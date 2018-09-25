@@ -1,2 +1,24 @@
-# rising-tides
-Rising Tides will be the first interactive online skills-based volunteering platform to connect professionals to communities in need of cultural heritage adaptation expertise.
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
