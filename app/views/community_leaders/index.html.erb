@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>RisingTides</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<p id="notice"><%= notice %></p>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-<div>hello world</div>
-  <body>
-    <%= yield %>
-  </body>
-</html>
+<h1>Community Leaders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @community_leaders.each do |community_leader| %>
+      <tr>
+        <td><%= link_to 'Show', community_leader %></td>
+        <td><%= link_to 'Edit', edit_community_leader_path(community_leader) %></td>
+        <td><%= link_to 'Destroy', community_leader, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Community Leader', new_community_leader_path %>
