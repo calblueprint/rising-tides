@@ -1,4 +1,4 @@
 <p id="notice"><%= notice %></p>
-
+<%= react_component('CommunityLeaderProfile', {community_leader: @community_leader}) %>
 <%= link_to 'Edit', edit_community_leader_path(@community_leader) %> |
 <%= link_to 'Back', community_leaders_path %>
