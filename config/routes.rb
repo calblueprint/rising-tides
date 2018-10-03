@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   resources :community_leaders
 
   resources :admins
-  
+
+  namespace :api, defaults: { format: :json } do
+    resources :community_leaders, :only => [:index, :show, :create, :update, :destroy]
+  end
+
   root to: redirect('/volunteers/sign_in')
 end
