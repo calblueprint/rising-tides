@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pages/root'
   devise_for :admins, path: 'admins', controllers: {
     sessions: 'admins/sessions',
     registrations: 'admins/registrations',
@@ -23,5 +24,5 @@ Rails.application.routes.draw do
     resources :community_leaders, :only => [:index, :show, :create, :update, :destroy]
   end
 
-  root to: redirect('/volunteers/sign_in')
+  root to: "pages#root"
 end
