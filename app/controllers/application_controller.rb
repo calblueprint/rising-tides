@@ -3,10 +3,8 @@ class ApplicationController < ActionController::Base
     case
     when user.is_a?(Admin)
       admins_path
-    when user.is_a?(CommunityLeader)
-      community_leaders_path
     else
-      volunteers_path
+      users_path
     end
   end
 end
