@@ -16,6 +16,10 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.2'
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -30,6 +34,12 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'jquery-rails'
+gem 'react-bootstrap-rails'
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+gem 'toastr-rails'
+gem 'momentjs-rails'
+gem 'react-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -60,5 +70,3 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
- 
-gem 'webpacker', '~> 3.5'

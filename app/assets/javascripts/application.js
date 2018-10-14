@@ -10,6 +10,22 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
 //= require activestorage
+//= require jquery
+//= require jquery_ujs
+//= require rails-ujs
+//= require turbolinks
+//= require react
+//= require moment
+//= require components
+//= require toastr
 //= require_tree .
+
+// Implements ' some str'.trim() => 'some str'
+if(typeof(String.prototype.trim) === "undefined")
+{
+  String.prototype.trim = function()
+  {
+    return String(this).replace(/^\s+|\s+$/g, '');
+  };
+}
