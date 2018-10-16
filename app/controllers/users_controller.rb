@@ -64,7 +64,12 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      if params[:id].nil? # if there is no user id in params, show current one
+        @user = current_user
+      else # if there is the user id in params just use it,
+        # maybe get 'authorization failed'
+        @user = User.find params[:id]
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
