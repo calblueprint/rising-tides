@@ -1,9 +1,7 @@
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  @roles = User.role
   <%= devise_error_messages! %>
-
 
   <div class="field">
     <%= f.label :email %><br />
@@ -24,7 +22,7 @@
   </div>
 
   <div class="field">
-    <%= f.select :role, options_for_select((User::roles), @user.role) %>
+    <%= f.select :role, options_for_select((User::roles.keys), @user.role) %>
   </div>
 
   <div class="actions">
