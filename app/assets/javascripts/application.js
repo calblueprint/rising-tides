@@ -29,3 +29,7 @@ if(typeof(String.prototype.trim) === "undefined")
     return String(this).replace(/^\s+|\s+$/g, '');
   };
 }
+
+function is_leader(user) {
+    return user.role == "CommunityLeader";
+}
