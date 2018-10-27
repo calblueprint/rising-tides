@@ -40,6 +40,7 @@ gem 'font-awesome-sass'
 gem 'toastr-rails'
 gem 'momentjs-rails'
 gem 'react-rails'
+gem 'webpacker'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
