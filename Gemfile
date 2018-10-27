@@ -74,3 +74,8 @@ gem 'devise'
 gem 'cancancan', '~> 2.0'
 
 gem "slim", "~> 4.0"
+
+# Used for stylesheets
+gem 'bootstrap-datepicker-rails'
+gem 'font-awesome-rails'
+

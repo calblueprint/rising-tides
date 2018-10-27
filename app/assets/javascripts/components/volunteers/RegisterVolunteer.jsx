@@ -4,27 +4,21 @@
  * @prop close    - callback to close modal
  * @prop isEdit   - callback to close modal
  */
-
-class RegisterVolunteer extends DefaultForm {
+// import * as ReactBootstrap from 'react-bootstrap';
+class RegisterVolunteer extends React.Component {
 
   constructor(props) {
-    super(props);
-    this.state = this.props.initData;
-    if (!this.state.name) {
-      this.state.name = "";
-    }
-    if (!this.state.city) {
-      this.state.city = "";
-    }
-    if (!this.state.state) {
-      this.state.state = "";
-    }
-    if (!this.state.skills) {
-      this.state.skills = [];
-    }
-    if (!this.state.bio) {
-      this.state.skills = "";
-    }
+    super();
+    this.state = {
+      name: "",
+      city: "",
+      state: "",
+      skills: "",
+      bio: "",
+    };
+    // this.select = this.select.bind(this);
+    // this.renderSelections = this.renderSelections.bind(this);
+    // this.state = this.props.initData;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,10 +31,43 @@ class RegisterVolunteer extends DefaultForm {
     this.props.nextStep(this.state, "basicForm", false);
   }
 
+  open(e) {
+    this.setState({ showModal: true });
+  }
+
+  close(e) {
+    this.setState({ showModal: false });
+    if (this.props.hideEditModal) {
+      this.props.hideEditModal();
+    }
+  }
+
+  _nextStep(data, key, validated, frequency) {
+    if (data && key){
+      this.setState({ [key]: data });
+    }
+    if (validated) {
+      if (key === "basicForm" && frequency && frequency === "one_time") {
+        this.setState({ step: this.state.step + 2 });
+      }
+      else {
+        this.setState({ step: this.state.step + 1 });
+      }
+    }
+  }
+
+  _prevStep(frequency) {
+    if (frequency && frequency === "one_time") {
+      this.setState({ step: this.state.step - 2 });
+    } else {
+      this.setState({ step: this.state.step - 1 });
+    }
+  }
+
   render() {
     pageContent = 
       <div className="">
-        <Modal.Body>
+        <ReactBootstrap.Modal.Body>
           <form className="modal-pickup-form">
             <div className="row marginTop-sm">
               <div className={this.props.isEdit ? `col-md-12` : `col-md-7`}>
@@ -97,8 +124,8 @@ class RegisterVolunteer extends DefaultForm {
               </div>
             </div>
           </form>
-        </Modal.Body>
-        <Modal.Footer>
+        </ReactBootstrap.Modal.Body>
+        <ReactBootstrap.Modal.Footer>
           <button className="button button--text-alert marginRight-xs pull-left"
             onClick={this.props.close}>Cancel</button>
           <button type="submit" name="submit" value="Next Step"
@@ -106,7 +133,7 @@ class RegisterVolunteer extends DefaultForm {
               Next
               <span className="fa fa-angle-right marginLeft-xxs"></span>
           </button>
-        </Modal.Footer>
+        </ReactBootstrap.Modal.Footer>
       </div>;
     return (
       <div className="">
@@ -118,8 +145,8 @@ class RegisterVolunteer extends DefaultForm {
   }
 }
 
-RegisterVolunteer.propTypes = {
-  initData : React.PropTypes.object.isRequired,
-  nextStep : React.PropTypes.func.isRequired,
-  close    : React.PropTypes.func.isRequired,
-};
+// RegisterVolunteer.propTypes = {
+//   initData : PropTypes.object.isRequired,
+//   nextStep : PropTypes.func.isRequired,
+//   close    : PropTypes.func.isRequired,
+// };
