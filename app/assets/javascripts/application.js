@@ -31,5 +31,5 @@ if(typeof(String.prototype.trim) === "undefined")
 }
 
 function is_leader(user) {
-    user.role == "CommunityLeader"
+    return user.role == "CommunityLeader";
 }
