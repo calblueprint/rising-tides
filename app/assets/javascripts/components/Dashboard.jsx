@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
 
     let actionButton = <span>No Leader Button for you!</span>;
 
-    if (user.is_leader) {
+    if (user.role == "CommunityLeader") {
       actionButton = <a href="#">Leader Button</a>;
     }
 
