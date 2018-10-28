@@ -4,8 +4,8 @@
  * @prop close    - callback to close modal
  * @prop isEdit   - callback to close modal
  */
-import * as ReactBootstrap from 'react-bootstrap';
-class RegisterVolunteer extends React.Component {
+
+class RegisterVolunteer extends DefaultForm {
 
   constructor(props) {
     super();
@@ -31,38 +31,38 @@ class RegisterVolunteer extends React.Component {
     this.props.nextStep(this.state, "basicForm", false);
   }
 
-  // open(e) {
-  //   this.setState({ showModal: true });
-  // }
+  open(e) {
+    this.setState({ showModal: true });
+  }
 
-  // close(e) {
-  //   this.setState({ showModal: false });
-  //   if (this.props.hideEditModal) {
-  //     this.props.hideEditModal();
-  //   }
-  // }
+  close(e) {
+    this.setState({ showModal: false });
+    if (this.props.hideEditModal) {
+      this.props.hideEditModal();
+    }
+  }
 
-  // _nextStep(data, key, validated, frequency) {
-  //   if (data && key){
-  //     this.setState({ [key]: data });
-  //   }
-  //   if (validated) {
-  //     if (key === "basicForm" && frequency && frequency === "one_time") {
-  //       this.setState({ step: this.state.step + 2 });
-  //     }
-  //     else {
-  //       this.setState({ step: this.state.step + 1 });
-  //     }
-  //   }
-  // }
+  _nextStep(data, key, validated, frequency) {
+    if (data && key){
+      this.setState({ [key]: data });
+    }
+    if (validated) {
+      if (key === "basicForm" && frequency && frequency === "one_time") {
+        this.setState({ step: this.state.step + 2 });
+      }
+      else {
+        this.setState({ step: this.state.step + 1 });
+      }
+    }
+  }
 
-  // _prevStep(frequency) {
-  //   if (frequency && frequency === "one_time") {
-  //     this.setState({ step: this.state.step - 2 });
-  //   } else {
-  //     this.setState({ step: this.state.step - 1 });
-  //   }
-  // }
+  _prevStep(frequency) {
+    if (frequency && frequency === "one_time") {
+      this.setState({ step: this.state.step - 2 });
+    } else {
+      this.setState({ step: this.state.step - 1 });
+    }
+  }
 
   render() {
     pageContent = 

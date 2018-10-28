@@ -34,12 +34,11 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'jquery-rails'
-gem 'react-bootstrap-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'toastr-rails'
 gem 'momentjs-rails'
-gem 'react-rails'
+gem 'react-rails', '~> 2.4.4'
 gem 'webpacker'
 
 # Reduces boot times through caching; required in config/boot.rb
