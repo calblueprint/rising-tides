@@ -63,6 +63,7 @@ class RegisterModal extends DefaultForm {
               <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container">
                   <label htmlFor="name" className="label label--newline">Name (First Last)</label>
+                  <br/>
                   <input type="text" placeholder="ie. John Doe" className="input"
                     value={this.state.name} name="name" id="name"
                     onChange={this._updateState} />
@@ -74,6 +75,7 @@ class RegisterModal extends DefaultForm {
               <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container">
                   <label htmlFor="city" className="label label--newline">City</label>
+                  <br/>
                   <input type="text" placeholder="ie. San Francisco" className="input"
                     value={this.state.city} name="city" id="city"
                     onChange={this._updateState} />
@@ -85,6 +87,7 @@ class RegisterModal extends DefaultForm {
               <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container">
                   <label htmlFor="state" className="label label--newline">State (abbreviation)</label>
+                  <br/>
                   <input type="text" placeholder="ie. CA" className="input"
                     value={this.state.state} name="state" id="state"
                     onChange={this._updateState} />
@@ -96,6 +99,7 @@ class RegisterModal extends DefaultForm {
               <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container name-container">
                   <label htmlFor="skills" className="label label--newline">Skills</label>
+                  <br/>
                   <textarea placeholder="ie. Software Development" value={this.state.skills}
                     name="skills" rows="6" cols="50" onChange={this._updateState}
                     id="skills" className="input"></textarea>
@@ -107,6 +111,7 @@ class RegisterModal extends DefaultForm {
               <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container name-container">
                   <label htmlFor="bio" className="label label--newline">Bio</label>
+                  <br/>
                   <textarea placeholder="Tell us about yourself!" value={this.state.bio}
                     name="bio" rows="6" cols="50" onChange={this._updateState}
                     id="bio" className="input"></textarea>
