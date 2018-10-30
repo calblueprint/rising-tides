@@ -5,10 +5,10 @@
  * @prop isEdit   - callback to close modal
  */
 
-class RegisterVolunteer extends DefaultForm {
+class RegisterModal extends DefaultForm {
 
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       name: "",
       city: "",
@@ -16,9 +16,10 @@ class RegisterVolunteer extends DefaultForm {
       skills: "",
       bio: "",
     };
-    // this.select = this.select.bind(this);
-    // this.renderSelections = this.renderSelections.bind(this);
-    // this.state = this.props.initData;
+    this.isEdit = true;
+    this._updateState = this._updateState.bind(this);
+    this.close = this.close.bind(this);
+    this._nextStep = this._nextStep.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -28,7 +29,7 @@ class RegisterVolunteer extends DefaultForm {
   _updateState(e) {
     let target = $(e.target);
     this.state[target.attr('name')] = target.val();
-    this.props.nextStep(this.state, "basicForm", false);
+    this._nextStep(this.state, "basicForm", false);
   }
 
   open(e) {
@@ -37,9 +38,6 @@ class RegisterVolunteer extends DefaultForm {
 
   close(e) {
     this.setState({ showModal: false });
-    if (this.props.hideEditModal) {
-      this.props.hideEditModal();
-    }
   }
 
   _nextStep(data, key, validated, frequency) {
@@ -56,21 +54,13 @@ class RegisterVolunteer extends DefaultForm {
     }
   }
 
-  _prevStep(frequency) {
-    if (frequency && frequency === "one_time") {
-      this.setState({ step: this.state.step - 2 });
-    } else {
-      this.setState({ step: this.state.step - 1 });
-    }
-  }
-
   render() {
     pageContent = 
       <div className="">
-        <ReactBootstrap.Modal.Body>
+        <Modal.Body>
           <form className="modal-pickup-form">
             <div className="row marginTop-sm">
-              <div className={this.props.isEdit ? `col-md-12` : `col-md-7`}>
+              <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container">
                   <label htmlFor="name" className="label label--newline">Name (First Last)</label>
                   <input type="text" placeholder="ie. John Doe" className="input"
@@ -81,7 +71,7 @@ class RegisterVolunteer extends DefaultForm {
             </div>
 
             <div className="row marginTop-sm">
-              <div className={this.props.isEdit ? `col-md-12` : `col-md-7`}>
+              <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container">
                   <label htmlFor="city" className="label label--newline">City</label>
                   <input type="text" placeholder="ie. San Francisco" className="input"
@@ -92,7 +82,7 @@ class RegisterVolunteer extends DefaultForm {
             </div>
 
             <div className="row marginTop-sm">
-              <div className={this.props.isEdit ? `col-md-12` : `col-md-7`}>
+              <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container">
                   <label htmlFor="state" className="label label--newline">State (abbreviation)</label>
                   <input type="text" placeholder="ie. CA" className="input"
@@ -103,7 +93,7 @@ class RegisterVolunteer extends DefaultForm {
             </div>
 
             <div className="row marginTop-sm">
-              <div className={this.props.isEdit ? `col-md-12` : `col-md-7`}>
+              <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container name-container">
                   <label htmlFor="skills" className="label label--newline">Skills</label>
                   <textarea placeholder="ie. Software Development" value={this.state.skills}
@@ -114,7 +104,7 @@ class RegisterVolunteer extends DefaultForm {
             </div>
 
             <div className="row marginTop-sm">
-              <div className={this.props.isEdit ? `col-md-12` : `col-md-7`}>
+              <div className={this.isEdit ? `col-md-12` : `col-md-7`}>
                 <fieldset className="input-container name-container">
                   <label htmlFor="bio" className="label label--newline">Bio</label>
                   <textarea placeholder="Tell us about yourself!" value={this.state.bio}
@@ -124,16 +114,16 @@ class RegisterVolunteer extends DefaultForm {
               </div>
             </div>
           </form>
-        </ReactBootstrap.Modal.Body>
-        <ReactBootstrap.Modal.Footer>
+        </Modal.Body>
+        <Modal.Footer>
           <button className="button button--text-alert marginRight-xs pull-left"
-            onClick={this.props.close}>Cancel</button>
+            onClick={this.close}>Cancel</button>
           <button type="submit" name="submit" value="Next Step"
             className="button submit-button" onClick={this._nextStep}>
               Next
               <span className="fa fa-angle-right marginLeft-xxs"></span>
           </button>
-        </ReactBootstrap.Modal.Footer>
+        </Modal.Footer>
       </div>;
     return (
       <div className="">
@@ -144,9 +134,3 @@ class RegisterVolunteer extends DefaultForm {
     );
   }
 }
-
-// RegisterVolunteer.propTypes = {
-//   initData : PropTypes.object.isRequired,
-//   nextStep : PropTypes.func.isRequired,
-//   close    : PropTypes.func.isRequired,
-// };
