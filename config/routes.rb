@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :users
 
   authenticated :user do
-    root 'users#show', as: :authenticated_user_root
+    root 'users#dashboard', as: :authenticated_user_root
   end
 
   namespace :api, defaults: { format: :json } do
