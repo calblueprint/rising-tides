@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum role: [:Admin, :Volunteer, :CommunityLeader]
+
 end
