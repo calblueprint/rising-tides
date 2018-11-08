@@ -12,4 +12,5 @@ Rising Tides will be the first interactive online skills-based volunteering plat
 git clone https://github.com/calblueprint/rising-tides.git
 cd rising-tides
 bundle install
+yarn install
 ```
