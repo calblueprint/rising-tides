@@ -1,3 +1,5 @@
+import React from "react"
+
 class Dashboard extends React.Component {
 
   constructor(props) {
@@ -15,7 +17,7 @@ class Dashboard extends React.Component {
 
     let actionButton = <span>No Leader Button for you!</span>;
 
-    if (is_leader(user)) {
+    if (user.role == "CommunityLeader") {
       actionButton = <a href="#">Leader Button</a>;
     }
 
@@ -24,3 +26,4 @@ class Dashboard extends React.Component {
     );
   }
 }
+export default Dashboard

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'pages/new'
+  get 'pages/create'
+  devise_for :organizations
   devise_for :users, path: 'users', controllers: {
       sessions: 'users/sessions',
       registrations: 'users/registrations',
@@ -15,5 +18,7 @@ Rails.application.routes.draw do
     resources :projects, :only => [:index, :show, :create, :update, :destroy]
   end
 
-  root to: redirect('/users/sign_up')
+  root 'pages#home'
+
+  get '*path' => redirect('/')
 end
