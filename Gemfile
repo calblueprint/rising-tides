@@ -73,4 +73,4 @@ gem 'devise'
 
 gem 'cancancan', '~> 2.0'
 
-gem "slim", "~> 4.0"
+gem 'webpacker'

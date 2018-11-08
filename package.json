@@ -1,5 +1,18 @@
 {
   "name": "rising-tides",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "babel-preset-react": "^6.24.1",
+    "jquery": "^3.3.1",
+    "prop-types": "^15.6.2",
+    "rails-ujs": "^5.2.1",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react_ujs": "^2.4.4",
+    "turbolinks": "^5.2.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "2.11.2"
+  }
 }
