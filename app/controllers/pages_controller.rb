@@ -4,4 +4,7 @@ class PagesController < ApplicationController
 
   def create
   end
+
+  def home
+  end
 end
