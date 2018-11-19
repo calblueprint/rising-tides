@@ -124,8 +124,6 @@ class RegisterForm extends React.Component {
       phone_number: this.state.phone_number
     }
 
-    console.log(data);
-
     axios
       .post("/users", {
         user: data
