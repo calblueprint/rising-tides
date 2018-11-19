@@ -2,7 +2,9 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   include Accessible
+  skip_before_action :verify_authenticity_token, only: [:create]
   skip_before_action :check_user, except: [:new, :create]
+
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -44,7 +46,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+     devise_parameter_sanitizer.permit(
+      :sign_up, 
+      keys: [ :role, 
+              :email, 
+              :password, 
+              :password_confirmation,
+              :first_name,
+              :last_name,
+              :city,
+              :state_abbrev,
+              :link,
+              :bio,
+              :skills,
+              :phone_number])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
