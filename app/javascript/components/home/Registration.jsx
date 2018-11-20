@@ -22,17 +22,8 @@ class Registration extends React.Component {
     }
 
     if (this.state.selectedType === "volunteer") {
-      axios
-        .post("/users", {
-          user: data
-        })
-        .then(function(response) {
-          window.location = "/"
-        })
-        .catch(function(error) {
-          console.log(error)
-        })
-    } 
+      window.location = "/users/new"
+    }
 
     else if (this.state.selectedType === "organization") {
       axios
@@ -41,7 +32,7 @@ class Registration extends React.Component {
           }
         )
         .then(function(response) {
-          window.location = "/"
+          window.location = "/organizations/new"
         })
         .catch(function(error) {
           console.log(error)
@@ -74,31 +65,6 @@ class Registration extends React.Component {
               />
               Organization
             </label>
-          </div>
-
-          <div>
-            <input
-              type="text"
-              id="email"
-              placeholder="email"
-              onChange={this.handleChange("email")}
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              id="password"
-              placeholder="password"
-              onChange={this.handleChange("password")}
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              id="password_confirmation"
-              placeholder="confirm password"
-              onChange={this.handleChange("passwordConfirmation")}
-            />
           </div>
 
           <div>
