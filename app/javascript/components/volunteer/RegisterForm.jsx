@@ -19,7 +19,7 @@ import axios from 'axios';
       selectedFile: null,
        //TODO: change photo to be of appropriate type
       photo: "",
-       form_errors: {first_name: '', last_name: '', email: ''},
+      form_errors: {first_name: '', last_name: '', email: ''},
       first_name_valid: false,
       last_name_valid: false,
       email_valid: false,

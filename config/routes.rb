@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :applications # To be deleted, currently just for testing
-  resources :users, only: [:edit, :create]
+  resources :users, only: [:new, :edit, :create]
   resources :organizations, only: [:edit]
 
   resources :projects, only: [:index, :show, :edit, :apply] do
