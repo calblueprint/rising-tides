@@ -12,4 +12,12 @@ Rising Tides will be the first interactive online skills-based volunteering plat
 git clone https://github.com/calblueprint/rising-tides.git
 cd rising-tides
 bundle install
+yarn install
+```
+
+If setting up webpacker/react for the first time, run:
+```
+rails webpacker:install
+rails webpacker:install:react
+rails generate react:install
 ```

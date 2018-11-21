@@ -11,8 +11,21 @@ class Api::ProjectsController < ApplicationController
     render json: @project
   end
 
-  def new
-    @community_leader = Project.new
+  def create
+    project = Project.new(project_params)
+
+    begin
+      saved = project.save!
+    rescue ActiveRecord::StatementInvalid => invalid
+      return render json: {message: 'Invalid project'}
+    end
+
+    if saved
+      return render json: {message: 'Project successfully created!'}
+    end
+
+    return render json: {error: projects.errors.full_messages,
+                         status: 422}
   end
 
   def edit
@@ -26,6 +39,9 @@ class Api::ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.fetch(:project, {})
+      params.require(:project).permit(
+        :title,
+        :description
+      )
     end
 end
