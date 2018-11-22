@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  resources :projects
   resources :applications # To be deleted, currently just for testing
   resources :users, only: [:new, :edit, :create]
   resources :organizations, only: [:edit]
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
     resources :applications, only: [:index, :show, :create, :update, :destroy]
   end
 
-  root 'pages#home'
+  root 'pages#dashboard'
 
   get '*path' => redirect('/')
 end
