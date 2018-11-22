@@ -28,12 +28,25 @@ class Api::ProjectsController < ApplicationController
                          status: 422}
   end
 
-  def edit
+  def update
+    begin
+      project = Project.find(params[:id])
+      a = project.update(project_params)
+    rescue
+      return render json: {error: "Forbidden"}
+    end
+    if a
+      new_project = Project.find(params[:id])
+      return render json: {message: 'Project successfully updated!',
+                           project: new_project}
+    else
+      return render json: {error: project.errors.full_messages}
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_community_leader
+    def set_project
       @project = Project.find(params[:id])
     end
 
