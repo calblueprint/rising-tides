@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :organizations, path: 'organizations', controllers: {
-      sessions: 'organizations/sessions',
-      registrations: 'organizations/registrations',
+  resources :orgs
+  devise_for :orgs, path: 'orgs', controllers: {
+      sessions: 'orgs/sessions',
+      registrations: 'orgs/registrations',
   }
   devise_for :users, path: 'users', controllers: {
       sessions: 'users/sessions',
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :applications # To be deleted, currently just for testing
   resources :users, only: [:new, :edit, :create]
-  resources :organizations, only: [:edit]
+  resources :orgs, only:  [:new, :edit, :create]
 
   resources :projects, only: [:index, :show, :edit, :apply] do
     resources :applications, only: [:index, :show, :edit, :delete]
@@ -22,8 +23,8 @@ Rails.application.routes.draw do
     root 'users#dashboard', as: :authenticated_user_root
   end
 
-  authenticated :organization do
-    root 'organizations#dashboard', as: :authenticated_organization_root
+  authenticated :org do
+    root 'orgs#dashboard', as: :authenticated_organization_root
   end
 
   namespace :api, defaults: { format: :json } do

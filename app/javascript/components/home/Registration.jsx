@@ -26,18 +26,19 @@ class Registration extends React.Component {
     }
 
     else if (this.state.selectedType === "organization") {
-      axios
-        .post("/organizations", {
-          organization: data
-          }
-        )
-        .then(function(response) {
-          window.location = "/organizations/new"
-        })
-        .catch(function(error) {
-          console.log(error)
-        })
-      }
+      window.location = "/orgs/new"
+
+      // axios
+      //   .post("/orgs", {
+      //     org: data
+      //     }
+      //   )
+      //   .then(function(response) {
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error)
+      //   })
+      // }
     }
 
   render() {
