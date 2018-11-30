@@ -12,9 +12,3 @@ console.log('Hello World from Webpacker')
 var componentRequireContext = require.context("components", true)
 var ReactRailsUJS = require("react_ujs")
 ReactRailsUJS.useContext(componentRequireContext)
-
-import Rails from 'rails-ujs';
-import Turbolinks from 'turbolinks';
-
-Rails.start();
-Turbolinks.start();
