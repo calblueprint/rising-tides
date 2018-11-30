@@ -5,27 +5,22 @@ class Registration extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.handleSignup = this.handleSignup.bind(this)
   }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value })
   }
 
-  handleSignup(e) {
+  handleSignup = (e) => {
     e.preventDefault()
 
-    const data = {
-          email: this.state.email,
-          password: this.state.password,
-          password_confirmation: this.state.passwordConfirmation
-    }
-
     if (this.state.selectedType === "volunteer") {
-      window.location = "/users/new"
+      window.location = "/users/sign_up"
     }
 
     else if (this.state.selectedType === "organization") {
+      window.location = "/organizations/sign_up"
+      /*
       axios
         .post("/organizations", {
           organization: data
@@ -38,7 +33,9 @@ class Registration extends React.Component {
           console.log(error)
         })
       }
+      */
     }
+  }
 
   render() {
     return (
@@ -71,11 +68,6 @@ class Registration extends React.Component {
             <button onClick={this.handleSignup}>Registration</button>
           </div>
         </form>
-
-        <button>
-          Back
-        </button>
-
       </div>
     )
   }
