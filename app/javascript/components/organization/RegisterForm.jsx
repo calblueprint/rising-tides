@@ -1,27 +1,27 @@
 import React from "react"
 import $ from "jquery"
 import axios from "axios"
+
 class RegisterForm extends React.Component {
   constructor() {
     super()
     this.state = {
-      first_name: "",
-      last_name: "",
+      name: "",
+      contact_first_name: "",
+      contact_last_name: "",
       email: "",
       password: "",
       password_confirmation: "",
-      phone_number: "",
+      contact_phone_number: "",
       city: "",
       state: "",
       link: "",
-      skills: "",
-      bio: "",
+      description: "",
       selected_file: null,
       //TODO: change photo to be of appropriate type
       photo: "",
       formErrors: { firstName: "", lastName: "", email: "" },
-      firstNameValid: false,
-      lastNameValid: false,
+      nameValid: false,
       emailValid: false,
       passwordValid: false,
       passwordMatch: false,
@@ -36,23 +36,16 @@ class RegisterForm extends React.Component {
 
   validateField = (fieldName, value) => {
     let formErrors = this.state.formErrors
-    let firstNameValid = this.state.firstNameValid
-    let lastNameValid = this.state.lastNameValid
+    let nameValid = this.state.nameValid
     let emailValid = this.state.emailValid
     let passwordValid = this.state.passwordValid
     let passwordMatch = this.state.passwordMatch
     switch (fieldName) {
-      case "first_name":
-        firstNameValid = value.length > 0
-        formErrors.firstName = firstNameValid
+      case "name":
+        nameValid = value.length > 0
+        formErrors.firstName = nameValid
           ? ""
           : " is not a valid first name"
-        break
-      case "last_name":
-        lastNameValid = value.length > 0
-        formErrors.lastName = lastNameValid
-          ? ""
-          : " is not a valid last name"
         break
       case "email":
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
@@ -72,8 +65,7 @@ class RegisterForm extends React.Component {
     this.setState(
       {
         formErrors: formErrors,
-        firstNameValid: firstNameValid,
-        lastNameValid: lastNameValid,
+        nameValid: nameValid,
         emailValid: emailValid,
         passwordValid: passwordValid,
         passwordMatch: passwordMatch
@@ -85,8 +77,7 @@ class RegisterForm extends React.Component {
   validateForm = () => {
     this.setState({
       formValid:
-        this.state.firstNameValid &&
-        this.state.lastNameValid &&
+        this.state.nameValid &&
         this.state.emailValid &&
         this.state.passwordValid &&
         this.state.passwordMatch
@@ -118,18 +109,18 @@ class RegisterForm extends React.Component {
       email: this.state.email,
       password: this.state.password,
       password_confirmation: this.state.password_confirmation,
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
+      contact_first_name: this.state.contact_first_name,
+      contact_last_name: this.state.contact_last_name,
       city: this.state.city,
       state: this.state.state,
       link: this.state.link,
-      bio: this.state.bio,
+      description: this.state.description,
       skills: this.state.skills,
-      phone_number: this.state.phone_number
+      contact_phone_number: this.state.contact_phone_number
     }
     axios
-      .post("/users", {
-        user: data
+      .post("/organizations", {
+        organization: data
       })
       .then(function(response) {
         window.location = "/"
@@ -159,25 +150,15 @@ class RegisterForm extends React.Component {
         </div>
         <form>
           <fieldset>
-            <label htmlFor="first_name">
-              First Name (required)
-            </label> <br/>  
+            <label htmlFor="name">
+              Organization name (required)
+            </label> <br/>
             <input
               type="text"
-              placeholder="ie. John"
-              value={this.state.first_name}
-              id="first_name"
-              onChange={this.handleChange("first_name")}
-            /> <br/>
-            <label htmlFor="last_name">
-              Last Name (required)
-            </label> <br/> 
-            <input
-              type="text"
-              placeholder="ie. Doe"
-              value={this.state.last_name}
-              id="last_name"
-              onChange={this.handleChange("last_name")}
+              placeholder="Organization"
+              value={this.state.name}
+              id="name"
+              onChange={this.handleChange("name")}
             />
           </fieldset>
           <fieldset>
@@ -217,15 +198,35 @@ class RegisterForm extends React.Component {
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="phone_number">
-              Phone number
+            <label htmlFor="contact_first_name">
+              Contact First Name
+            </label> <br/>  
+            <input
+              type="text"
+              placeholder="ie. John"
+              value={this.state.contact_first_name}
+              id="contact_first_name"
+              onChange={this.handleChange("contact_first_name")}
+            /> <br/>
+            <label htmlFor="contact_last_name">
+              Contact Last Name
+            </label> <br/> 
+            <input
+              type="text"
+              placeholder="ie. Doe"
+              value={this.state.contact_last_name}
+              id="contact_last_name"
+              onChange={this.handleChange("contact_last_name")}
+            /> <br/>
+            <label htmlFor="contact_phone_number">
+              Contact Phone number
             </label> <br/>
             <input
               type="text"
               placeholder="ie. (123)456-7890"
-              value={this.state.phone_number}
-              id="phone_number"
-              onChange={this.handleChange("phone_number")}
+              value={this.state.contact_phone_number}
+              id="contact_phone_number"
+              onChange={this.handleChange("contact_phone_number")}
             />
           </fieldset>
           <fieldset>
@@ -256,37 +257,23 @@ class RegisterForm extends React.Component {
             </label> <br/>
             <input
               type="text"
-              placeholder="ie. linkedin.com/in/john-doe/"
+              placeholder="ie. organization.com"
               value={this.state.link}
               id="link"
               onChange={this.handleChange("link")}
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="skills">
-              Skills
-            </label> <br/>
-            <textarea
-              placeholder="ie. Software Development"
-              value={this.state.skills}
-              name="skills"
-              rows="6"
-              cols="50"
-              onChange={this.handleChange("skills")}
-              id="skills"
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="bio">
+            <label htmlFor="description">
               Bio
             </label> <br/>
             <textarea
-              placeholder="Tell us about yourself!"
-              value={this.state.bio}
+              placeholder="Tell us about your organization!"
+              value={this.state.description}
               rows="6"
               cols="50"
-              onChange={this.handleChange("bio")}
-              id="bio"
+              onChange={this.handleChange("description")}
+              id="description"
             />
           </fieldset>
           <fieldset>
@@ -304,7 +291,7 @@ class RegisterForm extends React.Component {
             disabled={!this.state.formValid}
             onClick={this.handleRegistration}
           >
-            Complete volunteer registration!
+            Complete organization registration!
           </button>
         </fieldset>
       </div>

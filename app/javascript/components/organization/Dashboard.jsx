@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
     console.log(this.props)
     return (
       <div>
-        <p> Hello. You are a volunteer, and your email is {this.props.user.email}. </p>
+        <p> Hello. You are an organization, and your email is {this.props.organization.email}. </p>
         <Logout/>
       </div>
     )
