@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   authenticated :organization do
-    root 'organization#dashboard', as: :authenticated_organization_root
+    root 'organizations#dashboard', as: :authenticated_organization_root
   end
 
   namespace :api, defaults: { format: :json } do
