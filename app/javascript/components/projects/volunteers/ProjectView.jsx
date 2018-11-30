@@ -7,6 +7,10 @@ import axios from 'axios';
 
 class ProjectView extends React.Component {
 
+  goToApplication = () => {
+    window.location.href = `/projects/${this.props.project.id}/applications/new`;
+  }
+
   render() {
     const { project } = this.props;
 
@@ -14,10 +18,7 @@ class ProjectView extends React.Component {
       <div>
           <h3>{project.title}</h3>
           <p>{project.description}</p>
-
-          <div>
-            <button onClick={this.handleProjectsClick}>Apply to Project</button>
-          </div>
+          <a href="#" onClick={this.goToApplication}>Apply</a>
       </div>
     );
   }

@@ -1,5 +1,1 @@
-<h1>New Application</h1>
-
-<%= render 'form', application: @application %>
-
-<%= link_to 'Back', applications_path %>
+<%= react_component('applications/NewApplicationForm', { project_id: :id }) %>

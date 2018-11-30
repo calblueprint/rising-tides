@@ -14,7 +14,6 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/new
   def new
-    @application = Application.new
   end
 
   # GET /applications/1/edit
