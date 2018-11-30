@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<%= react_component('volunteer/Profile', {user: current_user}) %>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

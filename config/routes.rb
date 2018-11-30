@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :projects
   resources :applications # To be deleted, currently just for testing
-  resources :users, only: [:edit, :create]
+  resources :users, only: [:show, :edit, :create]
   resources :organizations, only: [:edit]
 
   resources :projects, only: [:index, :show, :edit, :apply] do
