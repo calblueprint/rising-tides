@@ -14,7 +14,7 @@ class Logout extends React.Component {
 
 handleLogout = (e) => {
     e.preventDefault();
-    axios.delete('/users/sign_out', {
+    axios.delete('/organizations/sign_out', {
     })
     .then(function(response){
       window.location = "/"

@@ -19,8 +19,8 @@ Rails.application.routes.draw do
     root 'users#dashboard', as: :authenticated_user_root
   end
 
-  authenticated :org do
-    root 'orgs#dashboard', as: :authenticated_organization_root
+  authenticated :organization do
+    root 'organization#dashboard', as: :authenticated_organization_root
   end
 
   namespace :api, defaults: { format: :json } do
