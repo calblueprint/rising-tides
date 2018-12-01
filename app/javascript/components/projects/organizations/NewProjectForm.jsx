@@ -75,10 +75,10 @@ class NewProjectForm extends React.Component {
         <h1>New Project</h1>
         <form onSubmit={this._handleSubmit}>
           <label>
-            <span class="container-label">Title</span>
+            <span className="container-label">Title</span>
             <input type="text"
                    placeholder="i.e. Assessing Adaptation Options"
-                   class="input-box"
+                   className="input-box"
                    onChange={this._handleChange('title')} />
           </label>
           <br />
@@ -139,7 +139,7 @@ class NewProjectForm extends React.Component {
             </textarea>
           </label>
           <br />
-          <input class="button" value="Create" type="submit" />
+          <input className="button" value="Create" type="submit" />
         </form>
       </div>
     );

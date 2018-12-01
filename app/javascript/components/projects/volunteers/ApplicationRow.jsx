@@ -22,8 +22,6 @@ class ApplicationRow extends React.Component {
     axios.get(`/api/projects/${this.props.application.project_id}`).then(ret => {
       let project = ret.data;
       this.setState({ project });
-      console.log(this.state)
-      console.log(this.props)
     })
   }
 
@@ -44,27 +42,27 @@ class ApplicationRow extends React.Component {
 
     if (project != null) {
       return (
-        <div class="project-card" onClick={this.goToApplication}>
-          <div class="project-card-container">
-            <h3 class="project-name">{project.title}</h3>
-            <p class="project-description">{status}</p>
+        <div className="project-card" onClick={this.goToApplication}>
+          <div className="project-card-container">
+            <h3 className="project-name">{project.title}</h3>
+            <p className="project-description">{status}</p>
             <br />
-            <p class="project-description">{application.question1}</p>
-            <p class="project-description">{application.question2}</p>
-            <p class="project-description">{application.question3}</p>
+            <p className="project-description">{application.question1}</p>
+            <p className="project-description">{application.question2}</p>
+            <p className="project-description">{application.question3}</p>
           </div>
         </div>
       );
     } else {
       return (
-        <div class="project-card" onClick={this.goToApplication}>
-          <div class="project-card-container">
-            <h3 class="project-name">Loading...</h3>
-            <p class="project-description">{status}</p>
+        <div className="project-card" onClick={this.goToApplication}>
+          <div className="project-card-container">
+            <h3 className="project-name">Loading...</h3>
+            <p className="project-description">{status}</p>
             <br />
-            <p class="project-description">{application.question1}</p>
-            <p class="project-description">{application.question2}</p>
-            <p class="project-description">{application.question3}</p>
+            <p className="project-description">{application.question1}</p>
+            <p className="project-description">{application.question2}</p>
+            <p className="project-description">{application.question3}</p>
           </div>
         </div>
       );

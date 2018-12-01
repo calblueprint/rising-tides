@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
         <p> Hello. You are an volunteer, and your email is {this.props.user.email}. </p>
 
 
-        <div class="input-contianer">
+        <div className="input-contianer">
           <div>
             <a onClick={this.viewProfile}>Profile</a>
           </div>

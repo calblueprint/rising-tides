@@ -30,7 +30,6 @@ class Profile extends React.Component {
     } else {
       return (
         <div className="">
-          <a onClick={this.goBack}>Back</a>
           <h2 className="">Organization Details</h2>
           <h3>Name</h3>
             {this.props.organization.name}
@@ -50,6 +49,9 @@ class Profile extends React.Component {
             {this.props.organization.contact_first_name} {this.props.organization.contact_last_name}
           <h3>Contact phone number</h3>
             {this.props.organization.contact_phone_number}
+
+            <br />
+          <a onClick={this.goBack}>Back</a>
         </div>
       )
     }
