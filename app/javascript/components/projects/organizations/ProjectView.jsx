@@ -41,6 +41,20 @@ class ProjectView extends React.Component {
     const { project } = this.props;
     const { organization } = this.state;
 
+    let applicationList;
+
+    if (this.state.applications.length != 0) {
+      applicationList = this.state.applications.map((application, index) => {
+          return <ApplicationRow application={application} key={index} />
+      });
+    } else {
+        applicationList = (
+          <li>
+          No Results
+          </li>
+          )
+    }
+
     if (organization != null) {
       return (
           <div>
@@ -93,7 +107,7 @@ class ProjectView extends React.Component {
 
           <h3> Project Applications </h3>
           {applicationList}
-          </div>
+        </div>
       );
     }
   }
