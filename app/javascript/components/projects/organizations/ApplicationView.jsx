@@ -86,11 +86,11 @@ class ApplicationView extends React.Component {
                 <a onClick={this.goBack}>Back</a>
                 <h3>Applicant: <a onClick={this.handleVolunteerClick}>{this.props.user.first_name} {this.props.user.last_name}</a></h3>
                 <h3> Status: {status} </h3>
-                <h3>Question 1</h3>
+                <h3>Why are you interested in working on this project? (2-3 sentences)</h3>
                 <p> {application.question1} </p>
-                <h3>Question 2</h3>
+                <h3>What experience could you contribute to this project? (2-3 sentences)</h3>
                 <p> {application.question2} </p>
-                <h3>Question 3</h3>
+                <h3>Skills</h3>
                 <p> {application.question3} </p>
 
                 {buttons}

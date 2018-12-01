@@ -56,7 +56,13 @@ class Api::ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(
         :title,
-        :description
+        :description,
+        :overview,
+        :volunteer_requirements,
+        :deliverable,
+        :question1,
+        :question2,
+        :question3
       )
     end
 end

@@ -40,11 +40,11 @@ class ApplicationView extends React.Component {
                 <h3> Applicant </h3>
                 <h4> {status} </h4>
                 <p> {application.user_id} </p>
-                <h3>Question 1</h3>
+                <h3>Why are you interested in working on this project? (2-3 sentences)</h3>
                 <p> {application.question1} </p>
-                <h3>Question 2</h3>
+                <h3>What experience could you contribute to this project? (2-3 sentences)</h3>
                 <p> {application.question2} </p>
-                <h3>Question 3</h3>
+                <h3>Skills</h3>
                 <p> {application.question3} </p>
             </div>
         );
