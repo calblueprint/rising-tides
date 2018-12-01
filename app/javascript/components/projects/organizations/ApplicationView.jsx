@@ -14,9 +14,11 @@ class ApplicationView extends React.Component {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content")
         };
+        this.handleAccept = this.handleAccept.bind(this);
+        this.handleReject = this.handleReject.bind(this);
     }
 
-    handleAccept = e => {
+    handleAccept = (e) => {
         e.preventDefault();
 
         axios
@@ -24,13 +26,15 @@ class ApplicationView extends React.Component {
                 decision: 2
             })
             .then(function(response) {
-                window.location = "/projects";
+                console.log(response);
+                window.location = `/projects/${response.data.application.project_id}`;
             })
             .catch(function(error) {
                 console.log(error);
             });
-    };
-    handleReject = e => {
+    }
+
+    handleReject = (e) => {
         e.preventDefault();
 
         axios
@@ -38,12 +42,12 @@ class ApplicationView extends React.Component {
                 decision: 1
             })
             .then(function(response) {
-                window.location = "/projects";
+                window.location = `/projects/${response.data.application.project_id}`;
             })
             .catch(function(error) {
                 console.log(error);
             });
-    };
+    }
 
     goBack = (e) => {
         e.preventDefault();
@@ -57,9 +61,9 @@ class ApplicationView extends React.Component {
 
         if (application.status != null) {
             if (application.status == 2) {
-                status = <span class="approved">Approved</span>;
+                status = <span className="approved">Approved</span>;
             } else if (application.status == 1) {
-                status = <span class="denied">Denied</span>;
+                status = <span className="denied">Denied</span>;
             }
         }
 

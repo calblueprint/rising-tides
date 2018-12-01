@@ -28,9 +28,9 @@ class ApplicationView extends React.Component {
 
         if (application.status != null) {
             if (application.status == 2) {
-                status = <span class="approved">Approved</span>;
+                status = <span className="approved">Approved</span>;
             } else if (application.status == 1) {
-                status = <span class="denied">Denied</span>;
+                status = <span className="denied">Denied</span>;
             }
         }
 
