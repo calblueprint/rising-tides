@@ -35,8 +35,9 @@ class NewApplicationForm extends React.Component {
         question1: this.state.question1,
         question2: this.state.question2,
         question3: this.state.question3,
-      },
-      project_id: this.props.project_id,
+        project_id: this.props.project_id,
+        user_id: this.props.user.id
+      }
     }
 
     axios.post('/api/applications', payload)

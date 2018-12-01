@@ -17,7 +17,7 @@ class ApplicationRow extends React.Component {
     return (
       <div>
         <a href="#" onClick={this.goToApplication}>
-          Application Here
+          <h1> application.user_id </h1>
         </a>
         <hr />
       </div>

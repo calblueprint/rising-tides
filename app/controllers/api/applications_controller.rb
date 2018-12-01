@@ -12,8 +12,7 @@ class Api::ApplicationsController < ApplicationController
   end
 
   def create
-    project = Project.find(params[:project_id])
-    application = project.applications.new(application_params)
+    application = Application.new(application_params)
 
     begin
       saved = application.save!
@@ -46,6 +45,14 @@ class Api::ApplicationsController < ApplicationController
     end
   end
 
+  def decide
+    decision = params[:decision]
+    application = Application.find(params[:id])
+
+    application.update(status: decision)
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_application
@@ -57,7 +64,9 @@ class Api::ApplicationsController < ApplicationController
       params.require(:application).permit(
         :question1,
         :question2,
-        :question3
+        :question3,
+        :project_id,
+        :user_id
       )
     end
 end

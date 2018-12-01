@@ -30,8 +30,14 @@ Rails.application.routes.draw do
     resources :organizations do
       resources :projects, only: [:index]
     end
-    resources :projects, only: [:index, :create, :update, :destroy] 
-    resources :applications, only: [:index, :create, :update, :destroy]
+    resources :projects, only: [:index, :create, :update, :destroy]  do
+      resources :applications, only: [:index, :decision]
+    end
+    resources :users do
+      resources :applications, only: [:index]
+    end
+    resources :applications, only: [:create, :update, :destroy, :decide]
+    post '/applications/:id/decide', to: 'applications#decide'
   end
 
   root 'pages#dashboard'

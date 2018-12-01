@@ -1,25 +1,4 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in? %>
+    <%= react_component('projects/volunteers/ApplicationsIndex', {}) %>
+<% end %>
 
-<h1>Applications</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @applications.each do |application| %>
-      <tr>
-        <td><%= link_to 'Show', application %></td>
-        <td><%= link_to 'Edit', edit_application_path(application) %></td>
-        <td><%= link_to 'Destroy', application, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Application', new_application_path %>

@@ -1,1 +1,6 @@
-<%= react_component('applications/ApplicationView', { application: @application }) %>
+<% if user_signed_in? %>
+    <%= react_component('projects/volunteers/ApplicationView', { application: @application, user: current_user }) %>
+<% elsif organization_signed_in? %>
+    <%= react_component('projects/organizations/ApplicationView', { application: @application }) %>
+<% end %>
+

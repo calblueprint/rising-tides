@@ -4,6 +4,7 @@
 
 import React from "react";
 import axios from 'axios';
+import ApplicationRow from './ApplicationRow'
 
 class ProjectView extends React.Component {
 
@@ -12,9 +13,10 @@ class ProjectView extends React.Component {
         this.state = {
           applications: []
       }
+    }
 
       componentDidMount() {
-        axios.get('/api/projects/${this.props.project.id}/applications').then(ret => {
+        axios.get(`/api/projects/${this.props.project.id}/applications`).then(ret => {
           let applications = ret.data;
           this.setState({ applications });
       })

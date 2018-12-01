@@ -24,7 +24,8 @@ class ApplicationsController < ApplicationController
   # POST /applications
   # POST /applications.json
   def create
-    @application = Application.new(application_params)
+    user = User.find(params.require(:project).permit(:organization_id)[:organization_id])
+    @application = user.applications.create(application_params)
 
     respond_to do |format|
       if @application.save

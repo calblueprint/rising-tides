@@ -31,6 +31,11 @@ class Dashboard extends React.Component {
         <div>
             <button onClick={this.handleProjectsClick}>View Projects</button>
           </div>
+
+          <div>
+            <button onClick={this.handleProjectsClick}>View Applications</button>
+          </div>
+
         <Logout/>
       </div>
     )
