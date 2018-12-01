@@ -161,7 +161,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="first_name">
               First Name (required)
-            </label> <br/>  
+            </label> <br/>
             <input
               type="text"
               placeholder="ie. John"
@@ -171,7 +171,7 @@ class RegisterForm extends React.Component {
             /> <br/>
             <label htmlFor="last_name">
               Last Name (required)
-            </label> <br/> 
+            </label> <br/>
             <input
               type="text"
               placeholder="ie. Doe"

@@ -115,7 +115,7 @@ class RegisterForm extends React.Component {
       state: this.state.state,
       link: this.state.link,
       description: this.state.description,
-      skills: this.state.skills,
+      name: this.state.name,
       contact_phone_number: this.state.contact_phone_number
     }
     axios
@@ -200,7 +200,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="contact_first_name">
               Contact First Name
-            </label> <br/>  
+            </label> <br/>
             <input
               type="text"
               placeholder="ie. John"
@@ -210,7 +210,7 @@ class RegisterForm extends React.Component {
             /> <br/>
             <label htmlFor="contact_last_name">
               Contact Last Name
-            </label> <br/> 
+            </label> <br/>
             <input
               type="text"
               placeholder="ie. Doe"

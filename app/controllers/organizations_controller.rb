@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show, :edit, :update, :destroy]
+  # before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
-def dashboard
+  def dashboard
   end
 end

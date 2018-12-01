@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :applications # To be deleted, currently just for testing
+  resources :users, only: [:show]
+  resources :organizations, only: [:show]
 
   resources :projects, only: [:index, :show, :edit, :apply] do
     resources :applications, only: [:index, :show, :edit, :delete]
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root 'users#dashboard', as: :authenticated_user_root
+
   end
 
   authenticated :organization do

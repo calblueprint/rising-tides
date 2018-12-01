@@ -11,11 +11,16 @@ class Dashboard extends React.Component {
     // this.updateEvents();
   }
 
+  viewProfile = () => {
+    window.location = `/users/${this.props.user.id}`;
+  }
+
   render() {
     console.log(this.props)
     return (
       <div>
         <p> Hello. You are a volunteer, and your email is {this.props.user.email}. </p>
+        <button onClick={this.viewProfile}>Profile</button>
         <Logout/>
       </div>
     )

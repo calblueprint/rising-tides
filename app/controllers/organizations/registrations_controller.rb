@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Organizations::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -37,6 +37,25 @@ class Organizations::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+
+  def configure_sign_up_params
+   devise_parameter_sanitizer.permit(
+     :sign_up,
+     keys: [:email,
+            :password,
+            :password_confirmation,
+            :name,
+            :city,
+            :state,
+            :link,
+            :description,
+            :contact_first_name,
+            :contact_last_name,
+            :contact_phone_number,
+            :org_name,
+            :first_name,
+            :last_name])
+  end
 
   # protected
 
