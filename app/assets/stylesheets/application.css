@@ -13,3 +13,109 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    --fire-focus-outline-color: rgba(3,155,229,0.5);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: #039be5;
+    text-decoration: underline;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 8px;
+    padding-right: 20px;
+    padding-left: 20px;
+    position: relative;
+}
+
+h1 {
+    color: rgba(0,0,0,0.87);
+    font-family: 'Google Sans',sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 40px;
+    margin: 0 0 8px 0;
+    display: block;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+a:hover {
+    cursor: pointer;
+    background-color: transparent;
+    color: #039be5;
+}
+
+.container {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.project-card {
+    width: 296px;
+    margin: 0 12px 24px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.project-card-container {
+    display: block;
+    border-radius: 8px;
+    color: rgba(0,0,0,0.87);
+    background-color: rgb(255,255,255);
+    cursor: pointer;
+    height: 204px;
+    padding: 16px 20px 20px 20px;
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    align-items: stretch;
+    align-content: stretch;
+    justify-content: flex-start;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15)
+}
+
+.project-card-container:hover {
+    background-color: rgb(230,230,230);
+}
+
+.project-name {
+    color: rgba(0,0,0,0.87);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    word-wrap: break-word;
+}
+
+.project-description {
+    color: rgba(0,0,0,0.54);
+    -webkit-align-self: flex-start;
+    align-self: flex-start;
+    color: rgba(0,0,0,0.38);
+    cursor: text;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 -2px;
+    min-width: 0;
+    padding: 0 2px;
+    word-wrap: break-word;
+}
+
+.flex {
+    min-height: 0;
+    flex: 1;
+    box-sizing: border-box;
+    color: rgba(0,0,0,0.87);
+}
+
+
+
+
+

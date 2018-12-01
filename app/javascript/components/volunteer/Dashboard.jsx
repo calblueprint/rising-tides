@@ -25,15 +25,16 @@ class Dashboard extends React.Component {
     console.log(this.props)
     return (
       <div>
-        <p> Hello. You are a volunteer, and your email is {this.props.user.email}. </p>
+        <h1>Volunteer Dashboard</h1>
+        <p> Hello. You are an volunteer, and your email is {this.props.user.email}. </p>
         <button onClick={this.viewProfile}>Profile</button>
 
         <div>
-            <button onClick={this.handleProjectsClick}>View Projects</button>
+            <a onClick={this.handleProjectsClick}>View Projects</a>
           </div>
 
           <div>
-            <button onClick={this.handleProjectsClick}>View Applications</button>
+            <a onClick={this.handleProjectsClick}>View Applications</a>
           </div>
 
         <Logout/>

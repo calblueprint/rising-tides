@@ -14,7 +14,7 @@ class ProjectsIndex extends React.Component {
   componentDidMount() {
     axios.get('/api/projects').then(ret => {
       let projects = ret.data;
-      
+
       this.setState({ projects });
     })
   }
@@ -37,9 +37,7 @@ class ProjectsIndex extends React.Component {
     return (
       <div>
         <h1>Projects</h1>
-        <ul>
-          {projectList}
-        </ul>
+        {projectList}
       </div>
     );
   }
