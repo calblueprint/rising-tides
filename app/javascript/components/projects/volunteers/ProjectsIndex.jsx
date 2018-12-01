@@ -19,6 +19,11 @@ class ProjectsIndex extends React.Component {
     })
   }
 
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/";
+  }
+
   render() {
     let projectList;
 
@@ -36,6 +41,7 @@ class ProjectsIndex extends React.Component {
 
     return (
       <div>
+        <a onClick={this.goBack}>Back</a>
         <h1>Projects</h1>
         {projectList}
       </div>

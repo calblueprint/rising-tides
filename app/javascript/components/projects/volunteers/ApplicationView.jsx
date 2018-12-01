@@ -16,12 +16,17 @@ class ApplicationView extends React.Component {
         };
     }
 
+    goBack = (e) => {
+        e.preventDefault();
+        window.location = "/applications";
+      }
 
     render() {
         const { application } = this.props;
 
         return (
             <div>
+                <a onClick={this.goBack}>Back</a>
                 <h3> Applicant </h3>
                 <h4> {application.status} </h4>
                 <p> {application.user_id} </p>

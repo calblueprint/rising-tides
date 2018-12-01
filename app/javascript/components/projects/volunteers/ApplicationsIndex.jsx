@@ -19,6 +19,11 @@ class ApplicationsIndex extends React.Component {
     })
   }
 
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/";
+  }
+
   render() {
     let applicationList;
 
@@ -36,6 +41,7 @@ class ApplicationsIndex extends React.Component {
 
     return (
       <div>
+        <a onClick={this.goBack}>Back</a>
         <h1>Applications</h1>
         {applicationList}
       </div>

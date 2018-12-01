@@ -16,6 +16,12 @@ class Profile extends React.Component {
       })
     })
   }
+
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/";
+  }
+
    render() {
     const { organization, dataLoaded } = this.state;
     let pageContent;
@@ -24,6 +30,7 @@ class Profile extends React.Component {
     } else {
       return (
         <div className="">
+          <a onClick={this.goBack}>Back</a>
           <h2 className="">Organization Details</h2>
           <h3>Name</h3>
             {this.props.organization.name}

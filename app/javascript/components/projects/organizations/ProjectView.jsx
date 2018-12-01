@@ -22,6 +22,11 @@ class ProjectView extends React.Component {
       })
     }
 
+    goBack = (e) => {
+      e.preventDefault();
+      window.location = "/projects";
+    }
+
     render() {
         const { project } = this.props;
         let applicationList;
@@ -40,6 +45,7 @@ class ProjectView extends React.Component {
 
       return (
           <div>
+          <a onClick={this.goBack}>Back</a>
           <h1>View Project</h1>
           <h3>{project.title}</h3>
           <h4>Description</h4>

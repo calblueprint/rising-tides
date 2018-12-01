@@ -139,9 +139,15 @@ class RegisterForm extends React.Component {
       })
   }
 
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/";
+  }
+
   render() {
     return (
       <div>
+        <a onClick={this.goBack}>Back</a>
         <div>
           <div>
             {Object.keys(this.state.formErrors).map((fieldName, i) => {
