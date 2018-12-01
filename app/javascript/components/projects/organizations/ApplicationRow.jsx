@@ -3,6 +3,7 @@
 */
 
 import React from "react";
+import axios from 'axios';
 
 class ApplicationRow extends React.Component {
 
@@ -41,18 +42,33 @@ class ApplicationRow extends React.Component {
         }
     }
 
-    return (
-      <div class="project-card" onClick={this.goToApplication}>
-        <div class="project-card-container">
-          <h3 class="project-name">{project.title}</h3>
-          <p class="project-description">{status}</p>
-          <br />
-          <p class="project-description">{application.question1}</p>
-          <p class="project-description">{application.question2}</p>
-          <p class="project-description">{application.question3}</p>
+    if (project != null) {
+      return (
+        <div class="project-card" onClick={this.goToApplication}>
+          <div class="project-card-container">
+            <h3 class="project-name">{project.title}</h3>
+            <p class="project-description">{status}</p>
+            <br />
+            <p class="project-description">{application.question1}</p>
+            <p class="project-description">{application.question2}</p>
+            <p class="project-description">{application.question3}</p>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div class="project-card" onClick={this.goToApplication}>
+          <div class="project-card-container">
+            <h3 class="project-name">Loading...</h3>
+            <p class="project-description">{status}</p>
+            <br />
+            <p class="project-description">{application.question1}</p>
+            <p class="project-description">{application.question2}</p>
+            <p class="project-description">{application.question3}</p>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
