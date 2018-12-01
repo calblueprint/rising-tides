@@ -19,6 +19,11 @@ class ProjectsIndex extends React.Component {
     })
   }
 
+  handleCreateProjectClick = (e) => {
+    e.preventDefault()
+    window.location = "/projects/new"
+  }
+
   render() {
     let projectList;
 
@@ -38,7 +43,12 @@ class ProjectsIndex extends React.Component {
       <div>
         <h1>organizations </h1>
         <h1>Projects</h1>
-          {projectList}
+        <div class="project-card center-card" onClick={this.handleCreateProjectClick}>
+          <div class="project-card-container">
+            <h3 class="project-name"><span class="card-center-text">Add Project</span></h3>
+          </div>
+        </div>
+        {projectList}
       </div>
     );
   }

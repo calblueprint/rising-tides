@@ -144,6 +144,46 @@ button:hover, .button:hover {
     word-wrap: break-word;
 }
 
+.card-center-text {
+    color: #039be5;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.center-card {
+    text-align:center;
+    line-height: 34px;
+}
+
+.center-card span {
+}
+
+.card-icons {
+    font-size: 48px;
+    margin: 8px;
+    font-family: "Material Icons Extended";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: 'liga';
+    font-feature-settings: 'liga';
+    speak: none;
+    text-decoration: none;
+    -webkit-user-select: none;
+}
+
 .project-description {
     color: rgba(0,0,0,0.54);
     -webkit-align-self: flex-start;
