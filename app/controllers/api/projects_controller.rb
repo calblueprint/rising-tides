@@ -3,7 +3,7 @@ class Api::ProjectsController < ApplicationController
   respond_to :json
 
   def index
-    @projects = Project.all
+    @projects = current_organization.projects.all
     render json:@projects
   end
 
