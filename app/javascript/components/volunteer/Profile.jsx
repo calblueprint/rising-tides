@@ -16,6 +16,12 @@ import axios from 'axios';
       })
     })
   }
+
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/";
+  }
+
    render() {
     const { user, dataLoaded } = this.state;
     let pageContent;
@@ -24,6 +30,7 @@ import axios from 'axios';
     } else {
       return (
         <div className="">
+          <a onClick={this.goBack}>Back</a>
           <h2 className="">Volunteer Details</h2>
           <h3>Name</h3>
             {this.props.user.first_name} {this.props.user.last_name}

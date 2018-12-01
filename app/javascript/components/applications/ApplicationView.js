@@ -7,10 +7,16 @@ import axios from 'axios';
 
 class ApplicationView extends React.Component {
 
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = `/applications`;
+  }
+
   render() {
     const { application } = this.props;
 
     return (
+      <a onClick={this.goBack}>Back</a>
       <div>
           <h3>Question1</h3>
           <p>{application.question1}</p>

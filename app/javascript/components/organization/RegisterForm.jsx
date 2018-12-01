@@ -133,6 +133,7 @@ class RegisterForm extends React.Component {
   render() {
     return (
       <div>
+        <a onClick={this.goBack}>Back</a>
         <div>
           <div>
             {Object.keys(this.state.formErrors).map((fieldName, i) => {

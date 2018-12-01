@@ -51,9 +51,15 @@ class NewProjectForm extends React.Component {
     return false;
   }
 
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/projects";
+  }
+
   render() {
     return (
       <div>
+        <a onClick={this.goBack}>Back</a>
         <h1>New Project</h1>
         <form onSubmit={this._handleSubmit}>
           <label>

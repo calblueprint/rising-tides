@@ -66,9 +66,15 @@ class EditProjectForm extends React.Component {
     return false;
   }
 
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/";
+  }
+
   render() {
     return (
       <div>
+        <a onClick={this.goBack}>Back</a>
         <h1>Edit Project</h1>
         <form onSubmit={this._handleSubmit}>
           <h4>Title</h4>
