@@ -32,11 +32,23 @@ class ApplicationRow extends React.Component {
     const { project } = this.state;
     const id = application.id;
 
+    let status = <span>Pending...</span>;
+
+    if (application.status != null) {
+        if (application.status == 2) {
+            status = <span className="approved">Approved</span>;
+        } else if (application.status == 1) {
+            status = <span className="denied">Denied</span>;
+        }
+    }
+
     if (project != null) {
       return (
         <div class="project-card" onClick={this.goToApplication}>
           <div class="project-card-container">
             <h3 class="project-name">{project.title}</h3>
+            <p class="project-description">{status}</p>
+            <br />
             <p class="project-description">{application.question1}</p>
             <p class="project-description">{application.question2}</p>
             <p class="project-description">{application.question3}</p>
@@ -47,7 +59,12 @@ class ApplicationRow extends React.Component {
       return (
         <div class="project-card" onClick={this.goToApplication}>
           <div class="project-card-container">
-            <p class="project-description">Loading...</p>
+            <h3 class="project-name">Loading...</h3>
+            <p class="project-description">{status}</p>
+            <br />
+            <p class="project-description">{application.question1}</p>
+            <p class="project-description">{application.question2}</p>
+            <p class="project-description">{application.question3}</p>
           </div>
         </div>
       );

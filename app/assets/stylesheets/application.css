@@ -302,4 +302,15 @@ button:hover, .button:hover {
 }
 
 
+.approved {
+    color: #3cba54;
+}
+
+.denied {
+    color: #db3236;
+}
+
+
+
+
 

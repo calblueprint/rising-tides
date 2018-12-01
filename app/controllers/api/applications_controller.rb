@@ -43,7 +43,7 @@ class Api::ApplicationsController < ApplicationController
     end
     if a
       new_application = Application.find(params[:id])
-      return render json: {message: 'Project successfully updated!',
+      return render json: {message: 'Application successfully updated!',
                            project: new_application}
     else
       return render json: {error: application.errors.full_messages}
@@ -52,9 +52,22 @@ class Api::ApplicationsController < ApplicationController
 
   def decide
     decision = params[:decision]
-    application = Application.find(params[:id])
+    puts("DECISION")
+    puts(decision)
 
-    application.update(status: decision)
+    begin
+      application = Application.find(params[:id])
+      a = application.update_attribute(:status, decision)
+    rescue
+      return render json: {error: "Forbidden"}
+    end
+    if a
+      new_application = Application.find(params[:id])
+      return render json: {message: 'Application successfully updated!',
+                           application: new_application}
+    else
+      return render json: {error: application.errors.full_messages}
+    end
   end
 
 
