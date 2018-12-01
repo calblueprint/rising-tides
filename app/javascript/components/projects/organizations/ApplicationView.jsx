@@ -21,7 +21,7 @@ class ApplicationView extends React.Component {
 
         axios
             .post(`/api/applications/${this.props.application.id}/decide`, {
-                decision: 1
+                decision: 2
             })
             .then(function(response) {
                 window.location = "/projects";
@@ -35,7 +35,7 @@ class ApplicationView extends React.Component {
 
         axios
             .post(`/api/applications/${this.props.application.id}/decide`, {
-                decision: 0
+                decision: 1
             })
             .then(function(response) {
                 window.location = "/projects";
