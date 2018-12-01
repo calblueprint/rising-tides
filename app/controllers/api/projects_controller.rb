@@ -4,7 +4,7 @@ class Api::ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-    render json: @projects
+    render json:@projects
   end
 
   def show
@@ -12,7 +12,9 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    project = Project.new(project_params)
+    organization = Organization.find(params.require(:project).permit(:organization_id)[:organization_id])
+
+    project = organization.projects.create(project_params)
 
     begin
       saved = project.save!

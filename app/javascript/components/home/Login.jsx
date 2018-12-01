@@ -35,7 +35,7 @@ class Login extends React.Component {
         .catch(function(error) {
           console.log(error)
         })
-    } 
+    }
 
     else if (this.state.selectedType === "organization") {
       axios
@@ -78,32 +78,29 @@ class Login extends React.Component {
               Organization
             </label>
           </div>
-
+          <br />
           <div>
             <input
+              class="input-box"
               type="text"
               id="email"
               placeholder="email"
               onChange={this.handleChange("email")}
             />
-          </div>
-          <div>
+            <br />
             <input
+              class="input-box"
               type="password"
               id="password"
               placeholder="password"
               onChange={this.handleChange("password")}
             />
           </div>
-
-          <div>
+          <br />
+          <div class="input-contianer">
             <button onClick={this.handleSignup}>Login</button>
           </div>
         </form>
-
-        <button>
-          Back
-        </button>
 
       </div>
     )

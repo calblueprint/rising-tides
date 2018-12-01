@@ -5,7 +5,7 @@ import ProjectRow from './ProjectRow';
 class ProjectsIndex extends React.Component {
 
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       projects: []
     };
@@ -14,8 +14,8 @@ class ProjectsIndex extends React.Component {
   componentDidMount() {
     axios.get('/api/projects').then(ret => {
       let projects = ret.data;
+
       this.setState({ projects });
-      console.log(this.state);
     })
   }
 
@@ -37,9 +37,7 @@ class ProjectsIndex extends React.Component {
     return (
       <div>
         <h1>Projects</h1>
-        <ul>
-          {projectList}
-        </ul>
+        {projectList}
       </div>
     );
   }

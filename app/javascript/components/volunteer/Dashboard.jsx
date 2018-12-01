@@ -15,12 +15,40 @@ class Dashboard extends React.Component {
     window.location = `/users/${this.props.user.id}`;
   }
 
+  handleProjectsClick = (e) => {
+    e.preventDefault()
+
+    window.location = "/projects"
+  }
+
+  handleApplicationsClick = (e) => {
+    e.preventDefault()
+
+    window.location = "/applications"
+  }
+
   render() {
     console.log(this.props)
     return (
       <div>
-        <p> Hello. You are a volunteer, and your email is {this.props.user.email}. </p>
-        <button onClick={this.viewProfile}>Profile</button>
+        <h1>Volunteer Dashboard</h1>
+        <p> Hello. You are an volunteer, and your email is {this.props.user.email}. </p>
+
+
+        <div class="input-contianer">
+          <div>
+            <a onClick={this.viewProfile}>Profile</a>
+          </div>
+
+          <div>
+            <a onClick={this.handleProjectsClick}>View Projects</a>
+          </div>
+
+          <div>
+            <a onClick={this.handleApplicationsClick}>View Applications</a>
+          </div>
+        </div>
+
         <Logout/>
       </div>
     )

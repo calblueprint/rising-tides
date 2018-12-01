@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if user_signed_in? %>
+    <%= react_component('projects/volunteers/ApplicationView', { application: @application, user: current_user }) %>
+<% elsif organization_signed_in? %>
+    <%= react_component('projects/organizations/ApplicationView', { application: @application }) %>
+<% end %>
 
-<%= link_to 'Edit', edit_application_path(@application) %> |
-<%= link_to 'Back', applications_path %>

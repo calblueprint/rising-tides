@@ -1,1 +1,6 @@
-<%= react_component('projects/ProjectsIndex', {}) %>
+<% if user_signed_in? %>
+    <%= react_component('projects/volunteers/ProjectsIndex', {}) %>
+<% elsif organization_signed_in? %>
+    <%= react_component('projects/organizations/ProjectsIndex', {organization: current_organization}) %>
+<% end %>
+

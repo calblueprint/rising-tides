@@ -49,7 +49,7 @@ class Registration extends React.Component {
               Organization
             </label>
           </div>
-
+          <br />
           <div>
             <button onClick={this.handleSignup}>Registration</button>
           </div>

@@ -26,11 +26,13 @@ handleLogout = (e) => {
 
 render() {
     return (
-      <button onClick={this.handleLogout}>Sign Out</button>
+      <div class="input-contianer">
+        <button onClick={this.handleLogout}>Sign Out</button>
+      </div>
     );
   }
 
 
-  
+
 }
 export default Logout
