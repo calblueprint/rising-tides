@@ -67,6 +67,15 @@ class ApplicationView extends React.Component {
             }
         }
 
+        let buttons = <span></span>;
+
+        if (application.status == null || application.status == 0) {
+            buttons = <div>
+                <button onClick={this.handleAccept}>Accept</button>
+                <button onClick={this.handleReject}>Reject</button>
+            </div>;
+        }
+
         return (
             <div>
                 <a onClick={this.goBack}>Back</a>
@@ -80,10 +89,7 @@ class ApplicationView extends React.Component {
                 <h3>Question 3</h3>
                 <p> {application.question3} </p>
 
-                <div>
-                    <button onClick={this.handleAccept}>Accept</button>
-                    <button onClick={this.handleReject}>Reject</button>
-                </div>
+                {buttons}
             </div>
         );
     }
