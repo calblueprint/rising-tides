@@ -44,7 +44,7 @@ class NewProjectForm extends React.Component {
       })
       .catch(res => {
         this.setState({success: 0});
-        console.log("ERROR" + res);
+        console.log(res);
       });
 
     console.log(this.state);
