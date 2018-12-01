@@ -26,8 +26,7 @@ class ApplicationView extends React.Component {
                 decision: 2
             })
             .then(function(response) {
-                console.log(response);
-                window.location = `/projects/${response.data.application.project_id}`;
+                window.reload();
             })
             .catch(function(error) {
                 console.log(error);
@@ -42,17 +41,23 @@ class ApplicationView extends React.Component {
                 decision: 1
             })
             .then(function(response) {
-                window.location = `/projects/${response.data.application.project_id}`;
+                window.reload();
             })
             .catch(function(error) {
                 console.log(error);
             });
     }
 
-    goBack = (e) => {
+    handleVolunteerClick = e => {
+        e.preventDefault();
+
+        window.location = `/users/${this.props.user.id}`;
+    };
+
+    goBack = e => {
         e.preventDefault();
         window.location = `/projects/${this.props.application.project_id}`;
-      }
+    };
 
     render() {
         const { application } = this.props;
@@ -79,9 +84,8 @@ class ApplicationView extends React.Component {
         return (
             <div>
                 <a onClick={this.goBack}>Back</a>
-                <h3> Applicant </h3>
-                <h4> {status} </h4>
-                <p> {application.user_id} </p>
+                <a onClick={this.handleVolunteerClick}><h3>Applicant: {this.props.user.first_name} {this.props.user.last_name}</h3></a>
+                <h3> Status: {status} </h3>
                 <h3>Question 1</h3>
                 <p> {application.question1} </p>
                 <h3>Question 2</h3>
