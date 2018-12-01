@@ -167,7 +167,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="first_name">
               First Name (required)
-            </label> <br/>
+            </label>
             <input
               type="text"
               placeholder="ie. John"
@@ -177,7 +177,7 @@ class RegisterForm extends React.Component {
             /> <br/>
             <label htmlFor="last_name">
               Last Name (required)
-            </label> <br/>
+            </label>
             <input
               type="text"
               placeholder="ie. Doe"
@@ -189,7 +189,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="email">
               Email (required)
-            </label> <br/>
+            </label>
             <input
               type="text"
               placeholder="ie. johndoe@email.com"
@@ -201,7 +201,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="password">
               Password (required, 6 characters minimum)
-            </label> <br/>
+            </label>
             <input
               type="password"
               placeholder="ie. password123"
@@ -213,7 +213,7 @@ class RegisterForm extends React.Component {
               htmlFor="password_confirmation"
             >
               Confirm password
-            </label> <br/>
+            </label>
             <input
               type="password"
               placeholder="ie. password123"
@@ -225,7 +225,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="phone_number">
               Phone number
-            </label> <br/>
+            </label>
             <input
               type="text"
               placeholder="ie. (123)456-7890"
@@ -237,7 +237,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="city">
               City
-            </label> <br/>
+            </label>
             <input
               type="text"
               placeholder="ie. San Francisco"
@@ -247,7 +247,7 @@ class RegisterForm extends React.Component {
             /> <br/>
             <label htmlFor="state">
               State (abbreviation)
-            </label> <br/>
+            </label>
             <input
               type="text"
               placeholder="ie. CA"
@@ -259,7 +259,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="link">
               Link
-            </label> <br/>
+            </label>
             <input
               type="text"
               placeholder="ie. linkedin.com/in/john-doe/"
@@ -271,7 +271,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="skills">
               Skills
-            </label> <br/>
+            </label>
             <textarea
               placeholder="ie. Software Development"
               value={this.state.skills}
@@ -285,7 +285,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="bio">
               Bio
-            </label> <br/>
+            </label>
             <textarea
               placeholder="Tell us about yourself!"
               value={this.state.bio}
@@ -298,7 +298,7 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="photo">
               Photo
-            </label> <br/>
+            </label>
             <input type="file" onChange={this.handleFileChange} />
             <button onClick={this.handleUpload}>Upload!</button>
           </fieldset>

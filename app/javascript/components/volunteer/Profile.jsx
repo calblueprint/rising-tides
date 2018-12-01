@@ -30,7 +30,6 @@ import axios from 'axios';
     } else {
       return (
         <div className="">
-          <a onClick={this.goBack}>Back</a>
           <h2 className="">Volunteer Details</h2>
           <h3>Name</h3>
             {this.props.user.first_name} {this.props.user.last_name}
@@ -50,6 +49,8 @@ import axios from 'axios';
             {this.props.user.email}
           <h3>Phone number</h3>
             {this.props.user.phone_number}
+          <br />
+          <a onClick={this.goBack}>Back</a>
         </div>
       )
     }

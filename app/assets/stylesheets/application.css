@@ -310,6 +310,10 @@ button:hover, .button:hover {
     color: #db3236;
 }
 
+fieldset {
+    border: 0;
+}
+
 
 
 
