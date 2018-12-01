@@ -48,9 +48,9 @@ class ProjectsIndex extends React.Component {
       <div>
         <a onClick={this.goBack}>Back</a>
         <h1>Projects</h1>
-        <div class="project-card center-card" onClick={this.handleCreateProjectClick}>
-          <div class="project-card-container">
-            <h3 class="project-name"><span class="card-center-text">Add Project</span></h3>
+        <div className="project-card center-card" onClick={this.handleCreateProjectClick}>
+          <div className="project-card-container">
+            <h3 className="project-name"><span className="card-center-text">Add Project</span></h3>
           </div>
         </div>
         {projectList}

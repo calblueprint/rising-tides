@@ -26,7 +26,7 @@ handleLogout = (e) => {
 
 render() {
     return (
-      <div class="input-contianer">
+      <div className="input-contianer">
         <button onClick={this.handleLogout}>Sign Out</button>
       </div>
     );
