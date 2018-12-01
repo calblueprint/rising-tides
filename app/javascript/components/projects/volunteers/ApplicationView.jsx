@@ -24,11 +24,21 @@ class ApplicationView extends React.Component {
     render() {
         const { application } = this.props;
 
+        let status = <span>Pending...</span>;
+
+        if (application.status != null) {
+            if (application.status == 2) {
+                status = <span class="approved">Approved</span>;
+            } else if (application.status == 1) {
+                status = <span class="denied">Denied</span>;
+            }
+        }
+
         return (
             <div>
                 <a onClick={this.goBack}>Back</a>
                 <h3> Applicant </h3>
-                <h4> {application.status} </h4>
+                <h4> {status} </h4>
                 <p> {application.user_id} </p>
                 <h3>Question 1</h3>
                 <p> {application.question1} </p>
