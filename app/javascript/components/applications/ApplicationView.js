@@ -18,11 +18,11 @@ class ApplicationView extends React.Component {
     return (
       <a onClick={this.goBack}>Back</a>
       <div>
-          <h3>Question1</h3>
+          <h3>Why are you interested in working on this project? (2-3 sentences)</h3>
           <p>{application.question1}</p>
-          <h3>Question2</h3>
+          <h3>What experience could you contribute to this project? (2-3 sentences)</h3>
           <p>{application.question2}</p>
-          <h3>Question3</h3>
+          <h3>Skills</h3>
           <p>{application.question3}</p>
       </div>
     );

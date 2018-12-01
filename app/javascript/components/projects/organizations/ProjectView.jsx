@@ -48,8 +48,20 @@ class ProjectView extends React.Component {
           <a onClick={this.goBack}>Back</a>
           <h1>View Project</h1>
           <h3>{project.title}</h3>
-          <h4>Description</h4>
+          <h4>Brief Description</h4>
           <p>{project.description}</p>
+          <h4>Project Plan</h4>
+          <p>{project.overview}</p>
+          <h4>Professional Skills Needed</h4>
+          <p>{project.volunteer_requirements}</p>
+          <h4>Project Outputs</h4>
+          <p>{project.deliverable}</p>
+          <h4>Your Community Needs This If:</h4>
+          <p>{project.question1}</p>
+          <h4>The Right Volunteer for this Project Is:</h4>
+          <p>{project.question2}</p>
+          <h4>What You Give, What You Get:</h4>
+          <p>{project.question3}</p>
           <br />
 
           <h3> Project Applications </h3>

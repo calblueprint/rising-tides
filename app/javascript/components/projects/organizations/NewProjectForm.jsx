@@ -9,6 +9,12 @@ class NewProjectForm extends React.Component {
       success: null,
       title: null,
       description: null,
+      overview: null,
+      volunteer_requirements: null,
+      deliverable: null,
+      question1: null,
+      question2: null,
+      question3: null
     };
     axios.defaults.headers.common = {
         'X-Requested-With': 'XMLHttpRequest',
@@ -33,7 +39,13 @@ class NewProjectForm extends React.Component {
       project: {
         title: this.state.title,
         description: this.state.description,
-        organization_id: this.props.organization.id
+        organization_id: this.props.organization.id,
+        overview: this.state.overview,
+        volunteer_requirements: this.state.volunteer_requirements,
+        deliverable: this.state.deliverable,
+        question1: this.state.question1,
+        question2: this.state.question2,
+        question3: this.state.question3
       }
     }
 
@@ -65,13 +77,65 @@ class NewProjectForm extends React.Component {
           <label>
             <span class="container-label">Title</span>
             <input type="text"
+                   placeholder="i.e. Assessing Adaptation Options"
                    class="input-box"
                    onChange={this._handleChange('title')} />
           </label>
           <br />
           <label>
-            <span class="container-label">Description</span>
-            <textarea class="input-area" onChange={this._handleChange('description')}>
+            <span class="container-label">Brief Description</span>
+            <textarea
+                  class="input-area"
+                  placeholder="i.e. Identify The Best Climate Change Adaptation Approaches For Your Community, Historic Property, or Landscape"
+                  onChange={this._handleChange('description')}>
+            </textarea>
+          </label>
+          <br />
+          <label>
+            <span class="container-label">Project Plan</span>
+            <textarea type="text"
+                   class="input-area"
+                   onChange={this._handleChange('overview')}>
+            </textarea>
+          </label>
+          <br />
+          <label>
+            <span class="container-label">Professional Skills Needed</span>
+            <textarea type="text"
+                   class="input-area"
+                   onChange={this._handleChange('volunteer_requirements')}>
+            </textarea>
+          </label>
+          <br />
+          <label>
+            <span class="container-label">Project Outputs</span>
+            <textarea type="text"
+                   class="input-area"
+                   onChange={this._handleChange('deliverable')}>
+            </textarea>
+          </label>
+          <br />
+          <label>
+            <span class="container-label">Our Community Needs This If:</span>
+            <textarea type="text"
+                   class="input-area"
+                   onChange={this._handleChange('question1')}>
+            </textarea>
+          </label>
+          <br />
+          <label>
+            <span class="container-label">The Right Volunteer for this Project Is:</span>
+            <textarea type="text"
+                   class="input-area"
+                   onChange={this._handleChange('question2')}>
+            </textarea>
+          </label>
+          <br />
+          <label>
+            <span class="container-label">What You Give, What You Get:</span>
+            <textarea type="text"
+                   class="input-area"
+                   onChange={this._handleChange('question3')}>
             </textarea>
           </label>
           <br />

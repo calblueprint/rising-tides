@@ -81,9 +81,39 @@ class EditProjectForm extends React.Component {
           <input type="text"
                  onChange={this._handleChange('title')}
                  value={this.state.project.title} />
-          <h4>Description</h4>
+          <h4>Brief Description</h4>
           <textarea onChange={this._handleChange('description')}
                     value={this.state.project.description}>
+          </textarea>
+          <br />
+          <h4>Project Plan</h4>
+          <textarea onChange={this._handleChange('overview')}
+                    value={this.state.project.overview}>
+          </textarea>
+          <br />
+          <h4>Professional Skills Needed</h4>
+          <textarea onChange={this._handleChange('volunteer_requirements')}
+                    value={this.state.project.volunteer_requirements}>
+          </textarea>
+          <br />
+          <h4>Project Outputs</h4>
+          <textarea onChange={this._handleChange('deliverable')}
+                    value={this.state.project.deliverable}>
+          </textarea>
+          <br />
+          <h4>Our Community Needs This If:</h4>
+          <textarea onChange={this._handleChange('question1')}
+                    value={this.state.project.question1}>
+          </textarea>
+          <br />
+          <h4>The Right Volunteer for this Project Is:</h4>
+          <textarea onChange={this._handleChange('question2')}
+                    value={this.state.project.question2}>
+          </textarea>
+          <br />
+          <h4>What You Give, What You Get:</h4>
+          <textarea onChange={this._handleChange('question3')}
+                    value={this.state.project.question3}>
           </textarea>
           <br />
           <input value="Edit" type="submit" />
