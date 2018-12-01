@@ -26,7 +26,7 @@ class ApplicationView extends React.Component {
                 decision: 2
             })
             .then(function(response) {
-                window.reload();
+                window.location.reload();
             })
             .catch(function(error) {
                 console.log(error);
@@ -41,7 +41,7 @@ class ApplicationView extends React.Component {
                 decision: 1
             })
             .then(function(response) {
-                window.reload();
+                window.location.reload();
             })
             .catch(function(error) {
                 console.log(error);
@@ -84,7 +84,7 @@ class ApplicationView extends React.Component {
         return (
             <div>
                 <a onClick={this.goBack}>Back</a>
-                <a onClick={this.handleVolunteerClick}><h3>Applicant: {this.props.user.first_name} {this.props.user.last_name}</h3></a>
+                <h3>Applicant: <a onClick={this.handleVolunteerClick}>{this.props.user.first_name} {this.props.user.last_name}</a></h3>
                 <h3> Status: {status} </h3>
                 <h3>Question 1</h3>
                 <p> {application.question1} </p>
