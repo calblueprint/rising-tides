@@ -18,6 +18,7 @@ class ProjectRow extends React.Component {
       <div>
         <a href="#" onClick={this.goToProject}>
           <h3>{project.title}</h3>
+          <h4>{project.organization_id}</h4>
           <p>{project.description}</p>
         </a>
         <hr />

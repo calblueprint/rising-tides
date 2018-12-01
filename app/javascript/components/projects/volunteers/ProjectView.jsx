@@ -14,6 +14,10 @@ class ProjectView extends React.Component {
       <div>
           <h3>{project.title}</h3>
           <p>{project.description}</p>
+
+          <div>
+            <button onClick={this.handleProjectsClick}>Apply to Project</button>
+          </div>
       </div>
     );
   }

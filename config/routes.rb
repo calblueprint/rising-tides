@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :organizations, only: [:show]
 
-  resources :projects, only: [:index, :show, :edit, :apply] do
-    resources :applications, only: [:index, :show, :edit, :delete]
+  resources :projects, only: [:index, :new, :show, :edit, :apply] do
+    resources :applications, only: [:new, :show, :edit, :delete]
   end
 
   authenticated :user do
@@ -27,8 +27,11 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: { format: :json } do
-    resources :projects, only: [:index, :show, :create, :update, :destroy]
-    resources :applications, only: [:index, :show, :create, :update, :destroy]
+    resources :organizations do
+      resources :projects, only: [:index]
+    end
+    resources :projects, only: [:index, :create, :update, :destroy] 
+    resources :applications, only: [:index, :create, :update, :destroy]
   end
 
   root 'pages#dashboard'
