@@ -21,6 +21,12 @@ class Dashboard extends React.Component {
     window.location = "/projects"
   }
 
+  handleApplicationsClick = (e) => {
+    e.preventDefault()
+
+    window.location = "/applications"
+  }
+
   render() {
     console.log(this.props)
     return (
@@ -29,13 +35,15 @@ class Dashboard extends React.Component {
         <p> Hello. You are an volunteer, and your email is {this.props.user.email}. </p>
         <button onClick={this.viewProfile}>Profile</button>
 
-        <div>
+        <div class="input-contianer">
+          <div>
             <a onClick={this.handleProjectsClick}>View Projects</a>
           </div>
 
           <div>
-            <a onClick={this.handleProjectsClick}>View Applications</a>
+            <a onClick={this.handleApplicationsClick}>View Applications</a>
           </div>
+        </div>
 
         <Logout/>
       </div>

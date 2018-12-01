@@ -34,7 +34,7 @@ class NewProjectForm extends React.Component {
         title: this.state.title,
         description: this.state.description,
         organization_id: this.props.organization.id
-      } 
+      }
     }
 
     axios.post('/api/projects', payload)
@@ -56,13 +56,20 @@ class NewProjectForm extends React.Component {
       <div>
         <h1>New Project</h1>
         <form onSubmit={this._handleSubmit}>
-          <h4>Title</h4>
-          <input type="text"
-                 onChange={this._handleChange('title')} />
-          <h4>Description</h4>
-          <textarea onChange={this._handleChange('description')}>
-          </textarea>
-          <input value="Create" type="submit" />
+          <label>
+            <span class="container-label">Title</span>
+            <input type="text"
+                   class="input-box"
+                   onChange={this._handleChange('title')} />
+          </label>
+          <br />
+          <label>
+            <span class="container-label">Description</span>
+            <textarea class="input-area" onChange={this._handleChange('description')}>
+            </textarea>
+          </label>
+          <br />
+          <input class="button" value="Create" type="submit" />
         </form>
       </div>
     );

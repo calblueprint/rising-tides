@@ -56,20 +56,32 @@ class NewApplicationForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="form-container">
         <h1>New Application</h1>
         <form onSubmit={this._handleSubmit}>
-          <h4>Question 1</h4>
-          <textarea onChange={this._handleChange('question1')}>
-          </textarea>
-          <h4>Question 2</h4>
-          <textarea onChange={this._handleChange('question2')}>
-          </textarea>
-          <h4>Question 3</h4>
-          <textarea onChange={this._handleChange('question3')}>
-          </textarea>
+          <div class="input-contianer">
+            <label>
+              <span class="container-label">Question 1</span>
+              <textarea class="input-area" onChange={this._handleChange('question1')}>
+              </textarea>
+            </label>
+          </div>
+          <div class="input-contianer">
+            <label>
+              <span class="container-label">Question 2</span>
+              <textarea class="input-area" onChange={this._handleChange('question2')}>
+              </textarea>
+            </label>
+          </div>
+          <div class="input-contianer">
+            <label>
+              <span class="container-label">Question 3</span>
+              <textarea class="input-area" onChange={this._handleChange('question3')}>
+              </textarea>
+            </label>
+          </div>
           <br />
-          <input value="Create" type="submit" />
+          <input class="button" value="Create" type="submit" />
         </form>
       </div>
     );

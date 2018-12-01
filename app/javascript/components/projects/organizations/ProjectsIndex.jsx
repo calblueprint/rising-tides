@@ -38,9 +38,7 @@ class ProjectsIndex extends React.Component {
       <div>
         <h1>organizations </h1>
         <h1>Projects</h1>
-        <ul>
           {projectList}
-        </ul>
       </div>
     );
   }

@@ -16,9 +16,12 @@ class ProjectView extends React.Component {
 
     return (
       <div>
+          <h1>View Project</h1>
           <h3>{project.title}</h3>
+          <h4>Description</h4>
           <p>{project.description}</p>
-          <a href="#" onClick={this.goToApplication}>Apply</a>
+          <br />
+          <button onClick={this.goToApplication}>Apply</button>
       </div>
     );
   }

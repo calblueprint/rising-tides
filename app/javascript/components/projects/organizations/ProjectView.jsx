@@ -40,16 +40,17 @@ class ProjectView extends React.Component {
 
       return (
           <div>
+          <h1>View Project</h1>
           <h3>{project.title}</h3>
+          <h4>Description</h4>
           <p>{project.description}</p>
+          <br />
 
           <h3> Project Applications </h3>
-          <ul>
           {applicationList}
-        </ul>
 
           </div>
-          );
+      );
   }
 }
 

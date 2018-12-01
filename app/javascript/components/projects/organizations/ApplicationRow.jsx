@@ -15,11 +15,13 @@ class ApplicationRow extends React.Component {
     const id = application.id;
 
     return (
-      <div>
-        <a href="#" onClick={this.goToApplication}>
-          <h1> application.user_id </h1>
-        </a>
-        <hr />
+      <div class="project-card" onClick={this.goToApplication}>
+        <div class="project-card-container">
+          <h3 class="project-name">{application.id}</h3>
+          <p class="project-description">{application.question1}</p>
+          <p class="project-description">{application.question2}</p>
+          <p class="project-description">{application.question3}</p>
+        </div>
       </div>
     );
   }
