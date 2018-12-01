@@ -7,6 +7,11 @@ class Api::ApplicationsController < ApplicationController
     render json: @applications
   end
 
+  def user_index
+    @applications = Application.where(user_id: params[:user_id])
+    render json: @applications
+  end
+
   def show
     render json: @application
   end

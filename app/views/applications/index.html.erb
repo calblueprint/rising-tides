@@ -1,4 +1,4 @@
 <% if user_signed_in? %>
-    <%= react_component('projects/volunteers/ApplicationsIndex', {}) %>
+    <%= react_component('projects/volunteers/ApplicationsIndex', {user: current_user}) %>
 <% end %>
 

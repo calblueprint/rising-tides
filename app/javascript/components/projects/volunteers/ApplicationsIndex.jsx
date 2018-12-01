@@ -37,9 +37,7 @@ class ApplicationsIndex extends React.Component {
     return (
       <div>
         <h1>Applications</h1>
-        <ul>
-          {applicationList}
-        </ul>
+        {applicationList}
       </div>
     );
   }
