@@ -3,7 +3,7 @@ class Api::ApplicationsController < ApplicationController
   respond_to :json
 
   def index
-    @applications = Application.all
+    @applications = Application.where(project_id: params[:project_id])
     render json: @applications
   end
 
