@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resources :applications, only: [:create, :update, :destroy, :decide]
     post '/applications/:id/decide', to: 'applications#decide'
     get '/users/:user_id/applications', to: 'applications#user_index'
+    get '/all_projects', to: 'projects#index_all'
   end
 
   root 'pages#dashboard'
