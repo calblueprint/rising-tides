@@ -12,7 +12,7 @@ class ProjectsIndex extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/projects').then(ret => {
+    axios.get('/api/all_projects').then(ret => {
       let projects = ret.data;
 
       this.setState({ projects });

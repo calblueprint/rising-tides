@@ -7,6 +7,11 @@ class Api::ProjectsController < ApplicationController
     render json:@projects
   end
 
+  def index_all
+    @projects = Project.all
+    render json:@projects
+  end
+
   def show
     render json: @project
   end
