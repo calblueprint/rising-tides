@@ -21,3 +21,10 @@ rails webpacker:install
 rails webpacker:install:react
 rails generate react:install
 ```
+
+### Using Whales:
+Obtain docker files
+```
+whales bootstrap
+whales s
+```
