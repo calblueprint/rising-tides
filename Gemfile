@@ -72,3 +72,10 @@ gem 'devise'
 gem 'cancancan', '~> 2.0'
 
 gem 'webpacker'
+
+gem 'sentry-raven'
+
+# Style checker for Ruby, call rubocop in terminal
+gem 'rubocop', require: false
+# Windows Directory Monitor is a thread-safe ruby library which can be used to monitor directories for changes on Windows.
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
