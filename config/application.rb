@@ -17,7 +17,3 @@ module RisingTides
     # the framework and any gems in your application.
   end
 end
-
-Raven.configure do |config|
-  config.dsn = 'https://8802c3d96a504ba2bc917fec25af9571:6ad65463ee0248838fda56dd5dcd5751@sentry.io/1399347'
-end
