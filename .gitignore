@@ -16,7 +16,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-# Should not ignore Gemfile.lock
+Gemfile.lock
 
 # Ignore uploaded files in development
 /storage/*
@@ -33,13 +33,6 @@
 
 # Ignore misc mac osx files
 .DS_Store/public/packs
-/public/packs-test
-/public/packs
-/node_modules
-yarn-debug.log*
-.yarn-integrity
-/yarn-error.log
-/public/packs
 /public/packs-test
 /node_modules
 yarn-debug.log*

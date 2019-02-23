@@ -1,1 +1,0 @@
-ENV["SPRING_SOCKET"]         = "/spring/spring.sock"
