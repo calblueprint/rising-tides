@@ -45,6 +45,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  gem 'travis'
+  gem 'rspec', '~> 3.8'
 end
 
 group :development do
@@ -54,6 +57,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Style checker for Ruby, call rubocop in terminal
+  gem 'rubocop', require: false
+  # Windows Directory Monitor is a thread-safe ruby library which can be used to monitor directories for changes on Windows.
+  gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 end
 
 group :test do

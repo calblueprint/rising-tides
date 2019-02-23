@@ -15,6 +15,13 @@ bundle install
 yarn install
 ```
 
+### Using Whales:
+Obtain docker files
+```
+whales bootstrap
+whales s
+```
+
 If setting up webpacker/react for the first time, run:
 ```
 rails webpacker:install
