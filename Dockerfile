@@ -6,4 +6,5 @@ ENV GEM_HOME=/gems
 COPY . .
 RUN gem install bundler
 RUN bundle install
+RUN yarn install
 CMD ["bundle", "exec", "rails", "server"]
