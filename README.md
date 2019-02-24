@@ -14,17 +14,15 @@ cd rising-tides
 bundle install
 yarn install
 ```
-
-### Using Whales:
-Obtain docker files
-```
-whales bootstrap
-whales s
-```
-
 If setting up webpacker/react for the first time, run:
 ```
 rails webpacker:install
 rails webpacker:install:react
 rails generate react:install
+```
+
+### Using Whales:
+First time installation: run `whales bootstrap`
+```
+whales s
 ```
