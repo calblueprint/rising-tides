@@ -48,3 +48,4 @@ yarn-debug.log*
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+.idea/
