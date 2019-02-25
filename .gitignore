@@ -33,6 +33,7 @@
 
 # Ignore testing
 .rspec
+package-lock.json
 
 # Ignore misc mac osx files
 .DS_Store/public/packs
