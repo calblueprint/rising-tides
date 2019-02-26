@@ -26,7 +26,7 @@ class NewApplicationForm extends React.Component {
       };
     }
     return this._handlers[name];
-  }
+  };
 
   _handleSubmit(e) {
     e.preventDefault();
@@ -38,7 +38,7 @@ class NewApplicationForm extends React.Component {
         project_id: this.props.project_id,
         user_id: this.props.user.id
       }
-    }
+    };
 
     axios.post('/api/applications', payload)
       .then(res => {
@@ -57,7 +57,7 @@ class NewApplicationForm extends React.Component {
   goBack = (e) => {
       e.preventDefault();
       window.location = `/projects/${this.props.project_id}`;
-    }
+  };
 
   render() {
     return (

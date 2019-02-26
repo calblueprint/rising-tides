@@ -10,7 +10,7 @@ class ApplicationView extends React.Component {
   goBack = (e) => {
     e.preventDefault();
     window.location = `/applications`;
-  }
+  };
 
   render() {
     const { application } = this.props;

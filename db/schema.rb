@@ -30,8 +30,11 @@ ActiveRecord::Schema.define(version: 2019_02_25_053805) do
   create_table 'applications', force: :cascade do |t|
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    # labeled 'why are you interested'
     t.text 'question1'
+    # labeled 'what experience could you contribute'
     t.text 'question2'
+    # labeled 'skills'
     t.text 'question3'
     t.bigint 'project_id'
     t.integer 'status', default: 0
@@ -64,15 +67,21 @@ ActiveRecord::Schema.define(version: 2019_02_25_053805) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.integer 'limit'
+    # labeled 'project plan'
     t.text 'overview'
+    # labeled 'project outputs'
     t.text 'deliverable'
+    # labeled 'professional skills needed'
     t.text 'volunteer_requirements'
     t.text 'other_details'
     t.integer 'organization_id'
     t.datetime 'start_time'
     t.datetime 'end_time'
+    # labeled 'Our Community Needs This If'
     t.text 'question1'
+    # labeled 'the right volunteer for this project is'
     t.text 'question2'
+    # labeled 'what you give, what you get'
     t.text 'question3'
   end
 
