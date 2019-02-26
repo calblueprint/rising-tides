@@ -50,6 +50,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
             :state,
             :link,
             :bio,
+            :profile_image,
             :skills,
             :phone_number])
   end
