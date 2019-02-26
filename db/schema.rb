@@ -11,10 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_02_25_053805) do
 =======
 ActiveRecord::Schema.define(version: 2019_02_24_000002) do
 >>>>>>> df06293... Allow profile image upload
+=======
+ActiveRecord::Schema.define(version: 2019_02_26_020414) do
+>>>>>>> 2fdafe4... Add organization upload abillity
 
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
@@ -31,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_000002) do
     t.index ['reset_password_token'], name: 'index_admins_on_reset_password_token', unique: true
   end
 
+<<<<<<< HEAD
   create_table 'applications', force: :cascade do |t|
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
@@ -44,6 +49,30 @@ ActiveRecord::Schema.define(version: 2019_02_24_000002) do
     # 1 = rejected; 2 = approved
     t.integer 'status', default: 0
     t.bigint 'user_id'
+=======
+  create_table "organizations", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "city"
+    t.string "state"
+    t.string "link"
+    t.string "description"
+    t.string "contact_first_name"
+    t.string "contact_last_name"
+    t.string "contact_phone_number"
+    t.string "profile_image_file_name"
+    t.string "profile_image_content_type"
+    t.integer "profile_image_file_size"
+    t.datetime "profile_image_updated_at"
+    t.index ["email"], name: "index_organizations_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_organizations_on_reset_password_token", unique: true
+>>>>>>> 2fdafe4... Add organization upload abillity
   end
 
   create_table 'organizations', force: :cascade do |t|

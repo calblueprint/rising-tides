@@ -98,14 +98,6 @@ class RegisterForm extends React.Component {
   }
 
   handleUpload = () => {
-    const formData = new FormData()
-    formData.append(
-      "myFile",
-      this.state.selected_file,
-      this.state.selected_file.name
-    )
-    //TODO: post photo to correct domain
-    axios.post("my-domain.com/file-upload", formData)
   }
 
   handleChange = name => event => {

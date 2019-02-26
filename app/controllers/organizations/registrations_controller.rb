@@ -53,6 +53,7 @@ class Organizations::RegistrationsController < Devise::RegistrationsController
             :contact_last_name,
             :contact_phone_number,
             :org_name,
+            :profile_image,
             :first_name,
             :last_name])
   end
