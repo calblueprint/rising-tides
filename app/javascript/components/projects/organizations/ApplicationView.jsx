@@ -65,16 +65,16 @@ class ApplicationView extends React.Component {
         let status = <span>Pending...</span>;
 
         if (application.status != null) {
-            if (application.status == 2) {
+            if (application.status === 2) {
                 status = <span className="approved">Approved</span>;
-            } else if (application.status == 1) {
+            } else if (application.status === 1) {
                 status = <span className="denied">Denied</span>;
             }
         }
 
         let buttons = <span></span>;
 
-        if (application.status == null || application.status == 0) {
+        if (application.status === null || application.status === 0) {
             buttons = <div>
                 <button onClick={this.handleAccept}>Accept</button>
                 <button onClick={this.handleReject}>Reject</button>

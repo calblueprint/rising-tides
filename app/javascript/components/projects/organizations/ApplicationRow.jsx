@@ -32,15 +32,15 @@ class ApplicationRow extends React.Component {
 
     let status = <span>Pending...</span>;
 
-    if (application.status != null) {
-        if (application.status == 2) {
+    if (application.status !== null) {
+        if (application.status === 2) {
             status = <span className="approved">Approved</span>;
-        } else if (application.status == 1) {
+        } else if (application.status === 1) {
             status = <span className="denied">Denied</span>;
         }
     }
 
-    if (project != null) {
+    if (project !== null) {
       return (
         <div className="project-card" onClick={this.goToApplication}>
           <div className="project-card-container">

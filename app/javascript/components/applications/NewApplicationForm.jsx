@@ -65,21 +65,21 @@ class NewApplicationForm extends React.Component {
         <a onClick={this.goBack}>Back</a>
         <h1>New Application</h1>
         <form onSubmit={this._handleSubmit}>
-          <div class="input-contianer">
+          <div class="input-container">
             <label>
               <span class="container-label">Why are you interested in working on this project? (2-3 sentences)</span>
               <textarea class="input-area" onChange={this._handleChange('question1')}>
               </textarea>
             </label>
           </div>
-          <div class="input-contianer">
+          <div class="input-container">
             <label>
               <span class="container-label">What experience could you contribute to this project? (2-3 sentences)</span>
               <textarea class="input-area" onChange={this._handleChange('question2')}>
               </textarea>
             </label>
           </div>
-          <div class="input-contianer">
+          <div class="input-container">
             <label>
               <span class="container-label">Skills</span>
               <textarea class="input-area" onChange={this._handleChange('question3')}>

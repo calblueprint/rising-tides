@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_02_25_053805) do
     # labeled 'skills'
     t.text 'question3'
     t.bigint 'project_id'
+    # 1 = rejected; 2 = approved
     t.integer 'status', default: 0
     t.bigint 'user_id'
   end
