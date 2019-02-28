@@ -16,7 +16,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-Gemfile.lock
+# Should not ignore Gemfile.lock
 
 # Ignore uploaded files in development
 /storage/*
@@ -31,9 +31,21 @@ Gemfile.lock
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Ignore testing
+.rspec
+package-lock.json
+
 # Ignore misc mac osx files
 .DS_Store/public/packs
+/public/packs-test
+/public/packs
+/node_modules
+yarn-debug.log*
+.yarn-integrity
+/yarn-error.log
+/public/packs
 /public/packs-test
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+.idea/

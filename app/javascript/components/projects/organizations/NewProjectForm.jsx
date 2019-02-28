@@ -47,7 +47,7 @@ class NewProjectForm extends React.Component {
         question2: this.state.question2,
         question3: this.state.question3
       }
-    }
+    };
 
     axios.post('/api/projects', payload)
       .then(res => {
@@ -66,7 +66,7 @@ class NewProjectForm extends React.Component {
   goBack = (e) => {
     e.preventDefault();
     window.location = "/projects";
-  }
+  };
 
   render() {
     return (
