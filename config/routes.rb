@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :admins, skip: :registrations
+  mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
+  devise_for :admins, skip: :registrations, controllers: {
+      sessions: 'admins/sessions'
+  }
   devise_for :organizations, controllers: {
       sessions: 'organizations/sessions',
       registrations: 'organizations/registrations'
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :applications # To be deleted, currently just for testing
+  # resources :admins, only: [:show]
   resources :users, only: [:show]
   resources :organizations, only: [:show]
 
