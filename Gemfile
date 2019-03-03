@@ -38,6 +38,7 @@ gem 'font-awesome-sass'
 gem 'toastr-rails'
 gem 'momentjs-rails'
 gem 'react-rails'
+gem 'rails_admin', '~> 1.3'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
