@@ -20,11 +20,13 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root 'users#dashboard', as: :authenticated_user_root
-
   end
 
   authenticated :organization do
     root 'organizations#dashboard', as: :authenticated_organization_root
+    resources :projects do
+      resources :photos, only: [:new]
+    end
   end
 
   namespace :api, defaults: { format: :json } do
@@ -36,9 +38,11 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :applications, only: [:create, :update, :destroy, :decide]
+    resource :photos, only: [:create]
     post '/applications/:id/decide', to: 'applications#decide'
     get '/users/:user_id/applications', to: 'applications#user_index'
     get '/all_projects', to: 'projects#index_all'
+    get '/projects/:project_id/photos', to: 'photos#index'
   end
 
   root 'pages#dashboard'

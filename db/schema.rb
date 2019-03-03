@@ -12,6 +12,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_02_25_053805) do
 =======
 ActiveRecord::Schema.define(version: 2019_02_24_000002) do
@@ -19,6 +20,9 @@ ActiveRecord::Schema.define(version: 2019_02_24_000002) do
 =======
 ActiveRecord::Schema.define(version: 2019_02_26_020414) do
 >>>>>>> 2fdafe4... Add organization upload abillity
+=======
+ActiveRecord::Schema.define(version: 2019_03_03_002915) do
+>>>>>>> 7d7389a... Add project photos
 
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
@@ -75,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_02_26_020414) do
 >>>>>>> 2fdafe4... Add organization upload abillity
   end
 
+<<<<<<< HEAD
   create_table 'organizations', force: :cascade do |t|
     t.string 'email', default: '', null: false
     t.string 'encrypted_password', default: '', null: false
@@ -118,6 +123,34 @@ ActiveRecord::Schema.define(version: 2019_02_26_020414) do
     t.text 'question2'
     # labeled 'what you give, what you get'
     t.text 'question3'
+=======
+  create_table "photos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.bigint "project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "limit"
+    t.text "overview"
+    t.text "deliverable"
+    t.text "volunteer_requirements"
+    t.text "other_details"
+    t.integer "organization_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.text "question1"
+    t.text "question2"
+    t.text "question3"
+>>>>>>> 7d7389a... Add project photos
   end
 
   create_table 'users', force: :cascade do |t|
