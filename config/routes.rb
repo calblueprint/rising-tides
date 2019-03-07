@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
-  devise_for :admins, skip: :registrations, controllers: {
-      sessions: 'admins/sessions'
-  }
+  devise_for :admins, skip: :registrations
   devise_for :organizations, controllers: {
       sessions: 'organizations/sessions',
       registrations: 'organizations/registrations'
