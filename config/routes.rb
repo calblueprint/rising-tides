@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admins', as: 'rails_admin'
-  devise_for :admins, skip: :registrations
+  devise_for :admins, skip: :registrations, controllers: {
+      session: 'admins/sessions'
+  }
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :organizations, controllers: {
       sessions: 'organizations/sessions',
       registrations: 'organizations/registrations'
@@ -22,7 +24,6 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root 'users#dashboard', as: :authenticated_user_root
-
   end
 
   authenticated :organization do
