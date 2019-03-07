@@ -3,8 +3,8 @@ import axios from "axios"
 
 class Login extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
 
     axios.defaults.headers.common = {
         'X-Requested-With': 'XMLHttpRequest',
@@ -14,15 +14,15 @@ class Login extends React.Component {
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value })
-  }
+  };
 
   handleSignup = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const data = {
           email: this.state.email,
           password: this.state.password
-    }
+    };
 
     if (this.state.selectedType === "volunteer") {
       axios
@@ -50,7 +50,7 @@ class Login extends React.Component {
           console.log(error)
         })
       }
-  }
+  };
 
   render() {
     return (
