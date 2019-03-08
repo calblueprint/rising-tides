@@ -33,6 +33,7 @@
 
 # Ignore testing
 .rspec
+package-lock.json
 
 # Ignore misc mac osx files
 .DS_Store/public/packs
@@ -47,3 +48,4 @@ yarn-debug.log*
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+.idea/
