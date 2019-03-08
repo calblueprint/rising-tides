@@ -1,5 +1,17 @@
-services:
-  postgresql
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
+  code_climate:
+    repo_token:
+      secure: "BzguZScx0R1ohm9KLuOz/0dkUl0DsQdNsovJ7uBSHba+o8yuirg1p8z0B2Qm97trb/Eah3AAATDANlxyKd2+WT3i1jgxKfdbIA0RA4wvzvsNj9rREruH4AkuQxYrecqCSZXHf6mNOuiz9W1PAPQ/HOe5lt6rbIs+mPh2jSAx8b4sLbBCaZkY7eBck5Wt0uxTSVgjkH4gXu45e7R5tfT8vo3Has8RD3VkrA5K1H94tF7IZHZByFnofHe1G7HinEZQUppRbuY2kvoOhU+4HeZ+zyidfSwD08OpmgRXYXkzgD+5lOtzZfKt6Rfve82uIX6Qp8pwHxYJPPf3Kp9R3Kd1rwpN5Q/g0yYouDUJJ+wm8OzMFgQF2gfGfDQ+CHeo2bd0Lot5Ja16Imd66T3IuzbtRnIVbFSDDvOqM7XygDujIF2zZ1NyUaEy2rY61YI6vKqw3RpP0jzrHq5fnucngTucMdDIWtUmK9zca8ybOPL9LRWUM086yu85aOWa7ozsMHzhfXaTY5kN9lKBMe1Gy7abGmqT3Xt6CtXcuv/r/7JN7U5MWR13FJfAhYs+23TynYE8Huthb3N7Gnu+zPbhkhMV3qfKNEQbgIoRQa5Ss5mRM+8VF9ziRaWwSrTvuT3TMVRFCRrmIhDgpdskdT8d5XO1ykQ8qvG2MC4R1Dha8VW56xQ="
+after_success:
+  - bundle exec codeclimate-test-reporter
+env:
+  global:
+  - PGPORT=5433
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
