@@ -293,7 +293,6 @@ class RegisterForm extends React.Component {
               Photo
             </label>
             <input type="file" onChange={this.handleFileChange} />
-            <button onClick={this.handleUpload}>Upload!</button>
           </fieldset>
         </form>
         <fieldset>
