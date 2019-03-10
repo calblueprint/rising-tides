@@ -4,6 +4,15 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# ignore other
+.babelrc
+.postcssrc.yml
+bin/webpack
+bin/webpack-dev-server
+config/database.yml
+public/packs/
+yarn.lock
+
 # Ignore bundler config.
 /.bundle
 
@@ -40,6 +49,10 @@ package-lock.json
 /public/packs-test
 /public/packs
 yarn-debug.log*
+.yarn-integrity
+/yarn-error.log
+/node_modules
 .idea/
+public/system
 
 /config/database.yml

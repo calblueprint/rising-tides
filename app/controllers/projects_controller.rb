@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @photos = @project.photos.map { |p| p.image.url(:original) }
   end
 
 

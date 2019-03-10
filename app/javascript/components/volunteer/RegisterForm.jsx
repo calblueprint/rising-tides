@@ -98,14 +98,6 @@ class RegisterForm extends React.Component {
   }
 
   handleUpload = () => {
-    const formData = new FormData()
-    formData.append(
-      "myFile",
-      this.state.selected_file,
-      this.state.selected_file.name
-    )
-    //TODO: post photo to correct domain
-    axios.post("my-domain.com/file-upload", formData)
   }
 
   handleChange = name => event => {
@@ -114,23 +106,24 @@ class RegisterForm extends React.Component {
   }
 
   handleRegistration = (e) => {
-    const data = {
-      email: this.state.email,
-      password: this.state.password,
-      password_confirmation: this.state.password_confirmation,
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      city: this.state.city,
-      state: this.state.state,
-      link: this.state.link,
-      bio: this.state.bio,
-      skills: this.state.skills,
-      phone_number: this.state.phone_number
-    }
+    let formData = new FormData();
+    formData.append('user[email]', this.state.email);
+    formData.append('user[password]', this.state.password);
+    formData.append('user[password_confirmation]', this.state.password_confirmation);
+    formData.append('user[first_name]', this.state.first_name);
+    formData.append('user[last_name]', this.state.last_name);
+    formData.append('user[city]', this.state.city);
+    formData.append('user[state]', this.state.state);
+    formData.append('user[link]', this.state.link);
+    formData.append('user[bio]', this.state.bio);
+    formData.append('user[skills]', this.state.skills);
+    formData.append('user[phone_number]', this.state.phone_number);
+    formData.append(
+      "user[profile_image]",
+      this.state.selected_file
+    )
     axios
-      .post("/users", {
-        user: data
-      })
+      .post("/users", formData)
       .then(function(response) {
         window.location = "/"
       })
@@ -300,7 +293,6 @@ class RegisterForm extends React.Component {
               Photo
             </label>
             <input type="file" onChange={this.handleFileChange} />
-            <button onClick={this.handleUpload}>Upload!</button>
           </fieldset>
         </form>
         <fieldset>
