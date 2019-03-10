@@ -38,7 +38,7 @@ class ProjectView extends React.Component {
     }
 
   render() {
-    const { project } = this.props;
+    const { project, project_type } = this.props;
     const { organization } = this.state;
 
     let applicationList;
@@ -62,6 +62,8 @@ class ProjectView extends React.Component {
           <h1>View Project</h1>
           <h3>{project.title}</h3>
           <h3>Organization: {organization.name}</h3>
+          <h4>Project Type</h4>
+          <p>{project_type.name}</p>
           <h4>Brief Description</h4>
           <p>{project.description}</p>
           <h4>Project Plan</h4>
@@ -89,6 +91,8 @@ class ProjectView extends React.Component {
           <h1>View Project</h1>
           <h3>{project.title}</h3>
           <h3>Organization: Loading...</h3>
+          <h4>Project Type</h4>
+          <p>{project_type.name}</p>
           <h4>Brief Description</h4>
           <p>{project.description}</p>
           <h4>Project Plan</h4>
