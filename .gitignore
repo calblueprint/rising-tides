@@ -39,13 +39,7 @@ package-lock.json
 .DS_Store/public/packs
 /public/packs-test
 /public/packs
-/node_modules
 yarn-debug.log*
-.yarn-integrity
-/yarn-error.log
-/public/packs
-/public/packs-test
-/node_modules
-yarn-debug.log*
-.yarn-integrity
 .idea/
+
+/config/database.yml
