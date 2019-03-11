@@ -89,14 +89,6 @@ class RegisterForm extends React.Component {
   }
 
   handleUpload = () => {
-    const formData = new FormData()
-    formData.append(
-      "myFile",
-      this.state.selected_file,
-      this.state.selected_file.name
-    )
-    //TODO: post photo to correct domain
-    axios.post("my-domain.com/file-upload", formData)
   }
 
   handleChange = name => event => {
@@ -105,23 +97,24 @@ class RegisterForm extends React.Component {
   }
 
   handleRegistration = (e) => {
-    const data = {
-      email: this.state.email,
-      password: this.state.password,
-      password_confirmation: this.state.password_confirmation,
-      contact_first_name: this.state.contact_first_name,
-      contact_last_name: this.state.contact_last_name,
-      city: this.state.city,
-      state: this.state.state,
-      link: this.state.link,
-      description: this.state.description,
-      name: this.state.name,
-      contact_phone_number: this.state.contact_phone_number
-    }
+    let formData = new FormData();
+    formData.append('organization[email]', this.state.email);
+    formData.append('organization[password]', this.state.password);
+    formData.append('organization[password_confirmation]', this.state.password_confirmation);
+    formData.append('organization[contact_first_name]', this.state.contact_first_name);
+    formData.append('organization[contact_last_name]', this.state.contact_last_name);
+    formData.append('organization[city]', this.state.city);
+    formData.append('organization[state]', this.state.state);
+    formData.append('organization[link]', this.state.link);
+    formData.append('organization[description]', this.state.description);
+    formData.append('organization[name]', this.state.name);
+    formData.append('organization[contact_phone_number]', this.state.contact_phone_number);
+    formData.append(
+      "organization[profile_image]",
+      this.state.selected_file
+    )
     axios
-      .post("/organizations", {
-        organization: data
-      })
+      .post("/organizations", formData)
       .then(function(response) {
         window.location = "/"
       })
@@ -282,7 +275,6 @@ class RegisterForm extends React.Component {
               Photo
             </label> <br/>
             <input type="file" onChange={this.handleFileChange} />
-            <button onClick={this.handleUpload}>Upload!</button>
           </fieldset>
         </form>
         <fieldset>

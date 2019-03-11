@@ -5,6 +5,7 @@
 import React from "react";
 import axios from 'axios';
 import ApplicationRow from './ApplicationRow'
+import PhotosView from '../../photos/PhotosView'
 
 class ProjectView extends React.Component {
 
@@ -37,8 +38,13 @@ class ProjectView extends React.Component {
       window.location = "/projects";
     }
 
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/projects";
+  }
+
   render() {
-    const { project } = this.props;
+    const { project, project_type } = this.props;
     const { organization } = this.state;
 
     let applicationList;
@@ -62,6 +68,8 @@ class ProjectView extends React.Component {
           <h1>View Project</h1>
           <h3>{project.title}</h3>
           <h3>Organization: {organization.name}</h3>
+          <h4>Project Type</h4>
+          <p>{project_type.name}</p>
           <h4>Brief Description</h4>
           <p>{project.description}</p>
           <h4>Project Plan</h4>
@@ -78,6 +86,9 @@ class ProjectView extends React.Component {
           <p>{project.question3}</p>
           <br />
 
+          <h3> Project Photos </h3>
+          <PhotosView photos={this.props.photos} />
+
           <h3> Project Applications </h3>
           {applicationList}
           </div>
@@ -89,6 +100,8 @@ class ProjectView extends React.Component {
           <h1>View Project</h1>
           <h3>{project.title}</h3>
           <h3>Organization: Loading...</h3>
+          <h4>Project Type</h4>
+          <p>{project_type.name}</p>
           <h4>Brief Description</h4>
           <p>{project.description}</p>
           <h4>Project Plan</h4>

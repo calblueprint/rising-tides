@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @photos = @project.photos.map { |p| p.image.url(:original) }
   end
 
 
@@ -15,6 +16,7 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
+      @project_type = ProjectType.find(@project.project_type_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

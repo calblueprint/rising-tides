@@ -63,6 +63,7 @@ def create_projects
                            question1: Faker::Company.bs,
                            question2: Faker::Company.buzzword,
                            question3: Faker::Company.catch_phrase,
+                           project_type_id: i % 2 + 1,
                            organization_id: org_id
     )
     proj.save
@@ -90,9 +91,18 @@ def create_applications
   puts "Created #{NUM_APPLICATIONS} applications! #{Application.count} applications in db."
 end
 
+def create_project_types
+  project_type_list = ['Full Length Project', 'Phone Consultation']
+  
+  project_type_list.each do |project_type|
+    ProjectType.create( name: project_type )
+  end
+end
+
 create_admin
 create_volunteers
 create_organizations
+create_project_types
 create_projects
 create_applications
 puts 'Seeding Finished!'

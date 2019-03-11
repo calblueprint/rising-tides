@@ -28,13 +28,17 @@ import axios from 'axios';
      if (!dataLoaded) {
       return (<div className="">Loading...</div>)
     } else {
+      let profile_image = <span>No Image</span>;
+      if (this.props.profile_image_url) {
+        profile_image = <img src={this.props.profile_image_url} />;
+      }
       return (
         <div className="">
           <h2 className="">Volunteer Details</h2>
           <h3>Name</h3>
             {this.props.user.first_name} {this.props.user.last_name}
           <h3>Photo</h3>
-            Photo
+            {profile_image}
           <h3>Bio</h3>
             {this.props.user.bio}
           <h3>Link</h3>

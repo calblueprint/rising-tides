@@ -5,4 +5,7 @@ class Organization < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :projects
+
+  has_attached_file :profile_image
+  validates_attachment_content_type :profile_image, content_type: /\Aimage\/.*\z/
 end

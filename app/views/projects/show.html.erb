@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
-    <%= react_component('projects/volunteers/ProjectView', { project: @project }) %>
+    <%= react_component('projects/volunteers/ProjectView', { project: @project, photos: @photos, project_type: @project_type }) %>
 <% elsif organization_signed_in? %>
-    <%= react_component('projects/organizations/ProjectView', { project: @project }) %>
+    <%= react_component('projects/organizations/ProjectView', { project: @project, photos: @photo, project_type: @project_types }) %>
 <% end %>
 

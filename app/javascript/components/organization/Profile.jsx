@@ -28,13 +28,17 @@ class Profile extends React.Component {
      if (!dataLoaded) {
       return (<div className="">Loading...</div>)
     } else {
+      let profile_image = <span>No Image</span>;
+      if (this.props.profile_image_url) {
+        profile_image = <img src={this.props.profile_image_url} />;
+      }
       return (
         <div className="">
           <h2 className="">Organization Details</h2>
           <h3>Name</h3>
             {this.props.organization.name}
           <h3>Photo</h3>
-            Photo
+            {profile_image}
           <h3>Description</h3>
             {this.props.organization.description}
           <h3>Link</h3>
