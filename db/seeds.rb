@@ -92,17 +92,11 @@ def create_applications
 end
 
 def create_project_types
-  proj_type = ProjectType.create!(
-    name: "physical"
-  )
-  proj_type.save
-  puts "Created project type 'physical'"
-
-  proj_type = ProjectType.create!(
-    name: "phone"
-  )
-  proj_type.save
-  puts "Created project type 'phone'"
+  project_type_list = ['Full Length Project', 'Phone Consultation']
+  
+  project_type_list.each do |project_type|
+    ProjectType.create( name: project_type )
+  end
 end
 
 create_admin
