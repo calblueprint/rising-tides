@@ -6,10 +6,13 @@
 
 # Ignore bundler config.
 /.bundle
+/vendor/bundle
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+# Ignore database.yml
+/config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -23,9 +26,18 @@
 !/storage/.keep
 
 /node_modules
-/yarn-error.log
 
+# Ignore yarn files
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
+/public/packs-test
+/public/packs
+/public/system
 /public/assets
+
+# Ignore Byebug command history file.
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
@@ -33,19 +45,10 @@
 
 # Ignore testing
 .rspec
-package-lock.json
 
 # Ignore misc mac osx files
 .DS_Store/public/packs
-/public/packs-test
-/public/packs
-/node_modules
-yarn-debug.log*
-.yarn-integrity
-/yarn-error.log
-/public/packs
-/public/packs-test
-/node_modules
-yarn-debug.log*
-.yarn-integrity
+
+# Ignore editor directories
 .idea/
+.vscode/
