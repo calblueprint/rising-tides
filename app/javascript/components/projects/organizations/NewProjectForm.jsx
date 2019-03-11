@@ -14,7 +14,8 @@ class NewProjectForm extends React.Component {
       deliverable: null,
       question1: null,
       question2: null,
-      question3: null
+      question3: null,
+      project_type_id: 1,
     };
     axios.defaults.headers.common = {
         'X-Requested-With': 'XMLHttpRequest',
@@ -45,7 +46,8 @@ class NewProjectForm extends React.Component {
         deliverable: this.state.deliverable,
         question1: this.state.question1,
         question2: this.state.question2,
-        question3: this.state.question3
+        question3: this.state.question3,
+        project_type_id: this.state.project_type_id
       }
     };
 
@@ -69,6 +71,10 @@ class NewProjectForm extends React.Component {
   };
 
   render() {
+    let projectTypes = this.props.project_types.map((project, index) => {
+      return <option value={project.id}>{project.name}</option>
+    });
+
     return (
       <div>
         <a onClick={this.goBack}>Back</a>
@@ -80,6 +86,13 @@ class NewProjectForm extends React.Component {
                    placeholder="i.e. Assessing Adaptation Options"
                    className="input-box"
                    onChange={this._handleChange('title')} />
+          </label>
+          <br />
+          <label>
+            <span className="container-label">Project Type</span>
+            <select className="input-box" onChange={this._handleChange('project_type_id')}>
+                {projectTypes}
+            </select>
           </label>
           <br />
           <label>
