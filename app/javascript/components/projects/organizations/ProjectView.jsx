@@ -5,6 +5,7 @@
 import React from "react";
 import axios from 'axios';
 import ApplicationRow from './ApplicationRow'
+import PhotosView from '../../photos/PhotosView'
 
 class ProjectView extends React.Component {
 
@@ -36,6 +37,11 @@ class ProjectView extends React.Component {
       e.preventDefault();
       window.location = "/projects";
     }
+
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/projects";
+  }
 
   render() {
     const { project, project_type } = this.props;
@@ -79,6 +85,9 @@ class ProjectView extends React.Component {
           <h4>What You Give, What You Get:</h4>
           <p>{project.question3}</p>
           <br />
+
+          <h3> Project Photos </h3>
+          <PhotosView photos={this.props.photos} />
 
           <h3> Project Applications </h3>
           {applicationList}

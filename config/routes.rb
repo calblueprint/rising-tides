@@ -1,16 +1,20 @@
 Rails.application.routes.draw do
-  devise_for :admins, skip: :registrations
+  devise_for :admins, skip: :registrations, controllers: {
+      session: 'admins/sessions'
+  }
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :organizations, controllers: {
       sessions: 'organizations/sessions',
-      registrations: 'organizations/registrations',
+      registrations: 'organizations/registrations'
   }
   devise_for :users, controllers: {
       sessions: 'users/sessions',
-      registrations: 'users/registrations',
+      registrations: 'users/registrations'
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :applications # To be deleted, currently just for testing
+  # resources :admins, only: [:show]
   resources :users, only: [:show]
   resources :organizations, only: [:show]
 
@@ -20,11 +24,13 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root 'users#dashboard', as: :authenticated_user_root
-
   end
 
   authenticated :organization do
     root 'organizations#dashboard', as: :authenticated_organization_root
+    resources :projects do
+      resources :photos, only: [:new]
+    end
   end
 
   namespace :api, defaults: { format: :json } do
@@ -36,9 +42,11 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :applications, only: [:create, :update, :destroy, :decide]
+    resource :photos, only: [:create]
     post '/applications/:id/decide', to: 'applications#decide'
     get '/users/:user_id/applications', to: 'applications#user_index'
     get '/all_projects', to: 'projects#index_all'
+    get '/projects/:project_id/photos', to: 'photos#index'
   end
 
   root 'pages#dashboard'
