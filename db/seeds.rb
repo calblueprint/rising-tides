@@ -96,7 +96,9 @@ def create_project_types
   
   project_type_list.each do |project_type|
     ProjectType.create( name: project_type )
+    puts "Created Project Type #{project_type}."
   end
+  puts "Created #{project_type_list.length} project types! #{ProjectType.count} applications in db."
 end
 
 create_admin
