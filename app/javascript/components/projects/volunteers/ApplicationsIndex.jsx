@@ -1,9 +1,8 @@
 import React from "react";
-import axios from 'axios';
-import ApplicationRow from './ApplicationRow';
+import axios from "axios";
+import ApplicationRow from "./ApplicationRow";
 
 class ApplicationsIndex extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -13,30 +12,26 @@ class ApplicationsIndex extends React.Component {
 
   componentDidMount() {
     axios.get(`/api/users/${this.props.user.id}/applications`).then(ret => {
-      console.log(this.props)
-      let applications = ret.data;
+      console.log(this.props);
+      const applications = ret.data;
       this.setState({ applications });
-    })
+    });
   }
 
-  goBack = (e) => {
+  goBack = e => {
     e.preventDefault();
     window.location = "/";
-  }
+  };
 
   render() {
     let applicationList;
 
     if (this.state.applications.length != 0) {
       applicationList = this.state.applications.map((application, index) => {
-        return <ApplicationRow application={application} key={index} />
+        return <ApplicationRow application={application} key={index} />;
       });
     } else {
-      applicationList = (
-        <li>
-          No Results
-        </li>
-     )
+      applicationList = <li>No Results</li>;
     }
 
     return (
@@ -47,7 +42,6 @@ class ApplicationsIndex extends React.Component {
       </div>
     );
   }
-
 }
 
 export default ApplicationsIndex;

@@ -3,7 +3,6 @@
 */
 
 import React from "react";
-import axios from 'axios';
 
 class ApplicationView extends React.Component {
 

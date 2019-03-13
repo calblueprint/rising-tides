@@ -1,12 +1,11 @@
 import React from "react";
-import axios from 'axios'
-import Registration from './Registration'
-import Login from './Login'
+import Registration from "./Registration";
+import Login from "./Login";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   render() {
@@ -16,11 +15,10 @@ class Home extends React.Component {
 
         <Login />
 
-        <Registration/>
-
+        <Registration />
       </div>
-    )
+    );
   }
 }
 
-export default Home
+export default Home;

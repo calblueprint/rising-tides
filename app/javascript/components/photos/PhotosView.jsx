@@ -1,22 +1,19 @@
 /**
-* @prop project - project object associated with this row
-*/
+ * @prop project - project object associated with this row
+ */
 
 import React from "react";
-import axios from 'axios';
-import PhotoView from './PhotoView'
+import PhotoView from "./PhotoView";
 
 class PhotosView extends React.Component {
-
   constructor(props) {
-      super(props);
-      this.state = {
-        photos: []
-    }
+    super(props);
+    this.state = {
+      photos: []
+    };
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     const { photos } = this.props;
@@ -25,21 +22,13 @@ class PhotosView extends React.Component {
 
     if (photos.length != 0) {
       photosList = photos.map((photo, index) => {
-          return <PhotoView photo={photo} key={index} />
+        return <PhotoView photo={photo} key={index} />;
       });
     } else {
-        photosList = (
-          <li>
-          No Results
-          </li>
-          )
+      photosList = <li>No Results</li>;
     }
 
-    return (
-        <div>
-            {photosList}
-        </div>
-    );
+    return <div>{photosList}</div>;
   }
 }
 

@@ -1,47 +1,52 @@
 /**
-* @prop project - project object associated with this row
-*/
+ * @prop project - project object associated with this row
+ */
 
 import React from "react";
-import axios from 'axios';
-import ApplicationRow from './ApplicationRow'
-import PhotosView from '../../photos/PhotosView'
+import axios from "axios";
+import ApplicationRow from "./ApplicationRow";
+import PhotosView from "../../photos/PhotosView";
 
 class ProjectView extends React.Component {
-
   constructor(props) {
-      super(props);
-      this.state = {
-        applications: [],
-        organization: null,
-    }
+    super(props);
+    this.state = {
+      applications: [],
+      organization: null
+    };
   }
 
   componentDidMount() {
-    axios.get(`/api/projects/${this.props.project.id}/applications`).then(ret => {
-      let applications = ret.data;
-      this.setState({ applications });
-    });
+    axios
+      .get(`/api/projects/${this.props.project.id}/applications`)
+      .then(ret => {
+        const applications = ret.data;
+        this.setState({ applications });
+      });
     if (this.props.project.organization_id != null) {
       console.log(this.props);
-      axios.get(`/api/organizations/${this.props.project.organization_id}`).then(ret => {
-        let organization = ret.data;
-        this.setState({ organization });
-      })
+      axios
+        .get(`/api/organizations/${this.props.project.organization_id}`)
+        .then(ret => {
+          const organization = ret.data;
+          this.setState({ organization });
+        });
     } else {
-      console.log(`Project ${this.props.project.id} not tied to an organization!`);
+      console.log(
+        `Project ${this.props.project.id} not tied to an organization!`
+      );
     }
   }
 
-    goBack = (e) => {
-      e.preventDefault();
-      window.location = "/projects";
-    }
-
-  goBack = (e) => {
+  goBack = e => {
     e.preventDefault();
     window.location = "/projects";
-  }
+  };
+
+  goBack = e => {
+    e.preventDefault();
+    window.location = "/projects";
+  };
 
   render() {
     const { project, project_type } = this.props;
@@ -51,23 +56,22 @@ class ProjectView extends React.Component {
 
     if (this.state.applications.length != 0) {
       applicationList = this.state.applications.map((application, index) => {
-          return <ApplicationRow application={application} key={index} />
+        return <ApplicationRow application={application} key={index} />;
       });
     } else {
-        applicationList = (
-          <li>
-          No Results
-          </li>
-          )
+      applicationList = <li>No Results</li>;
     }
 
     if (organization != null) {
       return (
-          <div>
+        <div>
           <a onClick={this.goBack}>Back</a>
           <h1>View Project</h1>
           <h3>{project.title}</h3>
-          <h3>Organization: {organization.name}</h3>
+          <h3>
+Organization:
+            {organization.name}
+          </h3>
           <h4>Project Type</h4>
           <p>{project_type.name}</p>
           <h4>Brief Description</h4>
@@ -91,9 +95,9 @@ class ProjectView extends React.Component {
 
           <h3> Project Applications </h3>
           {applicationList}
-          </div>
+        </div>
       );
-    } else {
+    } 
       return (
         <div>
           <a onClick={this.goBack}>Back</a>
@@ -122,7 +126,7 @@ class ProjectView extends React.Component {
           {applicationList}
         </div>
       );
-    }
+    
   }
 }
 

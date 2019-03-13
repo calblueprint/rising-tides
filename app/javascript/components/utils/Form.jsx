@@ -1,7 +1,6 @@
 import React from "react";
 
 class Form extends React.Component {
-
   constructor(props) {
     super();
     this._handlers = [];
@@ -14,8 +13,7 @@ class Form extends React.Component {
       };
     }
     return this._handlers[name];
-  }
-
+  };
 }
 
 export default Form;
