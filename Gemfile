@@ -34,13 +34,14 @@ gem 'jbuilder', '~> 2.5'
 gem "paperclip", "~> 5.0.0"
 
 gem 'jquery-rails'
-gem 'react-bootstrap-rails'
-gem 'bootstrap-sass'
+# gem 'react-bootstrap-rails'
+# gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'toastr-rails'
 gem 'momentjs-rails'
 gem 'react-rails'
 gem 'rails_admin', '~> 1.3'
+gem 'tachyons-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
