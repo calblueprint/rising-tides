@@ -3076,6 +3076,14 @@ eslint-plugin-react@^7.12.4:
     prop-types "^15.6.2"
     resolve "^1.9.0"
 
+eslint-plugin-tachyons-jsx@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-tachyons-jsx/-/eslint-plugin-tachyons-jsx-0.1.4.tgz#ea726ff8aeecbcb73f5ce67619bdce454a3c42ba"
+  integrity sha512-oBedAtNCWD+HcClgcMDjO063PLoPrco0Ohv3DXAOVYE4rbzVPmAfKss7TwvJvop/aszB1+y79v6NiHBukimzcA==
+  dependencies:
+    lodash "^4.17.11"
+    requireindex "~1.1.0"
+
 eslint-restricted-globals@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/eslint-restricted-globals/-/eslint-restricted-globals-0.1.1.tgz#35f0d5cbc64c2e3ed62e93b4b1a7af05ba7ed4d7"
@@ -6870,6 +6878,11 @@ require-main-filename@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
   integrity sha1-l/cXtp1IeE9fUmpsWqj/3aBVpNE=
+
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+  integrity sha1-5UBLgVV+91225JxacgBIk/4D4WI=
 
 requires-port@^1.0.0:
   version "1.0.0"
