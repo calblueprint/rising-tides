@@ -11,20 +11,20 @@ class Dashboard extends React.Component {
     // this.updateEvents();
   }
 
-  viewProfile = ({ user }) => {
-    window.location.href = `/users/${user.id}`;
+  viewProfile = () => {
+    window.location = `/users/${this.props.user.id}`;
   };
 
-  handleProjectsClick = e => {
+  handleProjectsClick = (e) => {
     e.preventDefault();
 
-    window.location.href = "/projects";
+    window.location = "/projects"
   };
 
-  handleApplicationsClick = e => {
+  handleApplicationsClick = (e) => {
     e.preventDefault();
 
-    window.location.href = "/applications";
+    window.location = "/applications"
   };
 
   render() {
