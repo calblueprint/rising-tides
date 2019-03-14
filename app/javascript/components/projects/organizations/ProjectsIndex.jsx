@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
-import ProjectRow from "./ProjectRow";
+import axios from 'axios';
+import ProjectCard from '../../utils/ProjectCard';
 
 class ProjectsIndex extends React.Component {
   constructor(props) {
@@ -37,6 +37,7 @@ class ProjectsIndex extends React.Component {
       projectList = this.state.projects.map((project, index) => {
         return <ProjectRow project={project} key={index} />;
       });
+
     } else {
       projectList = <li>No Results</li>;
     }
