@@ -18,7 +18,7 @@ class ProjectCard extends React.Component {
   renderHoveredCard() {
     return (
       <Card
-        title={this.props.project.title} bordered={true} style={{ width: 300, background: '#ECECEC'}}>
+        title={this.props.project.title} bordered={true} style={{ width: 300, background: '#ececec'}}>
       </Card>
     )
   }
@@ -26,7 +26,7 @@ class ProjectCard extends React.Component {
   renderNormalCard() {
     return (
       <article className="mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
-        <h2>{this.props.project.title} one card</h2>
+        <h2>{this.props.project.title}</h2>
       </article>
     )
   }
