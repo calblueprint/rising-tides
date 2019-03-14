@@ -218,6 +218,16 @@ button:hover, .button:hover {
     padding-bottom: 44px;
 }
 
+.sidebar {
+  padding-top: 32px;
+  margin: 0;
+  width: 200px;
+  background-color: #98CDEA;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
 .container-label {
     color: rgba(0,0,0,0.54);
     display: block;
