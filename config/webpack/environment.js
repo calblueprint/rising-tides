@@ -1,6 +1,11 @@
 const {environment} = require('@rails/webpacker');
 const webpack = require('webpack');
 
+environment.plugins.prepend('Provide', new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery'
+}));
+
 environment.loaders.prepend('eslint', {
   test: /\.js$/,
   exclude: /node_modules/,
@@ -12,10 +17,5 @@ environment.loaders.prepend('babel-loader', {
   exclude: /node_modules/,
   use: [{loader: 'babel-loader'}]
 })
-
-environment.plugins.append('Provide', new webpack.ProvidePlugin({
-  $: 'jquery',
-  jQuery: 'jquery'
-}));
 
 module.exports = environment;
