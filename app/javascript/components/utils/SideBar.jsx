@@ -6,6 +6,9 @@ class SideBar extends React.Component {
 
   constructor(props) {
     super(props);
+    this.goToDashboard = this.goToDashboard.bind(this);
+    this.goToProfile = this.goToProfile.bind(this);
+    this.goToBrowse = this.goToBrowse.bind(this);
   }
 
   goToDashboard = () => {
@@ -20,8 +23,25 @@ class SideBar extends React.Component {
     window.location.href = `/projects`;
   };
 
+  render() {
+    return (<div className="sidebar">
+    <div>
+      <a onClick={this.goToDashboard}>Dashboard</a>
+    </div>
+
+    <div>
+      <a onClick={this.goToProfile}>Profile</a>
+    </div>
+
+    <div>
+      <a onClick={this.goToBrowse}>Browse Projects</a>
+    </div>
+  </div>)
+  }
 }
 
-SideBar.proptypes = {
-  id: PropTypes.number
-}
+// SideBar.propTypes = {
+//   id: PropTypes.number
+// }
+
+export default SideBar;
