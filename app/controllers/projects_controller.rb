@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
                                         :deliverable,
                                         :question1,
                                         :question2,
-                                        :question3)
+                                        :question3,
+                                        skill_ids: [])
     end
 end

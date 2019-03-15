@@ -1,0 +1,23 @@
+proj1:
+  title: title1
+  description: desc1
+  deliverable: del1
+  overview: overview1
+  question1: question1.1
+  question2: question1.2
+  question3: question1.3
+  project_type_id: 1
+  organization_id: 1
+  skills: [skill1]
+
+proj2:
+  title: title2
+  description: desc1
+  deliverable: del1
+  overview: overview1
+  question1: question1.1
+  question2: question1.2
+  question3: question1.3
+  project_type_id: 1
+  organization_id: 1
+  skills: [skill2]
