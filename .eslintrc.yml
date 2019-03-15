@@ -6,6 +6,4 @@ plugins:
   - react
   - jsx-a11y
   - import
-  - css-modules
-  - prettier
   - tachyons-jsx
