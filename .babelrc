@@ -3,19 +3,20 @@
     [
       "@babel/preset-env",
       {
-        "modules": false
+        "modules": false,
+        "useBuiltIns": "entry"
       }
     ],
     "@babel/preset-react"
-  ],
-  "plugins": [
-    "@babel/syntax-dynamic-import",
-    // "@babel/transform-object-rest-spread",
-    // [
-    //   "@babel/transform-class-properties",
-    //   {
-    //     "spec": true
-    //   }
-    // ]
   ]
+  // "plugins": [
+  //   "@babel/syntax-dynamic-import",
+  //   // "@babel/transform-object-rest-spread",
+  //   // [
+  //   //   "@babel/transform-class-properties",
+  //   //   {
+  //   //     "spec": true
+  //   //   }
+  //   // ]
+  // ]
 }
