@@ -8,8 +8,9 @@
       }
     ],
     "@babel/preset-react"
-  ]
-  // "plugins": [
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties"
   //   "@babel/syntax-dynamic-import",
   //   // "@babel/transform-object-rest-spread",
   //   // [
@@ -18,5 +19,5 @@
   //   //     "spec": true
   //   //   }
   //   // ]
-  // ]
+  ]
 }

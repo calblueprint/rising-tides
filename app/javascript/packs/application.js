@@ -8,9 +8,9 @@
 // layout file, like app/views/layouts/application.html.erb
 import "@babel/polyfill";
 
-console.log('Hello World from Webpacker')
+console.log("Hello World from Webpacker");
 // Support component names relative to this directory:
-// const componentRequireContext = require.context("./components/", true)
-// const ReactRailsUJS = require("react_ujs")
+const componentRequireContext = require.context("components", true);
+const ReactRailsUJS = require("react_ujs");
 
-// ReactRailsUJS.useContext(componentRequireContext)
+ReactRailsUJS.useContext(componentRequireContext);
