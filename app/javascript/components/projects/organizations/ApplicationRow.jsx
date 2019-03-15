@@ -1,43 +1,44 @@
 /**
-* @prop application - application object associated with this row
-*/
+ * @prop application - application object associated with this row
+ */
 
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 
 class ApplicationRow extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      project: null,
+      project: null
     };
   }
 
   componentDidMount() {
-    axios.get(`/api/projects/${this.props.application.project_id}`).then(ret => {
-      let project = ret.data;
-      this.setState({ project });
-    })
+    axios
+      .get(`/api/projects/${this.props.application.project_id}`)
+      .then(ret => {
+        const project = ret.data;
+        this.setState({ project });
+      });
   }
 
   goToApplication = () => {
     window.location.href = `/applications/${this.props.application.id}`;
-  }
+  };
 
   render() {
     const { application } = this.props;
     const { project } = this.state;
-    const id = application.id;
+    const { id } = application;
 
     let status = <span>Pending...</span>;
 
     if (application.status !== null) {
-        if (application.status === 2) {
-            status = <span className="approved">Approved</span>;
-        } else if (application.status === 1) {
-            status = <span className="denied">Denied</span>;
-        }
+      if (application.status === 2) {
+        status = <span className="approved">Approved</span>;
+      } else if (application.status === 1) {
+        status = <span className="denied">Denied</span>;
+      }
     }
 
     if (project !== null) {
@@ -53,20 +54,19 @@ class ApplicationRow extends React.Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div className="project-card" onClick={this.goToApplication}>
-          <div className="project-card-container">
-            <h3 className="project-name">Loading...</h3>
-            <p className="project-description">{status}</p>
-            <br />
-            <p className="project-description">{application.question1}</p>
-            <p className="project-description">{application.question2}</p>
-            <p className="project-description">{application.question3}</p>
-          </div>
-        </div>
-      );
     }
+    return (
+      <div className="project-card" onClick={this.goToApplication}>
+        <div className="project-card-container">
+          <h3 className="project-name">Loading...</h3>
+          <p className="project-description">{status}</p>
+          <br />
+          <p className="project-description">{application.question1}</p>
+          <p className="project-description">{application.question2}</p>
+          <p className="project-description">{application.question3}</p>
+        </div>
+      </div>
+    );
   }
 }
 

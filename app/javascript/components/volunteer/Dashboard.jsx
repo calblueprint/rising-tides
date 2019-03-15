@@ -1,39 +1,41 @@
-import React from "react"
-import Logout from "./Logout"
-class Dashboard extends React.Component {
+import React from "react";
+import Logout from "./Logout";
 
+class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   componentDidMount() {
     // this.updateEvents();
   }
 
-  viewProfile = () => {
-    window.location = `/users/${this.props.user.id}`;
-  }
+  viewProfile = ({ user }) => {
+    window.location.href = `/users/${user.id}`;
+  };
 
-  handleProjectsClick = (e) => {
-    e.preventDefault()
+  handleProjectsClick = e => {
+    e.preventDefault();
 
-    window.location = "/projects"
-  }
+    window.location.href = "/projects";
+  };
 
-  handleApplicationsClick = (e) => {
-    e.preventDefault()
+  handleApplicationsClick = e => {
+    e.preventDefault();
 
-    window.location = "/applications"
-  }
+    window.location.href = "/applications";
+  };
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div>
         <h1>Volunteer Dashboard</h1>
-        <p> Hello. You are an volunteer, and your email is {this.props.user.email}. </p>
-
+        <p>
+          Hello. You are an volunteer, and your email is {this.props.user.email}
+          .
+        </p>
 
         <div className="input-contianer">
           <div>
@@ -49,10 +51,10 @@ class Dashboard extends React.Component {
           </div>
         </div>
 
-        <Logout/>
+        <Logout />
       </div>
-    )
+    );
   }
 }
 
-export default Dashboard
+export default Dashboard;

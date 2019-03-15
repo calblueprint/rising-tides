@@ -1,10 +1,9 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 
 class NewProjectForm extends React.Component {
-
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       success: null,
       title: null,
@@ -15,26 +14,33 @@ class NewProjectForm extends React.Component {
       question1: null,
       question2: null,
       question3: null,
-      project_type_id: 1,
+      project_type_id: 1
     };
     axios.defaults.headers.common = {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
     };
-    this._handleSubmit = this._handleSubmit.bind(this);
-    this._handlers = [];
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlers = [];
   }
 
-  _handleChange = name => {
-    if (!this._handlers[name]) {
-      this._handlers[name] = event => {
+  handleChange = name => {
+    if (!this.handlers[name]) {
+      this.handlers[name] = event => {
         this.setState({ [name]: event.target.value });
       };
     }
-    return this._handlers[name];
-  }
+    return this.handlers[name];
+  };
 
-  _handleSubmit(e) {
+  goBack = e => {
+    e.preventDefault();
+    window.location.href = "/projects";
+  };
+
+  handleSubmit(e) {
     e.preventDefault();
     const payload = {
       project: {
@@ -51,13 +57,14 @@ class NewProjectForm extends React.Component {
       }
     };
 
-    axios.post('/api/projects', payload)
+    axios
+      .post("/api/projects", payload)
       .then(res => {
-        this.setState({success: 1});
-        window.location.href = '/projects';
+        this.setState({ success: 1 });
+        window.location.href = "/projects";
       })
       .catch(res => {
-        this.setState({success: 0});
+        this.setState({ success: 0 });
         console.log(res);
       });
 
@@ -65,91 +72,99 @@ class NewProjectForm extends React.Component {
     return false;
   }
 
-  goBack = (e) => {
-    e.preventDefault();
-    window.location = "/projects";
-  };
-
   render() {
-    let projectTypes = this.props.project_types.map((project, index) => {
-      return <option value={project.id}>{project.name}</option>
+    const projectTypes = this.props.project_types.map((project, index) => {
+      return <option value={project.id}>{project.name}</option>;
     });
 
     return (
       <div>
         <a onClick={this.goBack}>Back</a>
         <h1>New Project</h1>
-        <form onSubmit={this._handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <label>
             <span className="container-label">Title</span>
-            <input type="text"
-                   placeholder="i.e. Assessing Adaptation Options"
-                   className="input-box"
-                   onChange={this._handleChange('title')} />
+            <input
+              type="text"
+              placeholder="i.e. Assessing Adaptation Options"
+              className="input-box"
+              onChange={this.handleChange("title")}
+            />
           </label>
           <br />
           <label>
             <span className="container-label">Project Type</span>
-            <select className="input-box" onChange={this._handleChange('project_type_id')}>
-                {projectTypes}
+            <select
+              className="input-box"
+              onChange={this.handleChange("project_type_id")}
+            >
+              {projectTypes}
             </select>
           </label>
           <br />
           <label>
-            <span class="container-label">Brief Description</span>
+            <span className="container-label">Brief Description</span>
             <textarea
-                  class="input-area"
-                  placeholder="i.e. Identify The Best Climate Change Adaptation Approaches For Your Community, Historic Property, or Landscape"
-                  onChange={this._handleChange('description')}>
-            </textarea>
+              className="input-area"
+              placeholder="i.e. Identify The Best Climate Change Adaptation Approaches For Your Community, Historic Property, or Landscape"
+              onChange={this.handleChange("description")}
+            />
           </label>
           <br />
           <label>
-            <span class="container-label">Project Plan</span>
-            <textarea type="text"
-                   class="input-area"
-                   onChange={this._handleChange('overview')}>
-            </textarea>
+            <span className="container-label">Project Plan</span>
+            <textarea
+              type="text"
+              className="input-area"
+              onChange={this.handleChange("overview")}
+            />
           </label>
           <br />
           <label>
-            <span class="container-label">Professional Skills Needed</span>
-            <textarea type="text"
-                   class="input-area"
-                   onChange={this._handleChange('volunteer_requirements')}>
-            </textarea>
+            <span className="container-label">Professional Skills Needed</span>
+            <textarea
+              type="text"
+              className="input-area"
+              onChange={this.handleChange("volunteer_requirements")}
+            />
           </label>
           <br />
           <label>
-            <span class="container-label">Project Outputs</span>
-            <textarea type="text"
-                   class="input-area"
-                   onChange={this._handleChange('deliverable')}>
-            </textarea>
+            <span className="container-label">Project Outputs</span>
+            <textarea
+              type="text"
+              className="input-area"
+              onChange={this.handleChange("deliverable")}
+            />
           </label>
           <br />
           <label>
-            <span class="container-label">Our Community Needs This If:</span>
-            <textarea type="text"
-                   class="input-area"
-                   onChange={this._handleChange('question1')}>
-            </textarea>
+            <span className="container-label">Our Community Needs This If:</span>
+            <textarea
+              type="text"
+              className="input-area"
+              onChange={this.handleChange("question1")}
+            />
           </label>
           <br />
           <label>
-            <span class="container-label">The Right Volunteer for this Project Is:</span>
-            <textarea type="text"
-                   class="input-area"
-                   onChange={this._handleChange('question2')}>
-            </textarea>
+            <span className="container-label">
+              The Right Volunteer for this Project Is:
+            </span>
+            <textarea
+              type="text"
+              className="input-area"
+              onChange={this.handleChange("question2")}
+            />
           </label>
           <br />
           <label>
-            <span class="container-label">What You Give, What You Get:</span>
-            <textarea type="text"
-                   class="input-area"
-                   onChange={this._handleChange('question3')}>
-            </textarea>
+            <span className="container-label">What You Give, What You Get:</span>
+            <textarea
+              type="text"
+              className="input-area"
+              onChange={this.handleChange("question3")}
+            />
           </label>
           <br />
           <input className="button" value="Create" type="submit" />
@@ -157,7 +172,6 @@ class NewProjectForm extends React.Component {
       </div>
     );
   }
-
 }
 
 export default NewProjectForm;

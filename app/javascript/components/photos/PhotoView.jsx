@@ -1,12 +1,10 @@
 /**
-* @prop application - application object associated with this row
-*/
+ * @prop application - application object associated with this row
+ */
 
 import React from "react";
-import axios from 'axios';
 
 class PhotoView extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -14,8 +12,7 @@ class PhotoView extends React.Component {
     };
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     const { photo } = this.props;
@@ -26,13 +23,8 @@ class PhotoView extends React.Component {
           <img src={photo} />
         </div>
       );
-    } else {
-      return (
-        <div className="project-card" >
-          No photo
-        </div>
-      );
     }
+    return <div className="project-card">No photo</div>;
   }
 }
 

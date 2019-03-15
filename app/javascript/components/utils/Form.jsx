@@ -1,21 +1,19 @@
 import React from "react";
 
 class Form extends React.Component {
-
   constructor(props) {
     super();
-    this._handlers = [];
+    this.handlers = [];
   }
 
-  _handleChange = name => {
-    if (!this._handlers[name]) {
-      this._handlers[name] = event => {
+  handleChange = name => {
+    if (!this.handlers[name]) {
+      this.handlers[name] = event => {
         this.setState({ [name]: event.target.value });
       };
     }
-    return this._handlers[name];
-  }
-
+    return this.handlers[name];
+  };
 }
 
 export default Form;

@@ -1,54 +1,58 @@
 /**
-* @prop application - application object associated with this row
-*/
+ * @prop application - application object associated with this row
+ */
 
 import React from "react";
 import axios from "axios";
 
 class ApplicationView extends React.Component {
-    constructor(props) {
-        super(props);
-        axios.defaults.headers.common = {
-            "X-Requested-With": "XMLHttpRequest",
-            "X-CSRF-TOKEN": document
-                .querySelector('meta[name="csrf-token"]')
-                .getAttribute("content")
-        };
-    }
+  constructor(props) {
+    super(props);
+    axios.defaults.headers.common = {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
+    };
+  }
 
-    goBack = (e) => {
-        e.preventDefault();
-        window.location = "/applications";
+  goBack = e => {
+    e.preventDefault();
+    window.location.href = "/applications";
+  };
+
+  render() {
+    const { application } = this.props;
+
+    let status = <span>Pending...</span>;
+
+    if (application.status != null) {
+      if (application.status === 2) {
+        status = <span className="approved">Approved</span>;
+      } else if (application.status === 1) {
+        status = <span className="denied">Denied</span>;
       }
-
-    render() {
-        const { application } = this.props;
-
-        let status = <span>Pending...</span>;
-
-        if (application.status != null) {
-            if (application.status == 2) {
-                status = <span className="approved">Approved</span>;
-            } else if (application.status == 1) {
-                status = <span className="denied">Denied</span>;
-            }
-        }
-
-        return (
-            <div>
-                <a onClick={this.goBack}>Back</a>
-                <h3> Applicant </h3>
-                <h4> {status} </h4>
-                <p> {application.user_id} </p>
-                <h3>Why are you interested in working on this project? (2-3 sentences)</h3>
-                <p> {application.question1} </p>
-                <h3>What experience could you contribute to this project? (2-3 sentences)</h3>
-                <p> {application.question2} </p>
-                <h3>Skills</h3>
-                <p> {application.question3} </p>
-            </div>
-        );
     }
+
+    return (
+      <div>
+        <a onClick={this.goBack}>Back</a>
+        <h3> Applicant </h3>
+        <h4>{status}</h4>
+        <p>{application.user_id}</p>
+        <h3>
+          Why are you interested in working on this project? (2-3 sentences)
+        </h3>
+        <p>{application.question1}</p>
+        <h3>
+          What experience could you contribute to this project? (2-3 sentences)
+        </h3>
+        <p>{application.question2}</p>
+        <h3>Skills</h3>
+        <p>{application.question3}</p>
+      </div>
+    );
+  }
 }
 
 export default ApplicationView;

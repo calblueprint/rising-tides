@@ -17,7 +17,7 @@ class Logout extends React.Component {
   handleLogout = e => {
     e.preventDefault();
     axios
-      .delete("/organizations/sign_out", {})
+      .delete("/users/sign_out", {})
       .then(function(response) {
         window.location.href = "/";
       })
@@ -27,7 +27,11 @@ class Logout extends React.Component {
   };
 
   render() {
-    return <button onClick={this.handleLogout}>Sign Out</button>;
+    return (
+      <div className="input-contianer">
+        <button onClick={this.handleLogout}>Sign Out</button>
+      </div>
+    );
   }
 }
 export default Logout;
