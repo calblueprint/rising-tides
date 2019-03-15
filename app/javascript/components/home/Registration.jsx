@@ -1,27 +1,24 @@
-import React from "react"
-import axios from "axios"
+import React from "react";
 
 class Registration extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
   }
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value })
-  }
+    this.setState({ [name]: event.target.value });
+  };
 
-  handleSignup = (e) => {
-    e.preventDefault()
+  handleSignup = e => {
+    e.preventDefault();
 
     if (this.state.selectedType === "volunteer") {
-      window.location = "/users/sign_up"
+      window.location.href = "/users/sign_up";
+    } else if (this.state.selectedType === "organization") {
+      window.location.href = "/organizations/sign_up";
     }
-
-    else if (this.state.selectedType === "organization") {
-      window.location = "/organizations/sign_up"
-    }
-  }
+  };
 
   render() {
     return (
@@ -55,7 +52,7 @@ class Registration extends React.Component {
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
-export default Registration
+export default Registration;

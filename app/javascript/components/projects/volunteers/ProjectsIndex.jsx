@@ -1,9 +1,8 @@
 import React from "react";
-import axios from 'axios';
-import ProjectRow from './ProjectRow';
+import axios from "axios";
+import ProjectRow from "./ProjectRow";
 
 class ProjectsIndex extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -12,31 +11,27 @@ class ProjectsIndex extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/all_projects').then(ret => {
-      let projects = ret.data;
+    axios.get("/api/all_projects").then(ret => {
+      const projects = ret.data;
 
       this.setState({ projects });
-    })
+    });
   }
 
-  goBack = (e) => {
+  goBack = e => {
     e.preventDefault();
-    window.location = "/";
-  }
+    window.location.href = "/";
+  };
 
   render() {
     let projectList;
 
-    if (this.state.projects.length != 0) {
+    if (this.state.projects.length !== 0) {
       projectList = this.state.projects.map((project, index) => {
-        return <ProjectRow project={project} key={index} />
+        return <ProjectRow project={project} key={index} />;
       });
     } else {
-      projectList = (
-        <li>
-          No Results
-        </li>
-     )
+      projectList = <li>No Results</li>;
     }
 
     return (
@@ -47,7 +42,6 @@ class ProjectsIndex extends React.Component {
       </div>
     );
   }
-
 }
 
 export default ProjectsIndex;

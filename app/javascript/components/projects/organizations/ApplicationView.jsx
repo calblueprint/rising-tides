@@ -1,102 +1,124 @@
 /**
-* @prop application - application object associated with this row
-*/
+ * @prop application - application object associated with this row
+ */
 
 import React from "react";
 import axios from "axios";
 
 class ApplicationView extends React.Component {
-    constructor(props) {
-        super(props);
-        axios.defaults.headers.common = {
-            "X-Requested-With": "XMLHttpRequest",
-            "X-CSRF-TOKEN": document
-                .querySelector('meta[name="csrf-token"]')
-                .getAttribute("content")
-        };
-        this.handleAccept = this.handleAccept.bind(this);
-        this.handleReject = this.handleReject.bind(this);
-    }
-
-    handleAccept = (e) => {
-        e.preventDefault();
-
-        axios
-            .post(`/api/applications/${this.props.application.id}/decide`, {
-                decision: 2
-            })
-            .then(function(response) {
-                window.location.reload();
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
-    }
-
-    handleReject = (e) => {
-        e.preventDefault();
-
-        axios
-            .post(`/api/applications/${this.props.application.id}/decide`, {
-                decision: 1
-            })
-            .then(function(response) {
-                window.location.reload();
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
-    }
-
-    handleVolunteerClick = e => {
-        e.preventDefault();
-
-        window.location = `/users/${this.props.user.id}`;
+  constructor(props) {
+    super(props);
+    axios.defaults.headers.common = {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
     };
+    this.handleAccept = this.handleAccept.bind(this);
+    this.handleReject = this.handleReject.bind(this);
+  }
 
-    goBack = e => {
-        e.preventDefault();
-        window.location = `/projects/${this.props.application.project_id}`;
-    };
+  handleAccept = e => {
+    e.preventDefault();
 
-    render() {
-        const { application } = this.props;
+    axios
+      .post(`/api/applications/${this.props.application.id}/decide`, {
+        decision: 2
+      })
+      .then(function(response) {
+        window.location.reload();
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
-        let status = <span>Pending...</span>;
+  handleReject = e => {
+    e.preventDefault();
 
-        if (application.status != null) {
-            if (application.status === 2) {
-                status = <span className="approved">Approved</span>;
-            } else if (application.status === 1) {
-                status = <span className="denied">Denied</span>;
-            }
-        }
+    axios
+      .post(`/api/applications/${this.props.application.id}/decide`, {
+        decision: 1
+      })
+      .then(function(response) {
+        window.location.reload();
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
-        let buttons = <span></span>;
+  handleVolunteerClick = e => {
+    e.preventDefault();
 
-        if (application.status === null || application.status === 0) {
-            buttons = <div>
-                <button onClick={this.handleAccept}>Accept</button>
-                <button onClick={this.handleReject}>Reject</button>
-            </div>;
-        }
+    window.location.href = `/users/${this.props.user.id}`;
+  };
 
-        return (
-            <div>
-                <a onClick={this.goBack}>Back</a>
-                <h3>Applicant: <a onClick={this.handleVolunteerClick}>{this.props.user.first_name} {this.props.user.last_name}</a></h3>
-                <h3> Status: {status} </h3>
-                <h3>Why are you interested in working on this project? (2-3 sentences)</h3>
-                <p> {application.question1} </p>
-                <h3>What experience could you contribute to this project? (2-3 sentences)</h3>
-                <p> {application.question2} </p>
-                <h3>Skills</h3>
-                <p> {application.question3} </p>
+  goBack = e => {
+    e.preventDefault();
+    window.location.href = `/projects/${this.props.application.project_id}`;
+  };
 
-                {buttons}
-            </div>
-        );
+  render() {
+    const { application } = this.props;
+
+    let status = <span>Pending...</span>;
+
+    if (application.status != null) {
+      if (application.status === 2) {
+        status = <span className="approved">Approved</span>;
+      } else if (application.status === 1) {
+        status = <span className="denied">Denied</span>;
+      }
     }
+
+    let buttons = <span />;
+
+    if (application.status === null || application.status === 0) {
+      buttons = (
+        <div>
+          <button onClick={this.handleAccept}>Accept</button>
+          <button onClick={this.handleReject}>Reject</button>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <a onClick={this.goBack}>Back</a>
+        <h3>
+          Applicant:
+          {" "}
+          <a onClick={this.handleVolunteerClick}>
+            {this.props.user.first_name} 
+            {' '}
+            {this.props.user.last_name}
+          </a>
+        </h3>
+        <h3>
+            Status: {status}
+        </h3>
+        <h3>
+          Why are you interested in working on this project? (2-3 sentences)
+        </h3>
+        <p>
+          {application.question1}
+        </p>
+        <h3>
+          What experience could you contribute to this project? (2-3 sentences)
+        </h3>
+        <p> 
+          {application.question2}
+        </p>
+        <h3>Skills</h3>
+        <p> 
+          {application.question3}
+        </p>
+
+        {buttons}
+      </div>
+    );
+  }
 }
 
 export default ApplicationView;
