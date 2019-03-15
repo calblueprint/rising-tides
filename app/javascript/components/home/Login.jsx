@@ -1,5 +1,5 @@
-import React from "react"
-import axios from "axios"
+import React from "react";
+import axios from "axios";
 
 class Login extends React.Component {
   constructor(props) {
@@ -7,21 +7,23 @@ class Login extends React.Component {
     this.state = {};
 
     axios.defaults.headers.common = {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-    }
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
+    };
   }
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value })
+    this.setState({ [name]: event.target.value });
   };
 
-  handleSignup = (e) => {
+  handleSignup = e => {
     e.preventDefault();
 
     const data = {
-          email: this.state.email,
-          password: this.state.password
+      email: this.state.email,
+      password: this.state.password
     };
 
     if (this.state.selectedType === "volunteer") {
@@ -30,26 +32,23 @@ class Login extends React.Component {
           user: data
         })
         .then(function(response) {
-          window.location = "/"
+          window.location.href = "/";
         })
         .catch(function(error) {
-          console.log(error)
-        })
-    }
-
-    else if (this.state.selectedType === "organization") {
+          console.log(error);
+        });
+    } else if (this.state.selectedType === "organization") {
       axios
         .post("/organizations/sign_in", {
           organization: data
-          }
-        )
+        })
         .then(function(response) {
-          window.location = "/"
+          window.location.href = "/";
         })
         .catch(function(error) {
-          console.log(error)
-        })
-      }
+          console.log(error);
+        });
+    }
   };
 
   render() {
@@ -81,7 +80,7 @@ class Login extends React.Component {
           <br />
           <div>
             <input
-              class="input-box"
+              className="input-box"
               type="text"
               id="email"
               placeholder="email"
@@ -89,7 +88,7 @@ class Login extends React.Component {
             />
             <br />
             <input
-              class="input-box"
+              className="input-box"
               type="password"
               id="password"
               placeholder="password"
@@ -97,13 +96,12 @@ class Login extends React.Component {
             />
           </div>
           <br />
-          <div class="input-contianer">
+          <div className="input-contianer">
             <button onClick={this.handleSignup}>Login</button>
           </div>
         </form>
-
       </div>
-    )
+    );
   }
 }
-export default Login
+export default Login;
