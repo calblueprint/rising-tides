@@ -34,13 +34,14 @@ gem 'jbuilder', '~> 2.5'
 gem "paperclip", "~> 5.0.0"
 
 gem 'jquery-rails'
-gem 'react-bootstrap-rails'
-gem 'bootstrap-sass'
+# gem 'react-bootstrap-rails'
+# gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'toastr-rails'
 gem 'momentjs-rails'
 gem 'react-rails'
 gem 'rails_admin', '~> 1.3'
+gem 'tachyons-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -48,6 +49,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Create random seed data
+  gem 'faker'
 end
 
 group :development do
@@ -77,6 +80,3 @@ gem 'devise'
 gem 'cancancan', '~> 2.0'
 
 gem 'webpacker'
-
-# Create random seed data
-gem 'faker'
