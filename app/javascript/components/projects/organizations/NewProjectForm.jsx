@@ -14,7 +14,8 @@ class NewProjectForm extends React.Component {
       question1: null,
       question2: null,
       question3: null,
-      project_type_id: 1
+      project_type_id: 1,
+      skills: new Array(this.props.skills.length),
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -35,10 +36,14 @@ class NewProjectForm extends React.Component {
     return this.handlers[name];
   };
 
-  goBack = e => {
-    e.preventDefault();
-    window.location.href = "/projects";
-  };
+  _handleSkillChange = name => {
+    if (!this._handlers[name]) {
+      this._handlers[name] = event => {
+        this.setState({ [name]: event.target.value });
+      };
+    }
+    return this._handlers[name];
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -72,9 +77,18 @@ class NewProjectForm extends React.Component {
     return false;
   }
 
+  goBack = (e) => {
+    e.preventDefault();
+    window.location = "/projects";
+  };
+
   render() {
     const projectTypes = this.props.project_types.map((project, index) => {
       return <option value={project.id}>{project.name}</option>;
+    });
+
+    let skills = this.props.skills.map((skill, index) => {
+      return <span><input type="checkbox" name={"skills[" + index + "]"} value={skill.id} /> {skill.name} <br /></span>
     });
 
     return (
@@ -165,6 +179,11 @@ class NewProjectForm extends React.Component {
               className="input-area"
               onChange={this.handleChange("question3")}
             />
+          </label>
+          <br />
+          <label>
+            <span class="container-label">Select skill:</span>
+            {skills}
           </label>
           <br />
           <input className="button" value="Create" type="submit" />

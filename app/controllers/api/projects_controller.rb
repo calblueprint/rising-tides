@@ -12,6 +12,11 @@ class Api::ProjectsController < ApplicationController
     render json:@projects
   end
 
+  def filter
+    @projects = Project.filter(filter_params)
+    render json:@projects
+  end
+
   def show
     render json: @project
   end
@@ -70,7 +75,14 @@ class Api::ProjectsController < ApplicationController
         :question2,
         :question3,
         :organization_id,
-        :project_type_id
+        :project_type_id,
+        skill_ids: []
       )
+    end
+
+    def filter_params
+        params.require(:query).permit(
+            skills: []
+        )
     end
 end

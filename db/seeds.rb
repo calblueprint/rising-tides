@@ -99,12 +99,31 @@ def create_project_types
   end
 end
 
+def create_skills
+  skill_list = ['Accounting', 'Botany', 
+    'Climate Change Adaptation (policy/planning)',
+    'Climate Change Adaptation (technical)', 'Climate Science',
+    'Communications', 'Cultural Resource Management', 'Data Analysis',
+    'Design', 'Education', 'Emergency Management', 'Engineering',
+    'Environmental Science', 'FEMA Expert',
+    'Financial Planning & Budgeting', 'Grant Writing',
+    'Historic Preservation', 'Historic Tax Credits Expert',
+    'Intangible Heritage Documentation', 'Landscape Management',
+    'Legal', 'Oral Histories', 'Public Relations & Outreach Programming',
+    'Strategic Planning & Strategy Consulting']
+
+  skill_list.each do |skill|
+    Skill.create( name: skill )
+  end
+end
+
 create_admin
 create_volunteers
 create_organizations
 create_project_types
 create_projects
 create_applications
+create_skills
 puts 'Seeding Finished!'
 
 
