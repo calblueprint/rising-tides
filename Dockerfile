@@ -1,15 +1,39 @@
-FROM ethanlee/whales
+FROM mhart/alpine-node:11 as node
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install
+
+FROM ruby:2.5.1-alpine
 
 ENV GEM_PATH=/gems
 ENV BUNDLE_PATH=/gems
 ENV GEM_HOME=/gems
-RUN bundle install
-ENV BUNDLER_VERSION=2.0.1
+ENV RAILS_ENV=development
+ENV NODE_ENV=development
+ENV BUNDLER_VERSION=2.0.1 NPM_VERSION=6 YARN_VERSION=1.13.0
+# ENV YARN_VERSION = 1.13.0
 
-RUN gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc
+RUN apk update \
+    && apk upgrade \
+    && apk add --update --no-cache \
+    build-base \
+    libxml2-dev \
+    libxslt-dev \
+    postgresql-dev \
+    tzdata \
+    busybox-extras \
+    bash \
+    postgresql-client \
+    curl \
+    expect \
+    yarn
+
+WORKDIR /app
+RUN gem install bundler -v ${BUNDLER_VERSION}
+COPY Gemfile Gemfile.lock ./
+
+RUN bundle install
 
 COPY . .
-RUN bundle install
-RUN yarn install
 
-CMD ["bundle", "exec", "rails", "server"]
+CMD ["./bin/webpack-dev-server", "bundle", "exec", "rails", "server"]
