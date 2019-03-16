@@ -8,7 +8,7 @@ class Project < ApplicationRecord
   has_many :photos
   has_and_belongs_to_many :skills
 
-  scope :skills, -> (skill_ids) { distinct.
+  scope :with_skill_ids, -> (skill_ids) { distinct.
       joins(:skills).
       where('skills.id' => skill_ids).
       group(:id).
