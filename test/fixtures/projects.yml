@@ -9,6 +9,7 @@ proj1:
   project_type_id: 1
   organization_id: 1
   skills: [skill1]
+  deliverable_type_id: 3
 
 proj2:
   title: title2
@@ -21,3 +22,4 @@ proj2:
   project_type_id: 1
   organization_id: 1
   skills: [skill2]
+  deliverable_type_id: 2

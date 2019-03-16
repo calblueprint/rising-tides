@@ -42,6 +42,8 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :skills, only: [:create]
+    resources :deliverable_types, only: [:create]
+
     resources :applications, only: [:create, :update, :destroy, :decide]
     resource :photos, only: [:create]
     post '/applications/:id/decide', to: 'applications#decide'

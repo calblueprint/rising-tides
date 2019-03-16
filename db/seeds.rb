@@ -117,13 +117,23 @@ def create_skills
   end
 end
 
+def create_deliverable_types
+    deliverable_list = ['del type 1', 'del type 2', 'del type 3']
+    deliverable_list.each do |deliverable|
+      DeliverableType.create( name: deliverable )
+    end
+end
+
 create_admin
+create_skills
+create_deliverable_types
 create_volunteers
 create_organizations
 create_project_types
 create_projects
 create_applications
 create_skills
+
 puts 'Seeding Finished!'
 
 
