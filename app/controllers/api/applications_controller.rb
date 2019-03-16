@@ -17,6 +17,11 @@ class Api::ApplicationsController < ApplicationController
   end
 
   def create
+    project = Project.find(application_params['project_id'])
+    if project.reached_application_limit
+        return render json: {message: 'Applications are closed.'}
+    end
+
     application = Application.new(application_params)
 
     begin
@@ -52,11 +57,12 @@ class Api::ApplicationsController < ApplicationController
 
   def decide
     decision = params[:decision]
-    puts("DECISION")
-    puts(decision)
 
     begin
       application = Application.find(params[:id])
+      if Application.status['accepted'] == Application.status[decision] and application.project.reached_user_limit
+        return render json: {message: 'Max applications already accepted.'}
+      end
       a = application.update_attribute(:status, decision)
     rescue
       return render json: {error: "Forbidden"}
