@@ -40,10 +40,10 @@ class ProjectCard extends React.Component {
       <h1 className="f3 roboto">
         {this.props.project.title}
       </h1>
-      <p className="f5 roboto fl">
+      <p className="f5 roboto">
       {this.state.organization.name} 
-      </p>
-      <p className="f5 roboto fr">
+      </p> <br/>
+      <p className="f6 roboto">
       {this.props.project.limit} spots left 
       </p>
       <p className="f6 roboto">
@@ -81,7 +81,7 @@ class ProjectCard extends React.Component {
   };
 
   render() {
-    return this.renderNormalCard();
+    return this.renderHoveredCard();
   }
 }
 
