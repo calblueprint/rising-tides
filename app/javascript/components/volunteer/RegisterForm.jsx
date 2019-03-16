@@ -18,8 +18,7 @@ class RegisterForm extends React.Component {
       skills: "",
       bio: "",
       selected_file: null,
-      // TODO: change photo to be of appropriate type
-      photo: "",
+      selected_resume_file: null,
       formErrors: { firstName: "", lastName: "", email: "" },
       firstNameValid: false,
       lastNameValid: false,
@@ -98,6 +97,10 @@ class RegisterForm extends React.Component {
     this.setState({ selected_file: e.target.files[0] });
   };
 
+  handleResumeFileChange = e => {
+    this.setState({ selected_resume_file: e.target.files[0] });
+  };
+
   handleUpload = () => {};
 
   handleChange = name => event => {
@@ -124,6 +127,7 @@ class RegisterForm extends React.Component {
     formData.append("user[skills]", this.state.skills);
     formData.append("user[phone_number]", this.state.phone_number);
     formData.append("user[profile_image]", this.state.selected_file);
+    formData.append("user[resume]", this.state.selected_resume_file);
     axios
       .post("/users", formData)
       .then(function(response) {
@@ -273,6 +277,10 @@ class RegisterForm extends React.Component {
           <fieldset>
             <label htmlFor="photo">Photo</label>
             <input type="file" onChange={this.handleFileChange} />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="resume">Resume</label>
+            <input type="file" onChange={this.handleResumeFileChange} />
           </fieldset>
         </form>
         <fieldset>
