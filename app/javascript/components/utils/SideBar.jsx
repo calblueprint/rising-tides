@@ -24,18 +24,31 @@ class SideBar extends React.Component {
   };
 
   render() {
-    return (<div className="sidebar">
+    return (<div className="fixed bg-white w-20">
     <div>
-      <a onClick={this.goToDashboard}>Dashboard</a>
+      <p className="roboto f4" onClick={this.goToDashboard}>
+        Rising Tides
+      </p>
+    </div>
+    <br/>
+    <div className="hover-bg-light-blue h3 pa1">
+      <p className="roboto f5 hover-white" onClick={this.goToDashboard}>
+        Dashboard
+      </p>
     </div>
 
-    <div>
-      <a onClick={this.goToProfile}>Profile</a>
+    <div className="hover-bg-light-blue h3 pa1">
+      <p className="roboto f5 hover-white" onClick={this.goToProfile}>
+       Profile
+      </p>
     </div>
 
-    <div>
-      <a onClick={this.goToBrowse}>Browse Projects</a>
+    <div className="hover-bg-light-blue h3 pa1">
+      <p className="roboto f5 hover-white" onClick={this.goToBrowse}>
+        Browse Projects
+      </p>
     </div>
+
   </div>)
   }
 }

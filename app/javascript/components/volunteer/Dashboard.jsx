@@ -43,9 +43,7 @@ class Dashboard extends React.Component {
         <br/>
         <br/>
         <br/>
-        <br/>
-        <div>
-         className="input-contianer">
+        <div className="input-contianer">
           <div>
             <a onClick={this.viewProfile}>Profile</a>
           </div>
