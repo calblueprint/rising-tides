@@ -81,7 +81,8 @@ class ProjectCard extends React.Component {
   };
 
   render() {
-    return this.renderHoveredCard();
+
+    return this.renderNormalCard();
   }
 }
 
