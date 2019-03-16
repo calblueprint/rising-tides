@@ -40,8 +40,11 @@ class ProjectCard extends React.Component {
       <h1 className="f3 roboto">
         {this.props.project.title}
       </h1>
-      <p className="f5 roboto">
+      <p className="f5 roboto fl">
       {this.state.organization.name} 
+      </p>
+      <p className="f5 roboto fr">
+      {this.props.project.limit} spots left 
       </p>
       <p className="f6 roboto">
         {this.state.organization.city}, {this.state.organization.city} <br/>
@@ -63,8 +66,11 @@ class ProjectCard extends React.Component {
       <h1 className="f3 roboto">
         {this.props.project.title}
       </h1>
-      <p className="f5 roboto">
+      <p className="f5 roboto fl">
         {this.state.organization.name}
+      </p>
+      <p className="f5 roboto fr">
+      {this.props.project.limit} spots left 
       </p>
   </div> : null
     return normalCard
