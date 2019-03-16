@@ -9,6 +9,7 @@ class ApiUsersControllerTest < ActionDispatch::IntegrationTest
         password_confirmation: 'password',
         first_name: 'First Name',
         last_name: 'Last Name',
+        linkedin_url: 'https://www.linkedin.com/in/alex-maccaw-ab592978/',
         skill_ids: [232994509, 350906233, 602757090, 1032438339]
     } }, xhr: true
 
