@@ -118,8 +118,8 @@ def create_skills
 end
 
 def create_deliverable_types
-    del_list = ['del type 1', 'del type 2', 'del type 3']
-    del_list.each do |delv|
+    deliverable_list = ['del type 1', 'del type 2', 'del type 3']
+    deliverable_list.each do |delv|
       DeliverableType.create( name: delv )
     end
 end
