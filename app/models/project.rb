@@ -3,6 +3,7 @@ class Project < ApplicationRecord
   belongs_to :organization
   belongs_to :project_type
   belongs_to :deliverable_type
+  belongs_to :project_status
   has_many :applications
   has_many :users
   has_many :photos
@@ -14,4 +15,8 @@ class Project < ApplicationRecord
       group(:id).
       having('count(skills.id) > 0', skill_ids.length) }
   scope :with_deliverable_type, -> (deliverable_type_id) { where deliverable_type_id:  deliverable_type_id }
+
+  def status
+    self.project_status
+  end
 end

@@ -124,9 +124,19 @@ def create_deliverable_types
     end
 end
 
+def create_project_status
+  status_list = ['Recruiting', 'In Progress', 'Complete']
+
+  status_list.each do |skill|
+    ProjectStatus.create( name: skill )
+  end
+end
+
 create_admin
 create_skills
 create_deliverable_types
+create_admin
+create_project_status
 create_volunteers
 create_organizations
 create_project_types
