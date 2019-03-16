@@ -52,7 +52,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
             :bio,
             :profile_image,
             :skills,
-            :phone_number])
+            :phone_number,
+            skill_ids: []])
   end
 
   # protected

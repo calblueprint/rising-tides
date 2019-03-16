@@ -21,6 +21,8 @@ class ApiProjectsControllerTest < ActionDispatch::IntegrationTest
         title: "My New Project",
         organization_id: 1,
         project_type_id: 1,
+        project_status_id: 1,
+        deliverable_type_id: 1,
         skill_ids: [232994509, 350906233, 602757090, 1032438339]
     } }, xhr: true
 
