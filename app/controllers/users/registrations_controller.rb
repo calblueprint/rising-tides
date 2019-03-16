@@ -51,7 +51,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
             :link,
             :bio,
             :profile_image,
-            :skills,
+            :resume,
             :phone_number,
             skill_ids: []])
   end
