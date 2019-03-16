@@ -95,10 +95,6 @@ ActiveRecord::Schema.define(version: 2019_03_16_013734) do
     t.text "question2"
     t.text "question3"
     t.bigint "project_type_id"
-    t.bigint "project_status_id", default: 1
-    t.bigint "deliverable_type_id"
-    t.integer "application_limit", default: 2
-    t.integer "user_limit", default: 1
   end
 
   create_table "projects_skills", id: false, force: :cascade do |t|
