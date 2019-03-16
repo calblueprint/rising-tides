@@ -84,7 +84,7 @@ class Api::ProjectsController < ApplicationController
     def filter_params
         params.require(:query).permit(
             :with_deliverable_type,
-            skills: []
+            with_skill_ids: []
         )
     end
 end
