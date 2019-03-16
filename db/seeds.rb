@@ -119,8 +119,8 @@ end
 
 def create_deliverable_types
     deliverable_list = ['del type 1', 'del type 2', 'del type 3']
-    deliverable_list.each do |delv|
-      DeliverableType.create( name: delv )
+    deliverable_list.each do |deliverable|
+      DeliverableType.create( name: deliverable )
     end
 end
 
