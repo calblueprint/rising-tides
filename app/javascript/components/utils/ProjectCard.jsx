@@ -60,7 +60,7 @@ class ProjectCard extends React.Component {
   renderNormalCard() {
     let normalCard = null;
     normalCard = this.state.organization ? 
-    <div className="ma2 pa2 col-item bg-white fl w-third shadow-1" onClick={this.goToProject}>
+    <div className="ma2 pa2 col-item bg-white vh-50 fl w-third shadow-1" onClick={this.goToProject}>
       <img src="http://placekitten.com/g/600/300" className="db h5 w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
       <h1 className="f3 roboto">
         {this.props.project.title}
@@ -80,7 +80,7 @@ class ProjectCard extends React.Component {
   };
 
   render() {
-    return this.renderHoveredCard();
+    return this.renderNormalCard();
   }
 }
 
