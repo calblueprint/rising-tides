@@ -1,6 +1,7 @@
 import React from "react";
 import Registration from "./Registration";
 import Login from "./Login";
+import Button from "../helpers/Button";
 
 class Home extends React.Component {
   constructor(props) {
@@ -9,11 +10,15 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <h1> Welcome to Rising Tides </h1>
         <Login />
         <Registration />
+        <Button type="button-primary">
+          hello
+        </Button>
       </div>
     );
   }
