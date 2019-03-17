@@ -2,6 +2,7 @@ import React from "react"
 import Logout from "./Logout"
 import SideBar from "../../utils/SideBar"
 
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +32,7 @@ class Dashboard extends React.Component {
   render() {
     console.log(this.props);
     return (
-      <div>
+      <div className="bg-light-gray h-100">
         <h1>Volunteer Dashboard</h1>
         <p> Hello. You are an volunteer, and your email is {this.props.user.email}. </p>
 
@@ -49,7 +50,8 @@ class Dashboard extends React.Component {
         <br/>
         <br/>
         <br/>
-        <br/><br/>
+        <br/>
+        <br/>
         <br/>
         <br/>
         <br/>

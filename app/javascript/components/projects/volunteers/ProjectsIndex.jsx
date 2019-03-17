@@ -36,7 +36,7 @@ class ProjectsIndex extends React.Component {
     }
 
     return (
-      <div>
+      <div className="bg-light-gray h-100">
         <a onClick={this.goBack}>Back</a>
         <h1>Projects</h1>
         {projectList}

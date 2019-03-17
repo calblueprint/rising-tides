@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+import PropTypes from "prop-types";
 
 
 class SideBar extends React.Component {
@@ -24,7 +24,7 @@ class SideBar extends React.Component {
   };
 
   render() {
-    return (<div className="fixed bg-white w-20">
+    return (<div className="fixed bg-white w-25 h-100">
     <div>
       <p className="roboto f4" onClick={this.goToDashboard}>
         Rising Tides
@@ -53,8 +53,8 @@ class SideBar extends React.Component {
   }
 }
 
-// SideBar.propTypes = {
-//   id: PropTypes.number
-// }
+SideBar.propTypes = {
+  id: PropTypes.number
+}
 
 export default SideBar;

@@ -11,7 +11,8 @@ class ProjectCard extends React.Component {
     this.goToProject = this.goToProject.bind(this);
     this.renderDate = this.renderDate.bind(this);
     this.state = {
-      organization: null
+      organization: null,
+      type: null
     }
   }
 
@@ -36,7 +37,7 @@ class ProjectCard extends React.Component {
     let hoveredCard = null;
 
     hoveredCard = this.state.organization ? 
-    <div className="ma2 pa2 h-auto col-item bg-white fl w-100 w-third-ns relative" onClick={this.goToProject}>
+    <div className="ma2 pa2 col-item bg-white vh-50 fl w-third shadow-1" onClick={this.goToProject}>
       <h1 className="f3 roboto">
         {this.props.project.title}
       </h1>
@@ -44,13 +45,11 @@ class ProjectCard extends React.Component {
       {this.state.organization.name} 
       </p> <br/>
       <p className="f6 roboto">
-      {this.props.project.limit} spots left 
+      {this.props.project.limit} spots left<br/><br/> 
+      {this.state.organization.city}, {this.state.organization.city} <br/><br/>
+      {this.props.project.volunteer_requirements}skills needed is null <br/><br/>
+      {this.renderDate(this.props.project.start_time)} to {this.renderDate(this.props.project.end_time)}
       </p>
-      <p className="f6 roboto">
-        {this.state.organization.city}, {this.state.organization.city} <br/>
-        {this.props.project.volunteer_requirements} <br/> 
-        {this.renderDate(this.props.project.start_time)} to {this.renderDate(this.props.project.end_time)}
-      </p> <br/>
       <p className="f7 roboto"> 
         {this.props.project.description} 
       </p>
@@ -61,7 +60,7 @@ class ProjectCard extends React.Component {
   renderNormalCard() {
     let normalCard = null;
     normalCard = this.state.organization ? 
-    <div className="ma2 pa2 col-item bg-lightest-blue fl w-100 w-third-ns relative" onClick={this.goToProject}>
+    <div className="ma2 pa2 col-item bg-white fl w-third shadow-1" onClick={this.goToProject}>
       <img src="http://placekitten.com/g/600/300" className="db h5 w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
       <h1 className="f3 roboto">
         {this.props.project.title}
@@ -81,13 +80,13 @@ class ProjectCard extends React.Component {
   };
 
   render() {
-
-    return this.renderNormalCard();
+    return this.renderHoveredCard();
   }
 }
 
 ProjectCard.propTypes = {
   project: PropTypes.object,
+  // TO-DO: add photos, project_type, project_status, project_capacity
   // photos: PropTypes.string,
   // project_type: PropTypes.string
 };
