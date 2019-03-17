@@ -54,8 +54,16 @@ a:hover {
   color: #039be5;
 }
 
-button.bg-primary-button {
+.bg-primary {
   background-color: #8bb5d5;
+}
+
+.primary-color {
+  color: #8bb5d5;
+}
+
+.primary-border-color {
+  border-color: #8bb5d5;
 }
 
 /* button,

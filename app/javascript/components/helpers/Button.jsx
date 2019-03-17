@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 class Button extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    children: PropTypes.string
   };
 
   static defaultProps = {
-    className: ""
+    className: "",
+    children: ""
   };
 
   constructor(props) {
@@ -18,26 +20,24 @@ class Button extends Component {
 
   render() {
     console.log(this.props);
-    const { type } = this.props;
+    const { type, children, className } = this.props;
     switch (type) {
       case "button-primary":
         return (
           <button
-            className={`${
-              this.props.className
-            } roboto f3 link dim br2 ph3 pv2 mb2 dib white bg-primary-button`}
+            type="button"
+            className={`${className} roboto f4 link dim br3 ph3 pv2 mb2 dib white bg-primary`}
           >
-            {this.props.children}
+            {children}
           </button>
         );
       case "button-secondary":
         return (
           <button
-            className={`${
-              this.props.className
-            } f3 link dim br2 ba bw1 ph3 pv2 mb2 dib black bg-white`}
+            type="button"
+            className={`${className} roboto f4 link dim br3 ba bw1 primary-border-color ph3 pv2 mb2 dib primary-color bg-white`}
           >
-            {this.props.children}
+            {children}
           </button>
         );
       // case "hover-button":
