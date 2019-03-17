@@ -35,10 +35,10 @@ development:
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
     https: false
-    host: localhost
+    host: sh
     port: 3035
     public: localhost:3035
-    hmr: false
+    hmr: true
     # Inline should be set to true if using HMR
     inline: true
     overlay: true
@@ -47,10 +47,9 @@ development:
     use_local_ip: false
     quiet: false
     headers:
-      'Access-Control-Allow-Origin': '*'
+      "Access-Control-Allow-Origin": "*"
     watch_options:
       ignored: /node_modules/
-
 
 test:
   <<: *default
