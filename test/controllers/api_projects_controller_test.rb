@@ -8,7 +8,7 @@ class ApiProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should filter project by skill ids" do
-    post api_projects_filter_url, params: { query: { skills: [232994509] } }, xhr: true
+    post api_projects_filter_url, params: { query: { with_skill_ids: [232994509] } }, xhr: true
 
     assert_response :success
     projects = JSON.parse(@response.body)
