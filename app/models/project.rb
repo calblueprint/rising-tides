@@ -14,4 +14,6 @@ class Project < ApplicationRecord
       group(:id).
       having('count(skills.id) > 0', skill_ids.length) }
   scope :with_deliverable_type, -> (deliverable_type_id) { where deliverable_type_id:  deliverable_type_id }
+
+  enum status: { recruiting: 0, in_progress: 1, completed: 2 }
 end

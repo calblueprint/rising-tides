@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_013734) do
+ActiveRecord::Schema.define(version: 2019_03_17_004333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,12 @@ ActiveRecord::Schema.define(version: 2019_03_16_013734) do
     t.index ["skill_id"], name: "index_project_skill_assignments_on_skill_id"
   end
 
+  create_table "project_statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "project_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -113,6 +119,8 @@ ActiveRecord::Schema.define(version: 2019_03_16_013734) do
     t.integer "application_limit", default: 2
     t.integer "user_limit", default: 1
     t.bigint "deliverable_type_id"
+    t.bigint "project_status_id", default: 1
+    t.integer "status"
   end
 
   create_table "projects_skills", id: false, force: :cascade do |t|

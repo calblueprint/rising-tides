@@ -64,7 +64,8 @@ def create_projects
                            question2: Faker::Company.buzzword,
                            question3: Faker::Company.catch_phrase,
                            project_type_id: i % 2 + 1,
-                           organization_id: org_id
+                           organization_id: org_id,
+                           deliverable_type_id: i % 3 + 1
     )
     proj.save
     puts "Created Project ##{i}. Owned by organization(id:#{org_id})"
