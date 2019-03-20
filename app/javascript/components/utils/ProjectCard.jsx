@@ -104,17 +104,18 @@ class ProjectCard extends React.Component {
         <div onMouseEnter={this.handleMouseHover}
              onMouseLeave={this.handleMouseHover}
         >
-          {this.renderNormalCard()}
-        </div>
-        {
-          this.state.isHover &&
+          {
+          this.state.isHover ?
           <div>
             {this.renderHoveredCard()}
+          </div>:
+          <div>
+            {this.renderNormalCard()}
           </div>
-        }
+          }
+        </div>
       </div>
     )
-    //return this.renderNormalCard();
   }
 }
 
