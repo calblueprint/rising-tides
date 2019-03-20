@@ -1,0 +1,8 @@
+asg1:
+  project: proj2
+  skill_id: 1
+
+asg2:
+  project: proj1
+  skill: skill2
+

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+delType1:
+  id: 1
+  name: delType1
+
+delType2:
+  id: 2
+  name: delType2
+
+delType3:
+  id: 3
+  name: delType3
