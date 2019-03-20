@@ -1,6 +1,6 @@
 import React from "react"
 import Logout from "./Logout"
-import SideBar from "../../utils/SideBar"
+import SideBar from "../utils/SideBar"
 
 
 class Dashboard extends React.Component {
