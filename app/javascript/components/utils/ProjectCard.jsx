@@ -38,9 +38,9 @@ class ProjectCard extends React.Component {
 
   renderHoveredCard() {
     let hoveredCard = null;
-
     hoveredCard = this.state.organization ? 
-    <div className="ma2 pa2 col-item bg-white vh-50 fl w-third shadow-1" onClick={this.goToProject}>
+    <div className="w-third col-item fl">
+    <div className="pa2 ma2 bg-white vh-50 shadow-1" onClick={this.goToProject}>
       <h1 className="f3 roboto">
         {this.props.project.title}
       </h1>
@@ -56,6 +56,7 @@ class ProjectCard extends React.Component {
       <p className="f7 roboto"> 
         {this.props.project.description} 
       </p>
+  </div>
   </div>: null
     return hoveredCard
   }
@@ -63,8 +64,8 @@ class ProjectCard extends React.Component {
   renderNormalCard() {
     let normalCard = null;
     normalCard = this.state.organization ? 
-    <div>
-      <div className="ma2 bg-white vh-50 w-third col-item fl shadow-1" onClick={this.goToProject}>
+    <div className="w-third col-item fl">
+      <div className="bg-white vh-50 ma2 shadow-1" onClick={this.goToProject}>
         <img src="http://placekitten.com/g/600/300" className="db h5 w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
         <div className="pr3 pl3 pb3">
         <h1 className="f3 roboto mb1">
@@ -79,7 +80,6 @@ class ProjectCard extends React.Component {
         </p>
       </div>
       </div>
-      
   </div> : null
     return normalCard
   }
