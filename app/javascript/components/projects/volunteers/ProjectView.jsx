@@ -37,22 +37,12 @@ class ProjectView extends React.Component {
   }
 
   goToApplication = () => {
-<<<<<<< HEAD
-    window.location.href = `/projects/${
-      this.props.project.id
-    }/applications/new`;
-=======
     window.location.href = `/projects/${this.props.project.id}/applications/new`;
->>>>>>> 5c36d3c... initial commit
   };
 
   goBack = e => {
     e.preventDefault();
-<<<<<<< HEAD
     window.location.href = "/projects";
-=======
-    window.location = "/projects";
->>>>>>> 5c36d3c... initial commit
   };
 
   render() {
