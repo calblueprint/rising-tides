@@ -10,9 +10,12 @@ class ProjectCard extends React.Component {
     this.renderNormalCard = this.renderNormalCard.bind(this);
     this.goToProject = this.goToProject.bind(this);
     this.renderDate = this.renderDate.bind(this);
+    this.handleMouseHover = this.handleMouseHover.bind(this);
+    this.toggleHoverState = this.toggleHoverState.bind(this)
     this.state = {
       organization: null,
-      type: null
+      type: null,
+      isHover: false
     }
   }
 
@@ -61,7 +64,7 @@ class ProjectCard extends React.Component {
     let normalCard = null;
     normalCard = this.state.organization ? 
     <div>
-      <div className="ma2 bg-white vh-50  w-third col-item fl shadow-1" onClick={this.goToProject}>
+      <div className="ma2 bg-white vh-50 w-third col-item fl shadow-1" onClick={this.goToProject}>
         <img src="http://placekitten.com/g/600/300" className="db h5 w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
         <div className="pr3 pl3 pb3">
         <h1 className="f3 roboto mb1">
@@ -81,12 +84,37 @@ class ProjectCard extends React.Component {
     return normalCard
   }
 
+  handleMouseHover() {
+    this.setState(this.toggleHoverState);
+  }
+
+  toggleHoverState(state) {
+    return {
+      isHover: !state.isHover
+    };
+  }
+
   goToProject = () => {
     window.location.href = `/projects/${this.props.project.id}`;
   };
 
   render() {
-    return this.renderNormalCard();
+    return (
+      <div> 
+        <div onMouseEnter={this.handleMouseHover}
+             onMouseLeave={this.handleMouseHover}
+        >
+          {this.renderNormalCard()}
+        </div>
+        {
+          this.state.isHover &&
+          <div>
+            {this.renderHoveredCard()}
+          </div>
+        }
+      </div>
+    )
+    //return this.renderNormalCard();
   }
 }
 
