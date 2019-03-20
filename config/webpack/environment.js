@@ -16,10 +16,4 @@ environment.loaders.prepend("babel-loader", {
   use: [{ loader: "babel-loader" }]
 });
 
-// environment.loaders.prepend("eslint", {
-//   test: /\.jsx$|\.js$/,
-//   exclude: /node_modules/,
-//   use: [{ loader: "eslint-loader" }]
-// });
-
 module.exports = environment;
