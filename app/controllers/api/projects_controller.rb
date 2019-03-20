@@ -76,13 +76,15 @@ class Api::ProjectsController < ApplicationController
         :question3,
         :organization_id,
         :project_type_id,
+        :deliverable_type_id,
         skill_ids: []
       )
     end
 
     def filter_params
         params.require(:query).permit(
-            skills: []
+            :with_deliverable_type,
+            with_skill_ids: []
         )
     end
 end
