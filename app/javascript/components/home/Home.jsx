@@ -1,8 +1,6 @@
 import React from "react";
 import logo from "images/arctic-institute-logo.png";
 import axios from "axios";
-// import Registration from "./Registration";
-// import Login from "./Login";
 import Button from "../helpers/Button";
 
 class Home extends React.Component {

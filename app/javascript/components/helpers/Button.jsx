@@ -42,16 +42,6 @@ class Button extends Component {
             {children}
           </button>
         );
-      // case "hover-button":
-      //   return (
-      //     <button
-      //       className={`${
-      //         this.props.className
-      //       }hover-button pa2 white font pointer`}
-      //     >
-      //       {this.props.children}
-      //     </button>
-      //   );
       default:
         return <p>default</p>;
     }
