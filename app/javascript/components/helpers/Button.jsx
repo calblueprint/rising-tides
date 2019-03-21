@@ -5,7 +5,8 @@ class Button extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
     className: PropTypes.string,
-    children: PropTypes.string
+    children: PropTypes.string,
+    onClick: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -19,14 +20,14 @@ class Button extends Component {
   }
 
   render() {
-    console.log(this.props);
-    const { type, children, className } = this.props;
+    const { type, children, className, onClick } = this.props;
     switch (type) {
       case "button-primary":
         return (
           <button
             type="button"
-            className={`${className} roboto f4 link dim br3 ph3 pv2 mb2 dib white bg-primary`}
+            className={`${className} roboto w4 f4 link bdim br3 b--none ph3 pv2 dib white bg-primary pointer`}
+            onClick={onClick}
           >
             {children}
           </button>
@@ -35,7 +36,8 @@ class Button extends Component {
         return (
           <button
             type="button"
-            className={`${className} roboto f4 link dim br3 ba bw1 primary-border-color ph3 pv2 mb2 dib primary-color bg-white`}
+            className={`${className} roboto w4 f4 link bdim br3 ba bw1 primary-border-color ph3 pv2 dib primary-color bg-white pointer`}
+            onClick={onClick}
           >
             {children}
           </button>
