@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2019_03_17_004333) do
     t.text "question2"
     t.text "question3"
     t.bigint "project_id"
-    t.integer "user_id"
-    t.integer "status"
+    t.integer "status", default: 0
+    t.bigint "user_id"
   end
 
   create_table "deliverable_types", force: :cascade do |t|
@@ -87,12 +87,6 @@ ActiveRecord::Schema.define(version: 2019_03_17_004333) do
     t.index ["skill_id"], name: "index_project_skill_assignments_on_skill_id"
   end
 
-  create_table "project_statuses", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "project_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -116,6 +110,10 @@ ActiveRecord::Schema.define(version: 2019_03_17_004333) do
     t.text "question2"
     t.text "question3"
     t.bigint "project_type_id"
+    t.bigint "deliverable_type_id"
+    t.integer "application_limit", default: 2
+    t.integer "user_limit", default: 1
+    t.integer "status", default: 0
   end
 
   create_table "projects_skills", id: false, force: :cascade do |t|
