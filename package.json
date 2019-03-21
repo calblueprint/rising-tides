@@ -12,7 +12,8 @@
     "react-dom": "^16.8.3",
     "react_ujs": "^2.4.4",
     "turbolinks": "^5.2.0",
-    "validate.js": "^0.12.0"
+    "validate.js": "^0.12.0",
+    "webpack": "^4.29.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -23,13 +24,14 @@
     "eslint": "^5.15.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.1.0",
+    "eslint-import-resolver-webpack": "^0.11.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-tachyons-jsx": "^0.1.4",
     "prettier": "^1.16.4",
-    "webpack-dev-server": "2.11.2"
+    "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
     "lint": "yarn run eslint -- --ext .js --ext .jsx app/javascript"
