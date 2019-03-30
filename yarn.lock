@@ -7176,11 +7176,6 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-tachyons@4.10.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/tachyons/-/tachyons-4.10.0.tgz#87fa088e88d9759983f2a1b0efd01d767bbef87b"
-  integrity sha512-50KOizE6V9QB7LdQqVLsLw17dnBzxonC2JWhmbu8xnQYUoyqV+Gcx678NwVM+O8A7jljobtC6QMl/hc8UZOzAA==
-
 tapable@^1.0.0, tapable@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-1.1.1.tgz#4d297923c5a72a42360de2ab52dadfaaec00018e"
