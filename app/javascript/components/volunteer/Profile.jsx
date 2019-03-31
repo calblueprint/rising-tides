@@ -31,33 +31,62 @@ class Profile extends React.Component {
       return <div className="">Loading...</div>;
     }
     let profileImage = <span>No Image</span>;
-    if (this.props.profileImage_url) {
-      profileImage = <img src={this.props.profileImage_url} />;
+    if (this.props.profile_image_url) {
+      profileImage = <img className="h-100 w4"  src={this.props.profile_image_url} />;
+    } else {
+      profileImage = <img className="h-100 w4"  src="https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg" />;
+    }
+    let resume = <span>No Resume</span>;
+    if (this.props.resume_url) {
+      resume = <a className="fl pa0 pv0 ph3 resume-button f7 lh-m" src={this.props.resume_url}>resume</a>;
+    } else {
+      resume = <a className="fl pa0 pv0 ph3 resume-button f7 lh-m">resume</a>;
     }
     return (
-      <div className="">
-        <h2 className="">Volunteer Details</h2>
-        <h3>Name</h3>
-        {this.props.user.first_name} {this.props.user.last_name}
-        <h3>Photo</h3>
-        {profileImage}
-        <h3>Bio</h3>
-        {this.props.user.bio}
-        <h3>Link</h3>
-        <a href={`http://${this.props.user.link}`}>{this.props.user.link}</a>
-        <h3>City</h3>
-        {this.props.user.city}
-        <h3>State</h3>
-        {this.props.user.state}
-        <h3>Skills</h3>
-        {this.props.user.skills}
-        <h3>Email</h3>
-        {this.props.user.email}
-        <h3>Phone number</h3>
-        {this.props.user.phone_number}
-        <br />
-        <a onClick={this.goBack}>Back</a>
-      </div>
+        <div className="w-100 h-100 tc">
+            <div className="tl fl w-100 pa6">
+                <div className="h4 flex">
+                    {profileImage}
+                    <div className="w-100 h-100 m3 ph4 pt4">
+                        <div className="h2 f1">
+                            {this.props.user.first_name} {this.props.user.last_name}
+                        </div>
+                        <hr />
+                        <div className="h1 flex">
+                            <div className="ph3 mt1-ns">
+                                <h3 className="f7 ma0 light-grey">Email</h3>
+                                {this.props.user.email}
+                            </div>
+                            <div className="ph3 mt1-ns">
+                                <h3 className="f7 ma0 light-grey">Phone number</h3>
+                                {this.props.user.phone_number}
+                            </div>
+                            <div className="ph3 mt1-ns">
+                                <h3 className="f7 ma0 light-grey">Location</h3>
+                                {this.props.user.city}, {this.props.user.state}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="h-100 w3 w-20">
+                        <a className="fl pa0 ph1 mr2" target="_blank" href={`http://${this.props.user.link}`}>
+                            <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
+                        </a>
+                        {resume}
+                    </div>
+                </div>
+
+                <h3 className="pt5">Skills</h3>
+                {this.props.user.skills}
+
+                <h3 className="pt5">Biography</h3>
+                {this.props.user.bio}
+
+                <h3 className="pt5">Projects</h3>
+
+                <br />
+                <a onClick={this.goBack}>Back</a>
+            </div>
+        </div>
     );
   }
 }
