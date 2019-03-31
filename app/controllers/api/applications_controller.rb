@@ -70,8 +70,8 @@ class Api::ApplicationsController < ApplicationController
         return render json: {message: 'Max applications already accepted.'}
       end
       a = application.update_attribute(:status, decision)
-    # rescue
-      # return render json: {error: "Forbidden"}
+    rescue
+      return render json: {error: "Forbidden"}
     end
     if a
       new_application = Application.find(params[:id])
