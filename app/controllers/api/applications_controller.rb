@@ -33,7 +33,9 @@ class Api::ApplicationsController < ApplicationController
 
     if saved
       UserMailer.with(
-        user: current_user, project: project
+        user: current_user,
+        organization: project.organization,
+        project: project
       ).application_recieved.deliver_later
       return render json: {message: 'Application successfully created!',
                            application: application}
@@ -64,15 +66,18 @@ class Api::ApplicationsController < ApplicationController
 
     begin
       application = Application.find(params[:id])
-      if Application.status['accepted'] == Application.status[decision] and application.project.reached_user_limit?
+      if Application.statuses['accepted'] == Application.statuses[decision] and application.project.reached_user_limit?
         return render json: {message: 'Max applications already accepted.'}
       end
       a = application.update_attribute(:status, decision)
-    rescue
-      return render json: {error: "Forbidden"}
+    # rescue
+      # return render json: {error: "Forbidden"}
     end
     if a
       new_application = Application.find(params[:id])
+      UserMailer.with(
+        application: new_application
+      ).application_decision.deliver_later
       return render json: {message: 'Application successfully updated!',
                            application: new_application}
     else

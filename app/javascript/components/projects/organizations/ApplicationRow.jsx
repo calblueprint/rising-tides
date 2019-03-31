@@ -34,10 +34,12 @@ class ApplicationRow extends React.Component {
     let status = <span>Pending...</span>;
 
     if (application.status !== null) {
-      if (application.status === 2) {
-        status = <span className="approved">Approved</span>;
-      } else if (application.status === 1) {
+      if (application.status === 'accepted') {
+        status = <span className="approved">Accepted</span>;
+      } else if (application.status === 'denied') {
         status = <span className="denied">Denied</span>;
+      } else if (application.status === 'interviewing') {
+        status = <span className="approved">Interviewing</span>;
       }
     }
 
