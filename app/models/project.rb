@@ -16,4 +16,12 @@ class Project < ApplicationRecord
   scope :with_deliverable_type, -> (deliverable_type_id) { where deliverable_type_id:  deliverable_type_id }
 
   enum status: { recruiting: 0, in_progress: 1, completed: 2 }
+
+  def reached_application_limit?
+    return self.applications.length >= self.application_limit
+  end
+
+  def reached_user_limit?
+    return self.users.length >= self.application_limit
+  end
 end
