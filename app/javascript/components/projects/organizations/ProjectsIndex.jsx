@@ -35,7 +35,7 @@ class ProjectsIndex extends React.Component {
 
     if (this.state.projects.length !== 0) {
       projectList = this.state.projects.map((project, index) => {
-        return <ProjectRow project={project} key={index} />;
+        return <ProjectCard project={project} key={index} />;
       });
 
     } else {

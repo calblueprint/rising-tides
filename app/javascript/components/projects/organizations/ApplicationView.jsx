@@ -23,9 +23,10 @@ class ApplicationView extends React.Component {
 
     axios
       .post(`/api/applications/${this.props.application.id}/decide`, {
-        decision: 2
+        decision: 'interviewing'
       })
       .then(function(response) {
+        console.log(response);
         window.location.reload();
       })
       .catch(function(error) {
@@ -38,7 +39,7 @@ class ApplicationView extends React.Component {
 
     axios
       .post(`/api/applications/${this.props.application.id}/decide`, {
-        decision: 1
+        decision: 'denied'
       })
       .then(function(response) {
         window.location.reload();
@@ -65,19 +66,21 @@ class ApplicationView extends React.Component {
     let status = <span>Pending...</span>;
 
     if (application.status != null) {
-      if (application.status === 2) {
-        status = <span className="approved">Approved</span>;
-      } else if (application.status === 1) {
+      if (application.status === 'interviewing') {
+        status = <span className="approved">Interviewing</span>;
+      } else if (application.status === 'denied') {
         status = <span className="denied">Denied</span>;
+      } else if (application.status === 'accepted') {
+        status = <span className="approved">Accepted</span>;
       }
     }
 
     let buttons = <span />;
 
-    if (application.status === null || application.status === 0) {
+    if (application.status === null || application.status === 'pending') {
       buttons = (
         <div>
-          <button onClick={this.handleAccept}>Accept</button>
+          <button onClick={this.handleAccept}>Interview</button>
           <button onClick={this.handleReject}>Reject</button>
         </div>
       );
