@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import logo from "images/rising-tides-logo.png";
 
 
 class SideBar extends React.Component {
@@ -24,37 +24,18 @@ class SideBar extends React.Component {
   };
 
   render() {
-    return (<div className="fixed bg-white w-25 ph3 h-100">
-    <div>
-      <p className="roboto f4" onClick={this.goToDashboard}>
-        Rising Tides
-      </p>
-    </div>
+    return (<div className="navbar overflow-auto pr4">
+    <img className="fl h3 w-auto" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
+    <ul className="ul">
+      <li className="fr f4 w4 tc" onClick={this.goToBrowse}>Search</li>
+      <li className="fr f4 w4 tc" onClick={this.goToDashboard}>Dashboard</li>
+      <li className="fr f4 w4 tc" onClick={this.goToProfile}>Profile</li>
+    </ul>
     <br/>
-    <div className="hover-bg-light-blue h3 pa1" onClick={this.goToDashboard}>
-      <p className="roboto f5 hover-white">
-        Dashboard
-      </p>
-    </div>
-
-    <div className="hover-bg-light-blue h3 pa1" onClick={this.goToProfile}>
-      <p className="roboto f5 hover-white">
-       Profile
-      </p>
-    </div>
-
-    <div className="hover-bg-light-blue h3 pa1" onClick={this.goToBrowse}>
-      <p className="roboto f5 hover-white">
-        Browse Projects
-      </p>
-    </div>
-
+    <div className="w5 h1 bg-black fr"></div>
   </div>)
   }
 }
 
-SideBar.propTypes = {
-  id: PropTypes.number
-}
 
 export default SideBar;

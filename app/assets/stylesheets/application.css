@@ -242,14 +242,18 @@ button:hover, .button:hover {
     padding-bottom: 44px;
 }
 
-.sidebar {
-  padding-top: 32px;
-  margin: 0;
-  width: 200px;
-  background-color: #98CDEA;
+.ul {
+    list-style-type: none;
+    font-family: 'Lato'
+  }
+
+
+.navbar {
+  padding-top: 16px;
+  width: 100%;
+  background-color: #EFE137;
   position: fixed;
-  height: 100%;
-  overflow: auto;
+  height: 80px;
 }
 
 .container-label {
