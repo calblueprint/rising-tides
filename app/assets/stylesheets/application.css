@@ -427,6 +427,12 @@ input.input {
     height:10rem;
 }
 
+.ul {
+    list-style-type: none;
+    font-family: 'Lato'
+  }
+
+
 .navbar {
   padding-top: 16px;
   width: 100%;
