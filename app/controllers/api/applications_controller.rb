@@ -18,7 +18,8 @@ class Api::ApplicationsController < ApplicationController
 
   def create
     project = Project.find(application_params['project_id'])
-    if project.reached_application_limit
+    if project.reached_application_limit?
+        puts "Applications are closed"
         return render json: {message: 'Applications are closed.'}
     end
 
@@ -31,6 +32,11 @@ class Api::ApplicationsController < ApplicationController
     end
 
     if saved
+      UserMailer.with(
+        user: current_user,
+        organization: project.organization,
+        project: project
+      ).application_recieved.deliver_later
       return render json: {message: 'Application successfully created!',
                            application: application}
     end
@@ -60,7 +66,7 @@ class Api::ApplicationsController < ApplicationController
 
     begin
       application = Application.find(params[:id])
-      if Application.status['accepted'] == Application.status[decision] and application.project.reached_user_limit
+      if Application.statuses['accepted'] == Application.statuses[decision] and application.project.reached_user_limit?
         return render json: {message: 'Max applications already accepted.'}
       end
       a = application.update_attribute(:status, decision)
@@ -69,6 +75,9 @@ class Api::ApplicationsController < ApplicationController
     end
     if a
       new_application = Application.find(params[:id])
+      UserMailer.with(
+        application: new_application
+      ).application_decision.deliver_later
       return render json: {message: 'Application successfully updated!',
                            application: new_application}
     else
