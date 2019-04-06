@@ -242,6 +242,11 @@ button:hover, .button:hover {
     padding-bottom: 44px;
 }
 
+.hr-navbar {
+    border: 3px solid black;
+    width: 304px;
+}
+
 .ul {
     list-style-type: none;
     font-family: 'Lato'

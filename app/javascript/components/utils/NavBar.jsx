@@ -2,7 +2,7 @@ import React from "react";
 import logo from "images/rising-tides-logo.png";
 
 
-class SideBar extends React.Component {
+class NavBar extends React.Component {
 
   constructor(props) {
     super(props);
@@ -31,11 +31,11 @@ class SideBar extends React.Component {
       <li className="fr f4 w4 tc" onClick={this.goToDashboard}>Dashboard</li>
       <li className="fr f4 w4 tc" onClick={this.goToProfile}>Profile</li>
     </ul>
-    <br/>
-    <div className="w5 h1 bg-black fr"></div>
+    <br/><br/>
+    <hr className="hr-navbar fr pr5"/>
   </div>)
   }
 }
 
 
-export default SideBar;
+export default NavBar;
