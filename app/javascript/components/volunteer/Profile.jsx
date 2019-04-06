@@ -30,18 +30,10 @@ class Profile extends React.Component {
     if (!dataLoaded) {
       return <div className="">Loading...</div>;
     }
-    let profileImage = <span>No Image</span>;
-    if (this.props.profile_image_url) {
-      profileImage = <img className="h-100 w4"  src={this.props.profile_image_url} />;
-    } else {
-      profileImage = <img className="h-100 w4"  src="https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg" />;
-    }
-    let resume = <span>No Resume</span>;
-    if (this.props.resume_url) {
-      resume = <a className="fl pa0 pv0 ph3 resume-button f7 lh-m" src={this.props.resume_url}>resume</a>;
-    } else {
-      resume = <a className="fl pa0 pv0 ph3 resume-button f7 lh-m">resume</a>;
-    }
+    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+    let profileImage = <img className="h-100 w4"  src={profileUrl} />;
+    let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
+    let resume = <a className="fl pa0 pv0 ph3 resume-button f7 lh-m" src={resumeUrl}>resume</a>;
     return (
         <div className="w-100 h-100 tc">
             <div className="tl fl w-100 pa6">
