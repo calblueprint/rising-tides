@@ -41,19 +41,19 @@ class ProjectCard extends React.Component {
     hoveredCard = this.state.organization ? 
     <div className="w-third col-item fl">
     <div className="pa2 ma2 bg-white vh-50 shadow-1" onClick={this.goToProject}>
-      <h1 className="f3 roboto">
+      <h1 className="f3 lato">
         {this.props.project.title}
       </h1>
-      <p className="f5 roboto">
+      <p className="f5 lato">
       {this.state.organization.name} 
-      </p> <br/>
-      <p className="f6 roboto">
+      </p> 
+      <p className="f6 lato">
       {this.props.project.limit} spots left<br/><br/> 
       {this.state.organization.city}, {this.state.organization.city} <br/><br/>
       {this.props.project.volunteer_requirements}skills needed is null <br/><br/>
       {this.renderDate(this.props.project.start_time)} to {this.renderDate(this.props.project.end_time)}
       </p>
-      <p className="f7 roboto"> 
+      <p className="f7 lato"> 
         {this.props.project.description} 
       </p>
   </div>
@@ -67,15 +67,15 @@ class ProjectCard extends React.Component {
     <div className="w-third col-item fl">
       <div className="bg-black vh-50 ma2 shadow-1" onClick={this.goToProject}>
         <img src="http://placekitten.com/g/600/300" className="db h5 w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
-        <div className="pr3 pl3 pb3">
-          <h1 className="white f4 b roboto mb1">
+        <div className="bt b--white pr3 pl3 pb3">
+          <h1 className="white f4 b lato compact">
             {this.props.project.title}
           </h1>
-          <p className="white f5 roboto fl truncate">
+          <p className="white f5 lato fl truncate">
             {this.state.organization.name}
           </p>
-          <br/><br/>
-          <div className="fl f6 br1 ph3 pv2 mb2 dib white bg-yellow">Status</div>
+          <br/><br/><br/>
+          <div className="fl f5 w4 tc br1 ph3 pv2 mb2 black bg-accent lato b">Status</div>
       </div>
       </div>
   </div> : null

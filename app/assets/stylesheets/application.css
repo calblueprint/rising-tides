@@ -245,11 +245,22 @@ button:hover, .button:hover {
     width: 304px;
 }
 
+.lato {
+    font-family: 'Lato'
+}
+
 .ul {
     list-style-type: none;
     font-family: 'Lato'
-  }
+}
 
+.bg-accent {
+    background-color: #EFE137;
+}
+
+.compact {
+    line-height: 70%;
+}
 
 .navbar {
   padding-top: 16px;
