@@ -345,9 +345,13 @@ input.input {
     padding-bottom: 44px;
 }
 
+.no-link {
+    text-decoration: none;
+}
+
 .hr-navbar {
     border: 3px solid black;
-    width: 304px;
+    width: 4rem;
 }
 
 .lato {
@@ -384,7 +388,6 @@ input.input {
     list-style-type: none;
     font-family: 'Lato'
   }
-
 
 .navbar {
   padding-top: 16px;
