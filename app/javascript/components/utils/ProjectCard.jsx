@@ -68,14 +68,14 @@ class ProjectCard extends React.Component {
       <div className="bg-black vh-50 ma2 shadow-1" onClick={this.goToProject}>
         <img src="http://placekitten.com/g/600/300" className="db h5 w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
         <div className="pr3 pl3 pb3">
-          <h1 className="white f3 roboto mb1">
+          <h1 className="white f4 b roboto mb1">
             {this.props.project.title}
           </h1>
           <p className="white f5 roboto fl truncate">
             {this.state.organization.name}
           </p>
           <br/><br/>
-          <div class="fl f6 br1 ph3 pv2 mb2 dib white bg-yellow">Status</div>
+          <div className="fl f6 br1 ph3 pv2 mb2 dib white bg-yellow">Status</div>
       </div>
       </div>
   </div> : null
