@@ -33,7 +33,6 @@ class Dashboard extends React.Component {
     console.log(this.props);
     return (
       <div>
-      <NavBar id={this.props.user.id}/>
       <div className="bg-light-gray h-100">
         <h1>Volunteer Dashboard</h1>
         <p> Hello. You are an volunteer, and your email is {this.props.user.email}. </p>
