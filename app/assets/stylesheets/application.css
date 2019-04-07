@@ -20,6 +20,7 @@ body {
     --fire-focus-outline-color: rgba(3,155,229,0.5);
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-font-smoothing: antialiased;
+    background: #F2F2F2;
 }
 
 a {
@@ -97,6 +98,29 @@ button, .button {
 
 button:hover, .button:hover {
     background-color: #0080c7;
+}
+
+.grey {
+    background: #F2F2F2;
+}
+
+.light-grey {
+    color: #D9D9D9;
+}
+
+.resume-button {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    color: #FDFDFD;
+    text-decoration: none;
+}
+
+.resume-button:hover {
+    transition: .15s ease-in;
+    box-shadow: 1px 1px 6px 1px #000;
+    background: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    color: #FDFDFD;
 }
 
 .button-wrapper {

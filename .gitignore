@@ -47,7 +47,8 @@ yarn-debug.log*
 .rspec
 
 # Ignore misc mac osx files
-.DS_Store/public/packs
+.DS_Store
+/public/packs
 
 # Ignore editor directories
 .idea/
