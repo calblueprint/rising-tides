@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2019_03_31_040211) do
     t.text "question2"
     t.text "question3"
     t.bigint "project_id"
-    t.integer "status", default: 0
-    t.bigint "user_id"
+    t.integer "user_id"
+    t.integer "status"
   end
 
   create_table "deliverable_types", force: :cascade do |t|

@@ -1,0 +1,5 @@
+<% if user_signed_in? %>
+    <%= react_component('utils/NavBar', {user: current_user}) %>
+<% elsif organization_signed_in? %>
+    <%= react_component('utils/NavBar', {organization: current_organization}) %>
+<% end %>
