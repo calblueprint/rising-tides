@@ -48,6 +48,23 @@ h1 {
     margin-inline-end: 0px;
 }
 
+h2 {
+    font-family: Impact;
+    font-size: 38px;
+    line-height: normal;
+    color: #000000;
+    margin: 0;
+}
+
+h3 {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: normal;
+    margin: 0;
+}
+
 a:hover {
     cursor: pointer;
     background-color: transparent;
@@ -98,6 +115,39 @@ button, .button {
 
 button:hover, .button:hover {
     background-color: #0080c7;
+}
+
+input:focus {
+    outline:none;
+}
+
+.std-button, .std-button:link, .std-button:visited, .std-button:active {
+    background-color: #EFE137;
+    text-decoration: none;
+    color: #000;
+    margin: 0;
+    font-weight: 600;
+    text-align: center;
+    font-size: 12px;
+    padding: 6px;
+    display: inline-block;
+}
+
+.std-button:hover {
+    background-color: #DACD23;
+    color: #000;
+}
+
+.rt-yellow-bg {
+    background-color: #EFE137;
+}
+
+.white {
+    color: #FFF;
+}
+
+.black {
+    color: #000;
 }
 
 .grey {

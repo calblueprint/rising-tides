@@ -35,10 +35,42 @@ class ProjectsIndex extends React.Component {
     }
 
     return (
-      <div className="bg-light-gray h-100 w-100">
-        <a onClick={this.goBack}>Back</a>
-        <h1>Projects</h1>
-        {projectList}
+      <div className="w-100 h-100 tc">
+            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
+                <div className="h-auto">
+                    <div className="w-100 h3">
+                        <div className="tl dib fl">
+                            <h2>Browse Projects</h2>
+                        </div>
+                        <div className="dib fr mt2">
+                            <div className="tr">
+                                <div className="dib flex items-center ba">
+                                    <span className="fa fa-search ma2"></span>
+                                    <input className="bn bg-transparent" type="text" placeholder="Find Projects..." />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cf"></div>
+                    <div className="w-100 h1">
+                        <div className="dib fl">
+                            <h3>Current Projects</h3>
+                        </div>
+                        <div className="dib fr">
+                           <h3>Filter <span className="f6 fa fa-filter"></span></h3>
+                        </div>
+                    </div>
+                </div>
+                <hr className="mt3" />
+                <div className="w-100 flex items-center">
+                    <input className="dib ba b--black-10 w-25 mr2 bg-transparent pa2" type="text" placeholder="Select location..."  />
+                    <input className="dib ba b--black-10 w-25 mr2 bg-transparent pa2" type="text" placeholder="mm/dd/yyyy"  />
+                    <input className="dib ba b--black-10 w-25 mr2 bg-transparent pa2" type="text" placeholder="Project Type"  />
+                    <input className="dib ba b--black-10 w-25 mr2 bg-transparent pa2" type="text" placeholder="Select skills..."  />
+                    <a className="w-25 std-button" href="#">Update Search</a>
+                </div>
+                {projectList}
+            </div>
       </div>
     );
   }
