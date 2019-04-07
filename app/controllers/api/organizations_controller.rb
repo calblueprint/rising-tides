@@ -22,8 +22,7 @@ class Api::OrganizationsController < ApplicationController
       return render json: {message: 'Organization successfully created!'}
     end
 
-    return render json: {error: organization.errors.full_messages,
-                         status: 422}
+    raise StandardError, application.errors.full_messages
   end
 
   def update
@@ -36,7 +35,7 @@ class Api::OrganizationsController < ApplicationController
       return render json: {message: 'Organization successfully updated!',
                            project: new_organization}
     else
-      return render json: {error: organization.errors.full_messages}
+      raise StandardError, application.errors.full_messages
     end
   end
 

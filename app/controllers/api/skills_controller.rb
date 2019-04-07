@@ -17,8 +17,7 @@ class Api::SkillsController < ApplicationController
       return render json: {message: 'Skill successfully created!'}
     end
 
-    return render json: {error: projects.errors.full_messages,
-                         status: 422}
+    raise StandardError, application.errors.full_messages
   end
 
   private

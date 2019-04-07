@@ -17,8 +17,7 @@ class Api::PhotosController < ApplicationController
       return render json: {message: 'Photo successfully saved!'}
     end
 
-    return render json: {error: photos.errors.full_messages,
-                         status: 422}
+    raise StandardError, application.errors.full_messages
   end
 
   private

@@ -17,8 +17,7 @@ class Api::DeliverableTypesController < ApplicationController
       return render json: {message: 'Deliverable type successfully created!'}
     end
 
-    return render json: {error: projects.errors.full_messages,
-                         status: 422}
+    raise StandardError, application.errors.full_messages
   end
 
   private

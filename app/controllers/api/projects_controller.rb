@@ -34,8 +34,7 @@ class Api::ProjectsController < ApplicationController
       return render json: {message: 'Project successfully created!'}
     end
 
-    return render json: {error: projects.errors.full_messages,
-                         status: 422}
+    raise StandardError, application.errors.full_messages
   end
 
   def update
@@ -48,7 +47,7 @@ class Api::ProjectsController < ApplicationController
       return render json: {message: 'Project successfully updated!',
                            project: new_project}
     else
-      return render json: {error: project.errors.full_messages}
+      raise StandardError, application.errors.full_messages
     end
   end
 
