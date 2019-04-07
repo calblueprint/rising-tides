@@ -11,8 +11,6 @@ class Api::SkillsController < ApplicationController
 
     begin
       saved = skill.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid skill'}
     end
 
     if saved

@@ -16,8 +16,6 @@ class Api::OrganizationsController < ApplicationController
 
     begin
       saved = organization.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid organization'}
     end
 
     if saved
@@ -32,8 +30,6 @@ class Api::OrganizationsController < ApplicationController
     begin
       organization = Organization.find(params[:id])
       a = organization.update(organization_params)
-    rescue
-      return render json: {error: "Forbidden"}
     end
     if a
       new_organization = Project.find(params[:id])

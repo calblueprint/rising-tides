@@ -11,8 +11,6 @@ class Api::DeliverableTypesController < ApplicationController
 
     begin
       saved = deliverable_type.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid deliverable type'}
     end
 
     if saved

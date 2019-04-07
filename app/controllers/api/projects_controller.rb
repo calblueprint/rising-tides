@@ -28,8 +28,6 @@ class Api::ProjectsController < ApplicationController
 
     begin
       saved = project.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid project'}
     end
 
     if saved
@@ -44,8 +42,6 @@ class Api::ProjectsController < ApplicationController
     begin
       project = Project.find(params[:id])
       a = project.update(project_params)
-    rescue
-      return render json: {error: "Forbidden"}
     end
     if a
       new_project = Project.find(params[:id])

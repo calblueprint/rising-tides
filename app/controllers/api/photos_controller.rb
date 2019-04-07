@@ -8,17 +8,9 @@ class Api::PhotosController < ApplicationController
 
   def create
     photo = Photo.new(photo_params)
-    # project = Project.find(params.require(:photo).permit(
-    #     :project_id,
-    #     :image
-    #   )[:project_id])
-
-    # photo = project.photos.create(photo_params)
 
     begin
       saved = photo.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid photo'}
     end
 
     if saved

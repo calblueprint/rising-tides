@@ -27,8 +27,6 @@ class Api::ApplicationsController < ApplicationController
 
     begin
       saved = application.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid application'}
     end
 
     if saved
@@ -49,8 +47,6 @@ class Api::ApplicationsController < ApplicationController
     begin
       application = Application.find(params[:id])
       a = application.update(application_params)
-    rescue
-      return render json: {error: "Forbidden"}
     end
     if a
       new_application = Application.find(params[:id])
@@ -70,8 +66,6 @@ class Api::ApplicationsController < ApplicationController
         return render json: {message: 'Max applications already accepted.'}
       end
       a = application.update_attribute(:status, decision)
-    rescue
-      return render json: {error: "Forbidden"}
     end
     if a
       new_application = Application.find(params[:id])
