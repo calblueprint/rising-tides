@@ -36,7 +36,7 @@ class Profile extends React.Component {
     let resume = <a className="fl pa0 pv0 ph3 resume-button f7 lh-m" src={resumeUrl}>resume</a>;
     return (
         <div className="w-100 h-100 tc">
-            <div className="tl fl w-100 pa6">
+            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
                 <div className="h4 flex">
                     {profileImage}
                     <div className="w-100 h-100 m3 ph4 pt4">
