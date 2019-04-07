@@ -28,31 +28,26 @@ class Api::ProjectsController < ApplicationController
 
     begin
       saved = project.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid project'}
     end
 
     if saved
       return render json: {message: 'Project successfully created!'}
     end
 
-    return render json: {error: projects.errors.full_messages,
-                         status: 422}
+    raise StandardError, application.errors.full_messages
   end
 
   def update
     begin
       project = Project.find(params[:id])
       a = project.update(project_params)
-    rescue
-      return render json: {error: "Forbidden"}
     end
     if a
       new_project = Project.find(params[:id])
       return render json: {message: 'Project successfully updated!',
                            project: new_project}
     else
-      return render json: {error: project.errors.full_messages}
+      raise StandardError, application.errors.full_messages
     end
   end
 

@@ -11,16 +11,13 @@ class Api::SkillsController < ApplicationController
 
     begin
       saved = skill.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid skill'}
     end
 
     if saved
       return render json: {message: 'Skill successfully created!'}
     end
 
-    return render json: {error: projects.errors.full_messages,
-                         status: 422}
+    raise StandardError, application.errors.full_messages
   end
 
   private

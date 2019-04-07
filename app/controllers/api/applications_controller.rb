@@ -18,17 +18,12 @@ class Api::ApplicationsController < ApplicationController
 
   def create
     project = Project.find(application_params['project_id'])
-    if project.reached_application_limit?
-        puts "Applications are closed"
-        return render json: {message: 'Applications are closed.'}
-    end
+    raise Error::AppLimitError unless not project.reached_application_limit?
 
     application = Application.new(application_params)
 
     begin
       saved = application.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid application'}
     end
 
     if saved
@@ -41,23 +36,20 @@ class Api::ApplicationsController < ApplicationController
                            application: application}
     end
 
-    return render json: {error: application.errors.full_messages,
-                         status: 422}
+    raise StandardError, application.errors.full_messages
   end
 
   def update
     begin
       application = Application.find(params[:id])
       a = application.update(application_params)
-    rescue
-      return render json: {error: "Forbidden"}
     end
     if a
       new_application = Application.find(params[:id])
       return render json: {message: 'Application successfully updated!',
                            project: new_application}
     else
-      return render json: {error: application.errors.full_messages}
+      raise StandardError, application.errors.full_messages
     end
   end
 
@@ -66,12 +58,8 @@ class Api::ApplicationsController < ApplicationController
 
     begin
       application = Application.find(params[:id])
-      if Application.statuses['accepted'] == Application.statuses[decision] and application.project.reached_user_limit?
-        return render json: {message: 'Max applications already accepted.'}
-      end
+      raise Error::MaxProjUserError unless Application.statuses['accepted'] != Application.statuses[decision] or not application.project.reached_user_limit?
       a = application.update_attribute(:status, decision)
-    rescue
-      return render json: {error: "Forbidden"}
     end
     if a
       new_application = Application.find(params[:id])
@@ -81,7 +69,7 @@ class Api::ApplicationsController < ApplicationController
       return render json: {message: 'Application successfully updated!',
                            application: new_application}
     else
-      return render json: {error: application.errors.full_messages}
+      raise StandardError, application.errors.full_messages
     end
   end
 
