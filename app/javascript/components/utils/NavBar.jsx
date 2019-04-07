@@ -31,9 +31,11 @@ class NavBar extends React.Component {
     return (<div className="navbar overflow-auto pr4">
     <img className="fl h3 w-auto" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
     <ul className="ul">
-      <li className="fr f4 w4 tc" onClick={this.goToBrowse}>Search</li>
-      <li className="fr f4 w4 tc" onClick={this.goToDashboard}>Dashboard</li>
-      <li className="fr f4 w4 tc" onClick={this.goToProfile}>Profile</li>
+      <li className="fr f4 w4 tc"> 
+        <a className="f4 no-link black hover-black" onClick={this.goToBrowse}>Search</a>
+      </li>
+      <li className="link fr f4 w4 tc" onClick={this.goToDashboard}>Dashboard</li>
+      <li className="link fr f4 w4 tc" onClick={this.goToProfile}>Profile</li>
     </ul>
     <br/><br/>
     <hr className="hr-navbar fr pr5"/>
