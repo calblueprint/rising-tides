@@ -39,8 +39,7 @@ class ProjectCard extends React.Component {
   renderHoveredCard() {
     let hoveredCard = null;
     hoveredCard = this.state.organization ? 
-    <div className="w-third col-item fl">
-    <div className="pa2 ma2 bg-white vh-50 shadow-1" onClick={this.goToProject}>
+    <div className="proj-card-size col-item fl pa2 ma2 bg-white shadow-1" onClick={this.goToProject}>
       <h1 className="f3 lato">
         {this.props.project.title}
       </h1>
@@ -56,7 +55,6 @@ class ProjectCard extends React.Component {
       <p className="f7 lato"> 
         {this.props.project.description} 
       </p>
-  </div>
   </div>: null
     return hoveredCard
   }
@@ -64,19 +62,17 @@ class ProjectCard extends React.Component {
   renderNormalCard() {
     let normalCard = null;
     normalCard = this.state.organization ? 
-    <div className="w-third col-item fl">
-      <div className="bg-black vh-50 ma2 shadow-1" onClick={this.goToProject}>
-        <img src="http://placekitten.com/g/600/300" className="db h5 w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
+    <div className="proj-card-size col-item fl bg-black ma2 shadow-1" onClick={this.goToProject}>
+        <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
         <div className="bt b--white pr3 pl3 pb3">
-          <h1 className="white f4 b lato compact">
+          <h1 className="white f4 b lato compact mt3 ma2">
             {this.props.project.title}
           </h1>
-          <p className="white f5 lato fl truncate">
+          <p className="white f5 lato fl truncate mb0 ma2">
             {this.state.organization.name}
           </p>
           <br/><br/><br/>
-          <div className="fl f5 w4 tc br1 ph3 pv2 mb2 black bg-accent lato b">Status</div>
-      </div>
+          <div className="fl f5 w4 tc br1 ph3 pv2 mt0 mb2 black bg-accent lato b">Status</div>
       </div>
   </div> : null
     return normalCard
