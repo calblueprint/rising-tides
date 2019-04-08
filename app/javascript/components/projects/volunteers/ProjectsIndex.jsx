@@ -32,12 +32,31 @@ class ProjectsIndex extends React.Component {
         });
     }
 
+    var deliverable_types_a = [];
+    var deliverable_type;
+    for (i in props.deliverable_types) {
+        deliverable_type = props.deliverable_types[i];
+        deliverable_types_a.push({
+            id: i,
+            uid: deliverable_type['id'],
+            title: deliverable_type['name'],
+            selected: false,
+            key: 'deliverable_types'
+        });
+    }
+
     this.state = {
       projects: [],
       skills: skills_a,
-      project_types: project_types_a
+      project_types: project_types_a,
+      deliverable_types: deliverable_types_a
     };
-    console.log(this.state);
+    axios.defaults.headers.common = {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
+    };
     this.toggleSelected = this.toggleSelected.bind(this);
   }
 
@@ -54,6 +73,39 @@ class ProjectsIndex extends React.Component {
     temp[id].selected = !temp[id].selected;
     this.setState({
       [key]: temp
+    });
+  }
+
+  updateSearch() {
+    var skill_ids = [];
+    var project_type_ids = [];
+    var deliverable_type_ids = [];
+
+    var i;
+    for (i in this.state.skills) {
+        if (this.state.skills[i].selected)
+            skill_ids.push(this.state.skills[i].uid);
+    }
+    for (i in this.state.project_types) {
+        if (this.state.project_types[i].selected)
+            project_type_ids.push(this.state.project_types[i].uid);
+    }
+    for (i in this.state.deliverable_types) {
+        if (this.state.deliverable_types[i].selected)
+            deliverable_type_ids.push(this.state.deliverable_types[i].uid);
+    }
+
+    var payload = {
+        query: {
+            with_skill_ids: skill_ids,
+            with_project_type_ids: project_type_ids,
+            with_deliverable_type_ids: deliverable_type_ids
+        }
+    }
+    axios.post("/api/projects/filter", payload).then(ret => {
+      const projects = ret.data;
+      this.setState({ projects });
+      console.log("UPDATED PROJECTS LENGTH: " + projects.length);
     });
   }
 
@@ -102,8 +154,12 @@ class ProjectsIndex extends React.Component {
                 </div>
                 <div className="mb2 mt3 bt b--black-10" />
                 <div className="w-100 flex items-center">
-                    <input className="dib ba b--black-10 w-25 mr2 bg-transparent pa2" type="text" placeholder="Select location..."  />
-                    <input className="dib ba b--black-10 w-25 mr2 bg-transparent pa2" type="text" placeholder="mm/dd/yyyy"  />
+                    <Dropdown
+                        titleHelper="Deliverable Type"
+                        title="Deliverable Types"
+                        list={this.state.deliverable_types}
+                        toggleItem={this.toggleSelected}
+                    />
                     <Dropdown
                         titleHelper="Project Type"
                         title="Project Types"
@@ -116,7 +172,11 @@ class ProjectsIndex extends React.Component {
                         list={this.state.skills}
                         toggleItem={this.toggleSelected}
                     />
-                    <a className="w-25 std-button" href="#">Update Search</a>
+                    <a
+                        className="w-25 std-button"
+                        href="#"
+                        onClick={() => this.updateSearch()}>
+                        Update Search</a>
                 </div>
                 {projectList}
             </div>

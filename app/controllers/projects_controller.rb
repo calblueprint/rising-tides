@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   def index
     @skills = Skill.all
     @project_types = ProjectType.all
+    @deliverable_types = DeliverableType.all
   end
 
   def new
