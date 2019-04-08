@@ -90,6 +90,21 @@ button:hover, .button:hover {
     background-color: #0080c7;
 }
 
+.std-button, .std-button:link, .std-button:visited, .std-button:active {
+    background-color: #EFE137;
+    text-decoration: none;
+    color: #000;
+    margin: 0;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.std-button:hover {
+    background-color: #DACD23;
+    color: #000;
+}
+
 .grey {
     background: #F2F2F2;
 }

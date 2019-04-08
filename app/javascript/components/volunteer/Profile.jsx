@@ -33,21 +33,23 @@ class Profile extends React.Component {
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
     let profileImage = <img className="h-100 w4"  src={profileUrl} />;
     let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
-    let resume = <a className="dib std-button f7 lh-m ml3" src={resumeUrl}>resume</a>;
+    let resume = <a className="dib std-button f7 lh-m" src={resumeUrl}>resume</a>;
     return (
         <div className="w-100 h-100 tc">
             <div className="tl fl w-100 pl6 pr6 pt5 pb5">
                 <div className="h4 flex items-end">
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
-                        <div className="mb3">
-                            <h1 className="ma0 f1 dib">
+                        <div className="flex items-end">
+                            <h1 className="ma0 f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
-                            <a className="dib pa0 ph1 ml3" target="_blank" href={`http://${this.props.user.link}`}>
+                            <a className="pa0 ph1 ml3 mb1" target="_blank" href={`http://${this.props.user.link}`}>
                                 <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
                             </a>
-                            {resume}
+                            <div className="pb2 ml3">
+                                {resume}
+                            </div>
                         </div>
                         <div className="flex">
                             <div className="mt1-ns">
