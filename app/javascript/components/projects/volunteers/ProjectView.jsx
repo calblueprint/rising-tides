@@ -119,7 +119,7 @@ class ProjectView extends React.Component {
                             </p>
                         </div>
                     </div>
-                    <div className="w-25 bg-light-gray pa4 h-auto">
+                    <div className="w-25 bg-light-gray pa3 h-auto">
                         <div className="flex items-center">
                             {org_img}
                             <h4 className="ma0 dib">{organization.name}</h4>
@@ -127,9 +127,12 @@ class ProjectView extends React.Component {
                         <div className="mt2">
                             <span className="fa fa-map-pin mr2"></span>{organization.city}, {organization.state}
                         </div>
-                        <div className="mt2">
+                        <div className="mt2 mb3">
                             <span className="fa fa-phone mr2"></span>{organization.contact_phone_number}
                         </div>
+                        <a className="std-button ph3 pv1 fw4 f5" href={project.id + "/applications/new"}>
+                            Apply
+                        </a>
                     </div>
                 </div>
             </div>

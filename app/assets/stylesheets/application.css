@@ -117,10 +117,8 @@ input:focus {
     text-decoration: none;
     color: #000;
     margin: 0;
-    font-weight: 600;
     text-align: center;
     font-size: 12px;
-    padding: 6px;
     display: inline-block;
 }
 
