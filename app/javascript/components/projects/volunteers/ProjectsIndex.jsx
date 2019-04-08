@@ -50,7 +50,8 @@ class ProjectsIndex extends React.Component {
       skills: skills_a,
       project_types: project_types_a,
       deliverable_types: deliverable_types_a,
-      show_filtering: false
+      show_filtering: false,
+      keyword: ""
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -59,6 +60,7 @@ class ProjectsIndex extends React.Component {
         .getAttribute("content")
     };
     this.toggleSelected = this.toggleSelected.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +70,11 @@ class ProjectsIndex extends React.Component {
       this.setState({ projects });
     });
   }
+
+  handleChange = name => event => {
+    const { value } = event.target;
+    this.setState({ [name]: value });
+  };
 
   toggleFiltering() {
     this.setState({
@@ -106,7 +113,8 @@ class ProjectsIndex extends React.Component {
         query: {
             with_skill_ids: skill_ids,
             with_project_type_ids: project_type_ids,
-            with_deliverable_type_ids: deliverable_type_ids
+            with_deliverable_type_ids: deliverable_type_ids,
+            with_keyword: this.state.keyword
         }
     }
     axios.post("/api/projects/filter", payload).then(ret => {
@@ -114,6 +122,12 @@ class ProjectsIndex extends React.Component {
       this.setState({ projects });
       console.log("UPDATED PROJECTS LENGTH: " + projects.length);
     });
+  }
+
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+        this.updateSearch();
+    }
   }
 
   goBack = e => {
@@ -144,7 +158,12 @@ class ProjectsIndex extends React.Component {
                             <div className="tr">
                                 <div className="dib flex items-center ba">
                                     <span className="fa fa-search ma2"></span>
-                                    <input className="bn bg-transparent" type="text" placeholder="Find Projects..." />
+                                    <input
+                                        onKeyPress={this.handleKeyPress}
+                                        onChange={this.handleChange("keyword")}
+                                        className="bn bg-transparent"
+                                        type="text"
+                                        placeholder="Find Projects..." />
                                 </div>
                             </div>
                         </div>

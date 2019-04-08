@@ -23,6 +23,8 @@ class Project < ApplicationRecord
       where('deliverable_types.id' => deliverable_type_ids).
       group(:id).
       having('count(deliverable_types.id) > 0', deliverable_type_ids.length) }
+  scope :with_keyword, -> (keyword) { 
+      where("LOWER(title) LIKE ? OR LOWER(description) LIKE ? OR ? = ''", "%#{keyword.downcase}%", "%#{keyword.downcase}%", keyword) }
   scope :with_deliverable_type, -> (deliverable_type_id) { where deliverable_type_id:  deliverable_type_id }
 
   enum status: { recruiting: 0, in_progress: 1, completed: 2 }
