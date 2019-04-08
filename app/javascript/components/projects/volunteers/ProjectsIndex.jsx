@@ -49,7 +49,8 @@ class ProjectsIndex extends React.Component {
       projects: [],
       skills: skills_a,
       project_types: project_types_a,
-      deliverable_types: deliverable_types_a
+      deliverable_types: deliverable_types_a,
+      show_filtering: false
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -66,6 +67,12 @@ class ProjectsIndex extends React.Component {
 
       this.setState({ projects });
     });
+  }
+
+  toggleFiltering() {
+    this.setState({
+        show_filtering: !this.state.show_filtering
+    })
   }
 
   toggleSelected(id, key) {
@@ -148,11 +155,16 @@ class ProjectsIndex extends React.Component {
                             <h3>Current Projects</h3>
                         </div>
                         <div className="dib fr">
-                           <h3>Filter <span className="f6 fa fa-filter"></span></h3>
+                            <h3
+                                className="pointer disable-selection dim"
+                                onClick={() => this.toggleFiltering()}>
+                                Filter <span className="f6 fa fa-filter"></span>
+                            </h3>
                         </div>
                     </div>
                 </div>
                 <div className="mb2 mt3 bt b--black-10" />
+                {this.state.show_filtering &&
                 <div className="w-100 flex items-center">
                     <Dropdown
                         titleHelper="Deliverable Type"
@@ -177,7 +189,7 @@ class ProjectsIndex extends React.Component {
                         href="#"
                         onClick={() => this.updateSearch()}>
                         Update Search</a>
-                </div>
+                </div>}
                 {projectList}
             </div>
       </div>
