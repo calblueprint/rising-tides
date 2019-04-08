@@ -128,9 +128,22 @@ input:focus {
     margin: 0;
     font-weight: 600;
     text-align: center;
-    font-size: 12px;
-    padding: 6px;
+    font-size: 13px;
+    padding: 8px;
     display: inline-block;
+}
+
+.disable-selection {
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer */
+   -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+  -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+}
+
+.dropdown-scroller {
+    overflow-y: scroll;
+    max-height: 150px;
 }
 
 .std-button:hover {
@@ -152,6 +165,10 @@ input:focus {
 
 .grey {
     background: #F2F2F2;
+}
+
+.light-grey-2 {
+    color: #B9B9B9;
 }
 
 .light-grey {
