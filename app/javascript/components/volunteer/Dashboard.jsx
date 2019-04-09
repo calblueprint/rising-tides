@@ -228,7 +228,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { user } = this.props;
-    
+
 
     let projectList;
 

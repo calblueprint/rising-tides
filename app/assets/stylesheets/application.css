@@ -409,8 +409,8 @@ input.input {
 }
 
 .hr-navbar {
-    border: 3px solid black;
-    width: 4rem;
+    border: 5px solid black;
+    width: 48px;
 }
 
 .lato {
@@ -452,16 +452,9 @@ input.input {
     font-family: 'Lato'
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 .logo-padding {
   padding-top: 12px;
 }
-=======
->>>>>>> navbar
-
-=======
->>>>>>> line :(
 .navbar {
   padding-top: 16px;
   width: 100%;

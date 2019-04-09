@@ -39,7 +39,6 @@ class NavBar extends React.Component {
     }
   }
 
-
   goToBrowse = () => {
     window.location.href = `/projects`;
   };
@@ -128,6 +127,7 @@ class NavBar extends React.Component {
       <li className="fr f4 w-auto tc"> 
         <a className="f4 black" onClick={this.goToDashboard}>Dashboard</a>
       </li>
+ navbar to figma
     </ul>
   </div>)
   }
