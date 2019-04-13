@@ -1,6 +1,12 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @skills = Skill.all
+    @project_types = ProjectType.all
+    @deliverable_types = DeliverableType.all
+  end
+
   def new
   end
 
