@@ -15,6 +15,10 @@ class ProjectsController < ApplicationController
 
   def show
     @photos = @project.photos.map { |p| p.image.url(:original) }
+
+    if @project.organization.profile_image
+        @org_image_url = @project.organization.profile_image.url
+    end
   end
 
 
