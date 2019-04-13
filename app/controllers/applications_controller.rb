@@ -15,7 +15,7 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/new
   def new
-    @project_id = params[:project_id]
+    @project = Project.find(params[:project_id])
   end
 
   # GET /applications/1/edit
