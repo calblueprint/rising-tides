@@ -2,6 +2,14 @@ class UsersController < ApplicationController
   #before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def dashboard
+    @skills = Skill.all
+    @project_types = ProjectType.all
+    @deliverable_types = DeliverableType.all
+    @user_applications = current_user.applications.includes(
+        project: [:organization]
+    ).as_json(
+        :include => { :project => { :include => :organization }
+    })
   end
 
   def show
