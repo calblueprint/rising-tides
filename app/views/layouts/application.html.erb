@@ -7,11 +7,21 @@
     <%= javascript_pack_tag 'application' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/> -->
+    <link rel="stylesheet" href="http://unpkg.com/tachyons-font-family@4.3.4/css/tachyons-font-family.min.css" /> 
+  </head>
+  <body>
+    <div>
+    
  </head>
 
   <body>
-    <div>
+    <header>
+        <%= render :template => 'layouts/_header' %>
+    </header>
+    <div class="container bg-white">
         <%= yield %>
     </div>
   </body>

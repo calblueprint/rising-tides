@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
-    <%= react_component('projects/volunteers/ProjectView', { project: @project, photos: @photos, project_type: @project_type }) %>
+    <%= react_component('projects/volunteers/ProjectView', { project: @project, photos: @photos, project_type: @project_type, organization: @project.organization, org_image_url: @org_image_url }) %>
 <% elsif organization_signed_in? %>
-    <%= react_component('projects/organizations/ProjectView', { project: @project, photos: @photos, project_type: @project_type, organization: current_organization }) %>
+    <%= react_component('projects/organizations/ProjectView', { project: @project, photos: @photos, project_type: @project_type, organization: current_organization, organization: @project.organization, org_image_url: @org_image_url }) %>
 <% end %>
 
 

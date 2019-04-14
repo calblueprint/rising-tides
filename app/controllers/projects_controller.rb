@@ -1,6 +1,12 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @skills = Skill.all
+    @project_types = ProjectType.all
+    @deliverable_types = DeliverableType.all
+  end
+
   def new
   end
 
@@ -9,6 +15,10 @@ class ProjectsController < ApplicationController
 
   def show
     @photos = @project.photos.map { |p| p.image.url(:original) }
+
+    if @project.organization.profile_image
+        @org_image_url = @project.organization.profile_image.url
+    end
   end
 
 

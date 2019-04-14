@@ -13,7 +13,25 @@ class Project < ApplicationRecord
       where('skills.id' => skill_ids).
       group(:id).
       having('count(skills.id) > 0', skill_ids.length) }
+  scope :with_project_type_ids, -> (project_type_ids) { distinct.
+      joins(:project_type).
+      where('project_types.id' => project_type_ids).
+      group(:id).
+      having('count(project_types.id) > 0', project_type_ids.length) }
+  scope :with_deliverable_type_ids, -> (deliverable_type_ids) { distinct.
+      joins(:deliverable_type).
+      where('deliverable_types.id' => deliverable_type_ids).
+      group(:id).
+      having('count(deliverable_types.id) > 0', deliverable_type_ids.length) }
+  scope :with_keyword, -> (keyword) { 
+      where("LOWER(title) LIKE ? OR LOWER(description) LIKE ? OR ? = ''", "%#{keyword.downcase}%", "%#{keyword.downcase}%", keyword) }
   scope :with_deliverable_type, -> (deliverable_type_id) { where deliverable_type_id:  deliverable_type_id }
+  scope :with_user_id, -> (user_id) { distinct.
+      joins(:applications).
+      where('applications.user_id' => user_id).
+      group(:id) }
+  scope :with_organization_id, -> (organization_id) { where organization_id: organization_id }
+  scope :with_limit, -> (_limit) { limit(_limit)}
 
   enum status: { recruiting: 0, in_progress: 1, completed: 2 }
 
