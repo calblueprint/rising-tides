@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "images/risingtides.svg";
 import PropTypes from "prop-types";
-
+import axios from "axios";
 
 class NavBar extends React.Component {
 
@@ -12,7 +12,20 @@ class NavBar extends React.Component {
     this.goToOrganizationProfile = this.goToOrganizationProfile.bind(this);
     this.renderProfile = this.renderProfile.bind(this);
     this.goToBrowse = this.goToBrowse.bind(this);
-    this.userType = this.props.userType;
+    this.goToApplications = this.goToApplications.bind(this);
+    this.goToMyProjects = this.goToMyProjects.bind(this);
+    this.handleMouseDropdown = this.handleMouseDropdown.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+    this.userType = this.props.userType; //0 is Organization; 1 is Volunteer
+    this.state = {
+      viewDropdown: false
+    }
+    axios.defaults.headers.common = {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
+    };
   }
 
   goToDashboard = () => {
@@ -31,15 +44,67 @@ class NavBar extends React.Component {
     window.location.href = `/projects`;
   };
 
+  goToMyProjects = e => {
+    e.preventDefault();
+    window.location.href = '/projects';
+  };
+
+  goToApplications = (e) => {
+    e.preventDefault();
+    if (this.props.userType == 0) {
+      
+    } else {
+      window.location = "/applications"
+    } 
+  };
+
+  handleLogout = e => {
+    e.preventDefault();
+    if (this.props.userType == 0) {
+      axios
+      .delete("/organizations/sign_out", {})
+      .then(function(response) {
+        window.location.href = "/";
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    } else {
+      axios
+      .delete("/users/sign_out", {})
+      .then(function(response) {
+        window.location.href = "/";
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    }
+  };
+
+  handleMouseDropdown() {
+    this.setState((prevState) => ({viewDropdown: !prevState.viewDropdown}));
+  }
+
   renderProfile() {
     let profile = null;
     if (this.props.userType == 0) {
-      profile = <li className="fr f4 w4 tc"> 
-                  <a className="f4 no-link black hover-black" onClick={this.goToOrganizationProfile}>{this.props.user.name}</a>
-                </li>
+    profile = <li className="fr f4 w-auto tc dropdown"> 
+                <a className="f4 black" onClick={this.handleMouseDropdown}>
+                  {this.props.user.name} 
+                  <i className="fa fa-caret-down"></i>
+                </a>
+                {this.state.viewDropdown ?
+                  <div className="dropdown-content h-auto">
+                    <a onClick={this.goToOrganizationProfile}>Profile</a>
+                    <a onClick={this.goToMyProjects}>Projects</a>
+                    <a onClick={this.goToApplications}>Applications</a>
+                    <a onClick={this.handleLogout}>Logout</a>
+                  </div>:null
+                }
+              </li>
     } else {
-      profile = <li className="fr f4 w4 tc"> 
-                  <a className="f4 no-link black hover-black" onClick={this.goToVolunteerProfile}>{this.props.user.first_name}</a>
+      profile = <li className="fr f4 w-auto tc"> 
+                  <a className="f4 black" onClick={this.volunteerDropdown}>O  {this.props.user.first_name}</a>
                 </li>
     }
     return profile
@@ -50,11 +115,11 @@ class NavBar extends React.Component {
     <img className="fl h3 w-auto logo-padding" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
     <ul className="ul">
       {this.renderProfile()}
-      <li className="fr f4 w4 tc"> 
-        <a className="f4 no-link black hover-black" onClick={this.goToBrowse}>Search</a>
+      <li className="fr f4 w-auto tc"> 
+        <a className="f4" onClick={this.goToBrowse}>Search</a>
       </li>
-      <li className="fr f4 w4 tc"> 
-        <a className="b f4 no-link black hover-black" onClick={this.goToDashboard}>Dashboard</a>
+      <li className="fr f4 w-auto tc"> 
+        <a className="f4 black" onClick={this.goToDashboard}>Dashboard</a>
       </li>
     </ul>
   </div>)
