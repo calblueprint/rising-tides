@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "images/rising-tides-logo.png";
+import logo from "images/risingtides.svg";
 import PropTypes from "prop-types";
 
 
@@ -26,7 +26,7 @@ class NavBar extends React.Component {
 
   render() {
     return (<div className="navbar overflow-auto pr4">
-    <img className="fl h3 w-auto" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
+    <img className="fl h3 w-auto mt2" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
     <ul className="ul">
       <li className="fr f4 w4 tc"> 
         <a className="f4 no-link black hover-black" onClick={this.goToProfile}>{this.props.user.first_name}</a>
