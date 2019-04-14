@@ -30,6 +30,7 @@ class Project < ApplicationRecord
       joins(:applications).
       where('applications.user_id' => user_id).
       group(:id) }
+  scope :with_organization_id, -> (organization_id) { where organization_id: organization_id }
   scope :with_limit, -> (_limit) { limit(_limit)}
 
   enum status: { recruiting: 0, in_progress: 1, completed: 2 }

@@ -2,6 +2,16 @@ class OrganizationsController < ApplicationController
   #before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
   def dashboard
+    @skills = Skill.all
+    @project_types = ProjectType.all
+    @deliverable_types = DeliverableType.all
+    @organization_applications = current_organization
+        .applications
+        .includes(
+            [:project, :user]
+        ).as_json(
+            include: [:project, :user]
+        )
   end
 
   def show
