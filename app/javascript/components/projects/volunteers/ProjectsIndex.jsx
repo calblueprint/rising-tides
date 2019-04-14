@@ -204,7 +204,7 @@ class ProjectsIndex extends React.Component {
                         toggleItem={this.toggleSelected}
                     />
                     <a
-                        className="w-25 std-button"
+                        className="w-25 std-button pv2"
                         href="#"
                         onClick={() => this.updateSearch()}>
                         Update Search</a>

@@ -8,17 +8,14 @@ class Api::ProjectsController < ApplicationController
   end
 
   def index_all
-    @projects =  Project.all
-                        .joins(:applications)
-                        .left_joins(:photos)
-                        .group('projects.id')
-                        .select('projects.*, COUNT(applications.id) AS application_count')
+    @projects =  Project.with_application_count
 
     render json:@projects
   end
 
   def filter
     @projects = Project.filter(filter_params)
+                        .with_application_count
     render json:@projects
   end
 
