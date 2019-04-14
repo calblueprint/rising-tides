@@ -80,6 +80,7 @@ class Api::ProjectsController < ApplicationController
             :with_deliverable_type,
             :with_keyword,
             :with_user_id,
+            :with_organization_id,
             :with_limit,
             with_skill_ids: [],
             with_project_type_ids: [],
