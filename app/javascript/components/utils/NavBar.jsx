@@ -38,6 +38,7 @@ class NavBar extends React.Component {
         window.location.href = `/users/${this.props.organization.id}`;
     }
   }
+
   goToBrowse = () => {
     window.location.href = `/projects`;
   };
@@ -116,12 +117,23 @@ class NavBar extends React.Component {
   renderProfile() {
     let profile = null;
     if (this.props.userType == 0) {
-      profile = <li className="fr f4 w4 tc"> 
-                  <a className="f4 no-link black hover-black" onClick={this.goToOrganizationProfile}>{this.props.user.name}</a>
-                </li>
+    profile = <li className="fr f4 w-auto tc dropdown"> 
+                <a className="f4 black" onClick={this.handleMouseDropdown}>
+                  {this.props.user.name} 
+                  <i className="fa fa-caret-down"></i>
+                </a>
+                {this.state.viewDropdown ?
+                  <div className="dropdown-content h-auto">
+                    <a onClick={this.goToOrganizationProfile}>Profile</a>
+                    <a onClick={this.goToMyProjects}>Projects</a>
+                    <a onClick={this.goToApplications}>Applications</a>
+                    <a onClick={this.handleLogout}>Logout</a>
+                  </div>:null
+                }
+              </li>
     } else {
-      profile = <li className="fr f4 w4 tc"> 
-                  <a className="f4 no-link black hover-black" onClick={this.goToVolunteerProfile}>{this.props.user.first_name}</a>
+      profile = <li className="fr f4 w-auto tc"> 
+                  <a className="f4 black" onClick={this.volunteerDropdown}>O  {this.props.user.first_name}</a>
                 </li>
     }
     return profile
@@ -132,12 +144,13 @@ class NavBar extends React.Component {
     <div className="navbar overflow-auto pr4">
     <img className="fl h3 w-auto logo-padding" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
     <ul className="ul">
-      {this.renderProfile()};
+      {this.renderProfile()}
       <li className="fr f4 w-auto tc"> 
         <a className="f4" onClick={this.goToBrowse}>Search</a>
       </li>
       <li className="fr f4 w-auto tc"> 
         <a className="f4" onClick={this.goToDashboard}>Dashboard</a>
+
       </li>
     </ul>
   </div>)
