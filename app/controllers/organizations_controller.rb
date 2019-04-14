@@ -5,11 +5,13 @@ class OrganizationsController < ApplicationController
     @skills = Skill.all
     @project_types = ProjectType.all
     @deliverable_types = DeliverableType.all
-    @organization_applications = current_organization.applications.includes(
-        project: [:organization]
-    ).as_json(
-        :include => { :project => { :include => :organization }
-    })
+    @organization_applications = current_organization
+        .applications
+        .includes(
+            [:project, :user]
+        ).as_json(
+            include: [:project, :user]
+        )
   end
 
   def show

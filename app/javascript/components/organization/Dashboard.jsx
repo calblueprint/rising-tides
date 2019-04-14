@@ -186,7 +186,7 @@ class Dashboard extends React.Component {
                     <div className="w-25">
                         {project_status}
                     </div>
-                    <div className="w-25">{application.project.organization.name}</div>
+                    <div className="w-25">{application.user.first_name} {application.user.last_name}</div>
                     <a
                         className="w-25 tr"
                         href={"/applications/" + application.id}
@@ -271,6 +271,7 @@ class Dashboard extends React.Component {
                 </div>}
                 {projectList}
             </div>
+            <Logout />
         </div>
     );
   }
