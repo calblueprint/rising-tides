@@ -6,12 +6,11 @@ class ProjectCard extends React.Component {
 
   constructor(props) {
     super(props);
-    this.renderHoveredCard = this.renderHoveredCard.bind(this);
+    this.renderOneSpotCard = this.renderOneSpotCard.bind(this);
     this.renderNormalCard = this.renderNormalCard.bind(this);
+    this.renderFullCard = this.renderFullCard.bind(this);
     this.goToProject = this.goToProject.bind(this);
-    this.renderDate = this.renderDate.bind(this);
-    this.handleMouseHover = this.handleMouseHover.bind(this);
-    this.toggleHoverState = this.toggleHoverState.bind(this)
+    this.spotsLeft = this.props.project.application_limit - this.props.project.application_count;
     this.state = {
       organization: null,
       type: null,
@@ -31,37 +30,54 @@ class ProjectCard extends React.Component {
     }
   }
 
-  renderDate(date) {
-    let d = new Date(date);
-    return d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear();
-  }
-
-  renderHoveredCard() {
-    let hoveredCard = null;
-    hoveredCard = this.state.organization ? 
-    <div className="proj-card-size col-item fl pa2 ma2 bg-white shadow-1" onClick={this.goToProject}>
-      <h1 className="f3 lato">
-        {this.props.project.title}
-      </h1>
-      <p className="f5 lato">
-      {this.state.organization.name} 
-      </p> 
-      <p className="f6 lato">
-      {this.props.project.limit} spots left<br/><br/> 
-      {this.state.organization.city}, {this.state.organization.city} <br/><br/>
-      {this.props.project.volunteer_requirements}skills needed is null <br/><br/>
-      {this.renderDate(this.props.project.start_time)} to {this.renderDate(this.props.project.end_time)}
-      </p>
-      <p className="f7 lato"> 
-        {this.props.project.description} 
-      </p>
-  </div>: null
-    return hoveredCard
+  renderOneSpotCard() {
+    console.log(this.props.project);
+    let oneSpotCard = null;
+    oneSpotCard = this.state.organization ? 
+    <div className="proj-card-size col-item fl bg-black ma2 shadow-1" onClick={this.goToProject}>
+        <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
+        <div className="bt b--white pr3 pl3 pb3">
+          <h1 className="white f4 b lato compact mt3 ma2">
+            {this.props.project.title}
+          </h1>
+          <p className="white f5 lato fl truncate ma2">
+            {this.state.organization.name}
+          </p>
+          <br/><br/>
+          <div className="fl f5 w4 tc br1 ph3 pv2 mt0 mb2 black bg-white lato b">
+            1 spot left
+          </div>
+      </div>
+  </div> : null
+    return oneSpotCard
   }
 
   renderNormalCard() {
+    console.log(this.props.project);
     let normalCard = null;
     normalCard = this.state.organization ? 
+    <div className="proj-card-size col-item fl bg-black ma2 shadow-1" onClick={this.goToProject}>
+        <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
+        <div className="bt b--white pr3 pl3 pb3">
+          <h1 className="white f4 b lato compact mt3 ma2">
+            {this.props.project.title}
+          </h1>
+          <p className="white f5 lato fl truncate ma2">
+            {this.state.organization.name}
+          </p>
+          <br/><br/>
+          <div className="fl f5 w4 tc br1 ph3 pv2 mt0 mb2 black bg-white lato b">
+            {this.spotsLeft} spots left
+          </div>
+      </div>
+  </div> : null
+    return normalCard
+  }
+
+  renderFullCard() {
+    console.log(this.props.project);
+    let fullCard = null;
+    fullCard = this.state.organization ? 
     <div className="proj-card-size col-item fl bg-black ma2 shadow-1" onClick={this.goToProject}>
         <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
         <div className="bt b--white pr3 pl3 pb3">
@@ -71,21 +87,13 @@ class ProjectCard extends React.Component {
           <p className="white f5 lato fl truncate mb0 ma2">
             {this.state.organization.name}
           </p>
-          <br/><br/><br/>
-          <div className="fl f5 w4 tc br1 ph3 pv2 mt0 mb2 black bg-accent lato b">Status</div>
+          <br/><br/>
+          <div className="fl f5 w4 tc br1 ph3 pv2 mt0 mb2 font-accent bg-black lato">
+            All spots filled
+          </div>
       </div>
   </div> : null
-    return normalCard
-  }
-
-  handleMouseHover() {
-    this.setState(this.toggleHoverState);
-  }
-
-  toggleHoverState(state) {
-    return {
-      isHover: !state.isHover
-    };
+    return fullCard
   }
 
   goToProject = () => {
@@ -93,19 +101,17 @@ class ProjectCard extends React.Component {
   };
 
   render() {
+    let card = null;
+    if (this.spotsLeft == 0) {
+      card = this.renderfullCard();
+    } else if (this.spotsLeft == 1) {
+      card = this.renderOneSpotCard();
+    } else {
+      card = this.renderNormalCard();
+    }
     return (
-      <div onMouseEnter={this.handleMouseHover}
-            onMouseLeave={this.handleMouseHover}
-      >
-        {
-        this.state.isHover ?
-        <div>
-          {this.renderHoveredCard()}
-        </div>:
-        <div>
-          {this.renderNormalCard()}
-        </div>
-        }
+      <div>
+        {card}
       </div>
     )
   }

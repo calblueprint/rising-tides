@@ -9,6 +9,12 @@ class Api::ProjectsController < ApplicationController
 
   def index_all
     @projects = Project.all
+    @projects =  Project.all
+                        .joins(:applications)
+                        .left_joins(:photos)
+                        .group('projects.id')
+                        .select('projects.*, COUNT(applications.id) AS application_count, photos.image as project_image')
+
     render json:@projects
   end
 

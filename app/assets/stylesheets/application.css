@@ -258,6 +258,10 @@ button:hover, .button:hover {
     background-color: #EFE137;
 }
 
+.font-accent {
+    color: #EFE137;
+}
+
 .proj-card-size {
     width: 16rem; 	
     height:18rem;
