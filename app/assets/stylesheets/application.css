@@ -343,11 +343,35 @@ input:focus {
     width: 304px;
 }
 
+.lato {
+    font-family: 'Lato'
+}
+
 .ul {
     list-style-type: none;
     font-family: 'Lato'
-  }
+}
 
+.bg-accent {
+    background-color: #EFE137;
+}
+
+.font-accent {
+    color: #EFE137;
+}
+
+.proj-card-size {
+    width: 16rem; 	
+    height:18rem;
+}
+
+.pic-height {
+    height:10rem;
+}
+
+.compact {
+    line-height: 50%;
+}
 
 .navbar {
   padding-top: 16px;
