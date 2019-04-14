@@ -19,7 +19,6 @@ class ProjectCard extends React.Component {
 
   componentDidMount() {
     if (this.props.project.organization_id != null) {
-      console.log(this.props);
       axios.get(`/api/organizations/${this.props.project.organization_id}`).then(ret => {
         let organization = ret.data;
         this.setState({ organization });
