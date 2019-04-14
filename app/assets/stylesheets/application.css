@@ -389,6 +389,9 @@ input.input {
     font-family: 'Lato'
   }
 
+.logo-padding {
+  padding-top: 12px;
+}
 .navbar {
   padding-top: 16px;
   width: 100%;
