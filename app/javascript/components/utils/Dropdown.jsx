@@ -23,10 +23,13 @@ class Dropdown extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    const count = nextProps.list.filter(function(a) { return a.selected; }).length;
-    console.log(count)
+    const selected = nextProps.list.filter(function(a) { return a.selected; });
+    const count = selected.length;
     if (count === 0) {
       return {headerTitle: nextProps.title}
+    }
+    else if (nextProps.singleItem) {
+        return {headerTitle: selected[0].title}
     }
     else if (count === 1) {
       return {headerTitle: `${count} ${nextProps.titleHelper}`}
@@ -41,7 +44,7 @@ class Dropdown extends React.Component {
     const {listOpen, headerTitle} = this.state;
 
     return (
-        <div className="dib ba b--black-10 w-25 mr2 bg-white pointer disable-selection">
+        <div className="dib ba b--black-10 w-100 mr2 bg-white pointer disable-selection">
             <div className="pa2" onClick={() => this.toggleList()}>
                 <div className="dib tl w-75 light-grey-2 f6">{headerTitle}</div>
                 <div className="dib tr w-25">

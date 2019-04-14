@@ -73,6 +73,10 @@ class Api::ProjectsController < ApplicationController
         :organization_id,
         :project_type_id,
         :deliverable_type_id,
+        :start_time,
+        :end_time,
+        :application_limit,
+        :user_limit,
         skill_ids: []
       )
     end

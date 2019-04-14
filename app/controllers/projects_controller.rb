@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :update, :destroy]
 
   def index
     @skills = Skill.all
@@ -11,6 +11,16 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @skills = Skill.all
+    @project_types = ProjectType.all
+    @deliverable_types = DeliverableType.all
+    @project = Project.where(:id => params[:id])
+        .with_application_count
+        .includes(
+          [:skills]
+        ).as_json(
+          include: [:skills]
+        ).first
   end
 
   def show
@@ -39,6 +49,10 @@ class ProjectsController < ApplicationController
                                         :question1,
                                         :question2,
                                         :question3,
+                                        :application_limit,
+                                        :user_limit,
+                                        :start_time,
+                                        :end_time,
                                         skill_ids: [])
     end
 end
