@@ -5,7 +5,6 @@ import Dropdown from '../../utils/Dropdown';
 class EditProjectForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     var skills_a = [];
     var i, skill;
     var prev_skill_ids = [];
@@ -142,8 +141,6 @@ class EditProjectForm extends React.Component {
     const payload = {
         project: project
     };
-
-    console.log(payload);
 
     axios
       .put(`/api/projects/${this.state.project.id}`, payload)
