@@ -13,7 +13,7 @@ class Api::ProjectsController < ApplicationController
                         .joins(:applications)
                         .left_joins(:photos)
                         .group('projects.id')
-                        .select('projects.*, COUNT(applications.id) AS application_count, photos.image as project_image')
+                        .select('projects.*, COUNT(applications.id) AS application_count')
 
     render json:@projects
   end
