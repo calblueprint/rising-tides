@@ -60,6 +60,7 @@ class ProjectsIndex extends React.Component {
         .getAttribute("content")
     };
     this.toggleSelected = this.toggleSelected.bind(this);
+    this.toggleSelectedSingle = this.toggleSelectedSingle.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
@@ -84,6 +85,19 @@ class ProjectsIndex extends React.Component {
 
   toggleSelected(id, key) {
     let temp = this.state[key];
+    temp[id].selected = !temp[id].selected;
+    this.setState({
+      [key]: temp
+    });
+  }
+
+  toggleSelectedSingle(id, key) {
+    let temp = this.state[key];
+    // clear selected first
+    temp = temp.map(function(item) {
+        item.selected = false;
+        return item;
+    });
     temp[id].selected = !temp[id].selected;
     this.setState({
       [key]: temp
@@ -189,13 +203,15 @@ class ProjectsIndex extends React.Component {
                         titleHelper="Deliverable Type"
                         title="Deliverable Types"
                         list={this.state.deliverable_types}
-                        toggleItem={this.toggleSelected}
+                        toggleItem={this.toggleSelectedSingle}
+                        singleItem={true}
                     />
                     <Dropdown
                         titleHelper="Project Type"
                         title="Project Types"
                         list={this.state.project_types}
-                        toggleItem={this.toggleSelected}
+                        toggleItem={this.toggleSelectedSingle}
+                        singleItem={true}
                     />
                     <Dropdown
                         titleHelper="Skill"
@@ -204,7 +220,7 @@ class ProjectsIndex extends React.Component {
                         toggleItem={this.toggleSelected}
                     />
                     <a
-                        className="w-25 std-button"
+                        className="w-100 std-button pv2"
                         href="#"
                         onClick={() => this.updateSearch()}>
                         Update Search</a>

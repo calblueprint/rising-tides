@@ -8,6 +8,7 @@ import axios from "axios";
 class ProjectView extends React.Component {
   constructor(props) {
     super(props);
+    this.spotsLeft = this.props.project.application_limit - this.props.project.application_count;
     this.state = {
       applications: [],
       organization: null
@@ -46,7 +47,12 @@ class ProjectView extends React.Component {
   };
 
   render() {
-    const { project, organization } = this.props;
+    const { 
+        project,
+        organization,
+        organization_signed_in,
+        current_organization
+    } = this.props;
 
     var org_img = <span></span>;
     if (this.props.org_image_url) {
@@ -62,6 +68,26 @@ class ProjectView extends React.Component {
     }
     console.log("PROJECT STATUS: " + project.status);
 
+    let apply_button = (
+        <a className="std-button ph3 pv1 fw4 f5" href={project.id + "/applications/new"}>
+            Apply
+        </a>
+    );
+    if (organization_signed_in || this.spotsLeft <= 0) {
+        apply_button = <span></span>;
+    }
+
+    let edit_button = (
+        <div>
+            <a className="std-button ph3 pv1 fw4 f5" href={project.id + "/edit"}>
+                Edit
+            </a>
+        </div>
+    );
+    if (!organization_signed_in || organization.id != current_organization.id) {
+        edit_button = <span></span>;
+    }
+
     return (
         <div className="w-100 h-100 tc bg-white">
             <div
@@ -69,6 +95,7 @@ class ProjectView extends React.Component {
                 style={{zIndex: -1}}></div>
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
                 <h1 className="f1 ma0">{project.title}</h1>
+                {edit_button}
                 <div className="dib rt-yellow-bg ph3 pv2 mv4 f5 fw4">
                     {project_string_status}
                 </div>
@@ -130,9 +157,7 @@ class ProjectView extends React.Component {
                         <div className="mt2 mb3">
                             <span className="fa fa-phone mr2"></span>{organization.contact_phone_number}
                         </div>
-                        <a className="std-button ph3 pv1 fw4 f5" href={project.id + "/applications/new"}>
-                            Apply
-                        </a>
+                        {apply_button}
                     </div>
                 </div>
             </div>

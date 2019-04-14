@@ -32,6 +32,10 @@ class Project < ApplicationRecord
       group(:id) }
   scope :with_organization_id, -> (organization_id) { where organization_id: organization_id }
   scope :with_limit, -> (_limit) { limit(_limit)}
+  scope :with_application_count, -> () {
+                        joins(:applications)
+                        .group('projects.id')
+                        .select('projects.*, COUNT(applications.id) AS application_count') }
 
   enum status: { recruiting: 0, in_progress: 1, completed: 2 }
 
@@ -42,4 +46,6 @@ class Project < ApplicationRecord
   def reached_user_limit?
     return self.users.length >= self.application_limit
   end
+
+
 end
