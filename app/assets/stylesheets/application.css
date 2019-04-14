@@ -22,17 +22,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-a {
-    color: #039be5;
-    text-decoration: underline;
-    font-size: 14px;
-    line-height: 20px;
-    margin-top: 8px;
-    padding-right: 20px;
-    padding-left: 20px;
-    position: relative;
-}
-
 h1 {
     font-family: Impact;
     line-height: normal;
@@ -56,10 +45,15 @@ h3 {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+    background-color: transparent;
+}
+
 a:hover {
     cursor: pointer;
-    background-color: transparent;
-    color: #039be5;
+    background-color: auto;
+    color: auto;
 }
 
 button, .button {

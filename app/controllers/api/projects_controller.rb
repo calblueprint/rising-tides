@@ -79,6 +79,8 @@ class Api::ProjectsController < ApplicationController
         params.require(:query).permit(
             :with_deliverable_type,
             :with_keyword,
+            :with_user_id,
+            :with_limit,
             with_skill_ids: [],
             with_project_type_ids: [],
             with_deliverable_type_ids: []

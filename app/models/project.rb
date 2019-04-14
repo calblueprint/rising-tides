@@ -26,6 +26,11 @@ class Project < ApplicationRecord
   scope :with_keyword, -> (keyword) { 
       where("LOWER(title) LIKE ? OR LOWER(description) LIKE ? OR ? = ''", "%#{keyword.downcase}%", "%#{keyword.downcase}%", keyword) }
   scope :with_deliverable_type, -> (deliverable_type_id) { where deliverable_type_id:  deliverable_type_id }
+  scope :with_user_id, -> (user_id) { distinct.
+      joins(:applications).
+      where('applications.user_id' => user_id).
+      group(:id) }
+  scope :with_limit, -> (_limit) { limit(_limit)}
 
   enum status: { recruiting: 0, in_progress: 1, completed: 2 }
 

@@ -34,8 +34,7 @@ class NewApplicationForm extends React.Component {
     window.location.href = `/projects/${this.props.project.id}`;
   };
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit() {
     const payload = {
       application: {
         question1: this.state.question1,
@@ -87,7 +86,7 @@ class NewApplicationForm extends React.Component {
                     <a className="fl std-button-black ph3 pv1 fw4 f5" onClick={this.goBack}>
                         Cancel
                     </a>
-                    <a className="fr std-button ph3 pv1 fw4 f5 ml3" onClick={this.handleSubmit}>
+                    <a className="fr std-button ph3 pv1 fw4 f5 ml3" onClick={() => this.handleSubmit()}>
                         Submit
                     </a>
                     <a className="fr std-button-white ph3 pv1 fw4 f5">
