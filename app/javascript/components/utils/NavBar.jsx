@@ -119,6 +119,7 @@ class NavBar extends React.Component {
   render() {
     return (<div className="navbar overflow-auto pr4">
     <img className="fl h3 w-auto logo-padding" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
+
     <ul className="ul">
       {this.renderProfile()}
       <li className="fr f4 w-auto tc"> 
