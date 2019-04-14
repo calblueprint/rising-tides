@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.where(:id => params[:id]).with_application_count.first
-      @project_type = ProjectType.find(@project['project_type_id'])
+      @project_type = ProjectType.find(@project.project_type_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
