@@ -409,8 +409,11 @@ input.input {
 }
 
 .hr-navbar {
-    border: 5px solid black;
+    border: 0px;
     width: 48px;
+    padding-top: 24px;
+    height: 2px;
+    background: black;
 }
 
 .lato {

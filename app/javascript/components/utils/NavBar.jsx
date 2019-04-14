@@ -38,7 +38,6 @@ class NavBar extends React.Component {
         window.location.href = `/users/${this.props.organization.id}`;
     }
   }
-
   goToBrowse = () => {
     window.location.href = `/projects`;
   };
@@ -111,23 +110,35 @@ class NavBar extends React.Component {
                       <a className="bt pv2" onClick={this.handleLogout}>Logout</a>
                     </div>:null
                   }
+              </li>         
+      }
+    }
+  renderProfile() {
+    let profile = null;
+    if (this.props.userType == 0) {
+      profile = <li className="fr f4 w4 tc"> 
+                  <a className="f4 no-link black hover-black" onClick={this.goToOrganizationProfile}>{this.props.user.name}</a>
+                </li>
+    } else {
+      profile = <li className="fr f4 w4 tc"> 
+                  <a className="f4 no-link black hover-black" onClick={this.goToVolunteerProfile}>{this.props.user.first_name}</a>
                 </li>
     }
     return profile
   }
 
   render() {
-    return (<div className="navbar overflow-auto pr4">
+    return (
+    <div className="navbar overflow-auto pr4">
     <img className="fl h3 w-auto logo-padding" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
     <ul className="ul">
-      {this.renderProfile()}
+      {this.renderProfile()};
       <li className="fr f4 w-auto tc"> 
         <a className="f4" onClick={this.goToBrowse}>Search</a>
       </li>
       <li className="fr f4 w-auto tc"> 
-        <a className="f4 black" onClick={this.goToDashboard}>Dashboard</a>
+        <a className="f4" onClick={this.goToDashboard}>Dashboard</a>
       </li>
- navbar to figma
     </ul>
   </div>)
   }
