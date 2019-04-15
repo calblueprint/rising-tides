@@ -91,9 +91,9 @@ class NavBar extends React.Component {
                 {this.state.viewDropdown ?
                   <div className="ba dropdown-content h-auto">
                     <a onClick={this.goToProfile}>Profile</a>
-                    <a onClick={this.goToMyProjects}>My Projects</a>
-                    <a onClick={this.goToApplications}>Applications</a>
-                    <a onClick={this.handleLogout}>Logout</a>
+                    <a className="bt pt2" onClick={this.goToMyProjects}>My Projects</a>
+                    <a className="bt pt2" onClick={this.goToApplications}>Applications</a>
+                    <a className="bt pt2" onClick={this.handleLogout}>Logout</a>
                   </div>:null
                 }
               </li>
@@ -106,9 +106,9 @@ class NavBar extends React.Component {
                   {this.state.viewDropdown ?
                     <div className="ba dropdown-content h-auto">
                       <a onClick={this.goToProfile}>Profile</a>
-                      <a onClick={this.goToMyProjects}>My Projects</a>
-                      <a onClick={this.goToApplications}>Applications</a>
-                      <a onClick={this.handleLogout}>Logout</a>
+                      <a className="bt pt2" onClick={this.goToMyProjects}>My Projects</a>
+                      <a className="bt pt2" onClick={this.goToApplications}>Applications</a>
+                      <a className="bt pv2" onClick={this.handleLogout}>Logout</a>
                     </div>:null
                   }
                 </li>
