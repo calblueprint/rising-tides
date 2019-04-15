@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import PropTypes from "prop-types";
+import linkedin from "images/linked-in.png";
 
 class AppReview extends React.Component {
     constructor(props) {
@@ -21,11 +22,11 @@ class AppReview extends React.Component {
       let profileImage = <img className="h-100 w4"  src={profileUrl} />;
       //let resumeUrl = "";
       //let resume = <a className="dib std-button f7 lh-m" src={resumeUrl}>resume</a>
-      let resume = <a className="dib std-button f7 lh-m">resume</a>
+      let resume = <a className="dib std-button f7 pa1 lh-m">Resume</a>
       return(
         <div className="w-100 h-100 tc">
             <div className="tl fl w-100 pl6 pr6 pt5 pb5">
-                <h1 className="ma0 f1 mb3 truncate"> Application - {this.props.project.title} </h1>
+                <h1 className="ma0 f1 mb5 truncate"> Application - {this.props.project.title} </h1>
                 <div className="h4 flex items-end">
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
@@ -33,8 +34,8 @@ class AppReview extends React.Component {
                             <h1 className="ma0 f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
-                            <a className="pa0 ph1 ml3 mb1" target="_blank" href={`http://${this.props.user.link}`}>
-                                <img src="/images/linked-in.png" style={{ width: '21px', height: '21px' }} />
+                            <a className="pa0 ph1 ml3 mb1" href={`http://${this.props.user.linkedin_url}`}>
+                                <img src={linkedin} style={{ width: '21px', height: '21px' }} />
                             </a>
                             <div className="pb2 ml3">
                                 {resume}
@@ -57,10 +58,10 @@ class AppReview extends React.Component {
                 </div>
 
                 <h3 className="pt5">Skills</h3>
-                {this.props.user.skills}
+                <p className="lato">{this.props.user.skills}</p>
 
                 <h3 className="pt5">Biography</h3>
-                {this.props.user.bio}
+                <p className="lato">{this.props.user.bio}</p>
 
                 <h3 className="pt5">Why are you interested?</h3>
                 <p className="lato">{this.props.application.question1}</p>
