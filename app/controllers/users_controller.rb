@@ -9,6 +9,12 @@ class UsersController < ApplicationController
         .with_project_organization_json
   end
 
+  def my_projects
+    @skills = Skill.all
+    @project_types = ProjectType.all
+    @deliverable_types = DeliverableType.all
+  end
+
   def show
     @user = User.find(params[:id])
     @profile_image_url = nil
