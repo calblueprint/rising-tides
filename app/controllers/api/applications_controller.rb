@@ -8,7 +8,7 @@ class Api::ApplicationsController < ApplicationController
   end
 
   def user_index
-    @applications = Application.where(user_id: params[:user_id])
+    @applications = Application.with_user_id(params[:user_id])
     render json: @applications
   end
 
@@ -17,11 +17,8 @@ class Api::ApplicationsController < ApplicationController
   end
 
   def filter
-    @applications = Application.filter(filter_params).includes(
-        project: [:organization]
-    ).as_json(
-        :include => { :project => { :include => :organization }
-    })
+    @applications = Application.filter(filter_params)
+        .with_project_organization_json
     render json:@applications
   end
 
@@ -104,6 +101,7 @@ class Api::ApplicationsController < ApplicationController
         params.require(:query).permit(
             :with_keyword,
             :with_user_id,
+            :with_organization_id,
             with_statuses: []
         )
     end

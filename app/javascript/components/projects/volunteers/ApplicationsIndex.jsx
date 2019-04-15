@@ -8,7 +8,7 @@ class ApplicationsIndex extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      applications: props.user_applications,
+      applications: props.applications,
       show_filtering: false,
       keyword: "",
       application_statuses: [
@@ -85,9 +85,14 @@ class ApplicationsIndex extends React.Component {
         query: {
             with_statuses: statuses,
             with_keyword: this.state.keyword,
-            with_user_id: this.props.user.id
         }
+    };
+    if (this.props.user) {
+        payload.query.with_user_id = this.props.user.id;
+    } else {
+        payload.query.with_organization_id = this.props.organization.id;
     }
+
     console.log(payload);
     axios.post("/api/applications/filter", payload).then(ret => {
       const applications = ret.data;
@@ -127,24 +132,30 @@ class ApplicationsIndex extends React.Component {
                 In Review
             </div>
         );
-        if (application.project.status == "interviewing") {
+        if (application.status == "interviewing") {
             project_status = (
                 <div className="dib rt-yellow-bg ph3 pv2 fw4">
                     Interview
                 </div>
             );
-        } else if (application.project.status == "accepted") {
+        } else if (application.status == "accepted") {
             project_status = (
                 <div className="dib rt-yellow-bg ph3 pv2 fw4">
                     Interview
                 </div>
             );
-        } else if (application.project.status == "denied") {
+        } else if (application.status == "denied") {
             project_status = (
                 <div className="dib ph3 pv2 fw4">
                     No longer in consideration
                 </div>
             );
+        }
+        var app_name;
+        if (this.props.organization) {
+            app_name = <span>{application.user.first_name} {application.user.last_name}</span>;
+        } else {
+            app_name = <span>{application.project.organization.name}</span>;
         }
         return (
             <div className="">
@@ -154,7 +165,7 @@ class ApplicationsIndex extends React.Component {
                     <div className="w-25">
                         {project_status}
                     </div>
-                    <div className="w-25">{application.project.organization.name}</div>
+                    <div className="w-25">{app_name}</div>
                     <a
                         className="w-25 tr"
                         href={"/applications/" + application.id}
