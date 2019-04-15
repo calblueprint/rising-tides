@@ -263,7 +263,8 @@ class Dashboard extends React.Component {
                         titleHelper="Deliverable Type"
                         title="Deliverable Types"
                         list={this.state.deliverable_types}
-                        toggleItem={this.toggleSelected}
+                        toggleItem={this.toggleSelectedSingle}
+                        singleItem={true}
                     />
                     <Dropdown
                         titleHelper="Project Type"
@@ -276,11 +277,10 @@ class Dashboard extends React.Component {
                         titleHelper="Skill"
                         title="Select Skills..."
                         list={this.state.skills}
-                        toggleItem={this.toggleSelectedSingle}
-                        singleItem={true}
+                        toggleItem={this.toggleSelected}
                     />
                     <a
-                        className="w-25 std-button pv2"
+                        className="w-100 std-button pv2"
                         href="#"
                         onClick={() => this.updateSearch()}>
                         Update Search</a>

@@ -24,10 +24,12 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root 'users#dashboard', as: :authenticated_user_root
+    get '/my-projects', to: 'users#my_projects'
   end
 
   authenticated :organization do
     root 'organizations#dashboard', as: :authenticated_organization_root
+    get '/my-projects', to: 'organizations#my_projects'
     resources :projects do
       resources :photos, only: [:new]
     end
