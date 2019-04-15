@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_040211) do
+ActiveRecord::Schema.define(version: 2019_04_15_002645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2019_03_31_040211) do
     t.text "question3"
     t.bigint "project_id"
     t.integer "user_id"
-    t.integer "status"
+    t.integer "status", default: 0
   end
 
   create_table "deliverable_types", force: :cascade do |t|

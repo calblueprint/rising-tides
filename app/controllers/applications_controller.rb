@@ -4,7 +4,11 @@ class ApplicationsController < ApplicationController
   # GET /applications
   # GET /applications.json
   def index
-    @applications = Application.all
+    @user_applications = current_user.applications.includes(
+        project: [:organization]
+    ).as_json(
+        :include => { :project => { :include => :organization }
+    })
   end
 
   # GET /applications/1

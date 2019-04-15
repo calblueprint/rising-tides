@@ -16,6 +16,15 @@ class Api::ApplicationsController < ApplicationController
     render json: @application
   end
 
+  def filter
+    @applications = Application.filter(filter_params).includes(
+        project: [:organization]
+    ).as_json(
+        :include => { :project => { :include => :organization }
+    })
+    render json:@applications
+  end
+
   def create
     project = Project.find(application_params['project_id'])
     raise Error::AppLimitError unless not project.reached_application_limit?
@@ -89,5 +98,13 @@ class Api::ApplicationsController < ApplicationController
         :project_id,
         :user_id
       )
+    end
+
+    def filter_params
+        params.require(:query).permit(
+            :with_keyword,
+            :with_user_id,
+            with_statuses: []
+        )
     end
 end

@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resource :photos, only: [:create]
     post '/applications/:id/decide', to: 'applications#decide'
     post '/projects/filter', to: 'projects#filter'
+    post '/applications/filter', to: 'applications#filter'
     get '/users/:user_id/applications', to: 'applications#user_index'
     get '/all_projects', to: 'projects#index_all'
     get '/projects/:project_id/photos', to: 'photos#index'
