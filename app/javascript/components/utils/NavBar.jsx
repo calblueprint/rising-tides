@@ -112,41 +112,7 @@ class NavBar extends React.Component {
                     </div>:null
                   }
               </li>         
-      }
-    }
-  renderProfile() {
-    let profile = null;
-    if (this.props.userType == 0) {
-    profile = <li className="fr f4 w-auto tc dropdown"> 
-                <a className="f4 black" onClick={this.handleMouseDropdown}>
-                  {this.props.user.name} 
-                  <i className="fa fa-caret-down"></i>
-                </a>
-                {this.state.viewDropdown ?
-                  <div className="dropdown-content h-auto">
-                    <a onClick={this.goToProfile}>Profile</a>
-                    <a onClick={this.goToMyProjects}>Projects</a>
-                    <a onClick={this.goToApplications}>Applications</a>
-                    <a onClick={this.handleLogout}>Logout</a>
-                  </div>:null
-                }
-              </li>
-    } else {
-      profile = <li className="fr f4 w-auto tc dropdown"> 
-                  <a className="f4 black" onClick={this.handleMouseDropdown}>
-                    {this.props.user.first_name} 
-                    <i className="fa fa-caret-down"></i>
-                  </a>
-                  {this.state.viewDropdown ?
-                    <div className="dropdown-content h-auto">
-                      <a onClick={this.goToProfile}>Profile</a>
-                      <a onClick={this.goToMyProjects}>My Projects</a>
-                      <a onClick={this.goToApplications}>My Applications</a>
-                      <a onClick={this.handleLogout}>Logout</a>
-                    </div>:null
-                  }
-                </li>
-    }
+      }            
     return profile
   }
 
