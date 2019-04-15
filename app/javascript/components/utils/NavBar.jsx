@@ -124,7 +124,7 @@ class NavBar extends React.Component {
                 </a>
                 {this.state.viewDropdown ?
                   <div className="dropdown-content h-auto">
-                    <a onClick={this.goToOrganizationProfile}>Profile</a>
+                    <a onClick={this.goToProfile}>Profile</a>
                     <a onClick={this.goToMyProjects}>Projects</a>
                     <a onClick={this.goToApplications}>Applications</a>
                     <a onClick={this.handleLogout}>Logout</a>
@@ -132,8 +132,19 @@ class NavBar extends React.Component {
                 }
               </li>
     } else {
-      profile = <li className="fr f4 w-auto tc"> 
-                  <a className="f4 black" onClick={this.volunteerDropdown}>O  {this.props.user.first_name}</a>
+      profile = <li className="fr f4 w-auto tc dropdown"> 
+                  <a className="f4 black" onClick={this.handleMouseDropdown}>
+                    {this.props.user.first_name} 
+                    <i className="fa fa-caret-down"></i>
+                  </a>
+                  {this.state.viewDropdown ?
+                    <div className="dropdown-content h-auto">
+                      <a onClick={this.goToProfile}>Profile</a>
+                      <a onClick={this.goToMyProjects}>My Projects</a>
+                      <a onClick={this.goToApplications}>My Applications</a>
+                      <a onClick={this.handleLogout}>Logout</a>
+                    </div>:null
+                  }
                 </li>
     }
     return profile
