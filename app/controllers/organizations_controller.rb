@@ -8,11 +8,7 @@ class OrganizationsController < ApplicationController
     @organization_applications = current_organization
         .applications
         .limit(4)
-        .includes(
-            [:project, :user]
-        ).as_json(
-            include: [:project, :user]
-        )
+        .with_project_organization_json
   end
 
   def show

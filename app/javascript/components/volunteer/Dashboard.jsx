@@ -173,19 +173,19 @@ class Dashboard extends React.Component {
                 In Review
             </div>
         );
-        if (application.project.status == "interviewing") {
+        if (application.status == "interviewing") {
             project_status = (
                 <div className="dib rt-yellow-bg ph3 pv2 fw4">
                     Interview
                 </div>
             );
-        } else if (application.project.status == "accepted") {
+        } else if (application.status == "accepted") {
             project_status = (
                 <div className="dib rt-yellow-bg ph3 pv2 fw4">
                     Interview
                 </div>
             );
-        } else if (application.project.status == "denied") {
+        } else if (application.status == "denied") {
             project_status = (
                 <div className="dib ph3 pv2 fw4">
                     No longer in consideration
