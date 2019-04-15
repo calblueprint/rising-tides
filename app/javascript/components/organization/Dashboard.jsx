@@ -65,6 +65,7 @@ class Dashboard extends React.Component {
     };
     this.toggleSelected = this.toggleSelected.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.toggleSelectedSingle = this.toggleSelectedSingle.bind(this);
   }
 
   handleChange = name => event => {
@@ -80,6 +81,19 @@ class Dashboard extends React.Component {
 
   toggleSelected(id, key) {
     let temp = this.state[key];
+    temp[id].selected = !temp[id].selected;
+    this.setState({
+      [key]: temp
+    });
+  }
+
+  toggleSelectedSingle(id, key) {
+    let temp = this.state[key];
+    // clear selected first
+    temp = temp.map(function(item) {
+        item.selected = false;
+        return item;
+    });
     temp[id].selected = !temp[id].selected;
     this.setState({
       [key]: temp
@@ -159,19 +173,19 @@ class Dashboard extends React.Component {
                 In Review
             </div>
         );
-        if (application.project.status == "interviewing") {
+        if (application.status == "interviewing") {
             project_status = (
                 <div className="dib rt-yellow-bg ph3 pv2 fw4">
                     Interview
                 </div>
             );
-        } else if (application.project.status == "accepted") {
+        } else if (application.status == "accepted") {
             project_status = (
                 <div className="dib rt-yellow-bg ph3 pv2 fw4">
                     Interview
                 </div>
             );
-        } else if (application.project.status == "denied") {
+        } else if (application.status == "denied") {
             project_status = (
                 <div className="dib ph3 pv2 fw4">
                     No longer in consideration
@@ -256,12 +270,14 @@ class Dashboard extends React.Component {
                         title="Project Types"
                         list={this.state.project_types}
                         toggleItem={this.toggleSelected}
+                        singleItem={true}
                     />
                     <Dropdown
                         titleHelper="Skill"
                         title="Select Skills..."
                         list={this.state.skills}
                         toggleItem={this.toggleSelected}
+                        singleItem={true}
                     />
                     <a
                         className="w-25 std-button pv2"
