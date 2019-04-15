@@ -7,6 +7,7 @@ class OrganizationsController < ApplicationController
     @deliverable_types = DeliverableType.all
     @organization_applications = current_organization
         .applications
+        .limit(4)
         .includes(
             [:project, :user]
         ).as_json(

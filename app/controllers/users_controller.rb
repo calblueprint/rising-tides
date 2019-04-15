@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @skills = Skill.all
     @project_types = ProjectType.all
     @deliverable_types = DeliverableType.all
-    @user_applications = current_user.applications.includes(
+    @user_applications = current_user.applications.limit(4).includes(
         project: [:organization]
     ).as_json(
         :include => { :project => { :include => :organization }
