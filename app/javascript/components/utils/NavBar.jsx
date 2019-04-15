@@ -8,8 +8,7 @@ class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.goToDashboard = this.goToDashboard.bind(this);
-    this.goToVolunteerProfile = this.goToVolunteerProfile.bind(this);
-    this.goToOrganizationProfile = this.goToOrganizationProfile.bind(this);
+    this.goToProfile = this.goToProfile.bind(this);
     this.renderProfile = this.renderProfile.bind(this);
     this.goToBrowse = this.goToBrowse.bind(this);
     this.goToApplications = this.goToApplications.bind(this);
@@ -32,12 +31,12 @@ class NavBar extends React.Component {
     window.location.href = `/`;
   };
 
-  goToVolunteerProfile = () => {
-    window.location.href = `/users/${this.props.user.id}`;
-  };
-
-  goToOrganizationProfile = () => {
-    window.location.href = `/organizations/${this.props.user.id}`;
+  goToProfile = () => {
+    if (this.props.userType == 0) {
+      window.location.href = `/organizations/${this.props.user.id}`;
+    } else {
+      window.location.href = `/users/${this.props.user.id}`;
+    }
   };
 
   goToBrowse = () => {
@@ -51,11 +50,7 @@ class NavBar extends React.Component {
 
   goToApplications = (e) => {
     e.preventDefault();
-    if (this.props.userType == 0) {
-      
-    } else {
-      window.location = "/applications"
-    } 
+    window.location = "/applications";
   };
 
   handleLogout = e => {
@@ -95,7 +90,7 @@ class NavBar extends React.Component {
                 </a>
                 {this.state.viewDropdown ?
                   <div className="dropdown-content h-auto">
-                    <a onClick={this.goToOrganizationProfile}>Profile</a>
+                    <a onClick={this.goToProfile}>Profile</a>
                     <a onClick={this.goToMyProjects}>Projects</a>
                     <a onClick={this.goToApplications}>Applications</a>
                     <a onClick={this.handleLogout}>Logout</a>
@@ -103,8 +98,19 @@ class NavBar extends React.Component {
                 }
               </li>
     } else {
-      profile = <li className="fr f4 w-auto tc"> 
-                  <a className="f4 black" onClick={this.volunteerDropdown}>O  {this.props.user.first_name}</a>
+      profile = <li className="fr f4 w-auto tc dropdown"> 
+                  <a className="f4 black" onClick={this.handleMouseDropdown}>
+                    {this.props.user.first_name} 
+                    <i className="fa fa-caret-down"></i>
+                  </a>
+                  {this.state.viewDropdown ?
+                    <div className="dropdown-content h-auto">
+                      <a onClick={this.goToProfile}>Profile</a>
+                      <a onClick={this.goToMyProjects}>My Projects</a>
+                      <a onClick={this.goToApplications}>My Applications</a>
+                      <a onClick={this.handleLogout}>Logout</a>
+                    </div>:null
+                  }
                 </li>
     }
     return profile
