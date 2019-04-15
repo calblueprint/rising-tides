@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import Button from "../helpers/Button";
+import Modal from "./RegistrationOption";
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,15 +20,17 @@ class Login extends React.Component {
     this.setState({ [name]: event.target.value });
   };
 
-  handleSignup = e => {
-    e.preventDefault();
+  handleSignin = event => {
+    event.preventDefault();
+
+    const { email, password, selectedType } = this.state;
 
     const data = {
-      email: this.state.email,
-      password: this.state.password
+      email,
+      password
     };
 
-    if (this.state.selectedType === "volunteer") {
+    if (selectedType === "volunteer") {
       axios
         .post("/users/sign_in", {
           user: data
@@ -35,9 +39,9 @@ class Login extends React.Component {
           window.location.href = "/";
         })
         .catch(function(error) {
-          console.log(error);
+          console.error(error);
         });
-    } else if (this.state.selectedType === "organization") {
+    } else if (selectedType === "organization") {
       axios
         .post("/organizations/sign_in", {
           organization: data
@@ -52,55 +56,83 @@ class Login extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        <h2>Login</h2>
-        <form>
-          <div>
-            <label>
-              <input
-                type="radio"
-                value="volunteer"
-                onChange={this.handleChange("selectedType")}
-                checked={this.state.selectedType === "volunteer"}
-              />
-              Volunteer
-            </label>
+    const { selectedType } = this.state;
 
-            <label>
-              <input
-                type="radio"
-                value="organization"
-                onChange={this.handleChange("selectedType")}
-                checked={this.state.selectedType === "organization"}
-              />
-              Organization
-            </label>
-          </div>
-          <br />
-          <div>
+    return (
+      <form className="mt4">
+        <div className="flex flex-row justify-center mb3">
+          <label
+            className="flex flex-row justify-center mh2"
+            htmlFor="login-volunteer-selection"
+          >
+            <input
+              className="mh1"
+              id="login-volunteer-selection"
+              type="radio"
+              value="volunteer"
+              onChange={this.handleChange("selectedType")}
+              checked={selectedType === "volunteer"}
+            />
+            Volunteer
+          </label>
+
+          <label
+            className="flex flex-row justify-center mh2"
+            htmlFor="login-organization-selection"
+          >
+            <input
+              className="mh1"
+              id="organization"
+              type="radio"
+              value="organization"
+              onChange={this.handleChange("selectedType")}
+              checked={selectedType === "organization"}
+            />
+            Organization
+          </label>
+        </div>
+        <div className="flex flex-column mb3">
+          <label htmlFor="login-email">
+            Email
             <input
               className="input-box"
               type="text"
-              id="email"
-              placeholder="email"
+              id="login-email"
               onChange={this.handleChange("email")}
             />
-            <br />
+          </label>
+        </div>
+        <div className="flex flex-column mb4">
+          <label htmlFor="login-password">
+            Password
             <input
               className="input-box"
               type="password"
-              id="password"
-              placeholder="password"
+              id="login-password"
               onChange={this.handleChange("password")}
             />
+          </label>
+          <a href="/" className="f6 no-underline">
+            Forgot your password?
+          </a>
+        </div>
+        <div className="flex login-buttons">
+          <Modal
+            className="mr3"
+            title="Sign up"
+            buttonType="button-secondary"
+          />
+          <div>
+            <Button
+              type="button-primary"
+              onClick={this.handleSignin}
+              className="ml3"
+            >
+              Sign In
+            </Button>
           </div>
-          <br />
-          <div className="input-contianer">
-            <button onClick={this.handleSignup}>Login</button>
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
     );
   }
 }
