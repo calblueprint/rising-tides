@@ -10,23 +10,6 @@ class AppReview extends React.Component {
           //userType
         }
     }
-
-    // componentDidMount() {
-    //     if (this.props.application.project_id != null) {
-    //       console.log(this.props);
-    //       axios.get(`/api/project/${this.props.application.project_id}`).then(ret => {
-    //         let project = ret.data;
-    //         this.setState({ project });
-    //         axios.get(`/api/organization/${this.state.project.organization_id}`).then(ret => {
-    //           let organization = ret.data;
-    //           this.setState({ organization });
-    //         })
-    //       })
-          
-    //     } else {
-    //       console.log(`Application ${this.props.application.id} not tied to a project!`);
-    //     }
-    //   }
     
     goBack = e => {
         e.preventDefault();
@@ -34,15 +17,69 @@ class AppReview extends React.Component {
     };
 
     render() {
+      let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+      let profileImage = <img className="h-100 w4"  src={profileUrl} />;
+      //let resumeUrl = "";
+      //let resume = <a className="dib std-button f7 lh-m" src={resumeUrl}>resume</a>
+      let resume = <a className="dib std-button f7 lh-m">resume</a>
       return(
-        <div>
-          <a className="no-link black f2" onClick={this.goBack}>
-            <i class="fas fa-angle-left"></i>
-          </a>
-          <h2 className="impact ma3">{this.props.user.first_name} {this.props.user.last_name}</h2>
-  
-          <div>{this.state.appStatus}</div>
-        </div>
+        <div className="w-100 h-100 tc">
+            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
+                <h1 className="ma0 f1 mb3 truncate"> Application - {this.props.project.title} </h1>
+                <div className="h4 flex items-end">
+                    {profileImage}
+                    <div className="w-100 m3 ph4 pt4">
+                        <div className="flex items-end">
+                            <h1 className="ma0 f1 mb3">
+                                {this.props.user.first_name} {this.props.user.last_name}
+                            </h1>
+                            <a className="pa0 ph1 ml3 mb1" target="_blank" href={`http://${this.props.user.link}`}>
+                                <img src="/images/linked-in.png" style={{ width: '21px', height: '21px' }} />
+                            </a>
+                            <div className="pb2 ml3">
+                                {resume}
+                            </div>
+                        </div>
+                        <div className="flex">
+                            <div className="mt1-ns">
+                                {this.props.user.email}
+                            </div>
+                            <span className="pl3 mt1-ns">|</span>
+                            <div className="pl3 mt1-ns">
+                                {this.props.user.phone_number}
+                            </div>
+                            <span className="pl3 mt1-ns">|</span>
+                            <div className="pl3 mt1-ns">
+                                {this.props.user.city}, {this.props.user.state}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 className="pt5">Skills</h3>
+                {this.props.user.skills}
+
+                <h3 className="pt5">Biography</h3>
+                {this.props.user.bio}
+
+                <h3 className="pt5">Why are you interested?</h3>
+                <p className="lato">{this.props.application.question1}</p>
+                <h3 className="pt5">Describe your relevant experience.</h3>
+                <p className="lato">{this.props.application.question2}</p>
+            </div>
+      </div>
+
+        /* // <div>
+        //   <a className="no-link black f2" onClick={this.goBack}>
+        //     <i class="fas fa-angle-left"></i>
+        //   </a>
+        //   <h2 className="truncate ma3">Application - {this.props.project.title} </h2>
+          // <h3 className="lato f3">Why are you interested?</h3>
+          // <p className="lato">{this.props.application.question1}</p>
+          // <br/>
+          // <h3 className="lato f3">Describe your relevant experience.</h3>
+          // <p className="lato">{this.props.application.question2}</p>
+        // </div> */
       )
     }
 }
