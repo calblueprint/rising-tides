@@ -28,7 +28,9 @@ jobs:
         - bundle exec rspec
     - stage: deploy to staging
       if: branch = fred/heroku
+      before_install: skip
       install: skip
+      before_script: skip
       script: skip
       deploy: &heroku
         provider: heroku
@@ -37,6 +39,8 @@ jobs:
         on: fred/heroku
     - stage: test staging
       if: branch = fred/heroku
+      before_install: skip
       install: skip
+      before_script: skip
       script: skip
       script: "curl https://risingtides-staging.herokuapp.com/"
