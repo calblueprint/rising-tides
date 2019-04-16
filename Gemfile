@@ -54,6 +54,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Create random seed data
   gem 'faker'
+  gem 'rspec-rails'
 end
 
 group :development do

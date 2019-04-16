@@ -1,0 +1,36 @@
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+      - postgresql-10
+      - postgresql-client-10
+env:
+  global:
+    - PGPORT=5433
+#  matrix:
+# Percy Token Encryption
+#  - secure: o4XYTxvP18fsWYTuDO3Px6bof5mkQCn8fYc7FG7MjRG29nLgNVvjzx/R2oW5Hh02+ZZTAZQOHc5MFJdHO5j7S/rGplJTpCBb19wn4SGB8o41hlGpUCOe4sKEbk/3+9Ii4e9EmschmkZgvmBxJLTVtqnM7J0IB6ny1D/IN/M67/TAxSPB9GCdwJRc+1LzGXB/OhJLW/LmdekEnAg06zYcDC0o+Uf7t0l62dawWHkfgrgYGIR+JblJLb9iaxWGTrt7HoUhTCot5YWEkPj8uT2/u/cg2oLsXDcPSK2xmc6J+bX1qMMv1bIPhlHsmitxKHL8Im0wQkfcLeHKSZtqAAyZ5dhy3djKCJJ2gJ4fhAhDLpnslSrbJpuBxpljLR0zuDu0INrwMhIPm30DNwfRj8G/OA83EPqBYGDH5eEsfv4iKipbrAR9oIw607SkHoQqXuvHwzrJy7kYacM3N4yxmNRiXKgtVZd5E6cNVt+zSoj3oQeqVYHVEeExXtdRMvMSMDvVRX/PMgVArFaVVVaLOqbNmtcWLxZBPDC3zwt5y+ChvcG3gEkc/wpYC1BfwSQjvV+acg6UM7XJDe0ximCV3wxWjGB1rAdsWfhkozc+1WhS3ByhZryvdr1QhQYIUsAJI2hsB3aeNYx9EtsfSIccpzwLs9hpfbS6vSLnHIjKDB3yP+E=
+# Code Climate Token Encryption
+#  - secure: Ea87/i8RbKWeLtcI1ruCDbLQLMJx6OLO+mVOp05G9EQXu8N9pYIuxoc6veqJ4Lknv6dXVkrgsBys8K/94ZWsfKLWIGWTUHz3xfCyRvgw4dfbUP70AgbVekPwlzRYZ4rDgckzfIhE4bDYsBKBdJfBEKXn7Ns7CNw2vw7ta3IFnwID5QbQxPbbU5G4XLAjiERcZIsnqilIn5xUfFMCPRNAYsRHazTmILbaVlSrWjOmIuflJUhwv57i1uwTzoa8/QCGfIs43j6niRwzmwxUfeAflgTJQ1s76Cc06hG02JYweYD3Ysohzf2iwkYNW4rCrO5i0u9MQylrXY8LEZV4DTqSxFCXkIn2W2XLrjCzGTjNaYAymZrqiAimIvKUtB04ekQWsWwRbKv8BwnPAV9Ug1cmY1Q2EuBIftnKV5XPAayK2uXJIfTE3xUH7l1eQLtgVjUCNQZBmobHzsPpM18WZFKDhMvl33ns0pZnj0JJvZDluX1yYm4ghKAGETrk55f2G9NInl8SvLqTsT6d1aUlzOa0CZPxeg6QUkIh/2N7CbeoddASnOgLR+2jnxrx9IJHyeJKy4ji6btYbnVoCG8RYcmOGVBVzuH+1IfefFcK/J9v2pgKA0tZW09DNGXkBWLTdbpHCMez1SafB+mYM3FGBSE4Nhs6rm6GkSdsZH1FQUWqLN8=
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+  # - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  #   > ./cc-test-reporter
+  # - chmod +x ./cc-test-reporter
+  # - "./cc-test-reporter before-build"
+before_install:
+  - gem update --system
+  - gem install bundler -v 2.0.1
+  - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
+  - sudo service postgresql restart
+  - sleep 1
+language: ruby
+cache: bundler
+rvm:
+  - 2.5.1
+script:
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rspec
+# after_success:
+# - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
