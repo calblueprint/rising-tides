@@ -27,6 +27,7 @@ jobs:
         - bundle exec rails db:migrate RAILS_ENV=test
         - bundle exec rspec
     - stage: deploy to staging
+      if: branch = master
       install: skip
       script: skip
       deploy: &heroku
@@ -35,6 +36,7 @@ jobs:
         api_key: $HEROKU_AUTH_TOKEN
         on: fred/heroku
     - stage: test staging
+      if: branch = master
       install: skip
       script: skip
       script: "curl https://risingtides-staging.herokuapp.com/"
