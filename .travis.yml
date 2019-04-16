@@ -29,20 +29,28 @@ language: ruby
 cache: bundler
 rvm:
   - 2.5.1
-jobs:
-  include:
-    - stage: testing
-      script:
-        - bundle exec rails db:migrate RAILS_ENV=test
-        - bundle exec rspec
-    - stage: deploy to staging
-      script: skip
-      deploy: &heroku
-        provider: heroku
-        app: rising-tides-staging
-        api_key: $HEROKU_AUTH_TOKEN
-        on: fred/heroku
-    - stage: test staging
-      script: "curl http://rising-tides-staging.herokuapp.com"
+script:
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rspec
+deploy: &heroku
+  provider: heroku
+  app: risingtides-staging
+  api_key: $HEROKU_AUTH_TOKEN
+  on: fred/heroku
+# jobs:
+#   include:
+#     - stage: testing
+#       script:
+#         - bundle exec rails db:migrate RAILS_ENV=test
+#         - bundle exec rspec
+#     - stage: deploy to staging
+#       script: skip
+#       deploy: &heroku
+#         provider: heroku
+#         app: risingtides-staging
+#         api_key: $HEROKU_AUTH_TOKEN
+#         on: fred/heroku
+#     - stage: test staging
+#       script: "curl http://rising-tides-staging.herokuapp.com"
 # after_success:
 # - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
