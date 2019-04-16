@@ -68,27 +68,3 @@ module.exports = api => {
     ].filter(Boolean)
   };
 };
-
-// {
-//   "presets": [
-//     [
-//       "@babel/preset-env",
-//       {
-//         "modules": false,
-//         "useBuiltIns": "entry"
-//       }
-//     ],
-//     "@babel/preset-react"
-//   ],
-//   "plugins": [
-//     "@babel/plugin-proposal-class-properties",
-//     "@babel/plugin-syntax-dynamic-import",
-//     "@babel/transform-object-rest-spread",
-//     //   // [
-//     //   //   "@babel/transform-class-properties",
-//     //   //   {
-//     //   //     "spec": true
-//     //   //   }
-//     //   // ]
-//   ]
-// }
