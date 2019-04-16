@@ -36,7 +36,8 @@ jobs:
         provider: heroku
         app: risingtides-staging
         api_key: $HEROKU_AUTH_TOKEN
-        on: fred/heroku
+        on: 
+          branch: fred/heroku
     - stage: test staging
       if: branch = fred/heroku
       before_install: skip
