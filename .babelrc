@@ -9,15 +9,5 @@
     ],
     "@babel/preset-react"
   ],
-  "plugins": [
-    "@babel/plugin-proposal-class-properties"
-    //   "@babel/syntax-dynamic-import",
-    //   // "@babel/transform-object-rest-spread",
-    //   // [
-    //   //   "@babel/transform-class-properties",
-    //   //   {
-    //   //     "spec": true
-    //   //   }
-    //   // ]
-  ]
+  "plugins": ["@babel/plugin-proposal-class-properties"]
 }
