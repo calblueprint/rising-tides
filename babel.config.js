@@ -31,9 +31,11 @@ module.exports = api => {
           forceAllTransforms: true,
           useBuiltIns: "entry",
           modules: false,
-          exclude: ["transform-typeof-symbol"]
+          exclude: ["transform-typeof-symbol"],
+          corejs: 2
         }
-      ]
+      ],
+      [require("@babel/preset-react")]
     ].filter(Boolean),
     plugins: [
       require("babel-plugin-macros"),
