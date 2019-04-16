@@ -8,6 +8,10 @@ Bundler.require(*Rails.groups)
 
 module RisingTides
   class Application < Rails::Application
+    Raven.configure do |config|
+      config.dsn = 'https://61fe6a36b7434af4afc76088856e94e7:f39d4353e36b40bc8c6566350e22425b@sentry.io/1440176'
+    end
+    
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
