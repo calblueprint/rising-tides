@@ -1,28 +1,28 @@
-addons:
-  postgresql: "10"
-  apt:
-    packages:
-      - postgresql-10
-      - postgresql-client-10
 env:
   global:
     - PGPORT=5433
-before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database travis_ci_test;' -U postgres
-before_install:
-  - gem update --system
-  - gem install bundler -v 2.0.1
-  - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
-  - sudo service postgresql restart
-  - sleep 1
-language: ruby
-cache: bundler
-rvm:
-  - 2.5.1
 jobs:
   include:
     - stage: testing
+      addons:
+        postgresql: "10"
+        apt:
+          packages:
+            - postgresql-10
+            - postgresql-client-10
+      before_script:
+        - cp config/database.yml.travis config/database.yml
+        - psql -c 'create database travis_ci_test;' -U postgres
+      before_install:
+        - gem update --system
+        - gem install bundler -v 2.0.1
+        - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
+        - sudo service postgresql restart
+        - sleep 1
+      language: ruby
+      cache: bundler
+      rvm:
+        - 2.5.1
       script:
         - bundle exec rails db:migrate RAILS_ENV=test
         - bundle exec rspec
