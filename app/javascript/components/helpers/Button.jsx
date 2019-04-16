@@ -28,7 +28,7 @@ class Button extends Component {
         return (
           <button
             type="button"
-            className={`${className} fw5 f4 ba bw1 primary-border-color ph3 pv2 dib black bg-primary`}
+            className={`${className} fw5 f4 ba bw1 primary-border-color ph3 pv2 dib black bg-primary flex justify-center`}
             onClick={onClick}
             disabled={disabled}
           >
@@ -39,7 +39,7 @@ class Button extends Component {
         return (
           <button
             type="button"
-            className={`${className} fw5 f4 ba bw1 primary-border-color ph3 pv2 dib black bg-white`}
+            className={`${className} fw5 f4 ba bw1 primary-border-color ph3 pv2 dib black bg-white flex justify-center`}
             onClick={onClick}
             disabled={disabled}
           >
