@@ -126,9 +126,13 @@ class MyProjects extends React.Component {
             with_project_type_ids: project_type_ids,
             with_deliverable_type_ids: deliverable_type_ids,
             with_keyword: this.state.keyword,
-            with_user_id: this.props.user.id,
             with_project_statuses: ['recruiting', 'in_progress']
         }
+    }
+    if (this.props.user) {
+        payload['query']['with_user_id'] = this.props.user.id;
+    } else {
+        payload['query']['with_organization_id'] = this.props.organization.id;
     }
     axios.post("/api/projects/filter", payload).then(ret => {
       const projects = ret.data;
@@ -146,9 +150,13 @@ class MyProjects extends React.Component {
             with_project_type_ids: project_type_ids,
             with_deliverable_type_ids: deliverable_type_ids,
             with_keyword: this.state.keyword,
-            with_user_id: this.props.user.id,
             with_project_statuses: ['completed']
         }
+    }
+    if (this.props.user) {
+        payload['query']['with_user_id'] = this.props.user.id;
+    } else {
+        payload['query']['with_organization_id'] = this.props.organization.id;
     }
     axios.post("/api/projects/filter", payload).then(ret => {
       const projects = ret.data;
