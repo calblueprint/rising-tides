@@ -6,16 +6,97 @@ import linkedin from "images/linked-in.png";
 class AppReview extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-          appStatus: this.props.application.status,
-          //userType
-        }
+        axios.defaults.headers.common = {
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-TOKEN": document
+              .querySelector('meta[name="csrf-token"]')
+              .getAttribute("content")
+          };
+        this.handleDeny = this.handleDeny.bind(this);
+        this.handleInterview = this.handleInterview.bind(this);
+        this.handleAccept = this.handleAccept.bind(this);
+        this.handleVolunteerClick = this.handleVolunteerClick.bind(this);
+        this.displayButtons = this.displayButtons.bind(this);
+        this.goBack = this.goBack.bind(this);
     }
+
+    handleDeny = e => {
+    e.preventDefault();
+    axios
+        .post(`/api/applications/${this.props.application.id}/decide`, {
+        decision: 'denied'
+        })
+        .then(function(response) {
+        window.location.reload();
+        })
+        .catch(function(error) {
+        console.log(error);
+        });
+    };
+
+    handleInterview = e => {
+        e.preventDefault();
+        axios
+          .post(`/api/applications/${this.props.application.id}/decide`, {
+            decision: 'interviewing'
+          })
+          .then(function(response) {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      };
     
+    handleAccept = e => {
+    e.preventDefault();
+    axios
+        .post(`/api/applications/${this.props.application.id}/decide`, {
+        decision: 'accepted'
+        })
+        .then(function(response) {
+        console.log(response);
+        window.location.reload();
+        })
+        .catch(function(error) {
+        console.log(error);
+        });
+    };
+
+    handleVolunteerClick = e => {
+    e.preventDefault();
+    window.location.href = `/users/${this.props.user.id}`;
+    };
+
     goBack = e => {
         e.preventDefault();
         window.location.href = "/applications";
     };
+
+    //status: { pending: 0, denied: 1, interviewing: 2, accepted: 3 }
+
+    displayButtons() {
+        let buttons = null;
+        if (this.props.organization) {
+            if (this.props.application.status === null || this.props.application.status === 'pending') {
+                buttons = (
+                    <div>
+                    <button onClick={this.handleAccept}>Interview</button>
+                    <button onClick={this.handleDeny}>Reject</button>
+                    </div>
+                );
+            } else if (this.props.application.status == 2) {
+                buttons = (
+                    <div>
+                    <button onClick={this.handleAccept}>Accept</button>
+                    <button onClick={this.handleDeny}>Reject</button>
+                    </div>
+                );
+            }
+        }
+        return buttons;
+    }
 
     render() {
       let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
@@ -27,11 +108,12 @@ class AppReview extends React.Component {
         <div className="w-100 h-100 tc">
             <div className="tl fl w-100 pl6 pr6 pt5 pb5">
                 <h1 className="ma0 f1 mb5 truncate"> Application - {this.props.project.title} </h1>
+                <button>{this.props.application.status}</button>
                 <div className="h4 flex items-end">
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
                         <div className="flex items-end">
-                            <h1 className="ma0 f1 overflow-auto mb3">
+                            <h1 className="ma0 f1 overflow-auto mb3" onClick={this.handleVolunteerClick}>
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
                             <a className="pa0 ph1 ml3 mb1" href={`http://${this.props.user.linkedin_url}`}>
@@ -68,6 +150,8 @@ class AppReview extends React.Component {
                 <h3 className="pt5">Describe your relevant experience.</h3>
                 <p className="lato">{this.props.application.question2} {this.props.application.question3}</p>
             </div>
+            {this.displayButtons()}
+            <button onClick={this.goBack}> Back </button>
       </div>
 
         /* // <div>
