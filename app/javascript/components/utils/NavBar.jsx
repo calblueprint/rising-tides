@@ -47,7 +47,7 @@ class NavBar extends React.Component {
 
   goToMyProjects = e => {
     e.preventDefault();
-    window.location.href = '/projects';
+    window.location.href = '/my-projects';
   };
 
   goToApplications = (e) => {
