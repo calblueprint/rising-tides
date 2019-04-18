@@ -66,7 +66,7 @@ class AppReview extends React.Component {
                 <h3 className="pt5">Why are you interested?</h3>
                 <p className="lato">{this.props.application.question1}</p>
                 <h3 className="pt5">Describe your relevant experience.</h3>
-                <p className="lato">{this.props.application.question2}</p>
+                <p className="lato">{this.props.application.question2} {this.props.application.question3}</p>
             </div>
       </div>
 
