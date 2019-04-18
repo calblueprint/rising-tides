@@ -280,7 +280,6 @@ class MyProjects extends React.Component {
                 <div className="mb2 mt3 bt b--black-10" />
                 {pastProjectList}
             </div>
-            <Logout />
         </div>
     );
   }
