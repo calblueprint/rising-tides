@@ -14,7 +14,8 @@ class NavBar extends React.Component {
     this.goToMyProjects = this.goToMyProjects.bind(this);
     this.handleMouseDropdown = this.handleMouseDropdown.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.userType = this.props.userType; //0 is Organization; 1 is Volunteer
+    this.isOrganization = this.props.organization ? 1 : 0;
+    this.isVolunteer = this.props.user ? 1 : 0; //0 is Organization; 1 is Volunteer
     this.state = {
       viewDropdown: false
     }
@@ -31,10 +32,12 @@ class NavBar extends React.Component {
   };
 
   goToProfile = () => {
-    if (this.props.user) {
-        window.location.href = `/users/${this.props.user.id}`;
+    if (this.isOrganization) {
+      window.location.href = `/organizations/${this.props.organization.id}`;
+    } else if (this.isVolunteer) {
+      window.location.href = `/users/${this.props.user.id}`;
     } else {
-        window.location.href = `/users/${this.props.organization.id}`;
+      window.location.href = `/`;
     }
   }
 
@@ -54,7 +57,7 @@ class NavBar extends React.Component {
 
   handleLogout = e => {
     e.preventDefault();
-    if (this.props.userType == 0) {
+    if (this.isOrganization) {
       axios
       .delete("/organizations/sign_out", {})
       .then(function(response) {
@@ -63,7 +66,7 @@ class NavBar extends React.Component {
       .catch(function(error) {
         console.log(error);
       });
-    } else {
+    } else if (this.isVolunteer) {
       axios
       .delete("/users/sign_out", {})
       .then(function(response) {
@@ -72,6 +75,8 @@ class NavBar extends React.Component {
       .catch(function(error) {
         console.log(error);
       });
+    } else {
+      console.log("not signed in");
     }
   };
 
@@ -81,10 +86,10 @@ class NavBar extends React.Component {
 
   renderProfile() {
     let profile = null;
-    if (this.props.userType == 0) {
+    if (this.isOrganization) {
     profile = <li className="fr f4 w-auto tc dropdown"> 
                 <a className="f4 black" onClick={this.handleMouseDropdown}>
-                  {this.props.user.name} 
+                  {this.props.organization.name} 
                   <i className="fa fa-caret-down ml2"></i>
                 </a>
                 {this.state.viewDropdown ?
@@ -96,7 +101,7 @@ class NavBar extends React.Component {
                   </div>:null
                 }
               </li>
-    } else {
+    } else if (this.isVolunteer) {
       profile = <li className="fr f4 w-auto tc dropdown"> 
                   <a className="f4 black" onClick={this.handleMouseDropdown}>
                     {this.props.user.first_name} 
@@ -111,7 +116,20 @@ class NavBar extends React.Component {
                     </div>:null
                   }
               </li>         
-      }            
+      } else {
+        profile = <li className="fr f4 w-auto tc dropdown"> 
+                  <a className="f4 black" onClick={this.handleMouseDropdown}>
+                    Welcome 
+                    <i className="fa fa-caret-down ml2"></i>
+                  </a>
+                  {this.state.viewDropdown ?
+                    <div className="ba dropdown-content h-auto">
+                      <a onClick={this.goToDashboard}>Sign In</a>
+                      <a className="bt pt2" onClick={this.goToDashboard}>Create Account</a>
+                    </div>:null
+                  }
+              </li>   
+      }          
     return profile
   }
 
@@ -135,7 +153,7 @@ class NavBar extends React.Component {
 
 NavBar.propTypes = {
   user: PropTypes.object,
-  userType: PropTypes.number
+  //userType: PropTypes.number
 };
 
 export default NavBar;
