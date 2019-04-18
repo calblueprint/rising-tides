@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "images/risingtides.svg";
 import PropTypes from "prop-types";
 import axios from "axios";
 
