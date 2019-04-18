@@ -31,7 +31,7 @@ class AppReview extends React.Component {
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
                         <div className="flex items-end">
-                            <h1 className="ma0 f1 mb3">
+                            <h1 className="ma0 f1 overflow-auto mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
                             <a className="pa0 ph1 ml3 mb1" href={`http://${this.props.user.linkedin_url}`}>
