@@ -113,6 +113,18 @@ input.input {
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
+.alert-show {
+    transition: all 1s ease-out;
+    opacity: 1;
+    visibility: visible;
+}
+
+.alert-hidden {
+    transition: all 1s ease-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
 .std-button, .std-button:link, .std-button:visited {
     background-color: #EFE137;
     text-decoration: none;

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import FlashMessage from '../utils/FlashMessage'
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,15 +13,14 @@ class Login extends React.Component {
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content")
     };
+    this.handleSignup = this.handleSignup.bind(this);
   }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
-  handleSignup = e => {
-    e.preventDefault();
-
+  handleSignup() {
     const data = {
       email: this.state.email,
       password: this.state.password
@@ -30,32 +30,36 @@ class Login extends React.Component {
       axios
         .post("/users/sign_in", {
           user: data
-        })
-        .then(function(response) {
+        }).then(function(response) {
           window.location.href = "/";
-        })
-        .catch(function(error) {
-          console.log(error);
+        }).catch(res => {
+          this.flash_message.flashError(
+            res.response.data
+          );
         });
     } else if (this.state.selectedType === "organization") {
       axios
         .post("/organizations/sign_in", {
           organization: data
-        })
-        .then(function(response) {
+        }).then(function(response) {
           window.location.href = "/";
-        })
-        .catch(function(error) {
-          console.log(error);
+        }).catch(res => {
+          this.flash_message.flashError(
+            res.response.data
+          );
         });
+    } else {
+        this.flash_message.flashMessage(
+            "You must select either \"Volunteer\" or \"Organization\""
+        );
     }
   };
 
   render() {
     return (
       <div>
+        <FlashMessage onRef={ref => (this.flash_message = ref)} />
         <h2>Login</h2>
-        <form>
           <div>
             <label>
               <input
@@ -97,9 +101,8 @@ class Login extends React.Component {
           </div>
           <br />
           <div className="input-contianer">
-            <button onClick={this.handleSignup}>Login</button>
+            <button onClick={() => this.handleSignup()}>Login</button>
           </div>
-        </form>
       </div>
     );
   }
