@@ -30,7 +30,9 @@ class ApplicationReview extends React.Component {
         window.location.reload();
         })
         .catch(function(error) {
-        console.log(error);
+            this.flash_message.flashError(
+                error.response.data.message
+            );
         });
     };
 
@@ -45,8 +47,10 @@ class ApplicationReview extends React.Component {
             window.location.reload();
           })
           .catch(function(error) {
-            console.log(error);
-          });
+            this.flash_message.flashError(
+                error.response.data.message
+                );
+            });
       };
     
     handleAccept = e => {
@@ -60,8 +64,9 @@ class ApplicationReview extends React.Component {
             window.location.reload();
             })
             .catch(function(error) {
-            console.log(error.response.data.message)
-            console.log(error);
+                this.flash_message.flashError(
+                    error.response.data.message
+                );
             });
     };
 
@@ -74,8 +79,6 @@ class ApplicationReview extends React.Component {
         e.preventDefault();
         window.location.href = "/applications";
     };
-
-    //status: { pending: 0, denied: 1, interviewing: 2, accepted: 3 }
 
     displayButtons() {
         let buttons = null;
@@ -104,8 +107,6 @@ class ApplicationReview extends React.Component {
     render() {
       let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
       let profileImage = <img className="h-100 w4"  src={profileUrl} />;
-      //let resumeUrl = "";
-      //let resume = <a className="dib std-button f7 lh-m" src={resumeUrl}>resume</a>
       let resume = <a className="dib std-button f7 pa1 lh-m">Resume</a>
       return(
         <div className="w-100 h-100 tc">
@@ -159,17 +160,6 @@ class ApplicationReview extends React.Component {
             </div>
       </div>
 
-        /* // <div>
-        //   <a className="no-link black f2" onClick={this.goBack}>
-        //     <i class="fas fa-angle-left"></i>
-        //   </a>
-        //   <h2 className="truncate ma3">Application - {this.props.project.title} </h2>
-          // <h3 className="lato f3">Why are you interested?</h3>
-          // <p className="lato">{this.props.application.question1}</p>
-          // <br/>
-          // <h3 className="lato f3">Describe your relevant experience.</h3>
-          // <p className="lato">{this.props.application.question2}</p>
-        // </div> */
       )
     }
 }
