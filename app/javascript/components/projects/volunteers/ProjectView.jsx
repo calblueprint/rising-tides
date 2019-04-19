@@ -8,6 +8,7 @@ import axios from "axios";
 class ProjectView extends React.Component {
   constructor(props) {
     super(props);
+    this.spotsLeft = this.props.project.application_limit - this.props.project.application_count;
     this.state = {
       applications: [],
       organization: null
@@ -37,9 +38,7 @@ class ProjectView extends React.Component {
   }
 
   goToApplication = () => {
-    window.location.href = `/projects/${
-      this.props.project.id
-    }/applications/new`;
+    window.location.href = `/projects/${this.props.project.id}/applications/new`;
   };
 
   goBack = e => {
@@ -48,61 +47,121 @@ class ProjectView extends React.Component {
   };
 
   render() {
-    const { project } = this.props;
-    const { organization } = this.state;
+    const { 
+        project,
+        organization,
+        organization_signed_in,
+        current_organization
+    } = this.props;
 
-    if (organization != null) {
-      return (
-        <div>
-          <a onClick={this.goBack}>Back</a>
-          <h1>View Project</h1>
-          <h3>{project.title}</h3>
-          <h3>
-            Organization:
-            {organization.name}
-          </h3>
-          <h4>Brief Description</h4>
-          <p>{project.description}</p>
-          <h4>Project Plan</h4>
-          <p>{project.overview}</p>
-          <h4>Professional Skills Needed</h4>
-          <p>{project.volunteer_requirements}</p>
-          <h4>Project Outputs</h4>
-          <p>{project.deliverable}</p>
-          <h4>Your Community Needs This If:</h4>
-          <p>{project.question1}</p>
-          <h4>The Right Volunteer for this Project Is:</h4>
-          <p>{project.question2}</p>
-          <h4>What You Give, What You Get:</h4>
-          <p>{project.question3}</p>
-          <br />
-          <button onClick={this.goToApplication}>Apply</button>
-        </div>
-      );
+    var org_img = <span></span>;
+    if (this.props.org_image_url) {
+        org_img = <img className="w2 h2 mr2 dib"
+                       src={this.props.org_image_url} />;
     }
+
+    var project_string_status = "Accepting Applications";
+    if (project.status == "in_progress") {
+        project_string_status = "Applications Closed";
+    } else if (project.status == "completed") {
+        project_string_status = "Project Completed";
+    }
+    console.log("PROJECT STATUS: " + project.status);
+
+    let apply_button = (
+        <a className="std-button ph3 pv1 fw4 f5" href={project.id + "/applications/new"}>
+            Apply
+        </a>
+    );
+    if (organization_signed_in || this.spotsLeft <= 0) {
+        apply_button = <span></span>;
+    }
+
+    let edit_button = (
+        <div>
+            <a className="std-button ph3 pv1 fw4 f5" href={project.id + "/edit"}>
+                Edit
+            </a>
+        </div>
+    );
+    if (!organization_signed_in || organization.id != current_organization.id) {
+        edit_button = <span></span>;
+    }
+
     return (
-      <div>
-        <a onClick={this.goBack}>Back</a>
-        <h1>View Project</h1>
-        <h3>{project.title}</h3>
-        <h3>Organization: Loading...</h3>
-        <h4>Brief Description</h4>
-        <p>{project.description}</p>
-        <h4>Project Plan</h4>
-        <p>{project.overview}</p>
-        <h4>Professional Skills Needed</h4>
-        <p>{project.volunteer_requirements}</p>
-        <h4>Project Outputs</h4>
-        <p>{project.deliverable}</p>
-        <h4>Your Community Needs This If:</h4>
-        <p>{project.question1}</p>
-        <h4>The Right Volunteer for this Project Is:</h4>
-        <p>{project.question2}</p>
-        <h4>What You Give, What You Get:</h4>
-        <p>{project.question3}</p>
-        <br />
-        <button onClick={this.goToApplication}>Apply</button>
-      </div>
+        <div className="w-100 h-100 tc bg-white">
+            <div
+                className="h5 absolute w-100 bg-moon-gray"
+                style={{zIndex: -1}}></div>
+            <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
+                <h1 className="f1 ma0">{project.title}</h1>
+                {edit_button}
+                <div className="dib rt-yellow-bg ph3 pv2 mv4 f5 fw4">
+                    {project_string_status}
+                </div>
+                <h3 className="mt3">Project Overview</h3>
+                <p>{project.description}</p>
+                <h3 className="mt4">Project Plan</h3>
+                <div className="mt3 flex items-start">
+                    <div className="w-75 flex">
+                        <div className="w-05 pl2 pr3 pv4">
+                            <div className="vl-black h-100 p"></div>
+                        </div>
+                        <div className="w-90 pr4">
+                            <div className="relative">
+                                <div
+                                    className="bg-black br-100 absolute mt1"
+                                    style={{width: "11px", height: "11px", left: "-1.4072rem"}}></div>
+                                <h4 className="fw4">mm/dd/yy</h4>
+                            </div>
+                            <p>
+                                kjsalkf jksd fjdsk fjdka sljfdsaj fk jdadf
+                                asfkdsj k sdjaflk jd lfkjdsa fkd ajfdksal
+                                asdfjk dsjafk djsaklf das jakld f
+                                asdfkldjds fkjsdakl fjdsklf
+                            </p>
+                            <div className="relative">
+                                <div
+                                    className="bg-black br-100 absolute mt1"
+                                    style={{width: "11px", height: "11px", left: "-1.4072rem"}}></div>
+                                <h4 className="fw4">mm/dd/yy</h4>
+                            </div>
+                            <p>
+                                kjsalkf jksd fjdsk fjdka sljfdsaj fk jdadf
+                                asfkdsj k sdjaflk jd lfkjdsa fkd ajfdksal
+                                asdfjk dsjafk djsaklf das jakld f
+                                asdfkldjds fkjsdakl fjdsklf
+                            </p>
+                            <div className="relative">
+                                <div
+                                    className="bg-black br-100 absolute mt1"
+                                    style={{width: "11px", height: "11px", left: "-1.4072rem"}}></div>
+                                <h4 className="fw4">mm/dd/yy</h4>
+                            </div>
+                            <p>
+                                kjsalkf jksd fjdsk fjdka sljfdsaj fk jdadf
+                                asfkdsj k sdjaflk jd lfkjdsa fkd ajfdksal
+                                asdfjk dsjafk djsaklf das jakld f
+                                asdfkldjds fkjsdakl fjdsklf
+                            </p>
+                        </div>
+                    </div>
+                    <div className="w-25 bg-light-gray pa3 h-auto">
+                        <div className="flex items-center">
+                            {org_img}
+                            <h4 className="ma0 dib">{organization.name}</h4>
+                        </div>
+                        <div className="mt2">
+                            <span className="fa fa-map-pin mr2"></span>{organization.city}, {organization.state}
+                        </div>
+                        <div className="mt2 mb3">
+                            <span className="fa fa-phone mr2"></span>{organization.contact_phone_number}
+                        </div>
+                        {apply_button}
+                    </div>
+                </div>
+            </div>
+        </div>
     );
   }
 }

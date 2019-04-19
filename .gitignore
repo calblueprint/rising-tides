@@ -44,10 +44,12 @@ yarn-debug.log*
 /config/master.key
 
 # Ignore testing
+coverage
 .rspec
 
 # Ignore misc mac osx files
-.DS_Store/public/packs
+.DS_Store
+/public/packs
 
 # Ignore editor directories
 .idea/

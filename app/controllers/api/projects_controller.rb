@@ -8,17 +8,29 @@ class Api::ProjectsController < ApplicationController
   end
 
   def index_all
-    @projects = Project.all
-    render json:@projects
+    @projects =  Project.with_application_count
+
+    render json: {
+        projects: @projects,
+        message: "Projects loaded..."
+    }
   end
 
   def filter
     @projects = Project.filter(filter_params)
-    render json:@projects
+                       .with_application_count
+                       .include_organization
+    render json: {
+        projects: @projects,
+        message: "Projects loaded..."
+    }
   end
 
   def show
-    render json: @project
+    render json: {
+        projects: @project,
+        message: "Project loaded..."
+    }
   end
 
   def create
@@ -28,31 +40,26 @@ class Api::ProjectsController < ApplicationController
 
     begin
       saved = project.save!
-    rescue ActiveRecord::StatementInvalid => invalid
-      return render json: {message: 'Invalid project'}
     end
 
     if saved
       return render json: {message: 'Project successfully created!'}
     end
 
-    return render json: {error: projects.errors.full_messages,
-                         status: 422}
+    raise StandardError, application.errors.full_messages
   end
 
   def update
     begin
       project = Project.find(params[:id])
       a = project.update(project_params)
-    rescue
-      return render json: {error: "Forbidden"}
     end
     if a
       new_project = Project.find(params[:id])
       return render json: {message: 'Project successfully updated!',
                            project: new_project}
     else
-      return render json: {error: project.errors.full_messages}
+      raise StandardError, application.errors.full_messages
     end
   end
 
@@ -60,7 +67,6 @@ class Api::ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
-      @project.project_type_name = ProjectType.find(@project.project_type_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -76,13 +82,26 @@ class Api::ProjectsController < ApplicationController
         :question3,
         :organization_id,
         :project_type_id,
+        :deliverable_type_id,
+        :start_time,
+        :end_time,
+        :application_limit,
+        :user_limit,
         skill_ids: []
       )
     end
 
     def filter_params
         params.require(:query).permit(
-            skills: []
+            :with_deliverable_type,
+            :with_keyword,
+            :with_user_id,
+            :with_organization_id,
+            :with_limit,
+            with_project_statuses: [],
+            with_skill_ids: [],
+            with_project_type_ids: [],
+            with_deliverable_type_ids: []
         )
     end
 end

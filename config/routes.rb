@@ -24,10 +24,12 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root 'users#dashboard', as: :authenticated_user_root
+    get '/my-projects', to: 'users#my_projects'
   end
 
   authenticated :organization do
     root 'organizations#dashboard', as: :authenticated_organization_root
+    get '/my-projects', to: 'organizations#my_projects'
     resources :projects do
       resources :photos, only: [:new]
     end
@@ -42,10 +44,13 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :skills, only: [:create]
+    resources :deliverable_types, only: [:create]
+
     resources :applications, only: [:create, :update, :destroy, :decide]
     resource :photos, only: [:create]
     post '/applications/:id/decide', to: 'applications#decide'
     post '/projects/filter', to: 'projects#filter'
+    post '/applications/filter', to: 'applications#filter'
     get '/users/:user_id/applications', to: 'applications#user_index'
     get '/all_projects', to: 'projects#index_all'
     get '/projects/:project_id/photos', to: 'photos#index'

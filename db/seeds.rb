@@ -36,6 +36,16 @@ def create_volunteers
     user.save
     puts "Created Volunteer ##{i} (#{user.id})"
   end
+  User.create!(email: "peterkangveerman@gmail.com",
+                        password: 'password',
+                        password_confirmation: 'password',
+                        first_name: "Peter",
+                        last_name: "Veerman",
+                        city: "Arcaida",
+                        state: "CA",
+                        bio: Faker::TvShows::RickAndMorty.quote,
+                        phone_number: Faker::PhoneNumber.phone_number
+  )
   puts "Created #{NUM_USERS} volunteers! #{User.count} volunteers in db."
 end
 
@@ -64,12 +74,25 @@ def create_projects
                            question2: Faker::Company.buzzword,
                            question3: Faker::Company.catch_phrase,
                            project_type_id: i % 2 + 1,
-                           organization_id: org_id
+                           organization_id: org_id,
+                           deliverable_type_id: i % 3 + 1,
+                           skill_ids: [Faker::Number.between(1, 24), Faker::Number.between(1, 24), Faker::Number.between(1, 24)]
     )
     proj.save
     puts "Created Project ##{i}. Owned by organization(id:#{org_id})"
   end
   puts "Created #{NUM_PROJECTS} projects! #{Project.count} projects in db."
+  Project.create!(title: "No Applications",
+                  description: Faker::TvShows::BojackHorseman.quote,
+                  deliverable: Faker::Commerce.product_name,
+                  overview: "1. #{Faker::Marketing.buzzwords} 2. #{Faker::Marketing.buzzwords}",
+                  question1: Faker::Company.bs,
+                  question2: Faker::Company.buzzword,
+                  question3: Faker::Company.catch_phrase,
+                  project_type_id: 1,
+                  organization_id: 1,
+                  deliverable_type_id: 1
+  )
 end
 
 def create_applications
@@ -117,13 +140,23 @@ def create_skills
   end
 end
 
+def create_deliverable_types
+    deliverable_list = ['del type 1', 'del type 2', 'del type 3']
+    deliverable_list.each do |deliverable|
+      DeliverableType.create( name: deliverable )
+    end
+end
+
 create_admin
+create_skills
+create_deliverable_types
 create_volunteers
 create_organizations
 create_project_types
 create_projects
 create_applications
 create_skills
+
 puts 'Seeding Finished!'
 
 

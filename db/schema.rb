@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_013734) do
+ActiveRecord::Schema.define(version: 2019_04_15_002645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,8 +34,14 @@ ActiveRecord::Schema.define(version: 2019_03_16_013734) do
     t.text "question2"
     t.text "question3"
     t.bigint "project_id"
+    t.integer "user_id"
     t.integer "status", default: 0
-    t.bigint "user_id"
+  end
+
+  create_table "deliverable_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -72,6 +78,15 @@ ActiveRecord::Schema.define(version: 2019_03_16_013734) do
     t.bigint "project_id"
   end
 
+  create_table "project_skill_assignments", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_skill_assignments_on_project_id"
+    t.index ["skill_id"], name: "index_project_skill_assignments_on_skill_id"
+  end
+
   create_table "project_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -95,10 +110,10 @@ ActiveRecord::Schema.define(version: 2019_03_16_013734) do
     t.text "question2"
     t.text "question3"
     t.bigint "project_type_id"
-    t.bigint "project_status_id", default: 1
     t.bigint "deliverable_type_id"
     t.integer "application_limit", default: 2
     t.integer "user_limit", default: 1
+    t.integer "status", default: 0
   end
 
   create_table "projects_skills", id: false, force: :cascade do |t|
@@ -142,8 +157,14 @@ ActiveRecord::Schema.define(version: 2019_03_16_013734) do
     t.string "resume_content_type"
     t.integer "resume_file_size"
     t.datetime "resume_updated_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "project_skill_assignments", "projects"
+  add_foreign_key "project_skill_assignments", "skills"
 end
