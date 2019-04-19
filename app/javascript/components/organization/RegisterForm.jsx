@@ -1,10 +1,12 @@
+/* eslint-disable jsx-a11y/label-has-for */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
-import $ from "jquery";
 import axios from "axios";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 class RegisterForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: "",
       contact_first_name: "",
@@ -133,19 +135,237 @@ class RegisterForm extends React.Component {
       });
   };
 
+  onSubmit = (values, actions) => {
+    const formData = new FormData();
+    formData.append("organization[email]", values.email);
+    formData.append("organization[password]", values.password);
+    formData.append(
+      "organization[password_confirmation]",
+      values.password_confirmation
+    );
+    formData.append(
+      "organization[contact_first_name]",
+      values.contact_first_name
+    );
+    formData.append(
+      "organization[contact_last_name]",
+      values.contact_last_name
+    );
+    formData.append("organization[city]", values.city);
+    formData.append("organization[state]", values.state);
+    // formData.append("organization[link]", values.link);
+    // formData.append("organization[description]", values.description);
+    formData.append("organization[name]", values.name);
+    formData.append(
+      "organization[contact_phone_number]",
+      values.contact_phone_number
+    );
+    formData.append("organization[profile_image]", values.photo);
+    for (const val of formData.values()) {
+      console.log(val);
+    }
+    // axios
+    //   .post("/organizations", formData)
+    //   .then(function(response) {
+    //     window.location.href = "/";
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
+  };
+
+  validate = type => value => {
+    let error;
+    if (!value) {
+      error = "Required";
+    } else {
+      switch (type) {
+        case "name":
+          error = /^(?!\s)(?!.*\s$)(?=.*[a-zA-Z0-9])[a-zA-Z0-9 '~?!]{2,}$/.test(
+            value
+          )
+            ? ""
+            : "Invalid organization name";
+          break;
+        case "email":
+          error = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+            ? ""
+            : "Invalid email address";
+          break;
+        case "password":
+          error = value.length >= 6 ? "" : "Too short!";
+          break;
+        case "password_confirmation":
+          error =
+            value.password_confirmation === value.password
+              ? ""
+              : "Passwords do not match";
+          break;
+        default:
+          break;
+      }
+    }
+    return error;
+  };
+
   render() {
+    const {
+      name,
+      email,
+      password,
+      password_confirmation,
+      contact_first_name,
+      contact_last_name,
+      contact_phone_number,
+      city,
+      state,
+      link,
+      description,
+      formValid,
+      formErrors
+    } = this.state;
+
     return (
       <div>
+        <Formik
+          initialValues={{
+            name: "",
+            email: "",
+            password: "",
+            password_confirmation: "",
+            contact_first_name: "",
+            contact_last_name: "",
+            contact_phone_number: "",
+            photo: ""
+          }}
+          onSubmit={this.onSubmit}
+          render={({ errors, touched }) => (
+            <Form>
+              <section className="flex flex-column mb3">
+                <label htmlFor="name">
+                  <h3>Organization Name</h3>
+                  <Field
+                    type="text"
+                    name="name"
+                    validate={this.validate("name")}
+                    className="w-100"
+                  />
+                  <ErrorMessage name="name" className="error" component="div" />
+                </label>
+              </section>
+              <section className="flex flex-column mb3">
+                <label htmlFor="email">
+                  <h3>Login Email</h3>
+                  <Field
+                    type="text"
+                    name="email"
+                    validate={this.validate("email")}
+                    className="w-100"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    className="error"
+                    component="div"
+                  />
+                </label>
+              </section>
+              <section className="flex mb3">
+                <label htmlFor="password" className="mr3 w-50">
+                  <h3>Password</h3>
+                  <Field
+                    type="password"
+                    name="password"
+                    validate={this.validate("password")}
+                  />
+                  <ErrorMessage
+                    name="password"
+                    className="error"
+                    component="div"
+                  />
+                </label>
+                <label htmlFor="password_confirmation" className="ml3 w-50">
+                  <h3>Verify Password</h3>
+                  <Field
+                    type="password"
+                    name="password_confirmation"
+                    validate={this.validate("password_confirmation")}
+                  />
+                  <ErrorMessage
+                    name="password_confirmation"
+                    className="error"
+                    component="div"
+                  />
+                </label>
+              </section>
+              <section className="flex mb3">
+                <label htmlFor="contact_first_name" className="mr3 w-50">
+                  <h3>First Name</h3>
+                  <Field
+                    type="text"
+                    name="contact_first_name"
+                    validate={this.validate("contact_first_name")}
+                  />
+                  <ErrorMessage
+                    name="contact_first_name"
+                    className="error"
+                    component="div"
+                  />
+                </label>
+                <label htmlFor="contact_last_name" className="ml3 w-50">
+                  <h3>Last Name</h3>
+                  <Field
+                    type="text"
+                    name="contact_last_name"
+                    validate={this.validate("contact_last_name")}
+                  />
+                  <ErrorMessage
+                    name="contact_last_name"
+                    className="error"
+                    component="div"
+                  />
+                </label>
+              </section>
+              <section className="flex flex-column mb3">
+                <label htmlFor="contact_phone_number">
+                  <h3>Phone Number</h3>
+                  <Field
+                    type="text"
+                    name="contact_phone_number"
+                    validate={this.validate("contact_phone_number")}
+                    className="w-100"
+                  />
+                  <ErrorMessage
+                    name="contact_phone_number"
+                    className="error"
+                    component="div"
+                  />
+                </label>
+              </section>
+              <section className="flex flex-column mb3">
+                <label htmlFor="photo">
+                  <h3>Add a Photo</h3>
+                  <Field type="file" name="photo" />
+                </label>
+              </section>
+              <button
+                type="submit"
+                value="Next Step"
+                // disabled={!formValid}
+              >
+                Complete organization registration!
+              </button>
+            </Form>
+          )}
+        />
+
         <a onClick={this.goBack}>Back</a>
         <div>
           <div>
-            {Object.keys(this.state.formErrors).map((fieldName, i) => {
-              if (this.state.formErrors[fieldName].length > 0) {
+            {Object.keys(formErrors).map((fieldName, i) => {
+              if (formErrors[fieldName].length > 0) {
                 return (
                   <p key={i}>
-                    {fieldName} 
-                    {' '}
-                    {this.state.formErrors[fieldName]}
+                    {fieldName} {formErrors[fieldName]}
                   </p>
                 );
               }
@@ -160,7 +380,7 @@ class RegisterForm extends React.Component {
             <input
               type="text"
               placeholder="Organization"
-              value={this.state.name}
+              value={name}
               id="name"
               onChange={this.handleChange("name")}
             />
@@ -171,7 +391,7 @@ class RegisterForm extends React.Component {
             <input
               type="text"
               placeholder="ie. johndoe@email.com"
-              value={this.state.email}
+              value={email}
               id="email"
               onChange={this.handleChange("email")}
             />
@@ -184,7 +404,7 @@ class RegisterForm extends React.Component {
             <input
               type="password"
               placeholder="ie. password123"
-              value={this.state.password}
+              value={password}
               id="password"
               onChange={this.handleChange("password")}
             />
@@ -194,7 +414,7 @@ class RegisterForm extends React.Component {
             <input
               type="password"
               placeholder="ie. password123"
-              value={this.state.password_confirmation}
+              value={password_confirmation}
               id="password_confirmation"
               onChange={this.handleChange("password_confirmation")}
             />
@@ -205,18 +425,16 @@ class RegisterForm extends React.Component {
             <input
               type="text"
               placeholder="ie. John"
-              value={this.state.contact_first_name}
+              value={contact_first_name}
               id="contact_first_name"
               onChange={this.handleChange("contact_first_name")}
             />
             <br />
-            <label htmlFor="contact_last_name">Contact Last Name</label> 
-            {' '}
-            <br />
+            <label htmlFor="contact_last_name">Contact Last Name</label> <br />
             <input
               type="text"
               placeholder="ie. Doe"
-              value={this.state.contact_last_name}
+              value={contact_last_name}
               id="contact_last_name"
               onChange={this.handleChange("contact_last_name")}
             />
@@ -226,7 +444,7 @@ class RegisterForm extends React.Component {
             <input
               type="text"
               placeholder="ie. (123)456-7890"
-              value={this.state.contact_phone_number}
+              value={contact_phone_number}
               id="contact_phone_number"
               onChange={this.handleChange("contact_phone_number")}
             />
@@ -237,30 +455,26 @@ class RegisterForm extends React.Component {
             <input
               type="text"
               placeholder="ie. San Francisco"
-              value={this.state.city}
+              value={city}
               id="city"
               onChange={this.handleChange("city")}
             />
             <br />
-            <label htmlFor="state">State (abbreviation)</label> 
-            {' '}
-            <br />
+            <label htmlFor="state">State (abbreviation)</label> <br />
             <input
               type="text"
               placeholder="ie. CA"
-              value={this.state.state}
+              value={state}
               id="state"
               onChange={this.handleChange("state")}
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="link">Link</label> 
-            {' '}
-            <br />
+            <label htmlFor="link">Link</label> <br />
             <input
               type="text"
               placeholder="ie. organization.com"
-              value={this.state.link}
+              value={link}
               id="link"
               onChange={this.handleChange("link")}
             />
@@ -270,7 +484,7 @@ class RegisterForm extends React.Component {
             <br />
             <textarea
               placeholder="Tell us about your organization!"
-              value={this.state.description}
+              value={description}
               rows="6"
               cols="50"
               onChange={this.handleChange("description")}
@@ -287,7 +501,7 @@ class RegisterForm extends React.Component {
           <button
             type="submit"
             value="Next Step"
-            disabled={!this.state.formValid}
+            disabled={!formValid}
             onClick={this.handleRegistration}
           >
             Complete organization registration!

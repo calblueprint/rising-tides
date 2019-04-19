@@ -33,7 +33,7 @@ class Step1 extends React.Component {
     }
     return (
       <div>
-        <div className="flex mb3">
+        <section className="flex mb3">
           <label htmlFor="firstName" className="mr3 w-50">
             <h3>First Name</h3>
             <input
@@ -54,8 +54,8 @@ class Step1 extends React.Component {
               className="w-100"
             />
           </label>
-        </div>
-        <div className="flex flex-column mb3">
+        </section>
+        <section className="flex flex-column mb3">
           <label htmlFor="email">
             <h3>Email</h3>
             <input
@@ -65,8 +65,8 @@ class Step1 extends React.Component {
               onChange={handleChange("email")}
             />
           </label>
-        </div>
-        <div className="flex flex-column mb3">
+        </section>
+        <section className="flex flex-column mb3">
           <label htmlFor="password" className="mb3">
             <h3>Password</h3>
             <input
@@ -86,7 +86,7 @@ class Step1 extends React.Component {
               onChange={handleChange("passwordConfirmation")}
             />
           </label>
-        </div>
+        </section>
       </div>
     );
   }
