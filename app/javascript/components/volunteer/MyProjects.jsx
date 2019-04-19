@@ -4,10 +4,9 @@ import Logout from "./Logout"
 import NavBar from "../utils/NavBar"
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
-import FlashMessage from '../utils/FlashMessage'
 
 
-class Dashboard extends React.Component {
+class MyProjects extends React.Component {
   constructor(props) {
     super(props);
     var skills_a = [];
@@ -50,7 +49,8 @@ class Dashboard extends React.Component {
     }
 
     this.state = {
-      projects: [],
+      pastProjects: [],
+      currentProjects: [],
       skills: skills_a,
       project_types: project_types_a,
       deliverable_types: deliverable_types_a,
@@ -126,23 +126,46 @@ class Dashboard extends React.Component {
             with_project_type_ids: project_type_ids,
             with_deliverable_type_ids: deliverable_type_ids,
             with_keyword: this.state.keyword,
-            with_organization_id: this.props.organization.id,
-            with_limit: 3
+            with_project_statuses: ['recruiting', 'in_progress']
         }
     }
+    if (this.props.user) {
+        payload['query']['with_user_id'] = this.props.user.id;
+    } else {
+        payload['query']['with_organization_id'] = this.props.organization.id;
+    }
     axios.post("/api/projects/filter", payload).then(ret => {
-      const { projects, message } = ret.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
-      this.setState({ projects });
+      const projects = ret.data;
+      this.setState({
+        currentProjects: projects
+      });
       console.log("UPDATED PROJECTS LENGTH: " + projects.length);
-    }).catch(res => {
-        this.flash_message.flashError(
-            res.response.data.message
-        );
+    }).catch(ret => {
+        console.log(JSON.stringify(ret));
+    });
+
+    var payload = {
+        query: {
+            with_skill_ids: skill_ids,
+            with_project_type_ids: project_type_ids,
+            with_deliverable_type_ids: deliverable_type_ids,
+            with_keyword: this.state.keyword,
+            with_project_statuses: ['completed']
+        }
+    }
+    if (this.props.user) {
+        payload['query']['with_user_id'] = this.props.user.id;
+    } else {
+        payload['query']['with_organization_id'] = this.props.organization.id;
+    }
+    axios.post("/api/projects/filter", payload).then(ret => {
+      const projects = ret.data;
+      this.setState({
+        pastProjects: projects
+      });
+      console.log("UPDATED PROJECTS LENGTH: " + projects.length);
+    }).catch(ret => {
+        console.log(JSON.stringify(ret));
     });
   }
 
@@ -160,75 +183,35 @@ class Dashboard extends React.Component {
 
   render() {
     console.log(this.props);
-    const { organization } = this.props;
+    const { user } = this.props;
 
-    let projectList;
+    let currentProjectList;
 
-    if (this.state.projects.length !== 0) {
-      projectList = this.state.projects.map((project, index) => {
+    if (this.state.currentProjects.length !== 0) {
+      currentProjectList = this.state.currentProjects.map((project, index) => {
         return <ProjectCard project={project} key={index} />
       });
     } else {
-      projectList = <div>No Results</div>;
+      currentProjectList = <div>No Results</div>;
     }
 
-    let applicationList;
+    let pastProjectList;
 
-    if (this.props.organization_applications.length !== 0) {
-      applicationList = this.props.organization_applications.map((application, index) => {
-        var project_status = (
-            <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                In Review
-            </div>
-        );
-        if (application.status == "interviewing") {
-            project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interview
-                </div>
-            );
-        } else if (application.status == "accepted") {
-            project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interview
-                </div>
-            );
-        } else if (application.status == "denied") {
-            project_status = (
-                <div className="dib ph3 pv2 fw4">
-                    No longer in consideration
-                </div>
-            );
-        }
-        return (
-            <div className="">
-                <div className="bt b--black-10" />
-                <div className="flex items-center pv3" key={index}>
-                    <h4 className="w-25 ma0">{application.project.title}</h4>
-                    <div className="w-25">
-                        {project_status}
-                    </div>
-                    <div className="w-25">{application.user.first_name} {application.user.last_name}</div>
-                    <a
-                        className="w-25 tr"
-                        href={"/applications/" + application.id}
-                        >View job description <span className="ml3 f5 fa fa-angle-right"></span></a>
-                </div>
-            </div>
-        );
+    if (this.state.currentProjects.length !== 0) {
+      pastProjectList = this.state.pastProjects.map((project, index) => {
+        return <ProjectCard project={project} key={index} />
       });
     } else {
-      applicationList = <div>No Results</div>;
+      pastProjectList = <div>No Results</div>;
     }
 
     return (
         <div className="w-100 h-100 tc bg-white">
-            <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div className="h4 w-100 bg-moon-gray"></div>
             <div className="tl fl w-75 ml6 mr6 mt4 mb5 bg-white pa3">
                 <div className="w-100 h3">
                     <div className="tl dib fl">
-                        <h1 className="f1 ma0">Welcome, {organization.name}</h1>
+                        <h1 className="f1 ma0">My Projects</h1>
                     </div>
                     <div className="dib fr mt2">
                         <div className="tr">
@@ -244,13 +227,6 @@ class Dashboard extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="cf"></div>
-                <div className="w-100 h1 mb3">
-                    <div className="dib fl">
-                        <h3>Applications</h3>
-                    </div>
-                </div>
-                {applicationList}
 
                 <div className="cf"></div>
                 <div className="w-100 h1 mt5">
@@ -294,12 +270,19 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateSearch()}>
                         Update Search</a>
                 </div>}
-                {projectList}
+                {currentProjectList}
+                <div className="cf"></div>
+                <div className="w-100 h1 mt5">
+                    <div className="dib fl">
+                        <h3>Past Projects</h3>
+                    </div>
+                </div>
+                <div className="mb2 mt3 bt b--black-10" />
+                {pastProjectList}
             </div>
-            <Logout />
         </div>
     );
   }
 }
 
-export default Dashboard;
+export default MyProjects;

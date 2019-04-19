@@ -11,6 +11,12 @@ class OrganizationsController < ApplicationController
         .with_project_organization_json
   end
 
+  def my_projects
+    @skills = Skill.all
+    @project_types = ProjectType.all
+    @deliverable_types = DeliverableType.all
+  end
+
   def show
     @organization = Organization.find(params[:id])
     @profile_image_url = nil

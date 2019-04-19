@@ -11,20 +11,6 @@ class ProjectCard extends React.Component {
     this.goToProject = this.goToProject.bind(this);
     this.spotsLeft = this.props.project.application_limit - this.props.project.application_count;
     this.state = {
-      organization: null,
-      type: null,
-      isHover: false
-    }
-  }
-
-  componentDidMount() {
-    if (this.props.project.organization_id != null) {
-      axios.get(`/api/organizations/${this.props.project.organization_id}`).then(ret => {
-        let organization = ret.data;
-        this.setState({ organization });
-      })
-    } else {
-      console.log(`Project ${this.props.project.id} not tied to an organization!`);
     }
   }
 
@@ -44,24 +30,21 @@ class ProjectCard extends React.Component {
     }
     return this.statusButton
   }
-    
+
   renderCard() {
-    let card = null;
-    card = this.state.organization ? 
-    <div className="proj-card-size col-item fl bg-black ma2 shadow-1" onClick={this.goToProject}>
+    return (<div className="proj-card-size col-item fl bg-black ma2 shadow-1" onClick={this.goToProject}>
         <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
         <div className="bt b--white pr3 pl3 pb3">
           <h1 className="white f4 b lato compact mt3 ma2">
             {this.props.project.title}
           </h1>
           <p className="white f5 lato fl truncate mb0 ma2">
-            {this.state.organization.name}
+            {this.props.project.organization.name}
           </p>
           <br/><br/>
           {this.renderStatusButton()}
       </div>
-  </div> : null
-    return card
+    </div>);
   }
 
   goToProject = () => {

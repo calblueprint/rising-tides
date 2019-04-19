@@ -1,21 +1,41 @@
 import React from "react";
 import axios from "axios";
+import ProjectCard from '../utils/ProjectCard';
+import FlashMessage from '../utils/FlashMessage'
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      organization: {},
-      dataLoaded: false
+      organization: props.organization
+    };
+    axios.defaults.headers.common = {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
     };
   }
 
   componentDidMount() {
-    axios.get(`/organizations/${this.props.organization.id}`).then(data => {
-      this.setState({
-        organization: data,
-        dataLoaded: true
-      });
+    var payload = {
+        query: {
+            with_organization_id: this.props.organization.id,
+            with_limit: 3
+        }
+    }
+    axios.post("/api/projects/filter", payload).then(res => {
+      const { projects, message } = res.data;
+      if (message) {
+        this.flash_message.flashMessage(
+          message
+        );
+      }
+      this.setState({ projects });
+    }).catch(res => {
+      this.flash_message.flashError(
+        res.response.data.message
+      );
     });
   }
 
@@ -25,43 +45,56 @@ class Profile extends React.Component {
   };
 
   render() {
-    const { organization, dataLoaded } = this.state;
-    let pageContent;
-    if (!dataLoaded) {
-      return <div className="">Loading...</div>;
-    }
-    let profileImage = <span>No Image</span>;
-    if (this.props.profile_image_url) {
-      profileImage = <img src={this.props.profile_image_url} />;
+    const { organization } = this.state;
+    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+    let profileImage = <img className="h-100 w4"  src={profileUrl} />;
+    let projectList;
+
+    if (this.state.projects && this.state.projects.length !== 0) {
+      projectList = this.state.projects.map((project, index) => {
+        return <ProjectCard project={project} key={index} />
+      });
+    } else {
+      projectList = <div>No Results</div>;
     }
     return (
-      <div className="">
-        <h2 className="">Organization Details</h2>
-        <h3>Name</h3>
-        {this.props.organization.name}
-        <h3>Photo</h3>
-        {profileImage}
-        <h3>Description</h3>
-        {this.props.organization.description}
-        <h3>Link</h3>
-        <a href={`http://${this.props.organization.link}`}>
-          {this.props.organization.link}
-        </a>
-        <h3>City</h3>
-        {this.props.organization.city}
-        <h3>State</h3>
-        {this.props.organization.state}
-        <h3>Email</h3>
-        {this.props.organization.email}
-        <h3>Contact Name</h3>
-        {this.props.organization.contact_first_name}
-        {" "}
-        {this.props.organization.contact_last_name}
-        <h3>Contact phone number</h3>
-        {this.props.organization.contact_phone_number}
-        <br />
-        <a onClick={this.goBack}>Back</a>
-      </div>
+        <div className="w-100 h-100 tc">
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
+            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
+                <div className="h4 flex items-end">
+                    {profileImage}
+                    <div className="w-100 m3 ph4 pt4">
+                        <div className="flex items-end">
+                            <h1 className="ma0 f1 mb3">
+                                {this.props.organization.name}
+                            </h1>
+                            <a className="pa0 ph1 ml3 mb1" target="_blank" href={`http://${this.props.organization.link}`}>
+                                <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
+                            </a>
+                        </div>
+                        <div className="flex">
+                            <div className="mt1-ns">
+                                {this.props.organization.email}
+                            </div>
+                            <span className="pl3 mt1-ns">|</span>
+                            <div className="pl3 mt1-ns">
+                                {this.props.organization.contact_phone_number}
+                            </div>
+                            <span className="pl3 mt1-ns">|</span>
+                            <div className="pl3 mt1-ns">
+                                {this.props.organization.city}, {this.props.organization.state}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 className="pt5">Description</h3>
+                {this.props.organization.description}
+
+                <h3 className="pt5">Projects</h3>
+                {projectList}
+            </div>
+        </div>
     );
   }
 }

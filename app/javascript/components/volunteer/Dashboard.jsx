@@ -4,6 +4,7 @@ import Logout from "./Logout"
 import NavBar from "../utils/NavBar"
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
+import FlashMessage from '../utils/FlashMessage'
 
 
 class Dashboard extends React.Component {
@@ -130,11 +131,18 @@ class Dashboard extends React.Component {
         }
     }
     axios.post("/api/projects/filter", payload).then(ret => {
-      const projects = ret.data;
+      const { projects, message } = ret.data;
+      if (message) {
+        this.flash_message.flashMessage(
+          message
+        );
+      }
       this.setState({ projects });
       console.log("UPDATED PROJECTS LENGTH: " + projects.length);
-    }).catch(ret => {
-        console.log(JSON.stringify(ret));
+    }).catch(res => {
+        this.flash_message.flashError(
+            res.response.data.message
+        );
     });
   }
 
@@ -215,6 +223,7 @@ class Dashboard extends React.Component {
 
     return (
         <div className="w-100 h-100 tc bg-white">
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div className="h4 w-100 bg-moon-gray"></div>
             <div className="tl fl w-75 ml6 mr6 mt4 mb5 bg-white pa3">
                 <div className="w-100 h3">
@@ -263,7 +272,8 @@ class Dashboard extends React.Component {
                         titleHelper="Deliverable Type"
                         title="Deliverable Types"
                         list={this.state.deliverable_types}
-                        toggleItem={this.toggleSelected}
+                        toggleItem={this.toggleSelectedSingle}
+                        singleItem={true}
                     />
                     <Dropdown
                         titleHelper="Project Type"
@@ -276,11 +286,10 @@ class Dashboard extends React.Component {
                         titleHelper="Skill"
                         title="Select Skills..."
                         list={this.state.skills}
-                        toggleItem={this.toggleSelectedSingle}
-                        singleItem={true}
+                        toggleItem={this.toggleSelected}
                     />
                     <a
-                        className="w-25 std-button pv2"
+                        className="w-100 std-button pv2"
                         href="#"
                         onClick={() => this.updateSearch()}>
                         Update Search</a>

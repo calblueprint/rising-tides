@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import FlashMessage from '../utils/FlashMessage'
 
 class NewApplicationForm extends React.Component {
   constructor(props) {
@@ -48,13 +49,17 @@ class NewApplicationForm extends React.Component {
     axios
       .post("/api/applications", payload)
       .then(res => {
-        this.setState({ success: 1 });
-        window.location.href = `/applications/${res.data.application.id}`;
-      })
-      .catch(res => {
-        this.setState({ success: 0 });
-        console.log(res);
-        console.log(JSON.stringify(res));
+        const { application, message } = res.data;
+        if (message) {
+          this.flash_message.flashMessage(
+            message
+          );
+        }
+        window.location.href = `/applications/${application.id}`;
+      }).catch(res => {
+        this.flash_message.flashError(
+            res.response.data.message
+        );
       });
 
     console.log(this.state);
@@ -65,6 +70,7 @@ class NewApplicationForm extends React.Component {
     const { project } = this.props;
     return (
         <div className="w-100 h-100 tc bg-white">
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div
                 className="h5 absolute w-100 bg-moon-gray"
                 style={{zIndex: -1}}></div>

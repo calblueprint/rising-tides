@@ -10,17 +10,27 @@ class Api::ProjectsController < ApplicationController
   def index_all
     @projects =  Project.with_application_count
 
-    render json:@projects
+    render json: {
+        projects: @projects,
+        message: "Projects loaded..."
+    }
   end
 
   def filter
     @projects = Project.filter(filter_params)
-                        .with_application_count
-    render json:@projects
+                       .with_application_count
+                       .include_organization
+    render json: {
+        projects: @projects,
+        message: "Projects loaded..."
+    }
   end
 
   def show
-    render json: @project
+    render json: {
+        projects: @project,
+        message: "Project loaded..."
+    }
   end
 
   def create
@@ -88,6 +98,7 @@ class Api::ProjectsController < ApplicationController
             :with_user_id,
             :with_organization_id,
             :with_limit,
+            with_project_statuses: [],
             with_skill_ids: [],
             with_project_type_ids: [],
             with_deliverable_type_ids: []

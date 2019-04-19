@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ApplicationRow from "./ApplicationRow";
 import Dropdown from '../../utils/Dropdown';
+import FlashMessage from '../../utils/FlashMessage'
 
 class ApplicationsIndex extends React.Component {
   constructor(props) {
@@ -95,11 +96,18 @@ class ApplicationsIndex extends React.Component {
 
     console.log(payload);
     axios.post("/api/applications/filter", payload).then(ret => {
-      const applications = ret.data;
+      const { applications, message } = ret.data;
+      if (message) {
+        this.flash_message.flashMessage(
+          message
+        );
+      }
       this.setState({ applications });
       console.log("UPDATED APPLICATIONS LENGTH: " + applications.length);
-    }).catch(ret => {
-        console.log(JSON.stringify(ret));
+    }).catch(res => {
+        this.flash_message.flashError(
+            res.response.data.message
+        );
     });
   }
 
@@ -180,6 +188,7 @@ class ApplicationsIndex extends React.Component {
 
     return (
         <div className="w-100 h-100 tc bg-white">
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div className="h4 w-100 bg-moon-gray"></div>
             <div className="tl fl w-75 ml6 mr6 mt4 mb5 bg-white pa3">
                 <div className="w-100 h3">
