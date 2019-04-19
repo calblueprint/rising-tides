@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from "prop-types";
 import linkedin from "images/linked-in.png";
 
-class AppReview extends React.Component {
+class ApplicationReview extends React.Component {
     constructor(props) {
         super(props);
         axios.defaults.headers.common = {
@@ -79,14 +79,16 @@ class AppReview extends React.Component {
     displayButtons() {
         let buttons = null;
         if (this.props.organization) {
-            if (this.props.application.status === null || this.props.application.status === 'pending') {
+            console.log('org signed in');
+            if (this.props.application.status === null || this.props.application.status === "pending") {
                 buttons = (
                     <div>
-                    <button onClick={this.handleAccept}>Interview</button>
-                    <button onClick={this.handleDeny}>Reject</button>
+                    <button className="fl" onClick={this.handleAccept}>Interview</button>
+                    <button className="fl" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
-            } else if (this.props.application.status == 2) {
+            } else if (this.props.application.status == "interviewing") {
+                console.log('interviewing');
                 buttons = (
                     <div>
                     <button onClick={this.handleAccept}>Accept</button>
@@ -113,7 +115,7 @@ class AppReview extends React.Component {
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
                         <div className="flex items-end">
-                            <h1 className="ma0 f1 overflow-auto mb3" onClick={this.handleVolunteerClick}>
+                            <h1 className="ma0 f1 mb3" onClick={this.handleVolunteerClick}>
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
                             <a className="pa0 ph1 ml3 mb1" href={`http://${this.props.user.linkedin_url}`}>
@@ -149,9 +151,11 @@ class AppReview extends React.Component {
                 <p className="lato">{this.props.application.question1}</p>
                 <h3 className="pt5">Describe your relevant experience.</h3>
                 <p className="lato">{this.props.application.question2} {this.props.application.question3}</p>
+                {this.displayButtons()}
+                <button className="f5 w-auto tc pa2 white bg-black lato b" onClick={this.goBack}>
+                    Back
+                </button>
             </div>
-            {this.displayButtons()}
-            <button onClick={this.goBack}> Back </button>
       </div>
 
         /* // <div>
@@ -169,11 +173,11 @@ class AppReview extends React.Component {
     }
 }
 
-AppReview.propTypes = {
+ApplicationReview.propTypes = {
     application: PropTypes.object,
     user: PropTypes.object,
     project: PropTypes.object,
     organization: PropTypes.object
   };
 
-export default AppReview;
+export default ApplicationReview;
