@@ -97,7 +97,7 @@ class NavBar extends React.Component {
                     <a onClick={this.goToProfile}>Profile</a>
                     <a className="bt pt2" onClick={this.goToMyProjects}>My Projects</a>
                     <a className="bt pt2" onClick={this.goToApplications}>Applications</a>
-                    <a className="bt pt2" onClick={this.handleLogout}>Logout</a>
+                    <a className="bt pt2 pb2" onClick={this.handleLogout}>Logout</a>
                   </div>:null
                 }
               </li>
@@ -112,7 +112,7 @@ class NavBar extends React.Component {
                       <a onClick={this.goToProfile}>Profile</a>
                       <a className="bt pt2" onClick={this.goToMyProjects}>My Projects</a>
                       <a className="bt pt2" onClick={this.goToApplications}>Applications</a>
-                      <a className="bt pv2" onClick={this.handleLogout}>Logout</a>
+                      <a className="bt pv2 pb2" onClick={this.handleLogout}>Logout</a>
                     </div>:null
                   }
               </li>         
@@ -125,7 +125,7 @@ class NavBar extends React.Component {
                   {this.state.viewDropdown ?
                     <div className="ba dropdown-content h-auto">
                       <a onClick={this.goToDashboard}>Sign In</a>
-                      <a className="bt pt2" onClick={this.goToDashboard}>Create Account</a>
+                      <a className="bt pt2 pb2" onClick={this.goToDashboard}>Create Account</a>
                     </div>:null
                   }
               </li>   
@@ -136,13 +136,13 @@ class NavBar extends React.Component {
   render() {
     return (
     <div className="navbar overflow-auto pr4">
-    <img className="fl h3 w-auto logo-padding" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
+    <img className="fl logo-navbar" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
     <ul className="ul">
       {this.renderProfile()}
-      <li className="fr f4 w-auto tc"> 
+      <li className="fr f4 w4 tc"> 
         <a className="f4" onClick={this.goToBrowse}>Search</a>
       </li>
-      <li className="fr f4 w-auto tc"> 
+      <li className="fr f4 w4 tc"> 
         <a className="f4" onClick={this.goToDashboard}>Dashboard</a>
 
       </li>
