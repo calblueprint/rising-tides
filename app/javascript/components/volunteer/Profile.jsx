@@ -1,21 +1,34 @@
 import React from "react";
 import axios from "axios";
+import ProjectCard from '../utils/ProjectCard';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
-      dataLoaded: false
+      user: props.user
+    };
+    axios.defaults.headers.common = {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
     };
   }
 
   componentDidMount() {
-    axios.get(`/users/${this.props.user.id}`).then(data => {
-      this.setState({
-        user: data,
-        dataLoaded: true
-      });
+    var payload = {
+        query: {
+            with_user_id: this.props.user.id,
+            with_limit: 3
+        }
+    }
+    axios.post("/api/projects/filter", payload).then(ret => {
+      const projects = ret.data;
+      this.setState({ projects });
+      console.log("UPDATED PROJECTS LENGTH: " + projects.length);
+    }).catch(ret => {
+        console.log(JSON.stringify(ret));
     });
   }
 
@@ -25,11 +38,7 @@ class Profile extends React.Component {
   };
 
   render() {
-    const { user, dataLoaded } = this.state;
-    let pageContent;
-    if (!dataLoaded) {
-      return <div className="">Loading...</div>;
-    }
+    const { user } = this.state;
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
     let profileImage = <img className="h-100 w4"  src={profileUrl} />;
     let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
