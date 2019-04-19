@@ -39,7 +39,7 @@ class NewApplicationForm extends React.Component {
     const payload = {
       application: {
         question1: this.state.question1,
-        question2d: this.state.question2,
+        question2: this.state.question2,
         question3: "",
         project_id: this.props.project.id,
         user_id: this.props.user.id

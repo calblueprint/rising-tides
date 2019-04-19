@@ -46,14 +46,9 @@ class FlashMessage extends React.Component {
     const { show, message, is_error } = this.state;
 
     return (
-        <span>
-            {is_error && <div className={`mw6 pa3 fixed mt3 top-3 left-1 bg-dark-red near-white br3 b ${show ? 'alert-shown' : 'alert-hidden'}`}>
-                <span>{message}</span>
-            </div>}
-            {!is_error && <div className={`mw6 pa3 fixed mt3 top-3 left-1 bg-blue near-white br3 b ${show ? 'alert-shown' : 'alert-hidden'}`}>
-                <span>{message}</span>
-            </div>}
-        </span>
+        <div className={`mw6 pa3 fixed mt3 top-3 left-1 ${is_error ? 'bg-dark-red' : 'bg-blue'} near-white br3 b ${show ? 'alert-shown' : 'alert-hidden'}`}>
+            <span>{message}</span>
+        </div>
     );
   }
 }
