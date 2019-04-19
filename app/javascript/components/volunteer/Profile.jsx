@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import ProjectCard from '../utils/ProjectCard';
+import FlashMessage from '../utils/FlashMessage'
 
 class Profile extends React.Component {
   constructor(props) {
@@ -23,12 +24,18 @@ class Profile extends React.Component {
             with_limit: 3
         }
     }
-    axios.post("/api/projects/filter", payload).then(ret => {
-      const projects = ret.data;
+    axios.post("/api/projects/filter", payload).then(res => {
+      const { projects, message } = res.data;
+      if (message) {
+        this.flash_message.flashMessage(
+          message
+        );
+      }
       this.setState({ projects });
-      console.log("UPDATED PROJECTS LENGTH: " + projects.length);
-    }).catch(ret => {
-        console.log(JSON.stringify(ret));
+    }).catch(res => {
+      this.flash_message.flashError(
+        res.response.data.message
+      );
     });
   }
 
@@ -45,6 +52,7 @@ class Profile extends React.Component {
     let resume = <a className="dib std-button f7 lh-m" src={resumeUrl}>resume</a>;
     return (
         <div className="w-100 h-100 tc">
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div className="tl fl w-100 pl6 pr6 pt5 pb5">
                 <div className="h4 flex items-end">
                     {profileImage}
