@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Dropdown from '../../utils/Dropdown';
+import FlashMessage from '../../utils/FlashMessage'
 
 class EditProjectForm extends React.Component {
   constructor(props) {
@@ -145,13 +146,18 @@ class EditProjectForm extends React.Component {
     axios
       .put(`/api/projects/${this.state.project.id}`, payload)
       .then(res => {
-        console.log(res);
+        const { project, message } = res.data;
+        if (message) {
+          this.flash_message.flashMessage(
+            message
+          );
+        }
         window.location.href = `/projects/${this.state.project.id}`;
-      })
-      .catch(res => {
-        console.log(res);
-        console.log(`ERROR${res.data}`);
-      });
+      }).catch(res => {
+        this.flash_message.flashError(
+            res.response.data.message
+        );
+    });
 
     return false;
   }
@@ -160,6 +166,7 @@ class EditProjectForm extends React.Component {
     const { project } = this.state;
     return (
         <div className="w-100 h-100 tc bg-white">
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div
                 className="h5 absolute w-100 bg-moon-gray"
                 style={{zIndex: -1}}></div>

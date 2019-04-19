@@ -9,7 +9,10 @@ class Api::ApplicationsController < ApplicationController
 
   def user_index
     @applications = Application.with_user_id(params[:user_id])
-    render json: @applications
+    render json: {
+        applications: @applications,
+        message: "Applications loaded..."
+    }
   end
 
   def show
@@ -19,7 +22,10 @@ class Api::ApplicationsController < ApplicationController
   def filter
     @applications = Application.filter(filter_params)
         .with_project_organization_json
-    render json:@applications
+    render json: {
+        applications: @applications,
+        message: "Applications loaded..."
+    }
   end
 
   def create
@@ -53,7 +59,7 @@ class Api::ApplicationsController < ApplicationController
     if a
       new_application = Application.find(params[:id])
       return render json: {message: 'Application successfully updated!',
-                           project: new_application}
+                           application: new_application}
     else
       raise StandardError, application.errors.full_messages
     end

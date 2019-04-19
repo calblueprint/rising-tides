@@ -2,6 +2,7 @@ import React from "react";
 import axios from 'axios';
 import ProjectCard from '../../utils/ProjectCard';
 import Dropdown from '../../utils/Dropdown';
+import FlashMessage from '../../utils/FlashMessage'
 
 class ProjectsIndex extends React.Component {
   constructor(props) {
@@ -65,11 +66,7 @@ class ProjectsIndex extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("/api/all_projects").then(ret => {
-      const projects = ret.data;
-
-      this.setState({ projects });
-    });
+    this.updateSearch();
   }
 
   handleChange = name => event => {
@@ -132,9 +129,18 @@ class ProjectsIndex extends React.Component {
         }
     }
     axios.post("/api/projects/filter", payload).then(ret => {
-      const projects = ret.data;
+      const { projects, message } = ret.data;
+      if (message) {
+        this.flash_message.flashMessage(
+          message
+        );
+      }
       this.setState({ projects });
       console.log("UPDATED PROJECTS LENGTH: " + projects.length);
+    }).catch(res => {
+        this.flash_message.flashError(
+            res.response.data.message
+        );
     });
   }
 
@@ -162,6 +168,7 @@ class ProjectsIndex extends React.Component {
 
     return (
       <div className="w-100 h-100 tc">
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div className="tl fl w-100 pl6 pr6 pt5 pb5 bg-white">
                 <div className="h-auto">
                     <div className="w-100 h3">
