@@ -8,6 +8,12 @@ module Error
         rescue_from StandardError do |e|
           respond(:standard_error, 500, e.to_s)
         end
+        rescue_from AppLimitError do |e|
+          respond(e.error, e.status, e.message)
+        end
+        rescue_from MaxProjUserError do |e|
+          respond(e.error, e.status, e.message)
+        end
       end
     end
 
