@@ -50,18 +50,19 @@ class ApplicationReview extends React.Component {
       };
     
     handleAccept = e => {
-    e.preventDefault();
-    axios
-        .post(`/api/applications/${this.props.application.id}/decide`, {
-        decision: 'accepted'
-        })
-        .then(function(response) {
-        console.log(response);
-        window.location.reload();
-        })
-        .catch(function(error) {
-        console.log(error);
-        });
+        e.preventDefault();
+        axios
+            .post(`/api/applications/${this.props.application.id}/decide`, {
+            decision: 'accepted'
+            })
+            .then(function(response) {
+            console.log(response);
+            window.location.reload();
+            })
+            .catch(function(error) {
+            console.log(error.response.data.message)
+            console.log(error);
+            });
     };
 
     handleVolunteerClick = e => {

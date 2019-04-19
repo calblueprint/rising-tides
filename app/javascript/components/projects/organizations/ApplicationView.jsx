@@ -15,12 +15,29 @@ class ApplicationView extends React.Component {
         .getAttribute("content")
     };
     this.handleAccept = this.handleAccept.bind(this);
+    this.handleInterview = this.handleInterview.bind(this);
     this.handleReject = this.handleReject.bind(this);
   }
 
   handleAccept = e => {
     e.preventDefault();
+    console.log(error.response.data.message)
+    axios
+      .post(`/api/applications/${this.props.application.id}/decide`, {
+        decision: 'accepted'
+      })
+      .then(function(response) {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
+  handleInterview = e => {
+    e.preventDefault();
+    console.log(error.response.data.message)
     axios
       .post(`/api/applications/${this.props.application.id}/decide`, {
         decision: 'interviewing'
