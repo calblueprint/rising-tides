@@ -36,6 +36,7 @@ class Project < ApplicationRecord
                         joins(:applications)
                         .group('projects.id')
                         .select('projects.*, COUNT(applications.id) AS application_count') }
+  scope :with_project_statuses, -> (statuses) { where status: statuses }
 
   enum status: { recruiting: 0, in_progress: 1, completed: 2 }
 

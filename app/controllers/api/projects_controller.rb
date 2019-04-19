@@ -88,6 +88,7 @@ class Api::ProjectsController < ApplicationController
             :with_user_id,
             :with_organization_id,
             :with_limit,
+            with_project_statuses: [],
             with_skill_ids: [],
             with_project_type_ids: [],
             with_deliverable_type_ids: []
