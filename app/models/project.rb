@@ -4,7 +4,7 @@ class Project < ApplicationRecord
   belongs_to :project_type
   belongs_to :deliverable_type
   has_many :applications
-  has_many :users
+  has_many :users, through: :applications
   has_many :photos
   has_and_belongs_to_many :skills
 
