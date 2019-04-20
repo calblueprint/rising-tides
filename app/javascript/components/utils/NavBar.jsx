@@ -14,12 +14,11 @@ class NavBar extends React.Component {
     this.goToBrowse = this.goToBrowse.bind(this);
     this.goToApplications = this.goToApplications.bind(this);
     this.goToMyProjects = this.goToMyProjects.bind(this);
-    //this.handleMouseDropdown = this.handleMouseDropdown.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.toggleList = this.toggleList.bind(this);
     this.isOrganization = this.props.organization ? 1 : 0;
-    this.isVolunteer = this.props.user ? 1 : 0; //0 is Organization; 1 is Volunteer
+    this.isVolunteer = this.props.user ? 1 : 0; 
     this.state = {
       listOpen: false
     }
@@ -96,10 +95,6 @@ class NavBar extends React.Component {
     }));
   }
 
-  // handleMouseDropdown() {
-  //   this.setState((prevState) => ({viewDropdown: !prevState.viewDropdown}));
-  // }
-
   renderProfile() {
     let profile = null;
     if (this.isOrganization) {
@@ -166,7 +161,6 @@ class NavBar extends React.Component {
 
 NavBar.propTypes = {
   user: PropTypes.object,
-  //userType: PropTypes.number
 };
 
 export default onClickOutside(NavBar);
