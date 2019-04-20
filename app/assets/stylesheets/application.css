@@ -458,7 +458,7 @@ input.input {
   padding-top: 16px;
   width: 100%;
   background-color: #EFE137;
-  position: relative;
+  position: fixed;
   height: 80px;
   overflow: visible;
 }
@@ -495,7 +495,6 @@ input.input {
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
     font-weight:bold;
 }
 
