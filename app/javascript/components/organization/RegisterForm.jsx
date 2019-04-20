@@ -193,7 +193,7 @@ class RegisterForm extends React.Component {
         this.setState({ currentStep: 5 });
         URL.revokeObjectURL(selectedProfileFile.preview);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(error);
         this.setState({ currentStep: 6 });
       });
