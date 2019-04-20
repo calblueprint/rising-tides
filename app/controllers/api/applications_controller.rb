@@ -30,6 +30,16 @@ class Api::ApplicationsController < ApplicationController
 
   def create
     project = Project.find(application_params['project_id'])
+    if not application_params[:question1]
+      return render json: {
+        message: "Missing \"Why are you interested?\"."
+      }, status: :unprocessable_entity
+    end
+    if not application_params[:question2]
+      return render json: {
+        message: "Missing \"Describe your relevant experience\"."
+      }, status: :unprocessable_entity
+    end
     raise Error::AppLimitError unless not project.reached_application_limit?
 
     application = Application.new(application_params)
