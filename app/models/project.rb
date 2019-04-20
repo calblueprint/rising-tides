@@ -27,13 +27,13 @@ class Project < ApplicationRecord
       where("LOWER(title) LIKE ? OR LOWER(description) LIKE ? OR ? = ''", "%#{keyword.downcase}%", "%#{keyword.downcase}%", keyword) }
   scope :with_deliverable_type, -> (deliverable_type_id) { where deliverable_type_id:  deliverable_type_id }
   scope :with_user_id, -> (user_id) { distinct.
-      joins(:applications).
+      left_joins(:applications).
       where('applications.user_id' => user_id).
       group(:id) }
   scope :with_organization_id, -> (organization_id) { where organization_id: organization_id }
   scope :with_limit, -> (_limit) { limit(_limit)}
   scope :with_application_count, -> () {
-                        joins(:applications)
+                        left_joins(:applications)
                         .group('projects.id')
                         .select('projects.*, COUNT(applications.id) AS application_count') }
   scope :with_project_statuses, -> (statuses) { where status: statuses }

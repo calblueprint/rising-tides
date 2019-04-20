@@ -8,6 +8,9 @@ class ProjectsController < ApplicationController
   end
 
   def new
+    @skills = Skill.all
+    @project_types = ProjectType.all
+    @deliverable_types = DeliverableType.all
   end
 
   def edit

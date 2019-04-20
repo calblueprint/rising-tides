@@ -4,6 +4,7 @@ import Logout from "./Logout"
 import NavBar from "../utils/NavBar"
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
+import FlashMessage from '../utils/FlashMessage'
 
 
 class MyProjects extends React.Component {
@@ -135,13 +136,19 @@ class MyProjects extends React.Component {
         payload['query']['with_organization_id'] = this.props.organization.id;
     }
     axios.post("/api/projects/filter", payload).then(ret => {
-      const projects = ret.data;
+      const { projects, message } = ret.data;
+      if (message) {
+        this.flash_message.flashMessage(
+          message
+        );
+      }
       this.setState({
         currentProjects: projects
       });
-      console.log("UPDATED PROJECTS LENGTH: " + projects.length);
-    }).catch(ret => {
-        console.log(JSON.stringify(ret));
+    }).catch(res => {
+        this.flash_message.flashError(
+            res.response.data.message
+        );
     });
 
     var payload = {
@@ -159,13 +166,19 @@ class MyProjects extends React.Component {
         payload['query']['with_organization_id'] = this.props.organization.id;
     }
     axios.post("/api/projects/filter", payload).then(ret => {
-      const projects = ret.data;
+      const { projects, message } = ret.data;
+      if (message) {
+        this.flash_message.flashMessage(
+          message
+        );
+      }
       this.setState({
         pastProjects: projects
       });
-      console.log("UPDATED PROJECTS LENGTH: " + projects.length);
-    }).catch(ret => {
-        console.log(JSON.stringify(ret));
+    }).catch(res => {
+        this.flash_message.flashError(
+            res.response.data.message
+        );
     });
   }
 
@@ -197,7 +210,7 @@ class MyProjects extends React.Component {
 
     let pastProjectList;
 
-    if (this.state.currentProjects.length !== 0) {
+    if (this.state.pastProjects.length !== 0) {
       pastProjectList = this.state.pastProjects.map((project, index) => {
         return <ProjectCard project={project} key={index} />
       });
@@ -207,6 +220,7 @@ class MyProjects extends React.Component {
 
     return (
         <div className="w-100 h-100 tc bg-white">
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div className="h4 w-100 bg-moon-gray"></div>
             <div className="tl fl w-75 ml6 mr6 mt4 mb5 bg-white pa3">
                 <div className="w-100 h3">
@@ -227,7 +241,11 @@ class MyProjects extends React.Component {
                         </div>
                     </div>
                 </div>
-
+                {!user && <a
+                    className="dib std-button pa2 fr"
+                    href="/projects/new">
+                    Create Project
+                </a>}
                 <div className="cf"></div>
                 <div className="w-100 h1 mt5">
                     <div className="dib fl">
