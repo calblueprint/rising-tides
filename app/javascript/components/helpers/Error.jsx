@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "../../helpers/Button";
+import Button from "./Button";
 
 class Error extends React.Component {
   static propTypes = { goBack: PropTypes.func.isRequired };
@@ -14,7 +14,7 @@ class Error extends React.Component {
     const { goBack } = this.props;
     return (
       <div className="flex flex-column items-center">
-        <p>Error</p>
+        <h2>Form failed to send!</h2>
         <Button type="button-primary" onClick={goBack}>
           Go Back
         </Button>

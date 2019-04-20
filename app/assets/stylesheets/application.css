@@ -59,6 +59,10 @@ a:hover {
   color: #eee037;
 }
 
+.error {
+  color: #db3236;
+}
+
 label {
   display: flex;
   flex-direction: column;
@@ -219,7 +223,6 @@ input.input {
 }
 
 .container {
-  padding-top: 80px;
 }
 
 .dropzone {
