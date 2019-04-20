@@ -5,16 +5,54 @@ import Dropdown from '../../utils/Dropdown';
 class EditProfileForm extends React.components {
   constructor(props) {
     super(props);
-    var name = props.name;
-    var website = props.organization.website;
-    var location = props.organization.lcoation;
+    var firstName = props.volunteer.first_name;
+    var lastName = props.volunteer.last_name;
+    var email = props.volunteer.email;
     var passwrod = "*****";
-    var profileImage = <span>No Image</span>;
-    if (this.props.profileImage_url) {
-      profileImage = <img src={this.props.profileImage_url} />;
+    var phone_number = props.volunteer.phone_number;
+    var city = props.volunteer.city;
+    var state = props.volunteer.state;
+    var skills = [];
+    for (i in props.skills){
+      skill = props.skills[i];
+      skills.push({
+          id: i,
+          uid: skill['id'],
+          title: skill['name'],
+          key: 'skills'
+      });
     }
-    var mission = props.organization.description;
+    var profileImage = props.volunteer.selected_file;
+    var resume = props.volunteer.selected_resume_file;
+    var linkedIn = props.volunteer.link;
+    var bio = props.volunteer.bio;
 
+    this.state = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      phone_number: phone_number,
+      city: city,
+      state: state,
+      skills: skills,
+      profileImage: profileImage,
+      resume: resume,
+      linkedIn: linkedIn,
+      bio: bio
+    };
+    axios.defaults.headers.common = {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleSelected = this.toggleSelected.bind(this);
+    this.toggleSelectedSingle = this.toggleSelectedSingle.bind(this);
+    this.handlers = [];
+    this.validateField = this.validateField.bind(this);
+    this.validateForm = this.validateForm.bind(this);
 
   }
 
@@ -47,13 +85,33 @@ class EditProfileForm extends React.components {
     this.setState(
       {
         formErrors,
-        nameValid,
+        firstNameValid,
+        lastNameValid,
         emailValid,
         passwordValid,
         passwordMatch
       },
       this.validateForm
     );
+  };
+
+  validateForm = () => {
+    this.setState({
+      formValid:
+        this.state.firstNameValid &&
+        this.state.lastNameValid &&
+        this.state.emailValid &&
+        this.state.passwordValid &&
+        this.state.passwordMatch
+    });
+  };
+
+  handleFileChange = e => {
+    this.setState({ selected_file: e.target.files[0] });
+  };
+
+  handleResumeFileChange = e => {
+    this.setState({ selected_resume_file: e.target.files[0] });
   };
 
 
@@ -66,16 +124,47 @@ class EditProfileForm extends React.components {
 
   goBack = e => {
     e.preventDefault();
-    window.location.href = "/projects/" + this.props.project.id;
+    window.location.href = "/";
   };
 
   handleSubmit() {
-
+    const formData = new FormData();
+    formData.append("volunteer[email]", this.state.email);
+    formData.append("volunteer[password]", this.state.password);
+    formData.append(
+      "volunteer[password_confirmation]",
+      this.state.password_confirmation
+    );
+    formData.append(
+      "volunteer[firstName]",
+      this.state.firstName
+    );
+    formData.append(
+      "volunteer[lastName]",
+      this.state.lastName
+    );
+    formData.append("volunteer[city]", this.state.city);
+    formData.append("volunteer[state]", this.state.state);
+    formData.append("volunteer[link]", this.state.linkedIn);
+    formData.append("volunteer[description]", this.state.bio);
+    formData.append(
+      "volunteer[phone_number]",
+      this.state.phone_number
+    );
+    formData.append("volunteer[profile_image]", this.state.selected_file);
+    axios
+      .post("/volunteers", formData)
+      .then(function(response) {
+        window.location.href = "/";
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
 
   }
 
   render() {
-    const { organization} = this.state;
+    const { volunteer} = this.state;
     return {
       <div className="w-100 h-100 bg-white">
         <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
@@ -88,8 +177,8 @@ class EditProfileForm extends React.components {
                 <input
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
-                    onChange={this.handleChange("first_name")}
-                    value={this.state.first_name}
+                    onChange={this.handleChange("firstName")}
+                    value={this.state.firstName}
                 />
               </div>
               <div className="dib w-100 ml3">
@@ -97,8 +186,8 @@ class EditProfileForm extends React.components {
                 <input
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
-                    onChange={this.handleChange("last_name")}
-                    value={this.state.last_name}
+                    onChange={this.handleChange("lastName")}
+                    value={this.state.lastName}
                 />
               </div>
             </div>
@@ -121,10 +210,27 @@ class EditProfileForm extends React.components {
                 className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                 type="password"
                 onChange={this.handleChange("password_confirmation")}
-                value={"*****"}
             />
-
-
+            <div className="flex justify-between w-100">
+              <div className="dib w-100 mr3">
+                <h3 className="mt5">City</h3>
+                <input
+                    className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
+                    type="text"
+                    onChange={this.handleChange("city")}
+                    value={this.state.city}
+                />
+              </div>
+              <div className="dib w-100 ml3">
+                <h3 className="mt5">State</h3>
+                <input
+                    className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
+                    type="text"
+                    onChange={this.handleChange("state")}
+                    value={this.state.state}
+                />
+              </div>
+            </div>
             <div className="dib w-30">
               <h3 className="mt3">Skills</h3>
               <Dropdown
@@ -138,12 +244,12 @@ class EditProfileForm extends React.components {
 
 
             <div className="dib w-100 ml3">
-              <h3 className="mt3">Add a picture</h3>
+              <h3 className="mt3">Add a photo</h3>
               <input
                 className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                 type="file"
                 onChange={this.handleFileChange}
-                value={this.state.selected_file}
+                value={this.state.profileImage}
               />
             </div>
             <div className="dib w-100 ml3">
@@ -160,20 +266,27 @@ class EditProfileForm extends React.components {
                 className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                 type="date"
                 onChange={this.handleChange("linkedin")}
-                value={this.state.link}
+                value={this.state.linkedIn}
             />
             <div className="dib w-100 ml3">
               <h3 className="mt3">Tell us a little about yourself.</h3>
               <textarea
                 placeholder={"Tell us a little about yourself!"}
-                value={this.state.description}
+                value={this.state.bio}
                 rows="6"
                 cols="50"
                 onChange={this.handleChange("description")}
                 id="description"
               />
             </div>
-
+            <div className="mt5">
+                <a className="fl std-button-black ph3 pv1 fw4 f5" onClick={this.goBack}>
+                    Cancel
+                </a>
+                <a className="fr std-button ph3 pv1 fw4 f5 ml3" onClick={() => this.handleSubmit()}>
+                    Save
+                </a>
+            </div>
 
 
         </div>

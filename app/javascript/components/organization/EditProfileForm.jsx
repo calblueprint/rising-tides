@@ -9,29 +9,45 @@ class EditProfileForm extends React.components {
     var website = props.organization.website;
     var location = props.organization.lcoation;
     var passwrod = "*****";
+    var password_confirmation = props.organization.password_confirmation;
     var profileImage = <span>No Image</span>;
     if (this.props.profileImage_url) {
       profileImage = <img src={this.props.profileImage_url} />;
     }
     var mission = props.organization.description;
-
+    var contact_first_name = props.organization.contact_first_name;
+    var contact_last_name = props.organization.contact_last_name;
+    var contact_phone_number = props.organization.phone_number;
+    var contact_selected_file = props.organization.contact_selected_file;
+    this.state{
+      name: name,
+      website: website,
+      location: location,
+      password: password,
+      password_confirmation: password_confirmation,
+      profileImage: profileImage,
+      mission: mission,
+      contact_first_name: contact_first_name,
+      contact_last_name: contact_last_name,
+      contact_selected_file: contact_selected_file,
+    }
 
   }
 
   validateField = (fieldName, value) => {
     const { formErrors } = this.state;
     let { nameValid } = this.state;
-    let { emailValid } = this.state;
-    let { passwordValid } = this.state;
-    let { passwordMatch } = this.state;
+    let { website } = this.state;
+    let { password } = this.state;
+    let { password_confirmation } = this.state;
     switch (fieldName) {
       case "name":
         nameValid = value.length > 0;
         formErrors.firstName = nameValid ? "" : " is not a valid first name";
         break;
       case "email":
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        formErrors.email = emailValid ? "" : " is an invalid email";
+        emailValid = value.match(/^([\w.%+-]+).+([\w]{2,})$/i);
+        formErrors.email = emailValid ? "" : " is an invalid website";
         break;
       case "password":
         passwordValid = value.length >= 6;
@@ -49,8 +65,8 @@ class EditProfileForm extends React.components {
         formErrors,
         nameValid,
         emailValid,
-        passwordValid,
-        passwordMatch
+        password,
+        password_confirmation
       },
       this.validateForm
     );
@@ -66,13 +82,45 @@ class EditProfileForm extends React.components {
 
   goBack = e => {
     e.preventDefault();
-    window.location.href = "/projects/" + this.props.project.id;
+    window.location.href = "/";
   };
 
-  handleSubmit() {
-
-
-  }
+  handleSubmit = e => {
+    const formData = new FormData();
+    formData.append("organization[email]", this.state.email);
+    formData.append("organization[password]", this.state.password);
+    formData.append(
+      "organization[password_confirmation]",
+      this.state.password_confirmation
+    );
+    formData.append(
+      "organization[contact_first_name]",
+      this.state.contact_first_name
+    );
+    formData.append(
+      "organization[contact_last_name]",
+      this.state.contact_last_name
+    );
+    formData.append("organization[city]", this.state.city);
+    formData.append("organization[state]", this.state.state);
+    formData.append("organization[link]", this.state.link);
+    formData.append("organization[description]", this.state.description);
+    formData.append("organization[name]", this.state.name);
+    formData.append(
+      "organization[contact_phone_number]",
+      this.state.contact_phone_number
+    );
+    formData.append("organization[profile_image]", this.state.selected_file);
+    formData.append("organization[contact_image]", this.state.contact_selected_file);
+    axios
+      .post("/organizations", formData)
+      .then(function(response) {
+        window.location.href = "/";
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
   render() {
     const { organization} = this.state;
@@ -133,7 +181,6 @@ class EditProfileForm extends React.components {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="password"
                     onChange={this.handleChange("password_confirmation")}
-                    value={"*****"}
                 />
               </div>
             </div>
