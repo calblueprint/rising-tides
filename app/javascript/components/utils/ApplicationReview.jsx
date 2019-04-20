@@ -30,9 +30,9 @@ class ApplicationReview extends React.Component {
         .then(function(response) {
         window.location.reload();
         })
-        .catch(function(error) {
+        .catch(res => {
             this.flash_message.flashError(
-                error.response.data.message
+                res.response.data.message
             );
         });
     };
@@ -47,9 +47,9 @@ class ApplicationReview extends React.Component {
             console.log(response);
             window.location.reload();
           })
-          .catch(function(error) {
+          .catch(res => {
             this.flash_message.flashError(
-                error.response.data.message
+                res.response.data.message
                 );
             });
       };
@@ -64,9 +64,9 @@ class ApplicationReview extends React.Component {
             console.log(response);
             window.location.reload();
             })
-            .catch(function(error) {
+            .catch(res => {
                 this.flash_message.flashError(
-                    error.response.data.message
+                    res.response.data.message
                 );
             });
     };
@@ -88,8 +88,8 @@ class ApplicationReview extends React.Component {
             if (this.props.application.status === null || this.props.application.status === "pending") {
                 buttons = (
                     <div>
-                    <button className="fl" onClick={this.handleAccept}>Interview</button>
-                    <button className="fl" onClick={this.handleDeny}>Reject</button>
+                    <button onClick={this.handleInterview}>Interview</button>
+                    <button onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             } else if (this.props.application.status == "interviewing") {
