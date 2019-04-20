@@ -87,7 +87,7 @@ class NavBar extends React.Component {
   renderProfile() {
     let profile = null;
     if (this.isOrganization) {
-    profile = <li className="fr f4 w4 tl dropdown"> 
+    profile = <li className="fr f4 tl dropdown"> 
                 <a className="f4 black" onClick={this.handleMouseDropdown}>
                   {this.props.organization.name} <i className="fa fa-caret-down ml1"></i>
                 </a>
@@ -101,7 +101,7 @@ class NavBar extends React.Component {
                 }
               </li>
     } else if (this.isVolunteer) {
-      profile = <li className="fr f4 w4 tl dropdown"> 
+      profile = <li className="fr f4 tl dropdown"> 
                   <a className="f4 black" onClick={this.handleMouseDropdown}>
                     {this.props.user.first_name} <i className="fa fa-caret-down ml1"></i>
                   </a>
@@ -115,7 +115,7 @@ class NavBar extends React.Component {
                   }
               </li>         
       } else {
-        profile = <li className="fr f4 w4 tl dropdown"> 
+        profile = <li className="fr f4 tl dropdown"> 
                   <a className="f4 black" onClick={this.handleMouseDropdown}>
                     Welcome <i className="fa fa-caret-down ml1"></i>
                   </a>

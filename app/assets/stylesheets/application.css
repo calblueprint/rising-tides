@@ -465,6 +465,7 @@ input.input {
 
 .dropdown {
     float: left;
+    width:10rem;
 }
   
 .dropdown .dropbtn {
