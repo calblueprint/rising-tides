@@ -10,18 +10,17 @@ class ProjectView extends React.Component {
     super(props);
     this.spotsLeft = this.props.project.application_limit - this.props.project.application_count;
     this.state = {
-      applications: [],
       organization: null
     };
+    if (props.project.start_time) {
+        props.project.start_time = props.project.start_time.split('T')[0];
+    }
+    if (props.project.end_time) {
+        props.project.end_time = props.project.end_time.split('T')[0];
+    }
   }
 
   componentDidMount() {
-    axios
-      .get(`/api/projects/${this.props.project.id}/applications`)
-      .then(ret => {
-        const applications = ret.data;
-        this.setState({ applications });
-      });
     if (this.props.project.organization_id != null) {
       console.log(this.props);
       axios
@@ -88,6 +87,55 @@ class ProjectView extends React.Component {
         edit_button = <span></span>;
     }
 
+    let applicationList;
+
+    if (this.props.applications) {
+      applicationList = this.props.applications.map((application, index) => {
+        var project_status = (
+            <div className="dib rt-yellow-bg ph3 pv2 fw4">
+                In Review
+            </div>
+        );
+        if (application.status == "interviewing") {
+            project_status = (
+                <div className="dib rt-yellow-bg ph3 pv2 fw4">
+                    Interview
+                </div>
+            );
+        } else if (application.status == "accepted") {
+            project_status = (
+                <div className="dib rt-yellow-bg ph3 pv2 fw4">
+                    Interview
+                </div>
+            );
+        } else if (application.status == "denied") {
+            project_status = (
+                <div className="dib ph3 pv2 fw4">
+                    No longer in consideration
+                </div>
+            );
+        }
+        return (
+            <div className="">
+                <div className="bt b--black-10" />
+                <div className="flex items-center pv3" key={index}>
+                    <h4 className="w-25 ma0">{application.project.title}</h4>
+                    <div className="w-25">
+                        {project_status}
+                    </div>
+                    <div className="w-25">{application.user.first_name} {application.user.last_name}</div>
+                    <a
+                        className="w-25 tr"
+                        href={"/applications/" + application.id}
+                        >View job description <span className="ml3 f5 fa fa-angle-right"></span></a>
+                </div>
+            </div>
+        );
+      });
+    } else {
+      applicationList = <div>No Results</div>;
+    }
+
     return (
         <div className="w-100 h-100 tc bg-white">
             <div
@@ -100,51 +148,23 @@ class ProjectView extends React.Component {
                     {project_string_status}
                 </div>
                 <h3 className="mt3">Project Overview</h3>
-                <p>{project.description}</p>
-                <h3 className="mt4">Project Plan</h3>
+                <p>{project.overview}</p>
                 <div className="mt3 flex items-start">
-                    <div className="w-75 flex">
-                        <div className="w-05 pl2 pr3 pv4">
-                            <div className="vl-black h-100 p"></div>
-                        </div>
-                        <div className="w-90 pr4">
-                            <div className="relative">
-                                <div
-                                    className="bg-black br-100 absolute mt1"
-                                    style={{width: "11px", height: "11px", left: "-1.4072rem"}}></div>
-                                <h4 className="fw4">mm/dd/yy</h4>
-                            </div>
-                            <p>
-                                kjsalkf jksd fjdsk fjdka sljfdsaj fk jdadf
-                                asfkdsj k sdjaflk jd lfkjdsa fkd ajfdksal
-                                asdfjk dsjafk djsaklf das jakld f
-                                asdfkldjds fkjsdakl fjdsklf
-                            </p>
-                            <div className="relative">
-                                <div
-                                    className="bg-black br-100 absolute mt1"
-                                    style={{width: "11px", height: "11px", left: "-1.4072rem"}}></div>
-                                <h4 className="fw4">mm/dd/yy</h4>
-                            </div>
-                            <p>
-                                kjsalkf jksd fjdsk fjdka sljfdsaj fk jdadf
-                                asfkdsj k sdjaflk jd lfkjdsa fkd ajfdksal
-                                asdfjk dsjafk djsaklf das jakld f
-                                asdfkldjds fkjsdakl fjdsklf
-                            </p>
-                            <div className="relative">
-                                <div
-                                    className="bg-black br-100 absolute mt1"
-                                    style={{width: "11px", height: "11px", left: "-1.4072rem"}}></div>
-                                <h4 className="fw4">mm/dd/yy</h4>
-                            </div>
-                            <p>
-                                kjsalkf jksd fjdsk fjdka sljfdsaj fk jdadf
-                                asfkdsj k sdjaflk jd lfkjdsa fkd ajfdksal
-                                asdfjk dsjafk djsaklf das jakld f
-                                asdfkldjds fkjsdakl fjdsklf
-                            </p>
-                        </div>
+                    <div className="w-75">
+                        <h3 className="mt3">Description</h3>
+                        <p>{project.overview}</p>
+                        <h3 className="mt3">Deliverable</h3>
+                        <p>{project.deliverable}</p>
+                        <h3 className="mt3">Volunteer Requirements</h3>
+                        <p>{project.volunteer_requirements}</p>
+                        <h3 className="mt3">Other Details</h3>
+                        <p>{project.other_details}</p>
+                        <h3 className="mt3">Our Community Needs This If</h3>
+                        <p>{project.question1}</p>
+                        <h3 className="mt3">The Right Volunteer for this Project Is</h3>
+                        <p>{project.question2}</p>
+                        <h3 className="mt3">What You Give, What You Get</h3>
+                        <p>{project.question3}</p>
                     </div>
                     <div className="w-25 bg-light-gray pa3 h-auto">
                         <div className="flex items-center">
@@ -154,12 +174,21 @@ class ProjectView extends React.Component {
                         <div className="mt2">
                             <span className="fa fa-map-pin mr2"></span>{organization.city}, {organization.state}
                         </div>
+                        <div className="mt2">
+                            <span className="fa fa-calendar mr2"></span>{project.start_time} - {project.end_time}
+                        </div>
                         <div className="mt2 mb3">
                             <span className="fa fa-phone mr2"></span>{organization.contact_phone_number}
                         </div>
                         {apply_button}
                     </div>
                 </div>
+                <div className="w-100 h1 mb3">
+                    <div className="dib fl">
+                        <a href="/applications"><h3>Applications</h3></a>
+                    </div>
+                </div>
+                {applicationList}
             </div>
         </div>
     );

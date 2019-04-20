@@ -27,6 +27,9 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    if organization_signed_in? and @project.organization_id == current_organization.id
+        @applications = @project.applications.with_project_organization_json
+    end
     @photos = @project.photos.map { |p| p.image.url(:original) }
 
     if @project.organization.profile_image

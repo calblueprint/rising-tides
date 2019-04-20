@@ -254,7 +254,7 @@ class EditProjectForm extends React.Component {
                     className="essay-box bg-light-gray mt1 w-100 pa3"
                     onChange={this.handleChange("question2")}
                     value={this.state.project.question2}></textarea>
-                <h3 className="mt3">What You Give, What You Get:</h3>
+                <h3 className="mt3">What You Give, What You Get</h3>
                 <textarea
                     rows="6"
                     className="essay-box bg-light-gray mt1 w-100 pa3"
