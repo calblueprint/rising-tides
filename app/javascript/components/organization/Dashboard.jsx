@@ -51,11 +51,43 @@ class Dashboard extends React.Component {
 
     this.state = {
       projects: [],
+      applications: [],
       skills: skills_a,
       project_types: project_types_a,
       deliverable_types: deliverable_types_a,
-      show_filtering: false,
-      keyword: ""
+      show_project_filtering: false,
+      show_application_filtering: false,
+      keyword: "",
+      application_statuses: [
+        {
+            id: 0,
+            uid: 'pending',
+            title: 'Pending',
+            selected: false,
+            key: 'application_statuses'
+        },
+        {
+            id: 1,
+            uid: 'denied',
+            title: 'Denied',
+            selected: false,
+            key: 'application_statuses'
+        },
+        {
+            id: 2,
+            uid: 'interviewing',
+            title: 'Interviewing',
+            selected: false,
+            key: 'application_statuses'
+        },
+        {
+            id: 3,
+            uid: 'accepted',
+            title: 'Accepted',
+            selected: false,
+            key: 'application_statuses'
+        }
+      ]
     };
 
     axios.defaults.headers.common = {
@@ -74,9 +106,15 @@ class Dashboard extends React.Component {
     this.setState({ [name]: value });
   };
 
-  toggleFiltering() {
+  toggleProjectFiltering() {
     this.setState({
-        show_filtering: !this.state.show_filtering
+        show_project_filtering: !this.state.show_project_filtering
+    })
+  }
+
+  toggleApplicationFiltering() {
+    this.setState({
+        show_application_filtering: !this.state.show_application_filtering
     })
   }
 
@@ -101,7 +139,7 @@ class Dashboard extends React.Component {
     });
   }
 
-  updateSearch() {
+  updateProjectSearch() {
     var skill_ids = [];
     var project_type_ids = [];
     var deliverable_type_ids = [];
@@ -138,7 +176,36 @@ class Dashboard extends React.Component {
         );
       }
       this.setState({ projects });
-      console.log("UPDATED PROJECTS LENGTH: " + projects.length);
+    }).catch(res => {
+        this.flash_message.flashError(
+            res.response.data.message
+        );
+    });
+  }
+
+  updateApplicationSearch() {
+    var statuses = [];
+    var i;
+    for (i in this.state.application_statuses) {
+        if (this.state.application_statuses[i].selected)
+            statuses.push(this.state.application_statuses[i].uid);
+    }
+
+    var payload = {
+        query: {
+            with_statuses: statuses,
+            with_organization_id: this.props.organization.id
+        }
+    };
+
+    axios.post("/api/applications/filter", payload).then(ret => {
+      const { applications, message } = ret.data;
+      if (message) {
+        this.flash_message.flashMessage(
+          message
+        );
+      }
+      this.setState({ applications });
     }).catch(res => {
         this.flash_message.flashError(
             res.response.data.message
@@ -148,18 +215,16 @@ class Dashboard extends React.Component {
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
-        this.updateSearch();
+        this.updateProjectSearch();
     }
   }
 
   componentDidMount() {
-    console.log(this.props);
-    console.log(this.state);
-    this.updateSearch();
+    this.updateProjectSearch();
+    this.updateApplicationSearch();
   }
 
   render() {
-    console.log(this.props);
     const { organization } = this.props;
 
     let projectList;
@@ -174,8 +239,8 @@ class Dashboard extends React.Component {
 
     let applicationList;
 
-    if (this.props.organization_applications.length !== 0) {
-      applicationList = this.props.organization_applications.map((application, index) => {
+    if (this.state.applications) {
+      applicationList = this.state.applications.map((application, index) => {
         var project_status = (
             <div className="dib rt-yellow-bg ph3 pv2 fw4">
                 In Review
@@ -249,11 +314,32 @@ class Dashboard extends React.Component {
                     href="/projects/new">
                     Create Project</a>
                 <div className="cf"></div>
-                <div className="w-100 h1 mb3">
+                <div className="w-100 h1 mb3 mt3">
                     <div className="dib fl">
                         <a href="/applications"><h3>Applications</h3></a>
                     </div>
+                    <div className="dib fr">
+                        <h3
+                            className="pointer disable-selection dim"
+                            onClick={() => this.toggleApplicationFiltering()}>
+                            Filter <span className="f6 fa fa-filter"></span>
+                        </h3>
+                    </div>
                 </div>
+                {this.state.show_application_filtering &&
+                <div className="w-100 flex items-center">
+                    <Dropdown
+                        titleHelper="Application Status"
+                        title="Select Status..."
+                        list={this.state.application_statuses}
+                        toggleItem={this.toggleSelected}
+                    />
+                    <a
+                        className="w-100 std-button pv2"
+                        href="#"
+                        onClick={() => this.updateApplicationSearch()}>
+                        Update Search</a>
+                </div>}
                 {applicationList}
 
                 <div className="cf"></div>
@@ -264,13 +350,13 @@ class Dashboard extends React.Component {
                     <div className="dib fr">
                         <h3
                             className="pointer disable-selection dim"
-                            onClick={() => this.toggleFiltering()}>
+                            onClick={() => this.toggleProjectFiltering()}>
                             Filter <span className="f6 fa fa-filter"></span>
                         </h3>
                     </div>
                 </div>
                 <div className="mb2 mt3 bt b--black-10" />
-                {this.state.show_filtering &&
+                {this.state.show_project_filtering &&
                 <div className="w-100 flex items-center">
                     <Dropdown
                         titleHelper="Deliverable Type"
@@ -295,7 +381,7 @@ class Dashboard extends React.Component {
                     <a
                         className="w-100 std-button pv2"
                         href="#"
-                        onClick={() => this.updateSearch()}>
+                        onClick={() => this.updateProjectSearch()}>
                         Update Search</a>
                 </div>}
                 {projectList}
