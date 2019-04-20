@@ -172,7 +172,10 @@ class RegisterForm extends React.Component {
     const formData = new FormData();
     formData.append("organization[email]", email);
     formData.append("organization[password]", password);
-    formData.append("organization[passwordConfirmation]", passwordConfirmation);
+    formData.append(
+      "organization[password_confirmation]",
+      passwordConfirmation
+    );
     formData.append("organization[contact_first_name]", contactFirstName);
     formData.append("organization[contact_last_name]", contactLastName);
     formData.append("organization[city]", city);
@@ -181,10 +184,7 @@ class RegisterForm extends React.Component {
     formData.append("organization[description]", description);
     formData.append("organization[name]", name);
     formData.append("organization[contact_phone_number]", contactPhoneNumber);
-    formData.append(
-      "organization[profile_image_file_name]",
-      selectedProfileFile[0]
-    );
+    formData.append("organization[profile_image]", selectedProfileFile[0]);
     console.log("formData appended");
     axios
       .post("/organizations", formData)

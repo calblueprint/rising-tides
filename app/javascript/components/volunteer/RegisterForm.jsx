@@ -178,7 +178,7 @@ class RegisterForm extends React.Component {
     const formData = new FormData();
     formData.append("user[email]", email);
     formData.append("user[password]", password);
-    formData.append("user[passwordConfirmation]", passwordConfirmation);
+    formData.append("user[password_confirmation]", passwordConfirmation);
     formData.append("user[first_name]", firstName);
     formData.append("user[last_name]", lastName);
     formData.append("user[city]", city);
@@ -187,8 +187,8 @@ class RegisterForm extends React.Component {
     formData.append("user[bio]", bio);
     formData.append("user[skills]", skills);
     formData.append("user[phone_number]", phoneNumber);
-    formData.append("user[profile_image_file_name]", selectedProfileFile[0]);
-    formData.append("user[resume_file_name]", selectedResumeFile[0]);
+    formData.append("user[profile_image]", selectedProfileFile[0]);
+    formData.append("user[resume]", selectedResumeFile[0]);
     console.log("formData appended");
     axios
       .post("/users", formData)
