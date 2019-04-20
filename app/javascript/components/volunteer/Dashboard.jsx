@@ -247,7 +247,7 @@ class Dashboard extends React.Component {
                 <div className="cf"></div>
                 <div className="w-100 h1 mb3">
                     <div className="dib fl">
-                        <h3>Applications</h3>
+                        <a href="/applications"><h3>Applications</h3></a>
                     </div>
                 </div>
                 {applicationList}
@@ -255,7 +255,7 @@ class Dashboard extends React.Component {
                 <div className="cf"></div>
                 <div className="w-100 h1 mt5">
                     <div className="dib fl">
-                        <h3>Current Projects</h3>
+                        <a href="/my-projects"><h3>Current Projects</h3></a>
                     </div>
                     <div className="dib fr">
                         <h3
