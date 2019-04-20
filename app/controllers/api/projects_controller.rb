@@ -36,6 +36,72 @@ class Api::ProjectsController < ApplicationController
   def create
     organization = Organization.find(params.require(:project).permit(:organization_id)[:organization_id])
 
+    if not project_params[:title]
+      return render json: {
+        message: "Missing title."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:description]
+      return render json: {
+        message: "Missing description."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:overview]
+      return render json: {
+        message: "Missing overview."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:start_time]
+      return render json: {
+        message: "Missing start time."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:end_time]
+      return render json: {
+        message: "Missing end time."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:skill_ids] or project_params[:skill_ids].length == 0
+      return render json: {
+        message: "Missing skills."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:deliverable_type_id]
+      return render json: {
+        message: "Missing deliverable type."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:project_type_id]
+      return render json: {
+        message: "Missing project type."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:question1]
+      return render json: {
+        message: "Missing an answer to \"Our Community Needs This If\"."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:question2]
+      return render json: {
+        message: "Missing an answer to \"The Right Volunteer for this Project Is\"."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:question3]
+      return render json: {
+        message: "Missing an answer to \"What You Give, What You Get\"."
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:application_limit]
+      return render json: {
+        message: "Application Limit"
+      }, status: :unprocessable_entity
+    end
+    if not project_params[:user_limit]
+      return render json: {
+        message: "Volunteer Limit"
+      }, status: :unprocessable_entity
+    end
+
     project = organization.projects.create(project_params)
 
     begin
@@ -43,10 +109,15 @@ class Api::ProjectsController < ApplicationController
     end
 
     if saved
-      return render json: {message: 'Project successfully created!'}
+      return render json: {
+        project: project,
+        message: 'Project successfully created!'
+      }
     end
 
-    raise StandardError, application.errors.full_messages
+    return render json: {
+        error: 'Failed to create project.'
+    }, status: :unprocessable_entity
   end
 
   def update
