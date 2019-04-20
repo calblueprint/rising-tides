@@ -14,7 +14,6 @@ class RegisterForm extends React.Component {
     prev: PropTypes.func.isRequired,
     handleRegistration: PropTypes.func.isRequired,
     handleProfileFileChange: PropTypes.func.isRequired,
-    handleResumeFileChange: PropTypes.func.isRequired,
     handleChange: PropTypes.func.isRequired,
     formErrors: PropTypes.shape({
       firstName: PropTypes.string,
@@ -23,28 +22,22 @@ class RegisterForm extends React.Component {
       password: PropTypes.string
     }).isRequired,
     formValid: PropTypes.bool.isRequired,
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    contactFirstName: PropTypes.string.isRequired,
+    contactLastName: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     passwordConfirmation: PropTypes.string.isRequired,
-    phoneNumber: PropTypes.string.isRequired,
+    contactPhoneNumber: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     state: PropTypes.string.isRequired,
-    skills: PropTypes.string.isRequired,
     selectedProfileFile: PropTypes.shape({
       name: PropTypes.string,
       path: PropTypes.string,
       preview: PropTypes.string
     }).isRequired,
-    selectedResumeFile: PropTypes.shape({
-      name: PropTypes.string,
-      path: PropTypes.string,
-      preview: PropTypes.string
-    }).isRequired,
     deleteProfileFile: PropTypes.func.isRequired,
-    deleteResumeFile: PropTypes.func.isRequired,
-    bio: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
     pbPercentage: PropTypes.number.isRequired
   };
@@ -98,28 +91,25 @@ class RegisterForm extends React.Component {
 
   render() {
     const {
+      pbPercentage,
       currentStep,
-      formErrors,
       handleChange,
-      handleProfileFileChange,
-      handleResumeFileChange,
-      firstName,
-      lastName,
+      name,
       email,
       password,
       passwordConfirmation,
-      phoneNumber,
+      contactFirstName,
+      contactLastName,
+      contactPhoneNumber,
+      handleProfileFileChange,
+      selectedProfileFile,
+      deleteProfileFile,
       city,
       state,
-      skills,
-      selectedProfileFile,
-      selectedResumeFile,
-      deleteProfileFile,
-      deleteResumeFile,
-      bio,
       link,
+      description,
       formValid,
-      pbPercentage
+      formErrors
     } = this.props;
 
     return (
@@ -144,8 +134,7 @@ class RegisterForm extends React.Component {
               <Step1
                 currentStep={currentStep}
                 handleChange={handleChange}
-                firstName={firstName}
-                lastName={lastName}
+                name={name}
                 email={email}
                 password={password}
                 passwordConfirmation={passwordConfirmation}
@@ -153,26 +142,24 @@ class RegisterForm extends React.Component {
               <Step2
                 currentStep={currentStep}
                 handleChange={handleChange}
-                phoneNumber={phoneNumber}
-                city={city}
-                state={state}
-                skills={skills}
+                contactFirstName={contactFirstName}
+                contactLastName={contactLastName}
+                contactPhoneNumber={contactPhoneNumber}
+                handleProfileFileChange={handleProfileFileChange}
+                selectedProfileFile={selectedProfileFile}
+                deleteProfileFile={deleteProfileFile}
               />
               <Step3
                 currentStep={currentStep}
                 handleChange={handleChange}
-                bio={bio}
+                city={city}
+                state={state}
+                link={link}
               />
               <Step4
                 currentStep={currentStep}
                 handleChange={handleChange}
-                handleResumeFileChange={handleResumeFileChange}
-                handleProfileFileChange={handleProfileFileChange}
-                selectedProfileFile={selectedProfileFile}
-                selectedResumeFile={selectedResumeFile}
-                deleteProfileFile={deleteProfileFile}
-                deleteResumeFile={deleteResumeFile}
-                link={link}
+                description={description}
                 formValid={formValid}
               />
             </form>

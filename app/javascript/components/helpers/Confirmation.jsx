@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import checkmark from "images/confirmation.png";
-import Button from "../../helpers/Button";
+import Button from "./Button";
 
 class Confirmation extends React.Component {
   static propTypes = {

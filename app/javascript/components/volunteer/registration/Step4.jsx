@@ -8,7 +8,6 @@ class Step4 extends React.Component {
     handleChange: PropTypes.func.isRequired,
     handleProfileFileChange: PropTypes.func.isRequired,
     handleResumeFileChange: PropTypes.func.isRequired,
-    handleRegistration: PropTypes.func.isRequired,
     link: PropTypes.string.isRequired,
     formValid: PropTypes.bool.isRequired,
     selectedProfileFile: PropTypes.shape({
@@ -156,7 +155,7 @@ class Step4 extends React.Component {
           </h3>
           {this.resume()}
         </section>
-        <div className="mb3">
+        <section className="mb3">
           <label htmlFor="link">
             <h3>
               Link to Linkedin Profile <i className="f5">(optional)</i>
@@ -169,7 +168,7 @@ class Step4 extends React.Component {
               onChange={handleChange("link")}
             />
           </label>
-        </div>
+        </section>
       </div>
     );
   }

@@ -1,8 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { Formik } from "formik";
-import Confirmation from "./registration/Confirmation";
-import Error from "./registration/Error";
+import Confirmation from "../helpers/Confirmation";
+import Error from "../helpers/Error";
 import FormContainer from "./registration/FormContainer";
 
 class RegisterForm extends React.Component {
@@ -180,16 +179,16 @@ class RegisterForm extends React.Component {
     formData.append("user[email]", email);
     formData.append("user[password]", password);
     formData.append("user[passwordConfirmation]", passwordConfirmation);
-    formData.append("user[firstName]", firstName);
-    formData.append("user[lastName]", lastName);
+    formData.append("user[first_name]", firstName);
+    formData.append("user[last_name]", lastName);
     formData.append("user[city]", city);
     formData.append("user[state]", state);
     formData.append("user[link]", link);
     formData.append("user[bio]", bio);
     formData.append("user[skills]", skills);
-    formData.append("user[phoneNumber]", phoneNumber);
-    formData.append("user[profile_image]", selectedProfileFile[0]);
-    formData.append("user[resume]", selectedResumeFile[0]);
+    formData.append("user[phone_number]", phoneNumber);
+    formData.append("user[profile_image_file_name]", selectedProfileFile[0]);
+    formData.append("user[resume_file_name]", selectedResumeFile[0]);
     console.log("formData appended");
     axios
       .post("/users", formData)
@@ -302,25 +301,6 @@ class RegisterForm extends React.Component {
   render() {
     return (
       <div className="vh-100 flex flex-column justify-center items-center">
-        <Formik
-          initialValues={{
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            passwordConfirmation: "",
-            phoneNumber: "",
-            city: "",
-            state: "",
-            skills: "",
-            selectedProfileFile: {},
-            selectedResumeFile: {},
-            bio: "",
-            link: ""
-          }}
-          onSubmit={() => {}}
-          render={({ errors, touched }) => <FormContainer />}
-        />
         {this.form()}
         {this.confirmation()}
         {this.registerError()}

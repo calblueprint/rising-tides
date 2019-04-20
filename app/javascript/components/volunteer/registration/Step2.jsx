@@ -33,7 +33,7 @@ class Step2 extends React.Component {
       <div>
         <div className="mb3">
           <label htmlFor="phoneNumber">
-            <h3>Phone number</h3>
+            <h3>Phone Number</h3>
             <input
               type="text"
               value={phoneNumber}
