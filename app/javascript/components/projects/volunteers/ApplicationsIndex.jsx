@@ -73,8 +73,6 @@ class ApplicationsIndex extends React.Component {
 
   updateSearch() {
     var statuses = [];
-    var project_type_ids = [];
-    var deliverable_type_ids = [];
 
     var i;
     for (i in this.state.application_statuses) {
@@ -85,7 +83,7 @@ class ApplicationsIndex extends React.Component {
     var payload = {
         query: {
             with_statuses: statuses,
-            with_keyword: this.state.keyword,
+            with_keyword: this.state.keyword
         }
     };
     if (this.props.user) {

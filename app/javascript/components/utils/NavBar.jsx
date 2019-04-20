@@ -16,7 +16,11 @@ class NavBar extends React.Component {
   };
 
   goToProfile = () => {
-    window.location.href = `/users/${this.props.user.id}`;
+    if (this.props.user) {
+        window.location.href = `/users/${this.props.user.id}`;
+    } else {
+        window.location.href = `/users/${this.props.organization.id}`;
+    }
   };
 
   goToBrowse = () => {

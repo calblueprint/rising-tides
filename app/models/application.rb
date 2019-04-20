@@ -34,4 +34,5 @@ class Application < ApplicationRecord
         ]
     )
   }
+  scope :with_limit, -> (_limit) { limit(_limit)}
 end
