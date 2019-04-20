@@ -95,9 +95,6 @@ class NewApplicationForm extends React.Component {
                     <a className="fr std-button ph3 pv1 fw4 f5 ml3" onClick={() => this.handleSubmit()}>
                         Submit
                     </a>
-                    <a className="fr std-button-white ph3 pv1 fw4 f5">
-                        Save for later
-                    </a>
                 </div>
             </div>
         </div>
