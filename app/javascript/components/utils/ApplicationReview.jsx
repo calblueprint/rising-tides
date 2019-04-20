@@ -2,7 +2,7 @@ import React from "react";
 import axios from 'axios';
 import PropTypes from "prop-types";
 import linkedin from "images/linked-in.png";
-import FlashMessage from '../../utils/FlashMessage';
+import FlashMessage from './FlashMessage';
 
 class ApplicationReview extends React.Component {
     constructor(props) {
