@@ -194,7 +194,8 @@ class Dashboard extends React.Component {
     var payload = {
         query: {
             with_statuses: statuses,
-            with_organization_id: this.props.organization.id
+            with_organization_id: this.props.organization.id,
+            with_limit: 3
         }
     };
 
@@ -229,7 +230,7 @@ class Dashboard extends React.Component {
 
     let projectList;
 
-    if (this.state.projects.length !== 0) {
+    if (this.state.projects.length) {
       projectList = this.state.projects.map((project, index) => {
         return <ProjectCard project={project} key={index} />
       });
