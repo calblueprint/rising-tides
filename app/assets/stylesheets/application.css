@@ -474,8 +474,11 @@ input.input {
 }
 
 .dropdown-content {
+    z-index:-1;
     display: block;
     position: fixed;
+    right:80px;
+    top:60px;
     background-color: #f9f9f9;
     height: auto;
     min-width: 160px;
