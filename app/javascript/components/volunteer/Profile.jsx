@@ -52,8 +52,11 @@ class Profile extends React.Component {
     let resume = <a className="dib std-button f7 lh-m" src={resumeUrl}>resume</a>;
     return (
         <div className="w-100 h-100 tc">
+            <div
+                className="h5 absolute w-100 bg-black"
+                style={{zIndex: -1, backgroundImage: `url('/images/bg.jpg')`, backgroundSize: `cover`}} />
+            <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
-            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
                 <div className="h4 flex items-end">
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
@@ -92,6 +95,7 @@ class Profile extends React.Component {
 
                 <h3 className="pt5">Projects</h3>
             </div>
+            
         </div>
     );
   }
