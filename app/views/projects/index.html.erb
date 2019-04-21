@@ -1,4 +1,4 @@
 <% if user_signed_in? || organization_signed_in? %>
-    <%= react_component('projects/volunteers/ProjectsIndex', {skills: @skills, project_types: @project_types, deliverable_types: @deliverable_types}) %>
+    <%= react_component('projects/ProjectsIndex', {skills: @skills, project_types: @project_types, deliverable_types: @deliverable_types}) %>
 <% end %>
 
