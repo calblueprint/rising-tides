@@ -382,6 +382,7 @@ input.input {
 .proj-card-size {
     width: 16rem; 	
     height:18rem;
+    cursor: pointer;
 }
 
 .pic-height {
