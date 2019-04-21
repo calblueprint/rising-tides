@@ -169,7 +169,7 @@ class ProjectsIndex extends React.Component {
     return (
       <div className="w-100 h-100 tc">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
-            <div className="h4 w-100 bg-black " style={{backgroundImage: `url('/images/bg.jpg')`, backgroundSize: `cover`}}></div>
+            <div className="h4 w-100 bg-black bg-image"}></div>
             <div className="tl fl w-100 pl6 pr6 pt5 pb5 bg-white">
                 <div className="h-auto">
                     <div className="w-100 h3">

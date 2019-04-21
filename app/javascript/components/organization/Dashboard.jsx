@@ -290,7 +290,7 @@ class Dashboard extends React.Component {
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
-            <div className="h4 w-100 bg-black " style={{backgroundImage: `url('/images/bg.jpg')`, backgroundSize: `cover`}}></div>
+            <div className="h4 w-100 bg-black bg-image"}></div>
             <div className="tl fl w-75 ml6 mr6 mt4 mb5 bg-white pa3">
                 <div className="w-100 h3">
                     <div className="tl dib fl">

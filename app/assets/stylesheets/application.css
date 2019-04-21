@@ -284,6 +284,11 @@ input.input {
     word-wrap: break-word;
 }
 
+.bg-image {
+    background-image: url('/images/bg.jpg'); 
+    background-size: cover;
+}
+
 .card-center-text {
     color: #039be5;
     font-size: 14px;
@@ -406,84 +411,6 @@ input.input {
     font-size: 13px;
     padding-bottom: 8px;
 }
-
-.input-box {
-    margin: 8px 0 0px;
-    max-width: 460px;
-    width: 100%;
-    box-shadow: 0 0 0 2px #039be5 inset, 0 0 0 1px #e0e0e0 inset;
-    max-height: 36px;
-    background-color: #fff;
-    border: 0;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    color: rgba(0,0,0,0.87);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    max-width: 100%;
-    outline: 0;
-    padding: 8px!important;
-    -webkit-transition: box-shadow .15s;
-    transition: box-shadow .15s;
-    vertical-align: middle;
-    -webkit-appearance: none;
-    -webkit-box-shadow: 0 0 0 2px transparent inset, 0 0 0 1px #e0e0e0 inset;
-    box-shadow: 0 0 0 2px transparent inset, 0 0 0 1px #e0e0e0 inset;
-    width: 390px;
-    text-rendering: auto;
-    color: initial;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    font: 400 11px system-ui;
-}
-
-.input-area {
-    margin: 8px 0 -8px;
-    max-width: 460px;
-    width: 100%;
-    box-shadow: 0 0 0 2px #039be5 inset, 0 0 0 1px #e0e0e0 inset;
-    background-color: #fff;
-    border: 0;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    color: rgba(0,0,0,0.87);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    margin: 0;
-    max-width: 100%;
-    outline: 0;
-    padding: 8px!important;
-    -webkit-transition: box-shadow .15s;
-    transition: box-shadow .15s;
-    vertical-align: middle;
-    -webkit-appearance: none;
-    -webkit-box-shadow: 0 0 0 2px transparent inset, 0 0 0 1px #e0e0e0 inset;
-    box-shadow: 0 0 0 2px transparent inset, 0 0 0 1px #e0e0e0 inset;
-    width: 390px;
-    text-rendering: auto;
-    color: initial;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    margin: 0em;
-    font: 400 11px system-ui;
-}
-
 
 .approved {
     color: #3cba54;
