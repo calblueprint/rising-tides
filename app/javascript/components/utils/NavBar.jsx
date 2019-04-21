@@ -98,7 +98,7 @@ class NavBar extends React.Component {
   renderProfile() {
     let profile = null;
     if (this.isOrganization) {
-    profile = <li className="fr f4 tl w-auto"> 
+    profile = <li className="fr f4 tl navbar-box w-auto"> 
                 <a className="f4 black" onClick={() => this.toggleList()}>
                   {this.props.organization.name} <i className="fa fa-caret-down ml1"></i>
                 </a>
@@ -112,7 +112,7 @@ class NavBar extends React.Component {
                 }
               </li>
     } else if (this.isVolunteer) {
-      profile = <li className="fr f4 tl w-auto"> 
+      profile = <li className="fr f4 tl navbar-box w-auto"> 
                   <a className="f4 black" onClick={() => this.toggleList()}>
                     {this.props.user.first_name} <i className="fa fa-caret-down ml1"></i>
                   </a>
@@ -126,7 +126,7 @@ class NavBar extends React.Component {
                   }
               </li>         
       } else {
-        profile = <li className="fr f4 tl w-auto"> 
+        profile = <li className="fr f4 tl navbar-box w-auto"> 
                   <a className="f4 black" onClick={() => this.toggleList()}>
                     Welcome <i className="fa fa-caret-down ml1"></i>
                   </a>
@@ -147,10 +147,10 @@ class NavBar extends React.Component {
     <img className="fl logo-navbar" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
     <ul className="ul">
       {this.renderProfile()}
-      <li className="fr w-auto tc"> 
+      <li className="fr w-auto navbar-box tc"> 
         <a className="f4" onClick={this.goToBrowse}>Browse Projects</a>
       </li>
-      <li className="fr w-auto tc"> 
+      <li className="fr w-auto navbar-box tc"> 
         <a className="f4" onClick={this.goToDashboard}>Dashboard</a>
 
       </li>
