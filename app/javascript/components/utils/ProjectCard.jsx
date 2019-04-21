@@ -8,25 +8,20 @@ class ProjectCard extends React.Component {
     super(props);
     this.renderCard = this.renderCard.bind(this);
     this.goToProject = this.goToProject.bind(this);
-    this.state = {
-    }
   }
     
   renderCard() {
-    let card = null;
-    card = this.state.organization ? 
-    <div className="proj-card col-item fl ma2 shadow-1" onClick={this.goToProject}>
-        <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
-        <div className="bt b--white pa3">
-          <p className="f4 b lato compact mt3 ma2">
-            {this.props.project.title}
-          </p>
-          <p className="f5 lato fl truncate mb0 ma2">
-            {this.state.organization.name}
-          </p>
-      </div>
-    </div>: null;
-    return card;
+    return (<div className="proj-card col-item fl ma2 shadow-1" onClick={this.goToProject}>
+              <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
+              <div className="bt b--white pa3">
+                <p className="f4 b lato compact mt3 ma2">
+                  {this.props.project.title}
+                </p>
+                <p className="f5 lato fl truncate mb0 ma2">
+                  {this.props.project.organization.name}
+                </p>
+            </div>
+          </div>)
   }
 
   goToProject = () => {
