@@ -384,17 +384,21 @@ input.input {
     color: #EFE137;
 }
 
-.proj-card-size {
+.proj-card {
     width: 16rem; 	
     height:18rem;
+    cursor: pointer;
+    color:white;
+    background-color:black;
+}
+
+.proj-card:hover {
+    background-color: #EFE137;
+    color:black;
 }
 
 .pic-height {
     height:10rem;
-}
-
-.compact {
-    line-height: 50%;
 }
 
 .navbar {
