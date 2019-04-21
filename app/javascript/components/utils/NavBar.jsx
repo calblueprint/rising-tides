@@ -143,7 +143,7 @@ class NavBar extends React.Component {
 
   render() {
     return (
-    <div className="navbar shadow-1 pr5">
+    <div className="navbar bb pr5">
     <img className="fl logo-navbar" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
     <ul className="ul">
       {this.renderProfile()}
