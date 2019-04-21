@@ -98,40 +98,40 @@ class NavBar extends React.Component {
   renderProfile() {
     let profile = null;
     if (this.isOrganization) {
-    profile = <li className="fr f4 tl dropdown"> 
+    profile = <li className="fr f4 tl w-auto"> 
                 <a className="f4 black" onClick={() => this.toggleList()}>
                   {this.props.organization.name} <i className="fa fa-caret-down ml1"></i>
                 </a>
                 {this.state.listOpen ?
-                  <div className="ba dropdown-content h-auto">
+                  <div className="ba fr dropdown-content h-auto">
                     <a onClick={this.goToProfile}>Profile</a>
-                    <a className="bt pt2" onClick={this.goToMyProjects}>My Projects</a>
+                    <a className="bt pt2" onClick={this.goToMyProjects}>Projects</a>
                     <a className="bt pt2" onClick={this.goToApplications}>Applications</a>
                     <a className="bt pt2 pb2" onClick={this.handleLogout}>Logout</a>
                   </div>:null
                 }
               </li>
     } else if (this.isVolunteer) {
-      profile = <li className="fr f4 tl dropdown"> 
+      profile = <li className="fr f4 tl w-auto"> 
                   <a className="f4 black" onClick={() => this.toggleList()}>
                     {this.props.user.first_name} <i className="fa fa-caret-down ml1"></i>
                   </a>
                   {this.state.listOpen ?
-                    <div className="ba dropdown-content h-auto">
+                    <div className="ba fr dropdown-content h-auto">
                       <a onClick={this.goToProfile}>Profile</a>
-                      <a className="bt pt2" onClick={this.goToMyProjects}>My Projects</a>
+                      <a className="bt pt2" onClick={this.goToMyProjects}>Projects</a>
                       <a className="bt pt2" onClick={this.goToApplications}>Applications</a>
                       <a className="bt pv2 pb2" onClick={this.handleLogout}>Logout</a>
                     </div>:null
                   }
               </li>         
       } else {
-        profile = <li className="fr f4 tl dropdown"> 
+        profile = <li className="fr f4 tl w-auto"> 
                   <a className="f4 black" onClick={() => this.toggleList()}>
                     Welcome <i className="fa fa-caret-down ml1"></i>
                   </a>
                   {this.state.listOpen ?
-                    <div className="ba dropdown-content h-auto">
+                    <div className="ba fr dropdown-content h-auto">
                       <a onClick={this.goToDashboard}>Sign In</a>
                       <a className="bt pt2 pb2" onClick={this.goToDashboard}>Create Account</a>
                     </div>:null
@@ -143,14 +143,14 @@ class NavBar extends React.Component {
 
   render() {
     return (
-    <div className="navbar overflow-auto pr4">
+    <div className="navbar shadow-1 pr2">
     <img className="fl logo-navbar" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
     <ul className="ul">
       {this.renderProfile()}
-      <li className="fr f4 w4 tc"> 
-        <a className="f4" onClick={this.goToBrowse}>Search</a>
+      <li className="fr w-auto tc"> 
+        <a className="f4" onClick={this.goToBrowse}>Browse Projects</a>
       </li>
-      <li className="fr f4 w4 tc"> 
+      <li className="fr w-auto tc"> 
         <a className="f4" onClick={this.goToDashboard}>Dashboard</a>
 
       </li>
