@@ -98,42 +98,42 @@ class NavBar extends React.Component {
   renderProfile() {
     let profile = null;
     if (this.isOrganization) {
-    profile = <li className="fr f4 tl navbar-box w-auto"> 
-                <a className="f4 black" onClick={() => this.toggleList()}>
+    profile = <li className="fr f4 tl w-auto"> 
+                <a className="f4 shadow-bold black" onClick={() => this.toggleList()}>
                   {this.props.organization.name} <i className="fa fa-caret-down ml1"></i>
                 </a>
                 {this.state.listOpen ?
                   <div className="ba fr dropdown-content h-auto">
-                    <a onClick={this.goToProfile}>Profile</a>
-                    <a className="bt pt2" onClick={this.goToMyProjects}>Projects</a>
-                    <a className="bt pt2" onClick={this.goToApplications}>Applications</a>
-                    <a className="bt pt2 pb2" onClick={this.handleLogout}>Logout</a>
+                    <a className="shadow-bold" onClick={this.goToProfile}>Profile</a>
+                    <a className="bt shadow-bold pt2" onClick={this.goToMyProjects}>Projects</a>
+                    <a className="bt shadow-bold pt2" onClick={this.goToApplications}>Applications</a>
+                    <a className="bt shadow-bold pt2 pb2" onClick={this.handleLogout}>Logout</a>
                   </div>:null
                 }
               </li>
     } else if (this.isVolunteer) {
-      profile = <li className="fr f4 tl navbar-box w-auto"> 
-                  <a className="f4 black" onClick={() => this.toggleList()}>
+      profile = <li className="fr f4 tl w-auto"> 
+                  <a className="f4 shadow-bold black" onClick={() => this.toggleList()}>
                     {this.props.user.first_name} <i className="fa fa-caret-down ml1"></i>
                   </a>
                   {this.state.listOpen ?
                     <div className="ba fr dropdown-content h-auto">
-                      <a onClick={this.goToProfile}>Profile</a>
-                      <a className="bt pt2" onClick={this.goToMyProjects}>Projects</a>
-                      <a className="bt pt2" onClick={this.goToApplications}>Applications</a>
-                      <a className="bt pv2 pb2" onClick={this.handleLogout}>Logout</a>
+                      <a className="shadow-bold" onClick={this.goToProfile}>Profile</a>
+                      <a className="bt shadow-bold pt2" onClick={this.goToMyProjects}>Projects</a>
+                      <a className="bt shadow-bold pt2" onClick={this.goToApplications}>Applications</a>
+                      <a className="bt shadow-bold pv2 pb2" onClick={this.handleLogout}>Logout</a>
                     </div>:null
                   }
               </li>         
       } else {
-        profile = <li className="fr f4 tl navbar-box w-auto"> 
-                  <a className="f4 black" onClick={() => this.toggleList()}>
+        profile = <li className="fr f4 tl w-auto"> 
+                  <a className="f4 shadow-bold black" onClick={() => this.toggleList()}>
                     Welcome <i className="fa fa-caret-down ml1"></i>
                   </a>
                   {this.state.listOpen ?
                     <div className="ba fr dropdown-content h-auto">
-                      <a onClick={this.goToDashboard}>Sign In</a>
-                      <a className="bt pt2 pb2" onClick={this.goToDashboard}>Create Account</a>
+                      <a className="shadow-bold" onClick={this.goToDashboard}>Sign In</a>
+                      <a className="bt pt2 shadow-bold pb2" onClick={this.goToDashboard}>Create Account</a>
                     </div>:null
                   }
               </li>   
@@ -148,10 +148,10 @@ class NavBar extends React.Component {
     <ul className="ul">
       {this.renderProfile()}
       <li className="fr w-auto navbar-box tc"> 
-        <a className="f4" onClick={this.goToBrowse}>Browse Projects</a>
+        <a className="f4 shadow-bold" onClick={this.goToBrowse}>Browse Projects</a>
       </li>
       <li className="fr w-auto navbar-box tc"> 
-        <a className="f4" onClick={this.goToDashboard}>Dashboard</a>
+        <a className="f4 shadow-bold" onClick={this.goToDashboard}>Dashboard</a>
 
       </li>
     </ul>

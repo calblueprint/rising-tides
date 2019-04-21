@@ -457,7 +457,7 @@ input.input {
   margin:0;
 }
   
-.navbar-box:hover {
+.shadow-bold:hover {
     text-shadow:0px 0px .25px black;
 }
 
