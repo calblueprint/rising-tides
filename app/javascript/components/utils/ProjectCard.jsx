@@ -13,17 +13,20 @@ class ProjectCard extends React.Component {
   }
     
   renderCard() {
-    return (<div className="proj-card-size col-item fl bg-black ma2 shadow-1" onClick={this.goToProject}>
+    let card = null;
+    card = this.state.organization ? 
+    <div className="proj-card col-item fl ma2 shadow-1" onClick={this.goToProject}>
         <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
-        <div className="bt b--white pr3 pl3 pb3">
-          <h1 className="white f4 b lato compact mt3 ma2">
+        <div className="bt b--white pa3">
+          <p className="f4 b lato compact mt3 ma2">
             {this.props.project.title}
-          </h1>
-          <p className="white f5 lato fl truncate mb0 ma2">
-            {this.props.project.organization.name}
+          </p>
+          <p className="f5 lato fl truncate mb0 ma2">
+            {this.state.organization.name}
           </p>
       </div>
-    </div>);
+    </div>: null
+    return card;
   }
 
   goToProject = () => {
