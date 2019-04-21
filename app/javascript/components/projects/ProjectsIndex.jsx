@@ -1,8 +1,8 @@
 import React from "react";
 import axios from 'axios';
-import ProjectCard from '../../utils/ProjectCard';
-import Dropdown from '../../utils/Dropdown';
-import FlashMessage from '../../utils/FlashMessage'
+import ProjectCard from '../utils/ProjectCard';
+import Dropdown from '../utils/Dropdown';
+import FlashMessage from '../utils/FlashMessage'
 
 class ProjectsIndex extends React.Component {
   constructor(props) {

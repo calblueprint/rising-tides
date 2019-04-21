@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
-    <%= react_component('utils/ApplicationReview', { application: @application, user: @application.user, project: @application.project }) %>
+    <%= react_component('applications/ApplicationView', { application: @application, user: @application.user, project: @application.project }) %>
 <% elsif organization_signed_in? %>
-    <%= react_component('utils/ApplicationReview', { application: @application, user: @application.user, organization: current_organization, project: @application.project }) %>
+    <%= react_component('applications/ApplicationView', { application: @application, user: @application.user, organization: current_organization, project: @application.project }) %>
 <% end %>
 
