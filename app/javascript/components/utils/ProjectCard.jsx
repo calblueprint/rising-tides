@@ -25,7 +25,7 @@ class ProjectCard extends React.Component {
             {this.state.organization.name}
           </p>
       </div>
-    </div>: null
+    </div>: null;
     return card;
   }
 
