@@ -86,15 +86,15 @@ class ApplicationView extends React.Component {
             if (this.props.application.status === null || this.props.application.status === "pending") {
                 buttons = (
                     <div className="mv4">
-                    <button className="accept-button" onClick={this.handleAccept}>Interview</button>
-                    <button className="deny-button" onClick={this.handleDeny}>Reject</button>
+                    <button className="accept-button f5 pa2 fr" onClick={this.handleAccept}>Interview</button>
+                    <button className="deny-button f5 mr4 pa2 fr" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             } else if (this.props.application.status == "interviewing") {
                 buttons = (
                     <div className="mv4">
-                    <button className="accept-button" onClick={this.handleAccept}>Accept</button>
-                    <button className="deny-button" onClick={this.handleDeny}>Reject</button>
+                    <button className="accept-button f5 pa2 fr" onClick={this.handleAccept}>Accept</button>
+                    <button className="deny-button f5 mr4 pa2 fr" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             }
@@ -110,7 +110,7 @@ class ApplicationView extends React.Component {
         <div className="w-100 h-100 tc">
             <div className="tl fl w-100 pl6 pr6 pt5 pb5">
                 <h1 className="ma0 f1 mb4 truncate"> Application - {this.props.project.title} </h1>
-                <div className="f5 pa2 w4 bg-accent mb4">
+                <div className="f5 pa2 w4 tc bg-accent mb4">
                     {this.props.application.status}
                 </div>
                 <div className="h4 flex items-end">
@@ -155,6 +155,7 @@ class ApplicationView extends React.Component {
                 <h3 className="pt5">Describe your relevant experience.</h3>
                 <p className="lato">{this.props.application.question2} {this.props.application.question3}</p>
                 {this.displayButtons()}
+                <br/>
                 <button className="f5 w-auto tc pa2 white bg-black lato b" onClick={this.goBack}>
                     Back
                 </button>
