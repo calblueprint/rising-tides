@@ -85,16 +85,16 @@ class ApplicationView extends React.Component {
         if (this.props.organization) {
             if (this.props.application.status === null || this.props.application.status === "pending") {
                 buttons = (
-                    <div>
-                    <button onClick={this.handleInterview}>Interview</button>
-                    <button onClick={this.handleDeny}>Reject</button>
+                    <div className="mv4">
+                    <button className="accept-button" onClick={this.handleAccept}>Interview</button>
+                    <button className="deny-button" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             } else if (this.props.application.status == "interviewing") {
                 buttons = (
                     <div className="mv4">
-                    <button onClick={this.handleAccept}>Accept</button>
-                    <button onClick={this.handleDeny}>Reject</button>
+                    <button className="accept-button" onClick={this.handleAccept}>Accept</button>
+                    <button className="deny-button" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             }

@@ -113,6 +113,7 @@ input.input {
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
+<<<<<<< HEAD
 .alert-show {
     transition: all 1s ease-out;
     opacity: 1;
@@ -123,6 +124,33 @@ input.input {
     transition: all 1s ease-out;
     opacity: 0;
     visibility: hidden;
+=======
+.accept-button {
+    width: auto;
+    height: auto;
+    margin:var(--spacing-small);
+    background-color: #EFE137;
+    color: black;
+    font-family: 'Lato';
+    cursor: pointer;
+    border-style:solid;
+    border-width:.5px;
+    text-decoration: bold;
+}
+
+.deny-button {
+    width: auto;
+    height: auto;
+    margin:var(--spacing-small);
+    background-color: #db3236;
+    color: white;
+    font-family: 'Lato';
+    cursor: pointer;
+    border-style:solid;
+    border-width:.5px;
+    text-decoration: bold;
+
+>>>>>>> button styling
 }
 
 .std-button, .std-button:link, .std-button:visited {
