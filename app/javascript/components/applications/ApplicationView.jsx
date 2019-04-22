@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import linkedin from "images/linked-in.png";
 import FlashMessage from '../utils/FlashMessage';
 
+
 class ApplicationView extends React.Component {
     constructor(props) {
         super(props);
@@ -84,20 +85,18 @@ class ApplicationView extends React.Component {
     displayButtons() {
         let buttons = null;
         if (this.props.organization) {
-            console.log('org signed in');
             if (this.props.application.status === null || this.props.application.status === "pending") {
                 buttons = (
-                    <div>
-                    <button onClick={this.handleInterview}>Interview</button>
-                    <button onClick={this.handleDeny}>Reject</button>
+                    <div className="mv4">
+                    <button className="accept-button f5 pa2 fr" onClick={this.handleInterview}>Interview</button>
+                    <button className="deny-button f5 mr4 pa2 fr" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             } else if (this.props.application.status == "interviewing") {
-                console.log('interviewing');
                 buttons = (
-                    <div>
-                    <button onClick={this.handleAccept}>Accept</button>
-                    <button onClick={this.handleDeny}>Reject</button>
+                    <div className="mv4">
+                    <button className="accept-button f5 pa2 fr" onClick={this.handleAccept}>Accept</button>
+                    <button className="deny-button f5 mr4 pa2 fr" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             }
@@ -108,23 +107,23 @@ class ApplicationView extends React.Component {
     render() {
       let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
       let profileImage = <img className="h-100 w4"  src={profileUrl} />;
-      let resume = <a className="dib std-button f7 pa1 lh-m">Resume</a>
+      let resume = <a className="dib std-button w3 f7 pa1 lh-m">Resume</a>
       return(
         <div className="w-100 h-100 tc">
-           <FlashMessage onRef={ref => (this.flash_message = ref)} />
-           <div
-                className="h5 absolute w-100 bg-black bg-image"
-                style={{zIndex: -1}} />
-            <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
-                <h1 className="ma0 f1 mb5 truncate"> Application - {this.props.project.title} </h1>
-                <button>{this.props.application.status}</button>
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
+            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
+                <h1 className="ma0 f1 mb4 truncate"> Application - {this.props.project.title} </h1>
+                <div className="f5 pa2 w4 tc bg-accent mb4">
+                    {this.props.application.status}
+                </div>
                 <div className="h4 flex items-end">
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
                         <div className="flex items-end">
-                            <h1 className="ma0 f1 mb3" onClick={this.handleVolunteerClick}>
+                            <h1 className="ma0 f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
+                            <br/>
                             <a className="pa0 ph1 ml3 mb1" href={`http://${this.props.user.linkedin_url}`}>
                                 <img src={linkedin} style={{ width: '21px', height: '21px' }} />
                             </a>
@@ -159,6 +158,7 @@ class ApplicationView extends React.Component {
                 <h3 className="pt5">Describe your relevant experience.</h3>
                 <p className="lato">{this.props.application.question2} {this.props.application.question3}</p>
                 {this.displayButtons()}
+                <br/>
                 <button className="f5 w-auto tc pa2 white bg-black lato b" onClick={this.goBack}>
                     Back
                 </button>
