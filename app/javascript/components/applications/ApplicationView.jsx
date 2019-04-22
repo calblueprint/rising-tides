@@ -2,6 +2,8 @@ import React from "react";
 import axios from 'axios';
 import PropTypes from "prop-types";
 import linkedin from "images/linked-in.png";
+import FlashMessage from '../utils/FlashMessage';
+
 
 class ApplicationView extends React.Component {
     constructor(props) {
@@ -108,6 +110,7 @@ class ApplicationView extends React.Component {
       let resume = <a className="dib std-button w3 f7 pa1 lh-m">Resume</a>
       return(
         <div className="w-100 h-100 tc">
+            <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div className="tl fl w-100 pl6 pr6 pt5 pb5">
                 <h1 className="ma0 f1 mb4 truncate"> Application - {this.props.project.title} </h1>
                 <div className="f5 pa2 w4 tc bg-accent mb4">
