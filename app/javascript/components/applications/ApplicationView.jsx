@@ -86,7 +86,7 @@ class ApplicationView extends React.Component {
             if (this.props.application.status === null || this.props.application.status === "pending") {
                 buttons = (
                     <div className="mv4">
-                    <button className="accept-button f5 pa2 fr" onClick={this.handleAccept}>Interview</button>
+                    <button className="accept-button f5 pa2 fr" onClick={this.handleInterview}>Interview</button>
                     <button className="deny-button f5 mr4 pa2 fr" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );

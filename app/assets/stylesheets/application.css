@@ -113,7 +113,6 @@ input.input {
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-<<<<<<< HEAD
 .alert-show {
     transition: all 1s ease-out;
     opacity: 1;
@@ -124,7 +123,8 @@ input.input {
     transition: all 1s ease-out;
     opacity: 0;
     visibility: hidden;
-=======
+}
+
 .accept-button {
     width: auto;
     height: auto;
@@ -149,7 +149,6 @@ input.input {
     border-color:black;
     text-decoration: bold;
 
->>>>>>> button styling
 }
 
 .std-button, .std-button:link, .std-button:visited {
