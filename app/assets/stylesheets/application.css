@@ -442,8 +442,8 @@ input.input {
     padding-bottom: 8px;
 }
 
-.approved {
-    color: #3cba54;
+.accepted {
+    background-color: #3cba54;
 }
 
 .denied {
