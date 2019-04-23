@@ -446,6 +446,10 @@ input.input {
     background-color: #3cba54;
 }
 
+.withdraw {
+    background-color: #db3236;
+}
+
 .denied {
     background-color: #db3236;
     color: white;
