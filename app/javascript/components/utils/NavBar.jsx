@@ -142,7 +142,7 @@ class NavBar extends React.Component {
   renderProfile() {
     let profile = null;
     if (this.isOrganization) {
-      let profileUrl = this.props.organization.profile_image_url ? this.props.organization.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+      let profileUrl = this.props.organization.profile_image_url ? this.props.organization.profile_image_url : "https://pngimage.net/wp-content/uploads/2018/05/default-user-profile-image-png-2.png";
       let profileImage = <img className="h-auto w2 ba"  src={profileUrl} />;
       profile = <li className="fr f4 tl w-auto"> 
                   <a className="shadow-bold black" onClick={() => this.toggleList()}>
@@ -158,7 +158,7 @@ class NavBar extends React.Component {
                   }
                 </li>
     } else if (this.isVolunteer) {
-      let profileUrl = this.props.user.profile_image_url ? this.props.user.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+      let profileUrl = this.props.user.profile_image_url ? this.props.user.profile_image_url : "https://pngimage.net/wp-content/uploads/2018/05/default-user-profile-image-png-2.png";
       let profileImage = <img className="h-auto w2 ba"  src={profileUrl} />;
       profile = <li className="fr f4 tl w-auto"> 
                   <a className="shadow-bold black" onClick={() => this.toggleList()}>
