@@ -20,7 +20,8 @@ class NavBar extends React.Component {
     this.isOrganization = this.props.organization ? 1 : 0;
     this.isVolunteer = this.props.user ? 1 : 0; 
     this.state = {
-      listOpen: false
+      listOpen: false,
+      viewHamburger: false
     }
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
