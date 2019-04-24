@@ -141,7 +141,7 @@ class ProjectView extends React.Component {
         );
       });
     } else {
-      applicationList = <div>No Results</div>;
+      applicationList = <div className="mv2">No Results</div>;
     }
 
     let applications;
@@ -257,10 +257,11 @@ class ProjectView extends React.Component {
                     </div>
                 </div>
                 <div className="w-100 h1 mt4 mb3">
-                    <div className="dib f3 fl">
-                        <a href="/applications"><h3>Applications</h3></a>
+                    <div className="dib fl">
+                        <a className="f3" href="/applications"><h3>Applications</h3></a>
                     </div>
                 </div>
+                <br/>
                 {applicationList}
             </div>
         </div>
