@@ -24,4 +24,12 @@ class OrganizationsController < ApplicationController
         @profile_image_url = @organization.profile_image.url
     end
   end
+
+  def edit
+    @organization = Organization.find(params[:id])
+    @profile_image_url = nil
+    if @organization.profile_image
+        @profile_image_url = @organization.profile_image.url
+    end
+  end
 end

@@ -26,4 +26,16 @@ class UsersController < ApplicationController
         @resume_url = @user.resume.url
     end
   end
+
+  def edit
+    @user = User.find(params[:id])
+    @profile_image_url = nil
+    if @user.profile_image
+        @profile_image_url = @user.profile_image.url
+    end
+
+    if @user.resume
+        @resume_url = @user.resume.url
+    end
+  end
 end
