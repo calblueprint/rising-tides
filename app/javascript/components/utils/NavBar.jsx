@@ -149,7 +149,7 @@ class NavBar extends React.Component {
                   {profileImage} <i className="fa fa-caret-down ml1"></i>
                   </a>
                   {this.state.listOpen ?
-                    <div className="ba fr dropdown-content h-auto">
+                    <div className="ba fr mt1 dropdown-content h-auto">
                       <a className="shadow-bold" onClick={this.goToProfile}>Profile</a>
                       <a className="bt shadow-bold pt2" onClick={this.goToMyProjects}>Projects</a>
                       <a className="bt shadow-bold pt2" onClick={this.goToApplications}>Applications</a>
