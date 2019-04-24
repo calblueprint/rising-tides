@@ -47,64 +47,6 @@ class ProjectView extends React.Component {
     window.location.href = "/projects";
   };
 
-//   plusSlides(n) {
-//     showSlides(slideIndex += n);
-//   }
-  
-//   currentSlide(n) {
-//     showSlides(slideIndex = n);
-//   }
-  
-//   showSlides(n) {
-//     var i;
-//     var slides = document.getElementsByClassName("mySlides");
-//     var dots = document.getElementsByClassName("dot");
-//     if (n > slides.length) {slideIndex = 1}    
-//     if (n < 1) {slideIndex = slides.length}
-//     for (i = 0; i < slides.length; i++) {
-//         slides[i].style.display = "none";  
-//     }
-//     for (i = 0; i < dots.length; i++) {
-//         dots[i].className = dots[i].className.replace(" active", "");
-//     }
-//     slides[slideIndex-1].style.display = "block";  
-//     dots[slideIndex-1].className += " active";
-//   }
-
-//   photoCarousel() {
-//     let photo_carousel = null;
-//     //to be replaced by if (this.props.project.photos) but no photos currently
-//     if (1) {
-//         photo_carousel = (
-//         <div class="w-70">
-//             <div class="mySlides fade">
-//                 <img src="images/proj-photo.jpg" style="width:100%"/>
-//             </div>      
-//                 <div class="mySlides fade">
-//                 <img src="images/proj-photo.jpg" style="width:100%"/>
-//             </div>
-            
-//             <div class="mySlides fade">
-//                 <img src="images/proj-photo.jpg" style="width:100%"/>
-//             </div>
-            
-//             <a onclick={this.plusSlides(-1)}><i className="fa fa-chevron-left f4"></i></a>
-//             <a onclick={this.plusSlides(1)}><i className="fa fa-chevron-right f4"></i></a>
-        
-//         </div>)
-//     }
-//     return photo_carousel;
-//   }
-
-//   carouselDots() {
-//       let carousel_dots = null;
-//       //to be replaced by if (this.props.project.photos) but no photos currently
-//       if (1) {
-
-//       }
-//       return carousel_dots;
-//   }
-
   render() {
     const { 
         project,
@@ -113,12 +55,6 @@ class ProjectView extends React.Component {
         current_organization,
         milestones
     } = this.props;
-
-    // let carousel_dots = (<div style="text-align:center">
-    //                         <span class="dot" onclick="currentSlide(1)"></span> 
-    //                         <span class="dot" onclick="currentSlide(2)"></span> 
-    //                         <span class="dot" onclick="currentSlide(3)"></span> 
-    //                     </div>)
 
     var org_img = <span></span>;
     if (this.props.org_image_url) {
