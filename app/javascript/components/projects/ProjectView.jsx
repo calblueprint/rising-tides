@@ -57,10 +57,12 @@ class ProjectView extends React.Component {
     } = this.props;
 
     var org_img = <span></span>;
-    if (this.props.org_image_url) {
+    //if (this.props.org_image_url)
+    if (0) {
         org_img = <img className="w2 h2 mr2 dib"
                        src={this.props.org_image_url} />;
     } else {
+        console.log('no profile pic')
         org_img = <img className="w2 h2 mr2 dib"
                        src={profile_pic} />;
     }
@@ -176,9 +178,10 @@ class ProjectView extends React.Component {
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
                 <h1 className="f1 ma0">{project.title}</h1>
                 {edit_button}
-                <div className="dib ba ph3 pv2 mv4 f5 fw4">
+                <div className="dib ba ph3 pv2 mv3 f5 fw4">
                     {project_string_status} {apply_button}
                 </div>
+                <img className="mv3 w-100 h-auto" src={project_pic}/>
                 <h3 className="mt3">Project Overview</h3>
                 <p>{project.overview}</p>
                 <div className="mt3 flex items-start">
