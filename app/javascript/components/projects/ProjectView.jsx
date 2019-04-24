@@ -200,7 +200,7 @@ class ProjectView extends React.Component {
                         {project.overview ? (
                             <div>
                                 <h3 className="mt4 f3">Description</h3>
-                                <p className="f5">{project.overview}</p>
+                                <p className="f5">{project.description}</p>
                             </div>
                         ) : (null)}
                         {project.deliverable ? (
