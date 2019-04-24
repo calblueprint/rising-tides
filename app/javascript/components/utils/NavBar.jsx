@@ -45,7 +45,7 @@ class NavBar extends React.Component {
   }
 
   updatePredicate() {
-    this.setState({ viewHamburger: window.innerWidth < 900 });
+    this.setState({ viewHamburger: window.innerWidth < 800 });
   }
 
   goToDashboard = () => {
@@ -123,7 +123,7 @@ class NavBar extends React.Component {
   renderHamburger() {
     let hamburger = <div>
                       <a onClick={() => this.toggleHamburger()}>
-                        <i className="fa fa-bars fr pt2 f3"></i>
+                        <i className="fa fa-bars fr pt3 pr3 f3"></i>
                       </a>
                       {this.state.hamburgerOpen ?  
                         <div className="ba fr dropdown-content h-auto">
@@ -142,23 +142,27 @@ class NavBar extends React.Component {
   renderProfile() {
     let profile = null;
     if (this.isOrganization) {
-    profile = <li className="fr f4 tl w-auto"> 
-                <a className="f4 shadow-bold black" onClick={() => this.toggleList()}>
-                  {this.props.organization.name} <i className="fa fa-caret-down ml1"></i>
-                </a>
-                {this.state.listOpen ?
-                  <div className="ba fr dropdown-content h-auto">
-                    <a className="shadow-bold" onClick={this.goToProfile}>Profile</a>
-                    <a className="bt shadow-bold pt2" onClick={this.goToMyProjects}>Projects</a>
-                    <a className="bt shadow-bold pt2" onClick={this.goToApplications}>Applications</a>
-                    <a className="bt shadow-bold pt2 pb2" onClick={this.handleLogout}>Logout</a>
-                  </div>:null
-                }
-              </li>
-    } else if (this.isVolunteer) {
+      let profileUrl = this.props.organization.profile_image_url ? this.props.organization.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+      let profileImage = <img className="h-auto w2 ba"  src={profileUrl} />;
       profile = <li className="fr f4 tl w-auto"> 
-                  <a className="f4 shadow-bold black" onClick={() => this.toggleList()}>
-                    {this.props.user.first_name} <i className="fa fa-caret-down ml1"></i>
+                  <a className="shadow-bold black" onClick={() => this.toggleList()}>
+                  {profileImage} <i className="fa fa-caret-down ml1"></i>
+                  </a>
+                  {this.state.listOpen ?
+                    <div className="ba fr dropdown-content h-auto">
+                      <a className="shadow-bold" onClick={this.goToProfile}>Profile</a>
+                      <a className="bt shadow-bold pt2" onClick={this.goToMyProjects}>Projects</a>
+                      <a className="bt shadow-bold pt2" onClick={this.goToApplications}>Applications</a>
+                      <a className="bt shadow-bold pt2 pb2" onClick={this.handleLogout}>Logout</a>
+                    </div>:null
+                  }
+                </li>
+    } else if (this.isVolunteer) {
+      let profileUrl = this.props.user.profile_image_url ? this.props.user.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+      let profileImage = <img className="h-auto w2 ba"  src={profileUrl} />;
+      profile = <li className="fr f4 tl w-auto"> 
+                  <a className="shadow-bold black" onClick={() => this.toggleList()}>
+                    {profileImage} <i className="fa fa-caret-down ml1"></i>
                   </a>
                   {this.state.listOpen ?
                     <div className="ba fr dropdown-content h-auto">
@@ -194,13 +198,13 @@ class NavBar extends React.Component {
       </div>) :
       (<div className="navbar bb pr5">
       <img className="fl logo-navbar" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
-      <ul className="ul">
+      <ul className="ul f4">
         {this.renderProfile()}
-        <li className="fr w-auto navbar-box tc"> 
-          <a className="f4 shadow-bold" onClick={this.goToBrowse}>Browse Projects</a>
+        <li className="mt2 fr w-auto navbar-box tc"> 
+          <a className="shadow-bold" onClick={this.goToBrowse}>Browse Projects</a>
         </li>
-        <li className="fr w-auto navbar-box tc"> 
-          <a className="f4 shadow-bold" onClick={this.goToDashboard}>Dashboard</a>
+        <li className="mt2 fr w-auto navbar-box tc"> 
+          <a className="shadow-bold" onClick={this.goToDashboard}>Dashboard</a>
         </li>
       </ul>
       </div>)}

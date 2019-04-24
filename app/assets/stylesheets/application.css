@@ -441,14 +441,14 @@ input.input {
   }
 
 .logo-navbar {
-  padding-top: 10.5px;
+  padding-top: 18px;
   width: 20rem;
   height: auto;
   cursor: pointer;
 }
 
 .navbar {
-  padding-top: 16px;
+  padding-top: 8px;
   width: 100%;
   height:82px;
   background-color: #EFE137;
