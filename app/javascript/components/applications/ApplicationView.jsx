@@ -109,7 +109,7 @@ class ApplicationView extends React.Component {
     displayWithdraw() {
         let withdraw = null;
         if (this.props.user && this.props.application.status != "denied") {
-            withdraw = (<button className="deny-button f5 mr4 pa2" onClick={this.handleDeny}>
+            withdraw = (<button className="deny-button f5 mr4 pa2 ml3" onClick={this.handleDeny}>
                             Withdraw Application
                         </button>)
         }
