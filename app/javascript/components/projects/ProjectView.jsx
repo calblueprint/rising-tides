@@ -135,19 +135,19 @@ class ProjectView extends React.Component {
                             {milestonesList}
                         </div>
                     </div>
-                    <div className="w-25 bg-light-gray pa3 h-auto">
+                    <div className="w-auto bg-light-gray pa3 h-auto">
                         <div className="flex items-center">
                             {org_img}
-                            <h4 className="ma0 dib">{organization.name}</h4>
+                            <p className="ma0 f3 truncate dib">{organization.name}</p>
                         </div>
                         <div className="mt2">
-                            <span className="fa fa-map-pin mr2"></span>{organization.city}, {organization.state}
+                            <p className="fa lato f5 fa-map-pin truncate mr2">{organization.city}, {organization.state}</p>
                         </div>
                         <div className="mt2">
-                            <span className="fa fa-calendar mr2"></span>{project.start_time} - {project.end_time}
+                            <span className="fa lato f5 fa-calendar mr2">{project.start_time} - {project.end_time}</span>
                         </div>
                         <div className="mt2 mb3">
-                            <span className="fa fa-phone mr2"></span>{organization.contact_phone_number}
+                            <span className="fa lato f5 fa-phone mr2">{organization.contact_phone_number}</span>
                         </div>
                         {apply_button}
                     </div>
