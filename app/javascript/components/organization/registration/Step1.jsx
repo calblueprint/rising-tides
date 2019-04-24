@@ -1,14 +1,13 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/label-has-for */
 import React from "react";
 import PropTypes from "prop-types";
+import { Field, ErrorMessage } from "formik";
 
 class Step1 extends React.Component {
   static propTypes = {
     currentStep: PropTypes.number.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    passwordConfirmation: PropTypes.string.isRequired
+    validate: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -17,66 +16,55 @@ class Step1 extends React.Component {
   }
 
   render() {
-    const {
-      currentStep,
-      handleChange,
-      name,
-      email,
-      password,
-      passwordConfirmation
-    } = this.props;
+    const { currentStep, validate } = this.props;
 
     if (currentStep !== 1) {
       return null;
     }
     return (
-      <div>
+      <>
         <section className="flex flex-column mb3">
           <label htmlFor="name">
             <h3>Organization Name</h3>
-            <input
-              type="text"
-              value={name}
-              id="name"
-              onChange={handleChange("name")}
-            />
+            <Field type="text" name="name" />
+            <ErrorMessage name="name" className="error" component="div" />
           </label>
         </section>
         <section className="flex flex-column mb3">
           <label htmlFor="email">
             <h3>Login Email</h3>
-            <input
-              type="text"
-              value={email}
-              id="email"
-              onChange={handleChange("email")}
-            />
+            <Field type="text" name="email" />
+            <ErrorMessage name="email" className="error" component="div" />
           </label>
         </section>
         <section className="flex mb3">
           <label htmlFor="password" className="mr3 w-50">
             <h3>Password</h3>
-            <input
+            <Field
               type="password"
-              value={password}
-              id="password"
-              onChange={handleChange("password")}
+              name="password"
               className="w-100"
+              // validate={validate("password")}
             />
             <i className="f6">must be at least 6 characters long</i>
+            <ErrorMessage name="password" className="error" component="div" />
           </label>
           <label htmlFor="passwordConfirmation" className="ml3 w-50">
             <h3>Verify Password</h3>
-            <input
+            <Field
               type="password"
-              value={passwordConfirmation}
-              id="passwordConfirmation"
-              onChange={handleChange("passwordConfirmation")}
+              name="passwordConfirmation"
               className="w-100"
+              // validate={validate("passwordConfirmation")}
+            />
+            <ErrorMessage
+              name="passwordConfirmation"
+              className="error"
+              component="div"
             />
           </label>
         </section>
-      </div>
+      </>
     );
   }
 }
