@@ -143,7 +143,7 @@ class RegisterForm extends React.Component {
               if (this.state.formErrors[fieldName].length > 0) {
                 return (
                   <p key={i}>
-                    {fieldName} 
+                    {fieldName}
                     {' '}
                     {this.state.formErrors[fieldName]}
                   </p>
@@ -210,7 +210,7 @@ class RegisterForm extends React.Component {
               onChange={this.handleChange("contact_first_name")}
             />
             <br />
-            <label htmlFor="contact_last_name">Contact Last Name</label> 
+            <label htmlFor="contact_last_name">Contact Last Name</label>
             {' '}
             <br />
             <input
@@ -242,7 +242,7 @@ class RegisterForm extends React.Component {
               onChange={this.handleChange("city")}
             />
             <br />
-            <label htmlFor="state">State (abbreviation)</label> 
+            <label htmlFor="state">State (abbreviation)</label>
             {' '}
             <br />
             <input
@@ -254,7 +254,7 @@ class RegisterForm extends React.Component {
             />
           </fieldset>
           <fieldset>
-            <label htmlFor="link">Link</label> 
+            <label htmlFor="link">Link</label>
             {' '}
             <br />
             <input
@@ -273,7 +273,7 @@ class RegisterForm extends React.Component {
               value={this.state.description}
               rows="6"
               cols="50"
-              onChange={this.handleChange("description")}
+      ange={this.handleChange("description")}
               id="description"
             />
           </fieldset>
