@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import logo from "images/risingtides.svg";
-import onClickOutside from "react-onclickoutside"
+import profile_pic from "images/profile_pic.png";
+import onClickOutside from "react-onclickoutside";
 
 class NavBar extends React.Component {
 
@@ -142,7 +143,7 @@ class NavBar extends React.Component {
   renderProfile() {
     let profile = null;
     if (this.isOrganization) {
-      let profileUrl = this.props.organization.profile_image_url ? this.props.organization.profile_image_url : "https://pngimage.net/wp-content/uploads/2018/05/default-user-profile-image-png-2.png";
+      let profileUrl = this.props.organization.profile_image_url ? this.props.organization.profile_image_url : profile_pic;
       let profileImage = <img className="h-auto w2 ba"  src={profileUrl} />;
       profile = <li className="fr f4 tl w-auto"> 
                   <a className="shadow-bold black" onClick={() => this.toggleList()}>
@@ -158,7 +159,7 @@ class NavBar extends React.Component {
                   }
                 </li>
     } else if (this.isVolunteer) {
-      let profileUrl = this.props.user.profile_image_url ? this.props.user.profile_image_url : "https://pngimage.net/wp-content/uploads/2018/05/default-user-profile-image-png-2.png";
+      let profileUrl = this.props.user.profile_image_url ? this.props.user.profile_image_url : profile_pic;
       let profileImage = <img className="h-auto w2 ba"  src={profileUrl} />;
       profile = <li className="fr f4 tl w-auto"> 
                   <a className="shadow-bold black" onClick={() => this.toggleList()}>
