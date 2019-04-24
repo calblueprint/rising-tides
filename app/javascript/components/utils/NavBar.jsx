@@ -8,20 +8,24 @@ class NavBar extends React.Component {
 
   constructor(props) {
     super(props);
+    this.updatePredicate = this.updatePredicate.bind(this);
     this.goToDashboard = this.goToDashboard.bind(this);
     this.goToProfile = this.goToProfile.bind(this);
     this.renderProfile = this.renderProfile.bind(this);
+    this.renderHamburger = this.renderHamburger.bind(this);
     this.goToBrowse = this.goToBrowse.bind(this);
     this.goToApplications = this.goToApplications.bind(this);
     this.goToMyProjects = this.goToMyProjects.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.toggleList = this.toggleList.bind(this);
+    this.toggleHamburger = this.toggleHamburger.bind(this);
     this.isOrganization = this.props.organization ? 1 : 0;
     this.isVolunteer = this.props.user ? 1 : 0; 
     this.state = {
       listOpen: false,
-      viewHamburger: false
+      viewHamburger: false,
+      hamburgerOpen: false
     }
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -29,6 +33,19 @@ class NavBar extends React.Component {
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content")
     };
+  }
+
+  componentDidMount() {
+    this.updatePredicate();
+    window.addEventListener("resize", this.updatePredicate);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updatePredicate);
+  }
+
+  updatePredicate() {
+    this.setState({ viewHamburger: window.innerWidth < 900 });
   }
 
   goToDashboard = () => {
@@ -86,7 +103,8 @@ class NavBar extends React.Component {
 
   handleClickOutside(e) {
     this.setState({
-        listOpen: false
+        listOpen: false,
+        hamburgerOpen: false
     });
   }
 
@@ -94,6 +112,31 @@ class NavBar extends React.Component {
     this.setState(prevState => ({
         listOpen: !prevState.listOpen
     }));
+  }
+
+  toggleHamburger() {
+    this.setState(prevState => ({
+         hamburgerOpen: !prevState.hamburgerOpen
+    }));
+  }
+
+  renderHamburger() {
+    let hamburger = <div>
+                      <a onClick={() => this.toggleHamburger()}>
+                        <i className="fa fa-bars fr pt2 f3"></i>
+                      </a>
+                      {this.state.hamburgerOpen ?  
+                        <div className="ba fr dropdown-content h-auto">
+                          <a className="shadow-bold f5" onClick={this.goToDashboard}>Dashboard</a>
+                          <a className="bt shadow-bold pt2 f5" onClick={this.goToBrowse}>Browse Projects</a>
+                          <a className="bt shadow-bold pt2 f5" onClick={this.goToProfile}>Profile</a>
+                          <a className="bt shadow-bold pt2 f5" onClick={this.goToMyProjects}>Projects</a>
+                          <a className="bt shadow-bold pt2 f5" onClick={this.goToApplications}>Applications</a>
+                          <a className="bt shadow-bold pv2 pb2 f5" onClick={this.handleLogout}>Logout</a>
+                        </div>:null
+                      }
+                    </div>
+    return hamburger;
   }
 
   renderProfile() {
@@ -144,19 +187,24 @@ class NavBar extends React.Component {
 
   render() {
     return (
-    <div className="navbar bb pr5">
-    <img className="fl logo-navbar" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
-    <ul className="ul">
-      {this.renderProfile()}
-      <li className="fr w-auto navbar-box tc"> 
-        <a className="f4 shadow-bold" onClick={this.goToBrowse}>Browse Projects</a>
-      </li>
-      <li className="fr w-auto navbar-box tc"> 
-        <a className="f4 shadow-bold" onClick={this.goToDashboard}>Dashboard</a>
-
-      </li>
-    </ul>
-  </div>)
+    <div> {this.state.viewHamburger ? (
+      <div className="navbar bb pr5">
+        <img className="fl logo-navbar" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
+        {this.renderHamburger()}
+      </div>) :
+      (<div className="navbar bb pr5">
+      <img className="fl logo-navbar" alt="The Rising Tides Logo" src={logo} onClick={this.goToDashboard} />
+      <ul className="ul">
+        {this.renderProfile()}
+        <li className="fr w-auto navbar-box tc"> 
+          <a className="f4 shadow-bold" onClick={this.goToBrowse}>Browse Projects</a>
+        </li>
+        <li className="fr w-auto navbar-box tc"> 
+          <a className="f4 shadow-bold" onClick={this.goToDashboard}>Dashboard</a>
+        </li>
+      </ul>
+      </div>)}
+  </div>);
   }
 }
 
