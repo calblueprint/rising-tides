@@ -197,7 +197,7 @@ class ProjectView extends React.Component {
                         <div className="ml4 bl">
                             {milestonesList}
                         </div>
-                        {project.overview ? (
+                        {project.description ? (
                             <div>
                                 <h3 className="mt4 f3">Description</h3>
                                 <p className="f5">{project.description}</p>
