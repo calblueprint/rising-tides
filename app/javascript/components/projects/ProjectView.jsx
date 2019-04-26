@@ -57,13 +57,11 @@ class ProjectView extends React.Component {
     } = this.props;
 
     var org_img = <span></span>;
-    //if (this.props.org_image_url)
-    if (0) {
+    if (this.props.org_image_url) {
         org_img = <img className="w2 h2 mr2 dib"
                        src={this.props.org_image_url} />;
     } else {
-        console.log('no profile pic')
-        org_img = <img className="w2 h2 mr2 dib"
+    var org_img = <img className="w2 h2 mr2 dib"
                        src={profile_pic} />;
     }
 
@@ -207,6 +205,12 @@ class ProjectView extends React.Component {
                             <div>
                                 <h3 className="mt4 f3">Deliverable</h3>
                                 <p className="f5">{project.deliverable}</p>
+                            </div>
+                        ) : (null)}
+                        {this.props.skills ? (
+                            <div>
+                                <h3 className="mt4 f3">Volunteer Skills</h3>
+                                <p className="f5">{this.props.skills}</p>
                             </div>
                         ) : (null)}
                         {project.volunteer_requirements ? (
