@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import Dropdown from '../utils/Dropdown';
-// import { Field, ErrorMessage } from "formik";
 
 class EditProfileForm extends React.Component {
   constructor(props) {
