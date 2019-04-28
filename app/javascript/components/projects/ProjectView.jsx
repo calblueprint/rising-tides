@@ -93,6 +93,19 @@ class ProjectView extends React.Component {
         edit_button = <span></span>;
     }
 
+    let skillList = null;
+    
+    if (this.props.skills) {
+        skillList = this.props.skills.map((skill, index) => {
+            var skill_pill = (
+                <p>skill</p>
+            )
+        })
+        return (
+            <div>{skill_pill}</div>
+        )
+    } 
+
     let applicationList;
 
     if (this.props.applications) {
@@ -210,7 +223,7 @@ class ProjectView extends React.Component {
                         {this.props.skills ? (
                             <div>
                                 <h3 className="mt4 f3">Volunteer Skills</h3>
-                                <p className="f5">{this.props.skills}</p>
+                                {skillList}
                             </div>
                         ) : (null)}
                         {project.volunteer_requirements ? (
