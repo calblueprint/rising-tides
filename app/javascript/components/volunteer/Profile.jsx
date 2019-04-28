@@ -68,7 +68,7 @@ class Profile extends React.Component {
             projectList = <div className="f4 tc pa3">There are no projects. </div>;
         }
     }
-
+    let resume = <a className="dib ba bg-accent f5 w-auto pv1 mb4 ml3 lh-m" src={resumeUrl}>Resume</a>;
     return (
         <div className="w-100 h-100 tc">
             <div
@@ -83,12 +83,10 @@ class Profile extends React.Component {
                             <h1 className="ma0 f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
-                            <a className="pa0 ph1 ml3 mb1" target="_blank" href={`http://${this.props.user.link}`}>
+                            <a className="pa0 ph1 ml3 mb4" target="_blank" href={`http://${this.props.user.link}`}>
                                 <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
                             </a>
-                            <div className="pb2 ml3">
-                                {resume}
-                            </div>
+                            {resume}
                         </div>
                         <div className="flex f5">
                             <div className="mt1-ns">
@@ -106,11 +104,11 @@ class Profile extends React.Component {
                     </div>
                 </div>
 
-                <h3 className="pt5">Skills</h3>
-                {this.props.user.skills}
+                <h3 className="pt5 f3">Skills</h3>
+                <p className="f5">{this.props.user.skills}</p>
 
-                <h3 className="pt5">Biography</h3>
-                {this.props.user.bio}
+                <h3 className="pt5 f3">Biography</h3>
+                <p className="f5">{this.props.user.bio}</p>
 
                 <h3 className="pt5">Projects</h3>
                 <Loader loading={this.state.loading} />
