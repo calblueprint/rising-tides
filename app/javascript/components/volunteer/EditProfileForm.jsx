@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Dropdown from '../utils/Dropdown';
-
+// import { Field, ErrorMessage } from "formik";
 
 class EditProfileForm extends React.Component {
   constructor(props) {
@@ -18,19 +18,7 @@ class EditProfileForm extends React.Component {
     }
 
     this.state = {
-      user: this.props,
-      first_name: props.first_name,
-      last_name: props.last_name,
-      email: props.email,
-      password: "*****",
-      phone_number: props.phone_number,
-      city: props.city,
-      state: props.state,
-      skills: skills,
-      profileImage: props.selected_file,
-      resume: props.selected_resume_file,
-      linkedIn: props.link,
-      bio: props.bio,
+      user: this.props.user,
       formErrors: { first_name: "", last_name: "", email: "" },
       first_nameValid: false,
       last_nameValid: false,
@@ -45,7 +33,9 @@ class EditProfileForm extends React.Component {
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content")
     };
-
+    this.handlers = [];
+    // this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   validateField = (fieldName, value) => {
@@ -90,19 +80,7 @@ class EditProfileForm extends React.Component {
         passwordValid,
         passwordMatch
       },
-      this.validateForm
     );
-  };
-
-  handleChange = name => {
-    if (!this.handlers[name]) {
-      this.handlers[name] = event => {
-        const { project } = this.state;
-        project[name] = event.target.value;
-        this.setState({ project });
-      };
-    }
-    return this.handlers[name];
   };
 
   handleFileChange = e => {
@@ -115,11 +93,11 @@ class EditProfileForm extends React.Component {
 
 
   handleChange = name => event => {
-    const { value } = event.target;
-    this.setState({ [name]: value }, () => {
-      this.validateField(name, value);
-    });
+    var user = this.state.user;
+    user[name] = event.target.value;
+    this.setState({ user: user });
   };
+
 
   goBack = e => {
     e.preventDefault();
@@ -128,36 +106,43 @@ class EditProfileForm extends React.Component {
 
   handleSubmit() {
     const formData = new FormData();
-    formData.append("user[email]", this.state.email);
-    formData.append("user[password]", this.state.password);
+    let { selected_file, selected_resume_file } = this.state;
+    formData.append("user[email]", this.state.user.email);
+    formData.append("user[password]", this.state.user.password);
     formData.append(
       "user[password_confirmation]",
-      this.state.password_confirmation
+      this.state.user.password_confirmation
     );
     formData.append(
       "user[first_name]",
-      this.state.first_name
+      this.state.user.first_name
     );
     formData.append(
       "user[last_name]",
-      this.state.last_name
+      this.state.user.last_name
     );
-    formData.append("user[city]", this.state.city);
-    formData.append("user[state]", this.state.state);
-    formData.append("user[link]", this.state.linkedIn);
-    formData.append("user[description]", this.state.bio);
+    formData.append("user[city]", this.state.user.city);
+    formData.append("user[state]", this.state.user.state);
+    formData.append("user[link]", this.state.user.linkedIn);
+    formData.append("user[bio]", this.state.user.bio);
     formData.append(
       "user[phone_number]",
-      this.state.phone_number
+      this.state.user.phone_number
     );
-    formData.append("user[profile_image]", this.state.selected_file);
+    formData.append("user[profile_image]", selected_file);
+    formData.append("user[resume]", selected_resume_file);
+    let { user } = this.props;
     axios
-      .put("/users/" + {this.state.project.id}, formData)
+      .patch(`/api/users/` + user.id, formData)
       .then(function(response) {
-        window.location.href = "/users";
+        console.log(response);
+        console.log(response.data.message);
+        window.location.href = "/users/" + user.id;
       })
       .catch(function(error) {
         console.log(error);
+        console.log(error.response.data.message);
+        // console.log(error);
       });
 
   }
@@ -177,7 +162,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("first_name")}
-                    defaultValue={this.state.user.user.first_name}
+                    defaultValue={this.state.user.first_name}
                 />
               </div>
               <div className="dib w-100 ml3">
@@ -186,7 +171,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("last_name")}
-                    defaultValue={this.state.user.user.last_name}
+                    defaultValue={this.state.user.last_name}
                 />
               </div>
             </div>
@@ -195,7 +180,7 @@ class EditProfileForm extends React.Component {
                 className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                 type="text"
                 onChange={this.handleChange("email")}
-                defaultValue={this.state.user.user.email}
+                defaultValue={this.state.user.email}
             />
             <h3 className="mt3">Password</h3>
             <input
@@ -218,7 +203,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("city")}
-                    defaultValue={this.state.user.user.city}
+                    defaultValue={this.state.user.city}
                 />
               </div>
               <div className="dib w-100 ml3">
@@ -227,32 +212,26 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("state")}
-                    defaultValue={this.state.user.user.state}
+                    defaultValue={this.state.user.state}
                 />
               </div>
             </div>
             <div className="dib w-30">
               <h3 className="mt3">Skills</h3>
-              <Dropdown
-                  titleHelper="Skill"
-                  title="Select Skills..."
-                  list={this.state.skills}
-                  toggleItem={this.toggleSelected}
-              />
             </div>
             <h3 className="mt3">Add a photo</h3>
             <input
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               type="file"
               onChange={this.handleFileChange}
-              defaultValue={this.state.user.user.profileImage}
+              defaultValue={this.state.user.profileImage}
             />
             <h3 className="mt3">Add a resume</h3>
             <input
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               type="file"
-              onChange={this.handleFileChange}
-              defaultValue={this.state.user.user.resume}
+              onChange={this.handleResumeFileChange}
+              defaultValue={this.state.user.resume}
             />
             <h3 className="mt3">LinkedIn Profile</h3>
             <input
@@ -265,10 +244,10 @@ class EditProfileForm extends React.Component {
             <textarea
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               placeholder={"Tell us a little about yourself!"}
-              value={this.state.user.user.bio}
+              value={this.state.user.bio}
               rows="6"
               cols="50"
-              onChange={this.handleChange("description")}
+              onChange={this.handleChange("bio")}
               id="description"
             />
             <div className="mt5">

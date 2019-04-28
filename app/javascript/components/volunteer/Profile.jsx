@@ -35,7 +35,7 @@ class Profile extends React.Component {
           message
         );
       }
-      this.setState({ 
+      this.setState({
         projects: projects,
         loading: false  });
     }).catch(res => {
@@ -49,7 +49,12 @@ class Profile extends React.Component {
     e.preventDefault();
     window.location.href = "/";
   };
- 
+
+
+  goEdit= () => {
+    window.location.href = "/users/edit";
+  };
+
   render() {
     let skillList;
     const { projects, loading } = this.state;
@@ -73,13 +78,13 @@ class Profile extends React.Component {
     let linkedin = this.props.user.link ? (<a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.link}`}>
                                             <i className="fab fa-linkedin f2 icon-link"></i>
                                             </a>) : null;
-    
+
     let resume;
     if (this.props.resume_url || this.props.resume_url ==="/profile_images/original/missing.png") {
         resume = null;
     } else {
         resume = (<a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={this.props.resume_url}>
-                    <i className="fas fa-file-alt f2 icon-link"></i>                            
+                    <i className="fas fa-file-alt f2 icon-link"></i>
                     </a>)}
 
     return (
@@ -89,9 +94,14 @@ class Profile extends React.Component {
                 style={{zIndex: -1}} />
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
+            <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
+              <img src="/images/edit_pen.png" style={{ width: '21px', height: '21px' }} />
+            </a>
                 <div className="h4 flex items-end">
                     {profileImage}
+
                     <div className="w-100 m3 ph4 pt4">
+
                         <div className="flex items-end">
                             <h1 className="ma0 truncate f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
@@ -124,7 +134,7 @@ class Profile extends React.Component {
                 <h2 className="pt4 f3">Projects</h2>
                 <ProjectList projects={projects} loading={loading} />
             </div>
-            
+
         </div>
     );
   }
