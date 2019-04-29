@@ -60,7 +60,9 @@ a:hover {
 }
 
 .error {
+  position: absolute;
   color: #db3236;
+  padding-top: 3.5rem;
 }
 
 label {
@@ -69,7 +71,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   padding: 0.5rem 1rem;
   border-style: none;
   background-color: #f2f2f2;
