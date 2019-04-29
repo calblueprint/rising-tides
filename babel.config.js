@@ -35,7 +35,13 @@ module.exports = api => {
           corejs: 2
         }
       ],
-      [require("@babel/preset-react")]
+      [
+        require("@babel/preset-react").default,
+        {
+          development: isDevelopmentEnv || isTestEnv,
+          useBuiltIns: true
+        }
+      ]
     ].filter(Boolean),
     plugins: [
       require("babel-plugin-macros"),
