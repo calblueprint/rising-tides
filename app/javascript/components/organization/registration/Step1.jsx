@@ -6,8 +6,7 @@ import { Field, ErrorMessage } from "formik";
 
 class Step1 extends React.Component {
   static propTypes = {
-    currentStep: PropTypes.number.isRequired,
-    validate: PropTypes.func.isRequired
+    currentStep: PropTypes.number.isRequired
   };
 
   constructor(props) {
@@ -16,28 +15,28 @@ class Step1 extends React.Component {
   }
 
   render() {
-    const { currentStep, validate } = this.props;
+    const { currentStep } = this.props;
 
     if (currentStep !== 1) {
       return null;
     }
     return (
       <>
-        <section className="flex flex-column mb3">
+        <section className="flex flex-column mb4">
           <label htmlFor="name">
             <h3>Organization Name</h3>
             <Field type="text" name="name" />
             <ErrorMessage name="name" className="error" component="div" />
           </label>
         </section>
-        <section className="flex flex-column mb3">
+        <section className="flex flex-column mb4">
           <label htmlFor="email">
             <h3>Login Email</h3>
             <Field type="text" name="email" />
             <ErrorMessage name="email" className="error" component="div" />
           </label>
         </section>
-        <section className="flex mb3">
+        <section className="flex mb4">
           <label htmlFor="password" className="mr3 w-50">
             <h3>Password</h3>
             <Field

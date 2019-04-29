@@ -11,7 +11,7 @@ class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pbPercentage: (1 / 4) * 100,
+      pbPercentage: (1 / 3) * 100,
       currentStep: 1,
       name: "",
       contactFirstName: "",
@@ -153,38 +153,44 @@ class RegisterForm extends React.Component {
     });
   };
 
-  handleRegistration = e => {
+  handleRegistration = (values, actions) => {
     console.log("entered registration");
     const {
-      name,
-      email,
-      password,
-      passwordConfirmation,
-      contactFirstName,
-      contactLastName,
-      contactPhoneNumber,
-      city,
-      state,
-      link,
-      description,
+      // name,
+      // email,
+      // password,
+      // passwordConfirmation,
+      // contactFirstName,
+      // contactLastName,
+      // contactPhoneNumber,
+      // city,
+      // state,
+      // link,
+      // description,
       selectedProfileFile
     } = this.state;
     const formData = new FormData();
-    formData.append("organization[email]", email);
-    formData.append("organization[password]", password);
+    formData.append("organization[email]", values.email);
+    formData.append("organization[password]", values.password);
     formData.append(
       "organization[password_confirmation]",
-      passwordConfirmation
+      values.passwordConfirmation
     );
-    formData.append("organization[contact_first_name]", contactFirstName);
-    formData.append("organization[contact_last_name]", contactLastName);
-    formData.append("organization[city]", city);
-    formData.append("organization[state]", state);
-    formData.append("organization[link]", link);
-    formData.append("organization[description]", description);
-    formData.append("organization[name]", name);
-    formData.append("organization[contact_phone_number]", contactPhoneNumber);
-    formData.append("organization[profile_image]", selectedProfileFile[0]);
+    formData.append(
+      "organization[contact_first_name]",
+      values.contactFirstName
+    );
+    formData.append("organization[contact_last_name]", values.contactLastName);
+    formData.append("organization[city]", values.city);
+    formData.append("organization[state]", values.state);
+    formData.append("organization[link]", values.link);
+    formData.append("organization[description]", values.description);
+    formData.append("organization[name]", values.name);
+    formData.append(
+      "organization[contact_phone_number]",
+      values.contactPhoneNumber
+    );
+    formData.append("organization[profile_image]", selectedProfileFile);
     console.log("formData appended");
     axios
       .post("/organizations", formData)
@@ -218,7 +224,7 @@ class RegisterForm extends React.Component {
       formValid,
       formErrors
     } = this.state;
-    if (currentStep > 4) {
+    if (currentStep > 3) {
       return null;
     }
     return (
@@ -228,20 +234,20 @@ class RegisterForm extends React.Component {
         prev={this.prev}
         handleRegistration={this.handleRegistration}
         handleProfileFileChange={this.handleProfileFileChange}
-        handleChange={this.handleChange}
+        // handleChange={this.handleChange}
         formErrors={formErrors}
         formValid={formValid}
-        name={name}
-        email={email}
-        password={password}
-        passwordConfirmation={passwordConfirmation}
-        contactFirstName={contactFirstName}
-        contactLastName={contactLastName}
-        contactPhoneNumber={contactPhoneNumber}
-        city={city}
-        state={state}
-        link={link}
-        description={description}
+        // name={name}
+        // email={email}
+        // password={password}
+        // passwordConfirmation={passwordConfirmation}
+        // contactFirstName={contactFirstName}
+        // contactLastName={contactLastName}
+        // contactPhoneNumber={contactPhoneNumber}
+        // city={city}
+        // state={state}
+        // link={link}
+        // description={description}
         selectedProfileFile={selectedProfileFile}
         deleteProfileFile={this.deleteProfileFile}
         pbPercentage={pbPercentage}
@@ -267,8 +273,8 @@ class RegisterForm extends React.Component {
 
   next = () => {
     let { currentStep, pbPercentage } = this.state;
-    currentStep = currentStep >= 3 ? 4 : currentStep + 1;
-    pbPercentage = (currentStep / 4) * 100;
+    currentStep = currentStep >= 3 ? 3 : currentStep + 1;
+    pbPercentage = (currentStep / 3) * 100;
     this.setState({
       currentStep,
       pbPercentage
@@ -278,7 +284,7 @@ class RegisterForm extends React.Component {
   prev = () => {
     let { currentStep, pbPercentage } = this.state;
     currentStep = currentStep <= 1 ? 1 : currentStep - 1;
-    pbPercentage = (currentStep / 4) * 100;
+    pbPercentage = (currentStep / 3) * 100;
     this.setState({
       currentStep,
       pbPercentage
@@ -287,7 +293,7 @@ class RegisterForm extends React.Component {
 
   backToStart = e => {
     e.preventDefault();
-    this.setState({ currentStep: 1, pbPercentage: (1 / 4) * 100 });
+    this.setState({ currentStep: 1, pbPercentage: (1 / 3) * 100 });
   };
 
   render() {

@@ -4,10 +4,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
 import { Field, ErrorMessage } from "formik";
+import PhoneInput from "react-phone-number-input";
 
 class Step2 extends React.Component {
   static propTypes = {
     currentStep: PropTypes.number.isRequired,
+    contactPhoneNumberValue: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired,
     handleProfileFileChange: PropTypes.func.isRequired,
     selectedProfileFile: PropTypes.shape({
       name: PropTypes.string,
@@ -83,7 +87,12 @@ class Step2 extends React.Component {
   };
 
   render() {
-    const { currentStep } = this.props;
+    const {
+      currentStep,
+      contactPhoneNumberValue,
+      handleChange,
+      handleBlur
+    } = this.props;
 
     if (currentStep !== 2) {
       return null;
@@ -91,7 +100,7 @@ class Step2 extends React.Component {
     return (
       <>
         <h2 className="underline mb3">Lead Contact Information</h2>
-        <section className="flex mb3">
+        <section className="flex mb4">
           <label htmlFor="firstName" className="mr3 w-50">
             <h3>First Name</h3>
             <Field type="text" name="contactFirstName" className="w-100" />
@@ -111,18 +120,32 @@ class Step2 extends React.Component {
             />
           </label>
         </section>
-        <section className="flex flex-column mb3">
+        <section className="flex flex-column mb4">
           <label htmlFor="contactPhoneNumber">
             <h3>Phone Number</h3>
-            <Field type="text" name="contactPhoneNumber" />
-            <ErrorMessage
+            <PhoneInput
+              name="contactPhoneNumber"
+              country="US"
+              showCountrySelect={false}
+              value={contactPhoneNumberValue}
+              onChange={handleChange}
+            />
+            {/* <Field
+              component={PhoneInput}
+              name="contactPhoneNumber"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              country="US"
+              showCountrySelect={false}
+            /> */}
+            {/* <ErrorMessage
               name="contactPhoneNumber"
               className="error"
               component="div"
-            />
+            /> */}
           </label>
         </section>
-        <section className="mb3">
+        <section className="mb4">
           <h3>Add a photo</h3>
           {this.profile()}
         </section>

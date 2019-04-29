@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import Button from "../../helpers/Button";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
-import Step4 from "./Step4";
 import ProgressBar from "../../helpers/ProgressBar";
 
 class RegisterForm extends React.Component {
@@ -14,7 +16,6 @@ class RegisterForm extends React.Component {
     prev: PropTypes.func.isRequired,
     handleRegistration: PropTypes.func.isRequired,
     handleProfileFileChange: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
     formErrors: PropTypes.shape({
       firstName: PropTypes.string,
       lastName: PropTypes.string,
@@ -22,23 +23,23 @@ class RegisterForm extends React.Component {
       password: PropTypes.string
     }).isRequired,
     formValid: PropTypes.bool.isRequired,
-    name: PropTypes.string.isRequired,
-    contactFirstName: PropTypes.string.isRequired,
-    contactLastName: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    passwordConfirmation: PropTypes.string.isRequired,
-    contactPhoneNumber: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired,
+    // name: PropTypes.string.isRequired,
+    // contactFirstName: PropTypes.string.isRequired,
+    // contactLastName: PropTypes.string.isRequired,
+    // email: PropTypes.string.isRequired,
+    // password: PropTypes.string.isRequired,
+    // passwordConfirmation: PropTypes.string.isRequired,
+    // contactPhoneNumber: PropTypes.string.isRequired,
+    // city: PropTypes.string.isRequired,
+    // state: PropTypes.string.isRequired,
     selectedProfileFile: PropTypes.shape({
       name: PropTypes.string,
       path: PropTypes.string,
       preview: PropTypes.string
     }).isRequired,
     deleteProfileFile: PropTypes.func.isRequired,
-    description: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
+    // description: PropTypes.string.isRequired,
+    // link: PropTypes.string.isRequired,
     pbPercentage: PropTypes.number.isRequired
   };
 
@@ -47,9 +48,9 @@ class RegisterForm extends React.Component {
     this.state = {};
   }
 
-  nextButton() {
+  nextButton = () => {
     const { currentStep, next } = this.props;
-    if (currentStep < 4) {
+    if (currentStep < 3) {
       return (
         <Button type="button-primary" onClick={next}>
           Next
@@ -57,11 +58,11 @@ class RegisterForm extends React.Component {
       );
     }
     return null;
-  }
+  };
 
-  backButton() {
+  backButton = () => {
     const { currentStep, prev } = this.props;
-    if (currentStep !== 1 && currentStep < 5) {
+    if (currentStep !== 1 && currentStep < 4) {
       return (
         <Button type="button-secondary" onClick={prev}>
           Back
@@ -69,17 +70,16 @@ class RegisterForm extends React.Component {
       );
     }
     return null;
-  }
+  };
 
-  submitButton() {
-    const { currentStep, formValid, handleRegistration } = this.props;
-    if (currentStep === 4) {
+  submitButton = () => {
+    const { currentStep, formValid } = this.props;
+    if (currentStep === 3) {
       return (
         <Button
-          type="button-primary"
+          type="button-primary-submit"
           value="Next Step"
           disabled={!formValid}
-          onClick={handleRegistration}
           className="self-end"
         >
           Sign up
@@ -87,93 +87,141 @@ class RegisterForm extends React.Component {
       );
     }
     return null;
-  }
+  };
+
+  // validate = (values, props) => {
+  //   const errors = {};
+  //   if (!values.name) {
+  //     errors.name = "Required";
+  //   } else if (
+  //     !/^(?!\s)(?!.*\s$)(?=.*[a-zA-Z0-9])[a-zA-Z0-9 '~?!]{2,}$/.test(
+  //       values.name
+  //     )
+  //   ) {
+  //     errors.name = "Invalid organization name";
+  //   }
+  //   if (!values.email) {
+  //     errors.email = "Required";
+  //   } else if (
+  //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+  //   ) {
+  //     errors.email = "Invalid email address";
+  //   }
+  //   if (!values.password) {
+  //     errors.password = "Required";
+  //   } else if (values.password.length < 6) {
+  //     errors.password = "Too short!";
+  //   }
+  //   if (!values.passwordConfirmation) {
+  //     errors.passwordConfirmation = "Required";
+  //   } else if (values.passwordConfirmation !== values.password) {
+  //     errors.passwordConfirmation = "Passwords do not match";
+  //   }
+
+  //   return errors;
+  // };
 
   render() {
     const {
       pbPercentage,
       currentStep,
-      handleChange,
-      name,
-      email,
-      password,
-      passwordConfirmation,
-      contactFirstName,
-      contactLastName,
-      contactPhoneNumber,
+      // name,
+      // email,
+      // password,
+      // passwordConfirmation,
+      // contactFirstName,
+      // contactLastName,
+      // contactPhoneNumber,
       handleProfileFileChange,
       selectedProfileFile,
       deleteProfileFile,
-      city,
-      state,
-      link,
-      description,
+      // city,
+      // state,
+      // link,
+      // description,
+      handleRegistration,
       formValid,
       formErrors
     } = this.props;
 
+    const validationSchema = Yup.object().shape({
+      name: Yup.string()
+        .min(2, "Too Short!")
+        .max(50, "Too Long!")
+        .required("Required"),
+      email: Yup.string()
+        .email("Invalid email")
+        .required("Required"),
+      password: Yup.string()
+        .min(6, "Too Short!")
+        .required("Password is required"),
+      passwordConfirmation: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .required("Required"),
+      firstName: Yup.string().required("Required"),
+      lastName: Yup.string().required("Required"),
+      contactPhoneNumber: Yup.string()
+        .test("phoneNumberTest", "Invalid phone number", isValidPhoneNumber)
+        // .matches(
+        //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+        //   "Invalid phone number"
+        // )
+        .required("Required"),
+      city: Yup.string().required("Required"),
+      state: Yup.string().required("Required"),
+      link: Yup.string().url("Invalid link"),
+      description: Yup.string().required("Required")
+    });
+
     return (
-      <div className="w-100 flex flex-column items-center">
-        <div>
-          <div>
-            {Object.keys(formErrors).map((fieldName, i) => {
-              if (formErrors[fieldName].length > 0) {
-                return (
-                  <p key={i}>
-                    {fieldName} {formErrors[fieldName]}
-                  </p>
-                );
-              }
-              return "";
-            })}
-          </div>
-        </div>
-        <div className="form-h w-33 flex flex-column justify-between">
-          <div>
-            <form className="w-100 flex flex-column">
-              <Step1
-                currentStep={currentStep}
-                handleChange={handleChange}
-                name={name}
-                email={email}
-                password={password}
-                passwordConfirmation={passwordConfirmation}
-              />
+      <Formik
+        initialValues={{
+          name: "",
+          email: "",
+          password: "",
+          passwordConfirmation: "",
+          contactFirstName: "",
+          contactLastName: "",
+          contactPhoneNumber: "",
+          city: "",
+          state: "",
+          link: "",
+          description: ""
+        }}
+        onSubmit={handleRegistration}
+        validationSchema={validationSchema}
+        render={({ values, handleSubmit, handleChange, handleBlur }) => (
+          <form
+            onSubmit={handleSubmit}
+            className="form-h w-90 w-60-m w-33-l flex flex-column justify-between"
+          >
+            <div>
+              <Step1 currentStep={currentStep} />
               <Step2
                 currentStep={currentStep}
+                contactPhoneNumberValue={values.contactPhoneNumber}
                 handleChange={handleChange}
-                contactFirstName={contactFirstName}
-                contactLastName={contactLastName}
-                contactPhoneNumber={contactPhoneNumber}
+                handleBlur={handleBlur}
                 handleProfileFileChange={handleProfileFileChange}
                 selectedProfileFile={selectedProfileFile}
                 deleteProfileFile={deleteProfileFile}
               />
-              <Step3
-                currentStep={currentStep}
-                handleChange={handleChange}
-                city={city}
-                state={state}
-                link={link}
-              />
-              <Step4
-                currentStep={currentStep}
-                handleChange={handleChange}
-                description={description}
-                formValid={formValid}
-              />
-            </form>
-          </div>
-          <div className="flex flex-column">
-            <div className="flex flex-row-reverse justify-between">
-              {this.submitButton()}
-              {this.nextButton()}
-              {this.backButton()}
+              <Step3 currentStep={currentStep} />
             </div>
-            <ProgressBar percentage={pbPercentage} currentStep={currentStep} />
-          </div>
-        </div>
-      </div>
+            <div className="flex flex-column">
+              <div className="flex flex-row-reverse justify-between">
+                {this.submitButton()}
+                {this.nextButton()}
+                {this.backButton()}
+              </div>
+              <ProgressBar
+                percentage={pbPercentage}
+                currentStep={currentStep}
+              />
+            </div>
+          </form>
+        )}
+      />
     );
   }
 }
