@@ -6,13 +6,14 @@ class Button extends Component {
     type: PropTypes.string.isRequired,
     className: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
     disabled: PropTypes.bool
   };
 
   static defaultProps = {
     className: "",
     children: "",
+    onClick: ()=>{},
     disabled: false
   };
 
@@ -41,6 +42,26 @@ class Button extends Component {
             type="button"
             className={`${className} fw5 f4 ba bw1 primary-border-color ph3 pv2 dib black bg-white flex justify-center`}
             onClick={onClick}
+            disabled={disabled}
+          >
+            {children}
+          </button>
+        );
+      case "button-primary-submit":
+        return (
+          <button
+            type="submit"
+            className={`${className} fw5 f4 ba bw1 primary-border-color ph3 pv2 dib black bg-primary flex justify-center`}
+            disabled={disabled}
+          >
+            {children}
+          </button>
+        );
+      case "button-secondary-submit":
+        return (
+          <button
+            type="submit"
+            className={`${className} fw5 f4 ba bw1 primary-border-color ph3 pv2 dib black bg-white flex justify-center`}
             disabled={disabled}
           >
             {children}
