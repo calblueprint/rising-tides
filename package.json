@@ -17,11 +17,13 @@
     "react-inlinesvg": "^0.8.4",
     "react-modal": "^3.8.1",
     "react-onclickoutside": "^6.8.0",
+    "react-phone-number-input": "^2.3.11",
     "react-select": "^2.4.2",
     "react_ujs": "^2.4.4",
     "turbolinks": "^5.2.0",
     "validate.js": "^0.12.0",
-    "webpack": "^4.29.6"
+    "webpack": "^4.29.6",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
