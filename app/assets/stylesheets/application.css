@@ -27,6 +27,14 @@ h1 {
     line-height: normal;
     color: #000000;
 }
+a {
+    line-height: 20px;
+    margin-top: 8px;
+    padding-right: 20px;
+    padding-left: 20px;
+    position: relative;
+    text-decoration: none;
+}
 
 h2 {
     font-family: Impact;
@@ -50,10 +58,12 @@ a {
     background-color: transparent;
 }
 
+
 a:hover {
     cursor: pointer;
     background-color: auto;
     color: auto;
+    color: black;
 }
 
 button, .button {
@@ -99,7 +109,7 @@ button, .button {
 }
 
 button:hover, .button:hover {
-    background-color: #0080c7;
+    cursor:pointer;
 }
 
 input:focus {
@@ -123,6 +133,32 @@ input.input {
     transition: all 1s ease-out;
     opacity: 0;
     visibility: hidden;
+}
+
+.accept-button {
+    width: auto;
+    height: auto;
+    background-color: #EFE137;
+    color: black;
+    font-family: 'Lato';
+    cursor: pointer;
+    border-style:solid;
+    border-width:.5px;
+    text-decoration: bold;
+}
+
+.deny-button {
+    width: auto;
+    height: auto;
+    background-color: #db3236;
+    color: white;
+    font-family: 'Lato';
+    cursor: pointer;
+    border-style:solid;
+    border-width:.5px;
+    border-color:black;
+    text-decoration: bold;
+
 }
 
 .std-button, .std-button:link, .std-button:visited {
@@ -178,7 +214,7 @@ input.input {
 }
 
 .std-button:hover, .std-button:active {
-    background-color: #DACD23;
+    background-color: #efe137;
     color: #000;
 }
 
@@ -361,10 +397,8 @@ input.input {
 .input-contianer {
     padding-bottom: 44px;
 }
-
-.hr-navbar {
-    border: 3px solid black;
-    width: 304px;
+.no-link {
+    text-decoration: none;
 }
 
 .lato {
@@ -401,12 +435,62 @@ input.input {
     height:10rem;
 }
 
+.ul {
+    list-style-type: none;
+    font-family: 'Lato'
+  }
+
+.logo-navbar {
+  padding-top: 18px;
+  width: 20rem;
+  height: auto;
+  cursor: pointer;
+}
+
 .navbar {
-  padding-top: 16px;
+  padding-top: 8px;
   width: 100%;
+  height:82px;
   background-color: #EFE137;
   position: fixed;
-  height: 80px;
+  overflow: hidden;
+  margin:0;
+}
+  
+.shadow-bold:hover {
+    text-shadow:0px 0px .25px black;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;  
+    color: white;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.dropdown-content {
+    z-index:-1;
+    display: block;
+    position: fixed;
+    right:80px;
+    top:60px;
+    background-color: #f9f9f9;
+    height: auto;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.show {
+    display: block;
 }
 
 .container-label {
@@ -416,12 +500,21 @@ input.input {
     padding-bottom: 8px;
 }
 
-.approved {
-    color: #3cba54;
+.accepted {
+    background-color: #3cba54;
+}
+
+.withdraw {
+    background-color: #db3236;
 }
 
 .denied {
-    color: #db3236;
+    background-color: #db3236;
+    color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000;
+      
 }
 
 fieldset {

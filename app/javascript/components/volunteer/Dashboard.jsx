@@ -245,19 +245,19 @@ class Dashboard extends React.Component {
       applicationList = this.state.applications.map((application, index) => {
         var project_status = (
             <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                In Review
+                Pending
             </div>
         );
         if (application.status == "interviewing") {
             project_status = (
                 <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interview
+                    Interviewing
                 </div>
             );
         } else if (application.status == "accepted") {
             project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interview
+                <div className="dib accepted ph3 pv2 fw4">
+                    Accepted
                 </div>
             );
         } else if (application.status == "denied") {
@@ -279,7 +279,7 @@ class Dashboard extends React.Component {
                     <a
                         className="w-25 tr"
                         href={"/applications/" + application.id}
-                        >View job description <span className="ml3 f5 fa fa-angle-right"></span></a>
+                        >View Application <span className="ml3 f5 fa fa-angle-right"></span></a>
                 </div>
             </div>
         );
