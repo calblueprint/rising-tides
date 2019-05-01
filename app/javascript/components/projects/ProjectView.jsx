@@ -190,10 +190,9 @@ class ProjectView extends React.Component {
                     </div>
                     {apply_button}
                 </div>
-                <img className="mv3 w-100 h-auto" src={project_pic}/>
                 {project.overview ? (
                             <div>
-                                <h3 className="mt3 f3">Project Overview</h3>
+                                <h2 className="mt3 f3">Project Overview</h2>
                                 <p className="f5">{project.overview}</p>
                             </div>
                         ) : (null)}
@@ -205,54 +204,54 @@ class ProjectView extends React.Component {
                         </div>
                         {project.description ? (
                             <div>
-                                <h3 className="mt4 f3">Description</h3>
+                                <h2 className="mt4 f3">Description</h2>
                                 <p className="f5">{project.description}</p>
                             </div>
                         ) : (null)}
                         {project.deliverable ? (
                             <div>
-                                <h3 className="mt4 f3">Deliverable</h3>
+                                <h2 className="mt4 f3">Deliverable</h2>
                                 <p className="f5">{project.deliverable}</p>
                             </div>
                         ) : (null)}
                         {this.props.skills ? (
                             <div>
-                                <h3 className="mt4 f3">Volunteer Skills</h3>
+                                <h2 className="mt4 f3">Volunteer Skills</h2>
                                 {skillList}
                             </div>
                         ) : (null)}
                         {project.volunteer_requirements ? (
                             <div>
-                                <h3 className="mt4 f3">Volunteer Requirements</h3>
+                                <h2 className="mt4 f3">Volunteer Requirements</h2>
                                 <p className="f5">{project.volunteer_requirements}</p>
                             </div>
                         ) : (null)}
                         {project.other_details ? (
                             <div>
-                                <h3 className="mt4 f3">Other Details</h3>
+                                <h2 className="mt4 f3">Other Details</h2>
                                 <p className="f5">{project.other_details}</p>
                             </div>
                         ) : (null)}
                         {project.question1 ? (
                             <div>
-                                <h3 className="mt4 f3">Our Community Needs This If</h3>
+                                <h2 className="mt4 f3">Our Community Needs This If</h2>
                                 <p className="f5"> {project.question1}</p>
                             </div>
                         ) : (null)}
                         {project.question2 ? (
                             <div>
-                                <h3 className="mt4 f3">The Right Volunteer for this Project Is</h3>
+                                <h2 className="mt4 f3">The Right Volunteer for this Project Is</h2>
                                 <p className="f5">{project.question2}</p>
                             </div>
                         ) : (null)}
                         {project.question3 ? (
                             <div>
-                                <h3 className="mt4 f3">What You Give, What You Get</h3>
+                                <h2 className="mt4 f3">What You Give, What You Get</h2>
                                 <p className="f5">{project.question3}</p>
                             </div>
                         ) : (null)}
                     </div>
-                    <div className="w-auto bg-light-gray pa3 h-auto">
+                    <div className="w-auto bg-light-gray pa4 h-auto">
                         <div className="flex items-center">
                             {org_img}
                             <a className="ma0 f3 truncate dib">{organization.name}</a>
@@ -268,9 +267,9 @@ class ProjectView extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="w-100 h1 mt4 mb3">
+                <div className="w-100 h1 mt2">
                     <div className="dib fl">
-                        <a className="f3" href="/applications"><h3>Applications</h3></a>
+                        <a className="mb2" href="/applications"><h2 className="f3">Applications</h2></a>
                     </div>
                 </div>
                 <br/>
