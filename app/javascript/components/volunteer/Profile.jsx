@@ -95,7 +95,7 @@ class Profile extends React.Component {
         profileUrl = profile_pic;
     }
     let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
- d    let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
+    let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
     let resume = <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
                     <i className="fas fa-file-alt f2"></i>                            
                 </a>
@@ -114,12 +114,14 @@ class Profile extends React.Component {
                             <h1 className="ma0 truncate f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
-                            <a className="pa0 ph1 ml3 mb4" target="_blank" href={`http://${this.props.user.link}`}>
-                                <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.link}`}>
+                            <i className="fab fa-linkedin f2"></i>
                             </a>
-                            {resume}
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
+                            <i class="fas fa-file-alt f2"></i>                            
+                            </a>
                         </div>
-                        <div className="flex f5">
+                        <div className="flex lato b f5">
                             <div className="mt1-ns">
                                 {this.props.user.email}
                             </div>
