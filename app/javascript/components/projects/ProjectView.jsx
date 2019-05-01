@@ -97,13 +97,8 @@ class ProjectView extends React.Component {
     
     if (this.props.skills) {
         skillList = this.props.skills.map((skill, index) => {
-            var skill_pill = (
-                <p>skill</p>
-            )
+            return (<p>skill</p>)
         })
-        return (
-            <div>{skill_pill}</div>
-        )
     } 
 
     let applicationList;
