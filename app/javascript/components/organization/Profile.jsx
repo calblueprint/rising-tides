@@ -51,6 +51,9 @@ class Profile extends React.Component {
   };
 
   render() {
+    const { organization } = this.state;
+    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+    let profileImage = <img className="h-100 ba w4"  src={profile_pic} />;
     let projectList;
 
     if (this.state.projects && this.state.projects.length !== 0) {

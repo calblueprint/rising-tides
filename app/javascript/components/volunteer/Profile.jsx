@@ -52,9 +52,17 @@ class Profile extends React.Component {
 
   render() {
     const { user } = this.state;
+<<<<<<< HEAD
     let projectList;  
+=======
+<<<<<<< HEAD
+>>>>>>> default profile pic
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
     let profileImage = <img className="h-100 w4"  src={profileUrl} />;
+=======
+    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+    let profileImage = <img className="h-100 ba w4"  src={profile_pic} />;
+>>>>>>> default profile pic
     let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
     let resume = <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
                     <i className="fas fa-file-alt f2"></i>                            
