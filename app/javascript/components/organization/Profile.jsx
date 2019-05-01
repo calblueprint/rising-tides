@@ -59,7 +59,9 @@ class Profile extends React.Component {
       if (this.props.organization.name == this.props.curr_organization.name && this.props.organization.email == this.props.curr_organization.email){
       return (
         <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
-          <img src="/images/edit_pen.png" style={{ width: '21px', height: '21px' }} />
+          <img src="/images/edit_pen.png"
+              style={{ width: '21px', height: '21px'}}
+              className="grayscale"/>
         </a>
       )}
     }

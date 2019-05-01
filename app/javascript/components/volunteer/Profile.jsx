@@ -55,12 +55,32 @@ class Profile extends React.Component {
     window.location.href = "/users/edit";
   };
 
+
+  getInitialState = () => {
+    return {
+        hover: false
+    };
+  };
+
+  hoverOn = () =>{
+    console.log("on");
+    this.setState({ hover: true });
+  };
+
+  hoverOff = () =>{
+    console.log("off");
+    this.setState({ hover: false });
+  };
+
+
   checkIfUser = () => {
     if (this.props.user != null && this.props.curr_user != null){
       if (this.props.user.name == this.props.curr_user.name && this.props.user.email == this.props.curr_user.email){
       return (
         <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
-          <img src="/images/edit_pen.png" style={{ width: '21px', height: '21px' }} />
+        <img src="/images/edit_pen.png"
+            style={{ width: '21px', height: '21px'}}
+            className="grayscale"/>
         </a>
       )}
     }
