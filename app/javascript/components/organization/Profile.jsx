@@ -2,9 +2,12 @@ import React from "react";
 import axios from "axios";
 import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
+<<<<<<< HEAD
 import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 
+=======
+>>>>>>> proj cards and fonts
 
 class Profile extends React.Component {
   constructor(props) {
@@ -52,8 +55,8 @@ class Profile extends React.Component {
 
   render() {
     const { organization } = this.state;
-    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
-    let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
+    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+    let profileImage = <img className="h-100 w4"  src={profileUrl} />;
     let projectList;
 
     if (this.state.projects && this.state.projects.length !== 0) {
