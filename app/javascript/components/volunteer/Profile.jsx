@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
+import profile_pic from "images/profile_pic.png";
+
 
 class Profile extends React.Component {
   constructor(props) {
@@ -71,7 +73,7 @@ class Profile extends React.Component {
                                 {resume}
                             </div>
                         </div>
-                        <div className="flex">
+                        <div className="flex f5">
                             <div className="mt1-ns">
                                 {this.props.user.email}
                             </div>
