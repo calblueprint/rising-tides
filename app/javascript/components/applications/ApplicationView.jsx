@@ -11,9 +11,9 @@ class ApplicationView extends React.Component {
         axios.defaults.headers.common = {
             "X-Requested-With": "XMLHttpRequest",
             "X-CSRF-TOKEN": document
-              .querySelector('meta[name="csrf-token"]')
-              .getAttribute("content")
-          };
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content")
+        };
         this.handleDeny = this.handleDeny.bind(this);
         this.handleInterview = this.handleInterview.bind(this);
         this.handleAccept = this.handleAccept.bind(this);
@@ -25,47 +25,47 @@ class ApplicationView extends React.Component {
     }
 
     handleDeny = e => {
-    e.preventDefault();
-    axios
-        .post(`/api/applications/${this.props.application.id}/decide`, {
-        decision: 'denied'
-        })
-        .then(function(response) {
-        window.location.reload();
-        })
-        .catch(res => {
-            this.flash_message.flashError(
-                res.response.data.message
-            );
-        });
+        e.preventDefault();
+        axios
+            .post(`/api/applications/${this.props.application.id}/decide`, {
+                decision: 'denied'
+            })
+            .then(function(response) {
+                window.location.reload();
+            })
+            .catch(res => {
+                this.flash_message.flashError(
+                    res.response.data.message
+                );
+            });
     };
 
     handleInterview = e => {
         e.preventDefault();
         axios
-          .post(`/api/applications/${this.props.application.id}/decide`, {
-            decision: 'interviewing'
-          })
-          .then(function(response) {
-            console.log(response);
-            window.location.reload();
-          })
-          .catch(res => {
-            this.flash_message.flashError(
-                res.response.data.message
+            .post(`/api/applications/${this.props.application.id}/decide`, {
+                decision: 'interviewing'
+            })
+            .then(function(response) {
+                console.log(response);
+                window.location.reload();
+            })
+            .catch(res => {
+                this.flash_message.flashError(
+                    res.response.data.message
                 );
             });
-      };
-    
+    };
+
     handleAccept = e => {
         e.preventDefault();
         axios
             .post(`/api/applications/${this.props.application.id}/decide`, {
-            decision: 'accepted'
+                decision: 'accepted'
             })
             .then(function(response) {
-            console.log(response);
-            window.location.reload();
+                console.log(response);
+                window.location.reload();
             })
             .catch(res => {
                 this.flash_message.flashError(
@@ -75,8 +75,8 @@ class ApplicationView extends React.Component {
     };
 
     handleVolunteerClick = e => {
-    e.preventDefault();
-    window.location.href = `/users/${this.props.user.id}`;
+        e.preventDefault();
+        window.location.href = `/users/${this.props.user.id}`;
     };
 
     goBack = e => {
@@ -117,37 +117,40 @@ class ApplicationView extends React.Component {
     }
 
     displayStatus() {
-      let rendered_status = (<div className="fl f5 pa2 w4 tc bg-light-gray">
+        let rendered_status = (<div className="fl f5 pa2 w4 tc bg-light-gray">
                                 Undefined Status
                             </div>)
-      if (this.props.application.status === "pending") {
-        rendered_status = (<div className="fl f5 pa2 w4 tc bg-accent">
+        if (this.props.application.status === "pending") {
+            rendered_status = (<div className="fl f5 pa2 w4 tc bg-accent">
                                 Pending
                             </div>)
-      } else if (this.props.application.status === "interviewing") {
-        rendered_status = (<div className="fl f5 pa2 w4 tc bg-accent">
+        } else if (this.props.application.status === "interviewing") {
+            rendered_status = (<div className="fl f5 pa2 w4 tc bg-accent">
                                 Interviewing
                           </div>)
-      } else if (this.props.application.status === "accepted") {
-        rendered_status = (<div className="fl f5 pa2 w4 tc accepted">
+        } else if (this.props.application.status === "accepted") {
+            rendered_status = (<div className="fl f5 pa2 w4 tc accepted">
                                 Accepted
                           </div>)
-      } else if (this.props.application.status === "denied") {
-        rendered_status = (<div className="fl f5 pa2 ba w5 tc">
+        } else if (this.props.application.status === "denied") {
+            rendered_status = (<div className="fl f5 pa2 ba w5 tc">
                                 No longer in consideration
                           </div>)
-      }
-      return rendered_status;
+        }
+        return rendered_status;
     }
 
     render() {
-      let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
-      let profileImage = <img className="h-100 w4"  src={profileUrl} />;
-      let resume = <a className="dib std-button w3 f7 pa1 lh-m">Resume</a>
-      return(
-        <div className="w-100 h-100 tc">
+        let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
+        let profileImage = <img className="h-100 w4"  src={profileUrl} />;
+        let resume = <a className="dib std-button w3 f7 pa1 lh-m">Resume</a>
+        return (
+            <div className="w-100 h-100 tc">
+            <div
+                className="h5 absolute w-100 bg-black bg-image"
+                style={{zIndex: -1}} />
+            <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
-            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
                 <h1 className="ma0 f1 mb4 truncate"> Application - {this.props.project.title} </h1>
                 <div className="mb5">
                     {this.displayStatus()} {this.displayWithdraw()}
@@ -199,10 +202,10 @@ class ApplicationView extends React.Component {
                 <button className="f5 w-auto tc pa2 white bg-black lato b" onClick={this.goBack}>
                     Back
                 </button>
-            </div>
+           </div>
       </div>
 
-      )
+        )
     }
 }
 
@@ -211,6 +214,6 @@ ApplicationView.propTypes = {
     user: PropTypes.object,
     project: PropTypes.object,
     organization: PropTypes.object
-  };
+};
 
 export default ApplicationView;
