@@ -55,6 +55,17 @@ class Profile extends React.Component {
     window.location.href = "/users/edit";
   };
 
+  checkIfUser = () => {
+    if (this.props.user != null && this.props.curr_user != null){
+      if (this.props.user.name == this.props.curr_user.name && this.props.user.email == this.props.curr_user.email){
+      return (
+        <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
+          <img src="/images/edit_pen.png" style={{ width: '21px', height: '21px' }} />
+        </a>
+      )}
+    }
+  }
+
   render() {
     let skillList;
     const { projects, loading } = this.state;
@@ -94,9 +105,7 @@ class Profile extends React.Component {
                 style={{zIndex: -1}} />
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
-            <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
-              <img src="/images/edit_pen.png" style={{ width: '21px', height: '21px' }} />
-            </a>
+            {this.checkIfUser()}
                 <div className="h4 flex items-end">
                     {profileImage}
 

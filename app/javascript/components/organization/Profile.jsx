@@ -54,6 +54,17 @@ class Profile extends React.Component {
     window.location.href = "/organizations/edit";
   };
 
+  checkIfOrg = () => {
+    if (this.props.organization != null && this.props.curr_organization != null){
+      if (this.props.organization.name == this.props.curr_organization.name && this.props.organization.email == this.props.curr_organization.email){
+      return (
+        <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
+          <img src="/images/edit_pen.png" style={{ width: '21px', height: '21px' }} />
+        </a>
+      )}
+    }
+  }
+
   render() {
     const { organization, projects, loading } = this.state;
 
@@ -70,9 +81,7 @@ class Profile extends React.Component {
                 style={{zIndex: -1}} />
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
-                <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
-                  <img src="/images/edit_pen.png" style={{ width: '21px', height: '21px' }} />
-                </a>
+                {this.checkIfOrg()}
                 <div className="h4 flex items-end">
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
