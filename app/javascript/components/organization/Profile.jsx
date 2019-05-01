@@ -77,11 +77,11 @@ class Profile extends React.Component {
                             <h1 className="ma0 f1 mb3">
                                 {this.props.organization.name}
                             </h1>
-                            <a className="pa0 ph1 ml3 mb4" target="_blank" href={`http://${this.props.organization.link}`}>
-                                <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.organization.link}`}>
+                            <i className="fab fa-linkedin f2"></i>
                             </a>
                         </div>
-                        <div className="flex f5">
+                        <div className="flex lato b f5">
                             <div className="mt1-ns">
                                 {this.props.organization.email}
                             </div>
