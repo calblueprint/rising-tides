@@ -139,8 +139,8 @@ class ProjectView extends React.Component {
     return (
         <div className="w-100 h-100 tc bg-white">
             <div
-                className="h5 absolute w-100 bg-moon-gray"
-                style={{zIndex: -1}}></div>
+                className="h5 absolute w-100 bg-black bg-image"
+                style={{zIndex: -1}} />
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
                 <h1 className="f1 ma0">{project.title}</h1>
                 {edit_button}
