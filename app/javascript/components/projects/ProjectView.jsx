@@ -145,7 +145,7 @@ class ProjectView extends React.Component {
         );
       });
     } else {
-      applicationList = <div className="mv2">No Results</div>;
+      applicationList = <div className="f5 lato mv3">No Results</div>;
     }
 
     let applications;
