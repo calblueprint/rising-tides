@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
+import profile_pic from "images/profile_pic.png";
+
 
 class Profile extends React.Component {
   constructor(props) {
@@ -45,9 +47,6 @@ class Profile extends React.Component {
   };
 
   render() {
-    const { organization } = this.state;
-    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
-    let profileImage = <img className="h-100 w4"  src={profileUrl} />;
     let projectList;
 
     if (this.state.projects && this.state.projects.length !== 0) {
@@ -57,6 +56,13 @@ class Profile extends React.Component {
     } else {
       projectList = <div>No Results</div>;
     }
+
+    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
+    if (profileUrl === "/profile_images/original/missing.png") {
+        profileUrl = profile_pic;
+    }
+    let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
+    
     return (
         <div className="w-100 h-100 tc">
            <div
@@ -71,11 +77,11 @@ class Profile extends React.Component {
                             <h1 className="ma0 f1 mb3">
                                 {this.props.organization.name}
                             </h1>
-                            <a className="pa0 ph1 ml3 mb1" target="_blank" href={`http://${this.props.organization.link}`}>
-                                <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.organization.link}`}>
+                            <i className="fab fa-linkedin f2"></i>
                             </a>
                         </div>
-                        <div className="flex">
+                        <div className="flex lato b f5">
                             <div className="mt1-ns">
                                 {this.props.organization.email}
                             </div>
@@ -91,10 +97,10 @@ class Profile extends React.Component {
                     </div>
                 </div>
 
-                <h3 className="pt5">Description</h3>
-                {this.props.organization.description}
+                <h2 className="pt4 f3">Description</h2>
+                <p className="f5">{this.props.organization.description}</p>
 
-                <h3 className="pt5">Projects</h3>
+                <h2 className="pt4 f3 pb3">Projects</h2>
                 {projectList}
             </div>
         </div>
