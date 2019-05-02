@@ -232,9 +232,7 @@ class Dashboard extends React.Component {
 
     if (this.state.projects.length) {
       projectList = this.state.projects.map((project, index) => {
-        return (<span>
-            <ProjectCard project={project} key={index} />
-        </span>);
+        return <ProjectCard project={project} key={index} />;
       });
     } else {
       projectList = <div>No Results</div>;
