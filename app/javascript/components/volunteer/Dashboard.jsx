@@ -196,6 +196,7 @@ class Dashboard extends React.Component {
         query: {
             with_statuses: statuses,
             with_user_id: this.props.user.id,
+            with_statuses: [0, 2, 3],
             with_limit: 3
         }
     };
