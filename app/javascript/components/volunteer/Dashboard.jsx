@@ -196,7 +196,7 @@ class Dashboard extends React.Component {
         query: {
             with_statuses: statuses,
             with_user_id: this.props.user.id,
-            with_limit: 3
+            with_limit: 4
         }
     };
 
@@ -233,7 +233,9 @@ class Dashboard extends React.Component {
 
     if (this.state.projects) {
       projectList = this.state.projects.map((project, index) => {
-        return <ProjectCard project={project} key={index} />
+        return (<span>
+            <ProjectCard project={project} key={index} />
+        </span>);
       });
     } else {
       projectList = <div>No Results</div>;
@@ -311,11 +313,11 @@ class Dashboard extends React.Component {
                     </div>
                 </div>
                 <div className="cf"></div>
-                <div className="w-100 h1 mb3">
-                    <div className="dib fl">
-                        <a href="/applications"><h3>Applications</h3></a>
+                <div className="w-100 mb1 flex items-center">
+                    <div className="dib w-100">
+                        <a className="f4 pa0" href="/applications">Applications</a>
                     </div>
-                    <div className="dib fr">
+                    <div className="dib w-100 tr">
                         <h3
                             className="pointer disable-selection dim"
                             onClick={() => this.toggleApplicationFiltering()}>
@@ -337,14 +339,23 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateApplicationSearch()}>
                         Update Search</a>
                 </div>}
+                <div className="cf"></div>
                 {applicationList}
+                <div>
+                    <div className="bt b--black-10" />
+                    <div className="pv3 tc">
+                        <a
+                            href={"/applications"}
+                            >View More Applications</a>
+                    </div>
+                </div>
 
                 <div className="cf"></div>
-                <div className="w-100 h1 mt5">
-                    <div className="dib fl">
-                        <a href="/my-projects"><h3>Current Projects</h3></a>
+                <div className="w-100 mt5 mb1 flex items-center">
+                    <div className="dib w-100">
+                        <a className="f4 pa0" href="/my-projects">Current Projects</a>
                     </div>
-                    <div className="dib fr">
+                    <div className="dib w-100 tr">
                         <h3
                             className="pointer disable-selection dim"
                             onClick={() => this.toggleProjectFiltering()}>
@@ -352,7 +363,7 @@ class Dashboard extends React.Component {
                         </h3>
                     </div>
                 </div>
-                <div className="mb2 mt3 bt b--black-10" />
+                <div className="mb2 bt b--black-10" />
                 {this.state.show_project_filtering &&
                 <div className="w-100 flex items-center">
                     <Dropdown
@@ -381,9 +392,15 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateProjectSearch()}>
                         Update Search</a>
                 </div>}
+                <div className="cf"></div>
                 {projectList}
+                <div className="cf"></div>
+                <div className="pv3 tc">
+                    <a
+                        href={"/my-projects"}
+                        >View More Projects</a>
+                </div>
             </div>
-            <Logout />
         </div>
     );
   }
