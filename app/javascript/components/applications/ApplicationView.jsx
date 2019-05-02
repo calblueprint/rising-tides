@@ -1,8 +1,9 @@
 import React from "react";
 import axios from 'axios';
 import PropTypes from "prop-types";
-import linkedin from "images/linked-in.png";
 import FlashMessage from '../utils/FlashMessage';
+import profile_pic from "images/profile_pic.png";
+
 
 
 class ApplicationView extends React.Component {
@@ -90,15 +91,15 @@ class ApplicationView extends React.Component {
             if (this.props.application.status === null || this.props.application.status === "pending") {
                 buttons = (
                     <div className="mv4">
-                    <button className="accept-button f5 pa2 fr" onClick={this.handleInterview}>Interview</button>
-                    <button className="deny-button f5 mr4 pa2 fr" onClick={this.handleDeny}>Reject</button>
+                    <button className="accept-button f5 pa2 fr b" onClick={this.handleInterview}>Interview</button>
+                    <button className="f5 w-auto tc pa2 white bg-black lato ba fr b mr3" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             } else if (this.props.application.status == "interviewing") {
                 buttons = (
                     <div className="mv4">
-                    <button className="accept-button f5 pa2 fr" onClick={this.handleAccept}>Accept</button>
-                    <button className="deny-button f5 mr4 pa2 fr" onClick={this.handleDeny}>Reject</button>
+                    <button className="accept-button f5 pa2 fr b" onClick={this.handleAccept}>Accept</button>
+                    <button className="f5 w-auto tc pa2 white bg-black lato ba b fr mr3" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             }
@@ -108,8 +109,8 @@ class ApplicationView extends React.Component {
 
     displayWithdraw() {
         let withdraw = null;
-        if (this.props.user && this.props.application.status != "denied") {
-            withdraw = (<button className="deny-button f5 mr4 pa2 ml3" onClick={this.handleDeny}>
+        if (!this.props.organization && this.props.application.user_id == this.props.user.id && this.props.application.status != "denied") {
+            withdraw = (<button className="f5 w-auto tc pa2 white bg-black lato ba mr3" onClick={this.handleDeny}>
                             Withdraw Application
                         </button>)
         }
@@ -117,23 +118,23 @@ class ApplicationView extends React.Component {
     }
 
     displayStatus() {
-        let rendered_status = (<div className="fl f5 pa2 w4 tc bg-light-gray">
+      let rendered_status = (<div className="f5 fr pa2 w4 tc bg-light-gray">
                                 Undefined Status
                             </div>)
-        if (this.props.application.status === "pending") {
-            rendered_status = (<div className="fl f5 pa2 w4 tc bg-accent">
+      if (this.props.application.status === "pending") {
+        rendered_status = (<div className="f5 fr pa2 w4 tc bg-accent">
                                 Pending
                             </div>)
-        } else if (this.props.application.status === "interviewing") {
-            rendered_status = (<div className="fl f5 pa2 w4 tc bg-accent">
+      } else if (this.props.application.status === "interviewing") {
+        rendered_status = (<div className="f5 fr pa2 w4 tc bg-accent">
                                 Interviewing
                           </div>)
-        } else if (this.props.application.status === "accepted") {
-            rendered_status = (<div className="fl f5 pa2 w4 tc accepted">
+      } else if (this.props.application.status === "accepted") {
+        rendered_status = (<div className="f5 fr pa2 w4 tc accepted">
                                 Accepted
                           </div>)
-        } else if (this.props.application.status === "denied") {
-            rendered_status = (<div className="fl f5 pa2 ba w5 tc">
+      } else if (this.props.application.status === "denied") {
+        rendered_status = (<div className="f5 fr pa2 ba w5 tc">
                                 No longer in consideration
                           </div>)
         }
@@ -141,19 +142,17 @@ class ApplicationView extends React.Component {
     }
 
     render() {
-        let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
-        let profileImage = <img className="h-100 w4"  src={profileUrl} />;
-        let resume = <a className="dib std-button w3 f7 pa1 lh-m">Resume</a>
-        return (
-            <div className="w-100 h-100 tc">
-            <div
-                className="h5 absolute w-100 bg-black bg-image"
-                style={{zIndex: -1}} />
-            <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
+      let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
+      let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
+      let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
+      return(
+        <div className="w-100 h-100 tc">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
-                <h1 className="ma0 f1 mb4 truncate"> Application - {this.props.project.title} </h1>
-                <div className="mb5">
-                    {this.displayStatus()} {this.displayWithdraw()}
+            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
+                <div><h1 className="ma0 f1 mb4 truncate"> Application - {this.props.project.title} </h1></div>
+                {this.displayStatus()}
+                <div className="mb3">
+                    {this.displayWithdraw()}
                 </div>
                 <br/>
                 <div className="h4 flex items-end">
@@ -164,14 +163,14 @@ class ApplicationView extends React.Component {
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
                             <br/>
-                            <a className="pa0 ph1 ml3 mb1" href={`http://${this.props.user.linkedin_url}`}>
-                                <img src={linkedin} style={{ width: '21px', height: '21px' }} />
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.linkedin_url}`}>
+                            <i className="fab fa-linkedin f2"></i>
                             </a>
-                            <div className="pb2 ml3">
-                                {resume}
-                            </div>
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
+                            <i class="fas fa-file-alt f2"></i>                            
+                            </a>
                         </div>
-                        <div className="flex">
+                        <div className="flex f5 b lato">
                             <div className="mt1-ns">
                                 {this.props.user.email}
                             </div>
@@ -187,19 +186,19 @@ class ApplicationView extends React.Component {
                     </div>
                 </div>
 
-                <h3 className="pt5">Skills</h3>
-                <p className="lato">{this.props.user.skills}</p>
+                <h2 className="pt4 f3">Skills</h2>
+                <p className="lato f5">{this.props.user.skills}</p>
 
-                <h3 className="pt5">Biography</h3>
-                <p className="lato">{this.props.user.bio}</p>
+                <h2 className="pt4 f3">Biography</h2>
+                <p className="lato f5">{this.props.user.bio}</p>
 
-                <h3 className="pt5">Why are you interested?</h3>
-                <p className="lato">{this.props.application.question1}</p>
-                <h3 className="pt5">Describe your relevant experience.</h3>
-                <p className="lato">{this.props.application.question2} {this.props.application.question3}</p>
+                <h2 className="pt4 f3">Why are you interested?</h2>
+                <p className="lato f5">{this.props.application.question1}</p>
+                <h2 className="pt4 f3">Describe your relevant experience.</h2>
+                <p className="lato f5">{this.props.application.question2} {this.props.application.question3}</p>
                 {this.displayButtons()}
                 <br/>
-                <button className="f5 w-auto tc pa2 white bg-black lato b" onClick={this.goBack}>
+                <button className="f5 w-auto ba tc bg-white black pa2 lato" onClick={this.goBack}>
                     Back
                 </button>
            </div>
