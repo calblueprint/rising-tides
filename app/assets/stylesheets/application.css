@@ -453,6 +453,7 @@ input.input {
   height:82px;
   background-color: #EFE137;
   position: fixed;
+  z-index: 9999;
   overflow: hidden;
   margin:0;
 }
