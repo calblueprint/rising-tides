@@ -147,20 +147,6 @@ input.input {
     text-decoration: bold;
 }
 
-.deny-button {
-    width: auto;
-    height: auto;
-    background-color: #db3236;
-    color: white;
-    font-family: 'Lato';
-    cursor: pointer;
-    border-style:solid;
-    border-width:.5px;
-    border-color:black;
-    text-decoration: bold;
-
-}
-
 .std-button, .std-button:link, .std-button:visited {
     background-color: #EFE137;
     text-decoration: none;
@@ -453,6 +439,7 @@ input.input {
   height:82px;
   background-color: #EFE137;
   position: fixed;
+  z-index: 9999;
   overflow: hidden;
   margin:0;
 }

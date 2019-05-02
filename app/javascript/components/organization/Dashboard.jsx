@@ -387,7 +387,6 @@ class Dashboard extends React.Component {
                 </div>}
                 {projectList}
             </div>
-            <Logout />
         </div>
     );
   }
