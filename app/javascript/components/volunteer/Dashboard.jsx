@@ -164,7 +164,7 @@ class Dashboard extends React.Component {
             with_project_type_ids: project_type_ids,
             with_deliverable_type_ids: deliverable_type_ids,
             with_keyword: this.state.keyword,
-            with_user_id: this.props.user.id,
+            with_accepted_user_id: this.props.user.id,
             with_limit: 3
         }
     }
