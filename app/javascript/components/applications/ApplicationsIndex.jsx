@@ -17,7 +17,7 @@ class ApplicationsIndex extends React.Component {
             id: 0,
             uid: 'pending',
             title: 'Pending',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
@@ -31,7 +31,7 @@ class ApplicationsIndex extends React.Component {
             id: 2,
             uid: 'interviewing',
             title: 'Interviewing',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
