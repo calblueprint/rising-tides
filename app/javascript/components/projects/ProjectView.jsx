@@ -56,14 +56,12 @@ class ProjectView extends React.Component {
         milestones
     } = this.props;
 
-    var org_img = <span></span>;
-    if (this.props.org_image_url) {
-        org_img = <img className="w2 h2 mr2 dib"
-                       src={this.props.org_image_url} />;
-    } else {
-    var org_img = <img className="w2 h2 mr2 dib"
-                       src={profile_pic} />;
+    let profileUrl = this.props.org_image_url ? this.props.org_image_url : profile_pic;
+    if (profileUrl === "/profile_images/original/missing.png") {
+        profileUrl = profile_pic;
     }
+    let org_img = <img className="h-100 ba" style={{width: 48}}  src={profileUrl} />;
+
 
     var project_string_status = "Accepting Applications";
     if (project.status == "in_progress" || project.application_limit - project.application_count < 1) {
@@ -251,7 +249,7 @@ class ProjectView extends React.Component {
                             </div>
                         ) : (null)}
                     </div>
-                    <div className="w-auto bg-light-gray pa4 h-auto">
+                    <div className="w-third bg-light-gray pa4 h-auto">
                         <div className="flex items-center">
                             {org_img}
                             <a className="ma0 f3 truncate dib">{organization.name}</a>
