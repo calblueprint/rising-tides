@@ -109,11 +109,21 @@ class Api::ProjectsController < ApplicationController
     end
 
     if saved
-      for deliverable in params[:deliverables]
-        project.deliverables.create(
-            deliverable.permit(:description, :deadline)
-        )
+      begin
+          for deliverable in params[:deliverables]
+            project.deliverables.create(
+                deliverable.permit(:description, :title)
+            )
+          end
+      rescue StandardError => e
+        project.deliverables.delete_all
+        project.delete
+        return render json: {
+            project: project,
+            error: e
+        }, status: :unprocessable_entity
       end
+
 
       return render json: {
         project: project,
@@ -136,7 +146,7 @@ class Api::ProjectsController < ApplicationController
       new_project.deliverables.delete_all
       for deliverable in params[:deliverables]
         new_project.deliverables.create(
-            deliverable.permit(:description, :deadline)
+            deliverable.permit(:description, :title)
         )
       end
       return render json: {message: 'Project successfully updated!',

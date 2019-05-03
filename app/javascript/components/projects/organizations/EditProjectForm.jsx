@@ -126,7 +126,7 @@ class EditProjectForm extends React.Component {
     var { deliverables } = this.state;
     deliverables.push({
         id: this.state.deliverables.length,
-        deadline: "",
+        title: "",
         description: ""
     });
     this.setState({
@@ -204,12 +204,13 @@ class EditProjectForm extends React.Component {
             <div key={index}>
                 <input
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
-                    type="date"
-                    onChange={this.handleDeliverableChange(index, "deadline")}
-                    value={this.state.deliverables[index].deadline}
+                    type="text"
+                    onChange={this.handleDeliverableChange(index, "title")}
+                    value={this.state.deliverables[index].title}
+                    placeholder="Enter title..."
                 />
                 <textarea
-                    rows="4"
+                    rows="3"
                     className="essay-box bg-light-gray mt1 w-100 pa3"
                     onChange={this.handleDeliverableChange(index, "description")}
                     placeholder="Enter deliverable..."

@@ -155,7 +155,7 @@ class ProjectView extends React.Component {
         return (
             <div className="ml4 mb4 relative">
                 <div style={{left: '-38px', height: '11px', width: '11px'}} className="w1 h1 br-pill bw3 absolute bg-black"></div>
-                <div className="f5">{deliverable.deadline}</div>
+                <div className="f5">{deliverable.title}</div>
                 <div className="mt3">{deliverable.description}</div>
             </div>
         );
