@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
+import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 
 
@@ -9,7 +10,8 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      organization: props.organization
+      organization: props.organization,
+      loading: true
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -33,7 +35,9 @@ class Profile extends React.Component {
           message
         );
       }
-      this.setState({ projects });
+      this.setState({ 
+        projects: projects,
+        loading: false });
     }).catch(res => {
       this.flash_message.flashError(
         res.response.data.message
@@ -54,7 +58,9 @@ class Profile extends React.Component {
         return <ProjectCard project={project} key={index} />
       });
     } else {
-      projectList = <div>No Results</div>;
+      if (this.state.loading == false) {
+            projectList = <div className="f4 tc pa3">There are no projects. </div>;
+        }
     }
 
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
@@ -101,6 +107,7 @@ class Profile extends React.Component {
                 <p className="f5">{this.props.organization.description}</p>
 
                 <h2 className="pt4 f3 pb3">Projects</h2>
+                <Loader loading={this.state.loading} />
                 {projectList}
             </div>
         </div>

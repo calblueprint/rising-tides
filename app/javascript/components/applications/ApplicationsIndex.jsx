@@ -2,12 +2,12 @@ import React from "react";
 import axios from "axios";
 import ApplicationRow from "./ApplicationRow";
 import Dropdown from '../utils/Dropdown';
+import Loader from '../utils/Loader'
 import FlashMessage from '../utils/FlashMessage'
 
 class ApplicationsIndex extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       applications: props.applications,
       show_filtering: false,
@@ -41,7 +41,8 @@ class ApplicationsIndex extends React.Component {
             selected: false,
             key: 'application_statuses'
         }
-      ]
+      ],
+      loading: true
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -92,7 +93,6 @@ class ApplicationsIndex extends React.Component {
         payload.query.with_organization_id = this.props.organization.id;
     }
 
-    console.log(payload);
     axios.post("/api/applications/filter", payload).then(ret => {
       const { applications, message } = ret.data;
       if (message) {
@@ -100,8 +100,10 @@ class ApplicationsIndex extends React.Component {
           message
         );
       }
-      this.setState({ applications });
-      console.log("UPDATED APPLICATIONS LENGTH: " + applications.length);
+      this.setState({
+        applications: applications,
+        loading: false
+      });
     }).catch(res => {
         this.flash_message.flashError(
             res.response.data.message
@@ -181,7 +183,9 @@ class ApplicationsIndex extends React.Component {
         );
       });
     } else {
-      applicationList = <div>You do not have any applications.</div>;
+        if (this.state.loading == false) {
+            applicationList = <div className="f4 tc pa3">There are no applications. </div>;
+        }
     }
 
     return (
@@ -234,6 +238,7 @@ class ApplicationsIndex extends React.Component {
                         onClick={() => this.updateSearch()}>
                         Update Search</a>
                 </div>}
+                <Loader loading={this.state.loading} />
                 {applicationList}
             </div>
         </div>

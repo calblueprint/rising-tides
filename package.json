@@ -35,7 +35,7 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-tachyons-jsx": "^0.1.4",
     "prettier": "^1.16.4",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.3.1"
   },
   "scripts": {
     "lint": "yarn run eslint -- --ext .js --ext .jsx app/javascript"
