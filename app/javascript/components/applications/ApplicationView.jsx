@@ -142,6 +142,16 @@ class ApplicationView extends React.Component {
     }
 
     render() {
+
+        let skillList;
+
+        if (this.props.user.skills) {
+            skillList = this.props.user.skills.map((skill, index) => {
+                return <div className="f5 dim br-pill ba ph3 pv2 mb2 dib lato black">{skill.name}</div>;
+            })
+        } else {
+            skillList = <div>No skills</div>;
+        }
       let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
       let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
       let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
@@ -190,7 +200,7 @@ class ApplicationView extends React.Component {
                 </div>
 
                 <h2 className="pt4 f3">Skills</h2>
-                <p className="lato f5">{this.props.user.skills}</p>
+                {skillList}
 
                 <h2 className="pt4 f3">Biography</h2>
                 <p className="lato f5">{this.props.user.bio}</p>
