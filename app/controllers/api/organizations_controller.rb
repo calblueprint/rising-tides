@@ -31,9 +31,9 @@ class Api::OrganizationsController < ApplicationController
       a = organization.update(organization_params)
     end
     if a
-      new_organization = Project.find(params[:id])
+      new_organization = Organization.find(params[:id])
       return render json: {message: 'Organization successfully updated!',
-                           project: new_organization}
+                           organization: new_organization}
     else
       raise StandardError, application.errors.full_messages
     end
@@ -53,6 +53,10 @@ class Api::OrganizationsController < ApplicationController
         :city,
         :state,
         :link,
+        :password,
+        :password_confirmation,
+        :profile_image,
+        :contact_image,
         :description,
         :contact_first_name,
         :contact_last_name,
