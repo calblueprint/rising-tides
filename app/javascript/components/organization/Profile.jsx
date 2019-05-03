@@ -90,7 +90,7 @@ class Profile extends React.Component {
                                 {this.props.organization.name}
                             </h1>
                             <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.organization.link}`}>
-                            <i className="fab fa-linkedin f2"></i>
+                            <i className="fab fa-linkedin f2 icon-link"></i>
                             </a>
                         </div>
                         <div className="flex lato b f5">

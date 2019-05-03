@@ -84,8 +84,11 @@ class Profile extends React.Component {
                             <h1 className="ma0 truncate f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
-                            <a className="pa0 ph1 ml3 mb4" target="_blank" href={`http://${this.props.user.link}`}>
-                                <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.link}`}>
+                            <i className="fab fa-linkedin f2 icon-link"></i>
+                            </a>
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
+                            <i className="fas fa-file-alt f2 icon-link"></i>                            
                             </a>
                         </div>
                         <div className="flex f5">
