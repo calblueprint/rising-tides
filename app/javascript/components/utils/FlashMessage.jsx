@@ -46,7 +46,7 @@ class FlashMessage extends React.Component {
     const { show, message, is_error } = this.state;
 
     return (
-        <div className={`mw6 pa3 fixed mt3 top-3 left-1 ${is_error ? 'bg-dark-red' : 'bg-blue'} near-white br3 b ${show ? 'alert-shown' : 'alert-hidden'}`}>
+        <div className={`flash-message mw6 pa3 fixed mt3 top-3 left-1 ${is_error ? 'bg-dark-red' : 'bg-blue'} near-white br3 b ${show ? 'alert-shown' : 'alert-hidden'}`}>
             <span>{message}</span>
         </div>
     );
