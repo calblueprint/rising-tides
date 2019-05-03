@@ -290,7 +290,7 @@ class MyProjects extends React.Component {
                 </div>}
                 {currentProjectList}
                 <div className="cf"></div>
-                <div className="w-100 h1 mt5">
+                <div className="w-100 h1 mt3">
                     <div className="dib fl">
                         <h3>Past Projects</h3>
                     </div>
