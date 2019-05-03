@@ -312,7 +312,7 @@ input.input {
 }
 
 .bg-image {
-    background-image: url('/images/bg.jpg'); 
+    background-image: url('/images/bg.jpg');
     background-size: cover;
 }
 
@@ -410,7 +410,7 @@ input.input {
 }
 
 .proj-card {
-    width: 16rem; 	
+    width: 16rem;
     height:18rem;
     cursor: pointer;
     color:white;
@@ -452,14 +452,14 @@ input.input {
   overflow: hidden;
   margin:0;
 }
-  
+
 .shadow-bold:hover {
     text-shadow:0px 0px .25px black;
 }
 
 .dropdown .dropbtn {
     cursor: pointer;
-    font-size: 16px;  
+    font-size: 16px;
     color: white;
     background-color: inherit;
     font-family: inherit;
@@ -510,7 +510,7 @@ input.input {
     border-style: solid;
     border-width: 1px;
     border-color: #000;
-      
+
 }
 
 fieldset {
@@ -531,20 +531,6 @@ fieldset {
     display:inline-block;
 }
 
-.deliverable-pill {
-    font-family: Lato;
-    border-style:solid;
-    border-width:1px;
-    margin:8px;
-    border-radius:9999px;
-    padding-left:16px;
-    padding-right:16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    font-size: 16px;
-    display:inline-block;
-    color: white;
-    background-color:black;
-}
-
-
+.grayscale:hover {
+    opacity: .4;
+  }
