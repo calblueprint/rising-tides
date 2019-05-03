@@ -95,10 +95,10 @@ class ProjectView extends React.Component {
     
     if (this.props.skills) {
         skillList = this.props.skills.map((skill, index) => {
-            return <div className="f5 dim br-pill ba ph3 pv2 mb2 dib lato black">{skill.name}</div>;
+            return <div className="f5 ma1 dim br-pill ba ph3 pv2 dib lato black">{skill.name}</div>;
         })
     } else {
-        skillList = <div>No skills</div>;
+        skillList = <div>No skills.</div>;
     }
 
     let start_date = project.start_time;
@@ -149,8 +149,25 @@ class ProjectView extends React.Component {
                     </div>
                     {apply_button}
                 </div>
+                  <div className="bg-light-gray ma2 pa4 h-auto">
+                    <div className="flex items-center">
+                        {org_img}
+                        <a className="ma0 f3 truncate dib">{organization.name}</a>
+                    </div>
+                    <div className="flex pt3">
+                        <div className="pa2 w-33 truncate">
+                            <i style={{marginLeft: 3}} className="fas fa-map-pin f4"></i><span style={{marginLeft: 10}} className="f5 truncate">{organization.city}, {organization.state}</span>
+                        </div>
+                        <div className="pa2 w-33 truncate">
+                            <i className="fas fa-calendar f4"></i><span className="ml2 f5 truncate">{start_date} to {end_date}</span>
+                        </div>
+                        <div className="pa2 w-33 truncate">
+                            <i className="fas fa-phone f4"></i><span style={{marginLeft: 5}} className="f5 truncate">E{organization.contact_phone_number}</span>
+                        </div>
+                    </div>
+                </div>
                 {project.overview ? (
-                            <div>
+                            <div className="pt3">
                                 <h2 className="mt3 f3">Project Overview</h2>
                                 <p className="f5">{project.overview}</p>
                             </div>
@@ -175,7 +192,7 @@ class ProjectView extends React.Component {
                         ) : (null)}
                         {this.props.skills ? (
                             <div>
-                                <h2 className="mt4 f3">Volunteer Skills</h2>
+                                <h2 className="mt4 f3 pb3">Volunteer Skills</h2>
                                 {skillList}
                             </div>
                         ) : (null)}

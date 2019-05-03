@@ -1,21 +1,13 @@
 import React from "react";
 import axios from 'axios';
 import Logout from "./Logout";
-<<<<<<< HEAD
-import NavBar from "../utils/NavBar";
-import Loader from "../utils/Loader";
-=======
 import NavBar from "../utils/NavBar"
 import Loader from "../utils/Loader"
->>>>>>> Application List Styling (#115)
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
 import FlashMessage from '../utils/FlashMessage';
 import ApplicationList from '../applications/ApplicationList';
-<<<<<<< HEAD
 import ProjectList from '../projects/ProjectList';
-=======
->>>>>>> Application List Styling (#115)
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -247,23 +239,8 @@ class Dashboard extends React.Component {
 
   render() {
     const { organization } = this.props;
-<<<<<<< HEAD
     const { projects, projectsLoading } = this.state;
 
-=======
-
-    let projectList;
-
-    if (this.state.projects.length) {
-      projectList = this.state.projects.map((project, index) => {
-        return <ProjectCard project={project} key={index} />;
-      });
-    } else {
-        if (this.state.projectsLoading == false) {
-            projectList = <div className="f4 tc pa3">There are no projects. </div>;
-        }
-    }
->>>>>>> Application List Styling (#115)
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -325,14 +302,11 @@ class Dashboard extends React.Component {
                     applications={this.state.applications}
                     loading={this.state.applicationsLoading} />
                 <div className="cf"></div>
-<<<<<<< HEAD
                 <div className="pv3 tc">
                     <a
                         href={"/applications"}
                         >View More Applications</a>
                 </div>
-=======
->>>>>>> Application List Styling (#115)
                 <div className="w-100 mt5 mb1 flex items-center">
                     <div className="dib w-100">
                         <a className="f4 pa0" href="/my-projects">Current Projects</a>
