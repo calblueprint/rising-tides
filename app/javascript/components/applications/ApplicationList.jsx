@@ -42,6 +42,9 @@ class ApplicationList extends React.Component {
             );
         }
         var app_columns;
+        var date_string = application.created_at.split('T')[0];
+        var time_string = application.created_at.split('T')[1].split('.')[0];
+        var creation_time = date_string + ' ' + time_string;
         if (is_org_view) {
             app_columns = (
                 <div className="flex items-center pv3">
@@ -50,6 +53,7 @@ class ApplicationList extends React.Component {
                         {project_status}
                     </div>
                     <div className="w-25"><a className="pa0" href={"/projects/" + application.project.id}>{application.project.title}</a></div>
+                    <div className="w-25">{creation_time}</div>
                     <a
                         className="w-25 tr pa0"
                         href={"/applications/" + application.id}
@@ -64,6 +68,7 @@ class ApplicationList extends React.Component {
                         {project_status}
                     </div>
                     <h4 className="w-25 ma0"><a className="pa0" href={"/organizations/" + application.project.organization.id}>{application.project.organization.name}</a></h4>
+                    <div className="w-25">{creation_time}</div>
                     <a
                         className="w-25 tr pa0"
                         href={"/applications/" + application.id}
@@ -92,6 +97,7 @@ class ApplicationList extends React.Component {
                 Application Status
             </div>
             <div className="w-25">Project Name</div>
+            <div className="w-25">Submission Time</div>
             <div className="w-25 tr"></div>
         </div>
         <Loader loading={this.props.loading} />
