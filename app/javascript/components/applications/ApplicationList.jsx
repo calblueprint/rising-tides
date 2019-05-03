@@ -89,18 +89,36 @@ class ApplicationList extends React.Component {
         }
     }
 
+    var header_row;
+    if (is_org_view) {
+        header_row = (
+            <div className="flex items-center pv3">
+                <div className="w-25 ma0">User Name</div>
+                <div className="w-25">
+                    Application Status
+                </div>
+                <div className="w-25">Project Name</div>
+                <div className="w-25">Submission Time</div>
+                <div className="w-25 tr"></div>
+            </div>
+        );
+    } else {
+        header_row = (
+            <div className="flex items-center pv3">
+                <div className="w-25">Project Name</div>
+                <div className="w-25">
+                    Application Status
+                </div>
+                <div className="w-25 ma0">User Name</div>
+                <div className="w-25">Submission Time</div>
+                <div className="w-25 tr"></div>
+            </div>
+        );
+    }
     return (
       <div>
-        <div className="flex items-center pv3">
-            <div className="w-25 ma0">User Name</div>
-            <div className="w-25">
-                Application Status
-            </div>
-            <div className="w-25">Project Name</div>
-            <div className="w-25">Submission Time</div>
-            <div className="w-25 tr"></div>
-        </div>
         <Loader loading={this.props.loading} />
+        {header_row}
         {applicationList}
       </div>
     );
