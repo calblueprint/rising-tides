@@ -2,6 +2,7 @@ import React from "react"
 import axios from 'axios';
 import Logout from "./Logout"
 import NavBar from "../utils/NavBar"
+import Loader from "../utils/Loader"
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
 import FlashMessage from '../utils/FlashMessage'
@@ -58,6 +59,8 @@ class Dashboard extends React.Component {
       show_project_filtering: false,
       show_application_filtering: false,
       keyword: "",
+      applicationsLoading: true,
+      projectsLoading: true,
       application_statuses: [
         {
             id: 0,
@@ -175,7 +178,11 @@ class Dashboard extends React.Component {
           message
         );
       }
-      this.setState({ projects });
+        this.setState( {
+            projects: projects,
+            projectsLoading: false
+        });
+
     }).catch(res => {
         this.flash_message.flashError(
             res.response.data.message
@@ -207,7 +214,10 @@ class Dashboard extends React.Component {
           message
         );
       }
-      this.setState({ applications });
+      this.setState({
+            applications: applications, 
+            applicationsLoading: false
+        });
     }).catch(res => {
         this.flash_message.flashError(
             res.response.data.message
@@ -222,8 +232,8 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.updateProjectSearch();
     this.updateApplicationSearch();
+    this.updateProjectSearch();
   }
 
   render() {
@@ -236,7 +246,9 @@ class Dashboard extends React.Component {
         return <ProjectCard project={project} key={index} />;
       });
     } else {
-      projectList = <div>You do not have any projects.</div>;
+        if (this.state.projectsLoading == false) {
+            projectList = <div className="f4 tc pa3"> There are no projects. </div>;
+        }
     }
 
     let applicationList;
@@ -285,7 +297,9 @@ class Dashboard extends React.Component {
         );
       });
     } else {
-      applicationList = <div>You do not have any applications.</div>;
+        if (this.state.applicationsLoading == false) {
+            applicationList = <div className="f4 tc pa3"> There are no applications. </div>;
+        }
     }
 
     return (
@@ -296,6 +310,7 @@ class Dashboard extends React.Component {
                 <div className="w-100 h3">
                     <div className="tl dib fl">
                         <h1 className="f1 ma0">Welcome, {organization.name}</h1>
+            
                     </div>
                     <div className="dib fr mt2">
                         <div className="tr">
@@ -343,6 +358,7 @@ class Dashboard extends React.Component {
                         Update Search</a>
                 </div>}
                 <div className="cf"></div>
+                <Loader loading={this.state.applicationsLoading} />
                 {applicationList}
                 <div>
                     <div className="bt b--black-10" />
@@ -396,6 +412,7 @@ class Dashboard extends React.Component {
                         Update Search</a>
                 </div>}
                 <div className="cf"></div>
+                <Loader loading={this.state.projectsLoading} />
                 {projectList}
                 <div className="cf"></div>
                 <div className="pv3 tc">

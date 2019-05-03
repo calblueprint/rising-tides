@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
+import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 
 
@@ -9,7 +10,8 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.user
+      user: props.user,
+      loading: true
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -33,7 +35,9 @@ class Profile extends React.Component {
           message
         );
       }
-      this.setState({ projects });
+      this.setState({ 
+        projects: projects,
+        loading: false  });
     }).catch(res => {
       this.flash_message.flashError(
         res.response.data.message
@@ -48,12 +52,23 @@ class Profile extends React.Component {
 
   render() {
     const { user } = this.state;
+    let projectList;  
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
     let profileImage = <img className="h-100 w4"  src={profileUrl} />;
     let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
     let resume = <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
                     <i className="fas fa-file-alt f2"></i>                            
                 </a>
+    if (this.state.projects && this.state.projects.length !== 0) {
+      projectList = this.state.projects.map((project, index) => {
+        return <ProjectCard project={project} key={index} />
+      });
+    } else {
+      if (this.state.loading == false) {
+            projectList = <div className="f4 tc pa3"> There are no projects. </div>;
+        }
+    }
+
     return (
         <div className="w-100 h-100 tc">
             <div
@@ -98,6 +113,8 @@ class Profile extends React.Component {
                 {this.props.user.bio}
 
                 <h3 className="pt5">Projects</h3>
+                <Loader loading={this.state.loading} />
+                {projectList}
             </div>
             
         </div>
