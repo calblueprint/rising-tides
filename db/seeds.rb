@@ -33,6 +33,7 @@ def create_volunteers
                         bio: Faker::TvShows::RickAndMorty.quote,
                         phone_number: Faker::PhoneNumber.phone_number
     )
+    user.skip_confirmation!
     user.save
     puts "Created Volunteer ##{i} (#{user.id})"
   end
