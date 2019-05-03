@@ -310,6 +310,11 @@ class Dashboard extends React.Component {
                     applications={this.state.applications}
                     loading={this.state.applicationsLoading} />
                 <div className="cf"></div>
+                <div className="pv3 tc">
+                    <a
+                        href={"/applications"}
+                        >View More Applications</a>
+                </div>
                 <div className="w-100 mt5 mb1 flex items-center">
                     <div className="dib w-100">
                         <a className="f4 pa0" href="/my-projects">Current Projects</a>

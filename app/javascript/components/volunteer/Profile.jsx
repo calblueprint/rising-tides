@@ -123,7 +123,7 @@ class Profile extends React.Component {
                 <h2 className="pt4 f3">Biography</h2>
                 <p className="f5">{this.props.user.bio}</p>
 
-                <h3 className="pt5">Projects</h3>
+                <h2 className="pt4 f3">Projects</h2>
                 <Loader loading={this.state.loading} />
                 {projectList}
             </div>
