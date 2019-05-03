@@ -51,8 +51,18 @@ class Profile extends React.Component {
   };
  
   render() {
-    const { user } = this.state;
     let projectList;  
+    let skillList;
+
+     if (this.props.user.skills) {
+        console.log(this.props.user.skills)
+        skillList = this.props.user.skills.map((skill, index) => {
+            return   <div className="f5 dim br-pill ba ph3 pv2 mb2 dib lato black" href="#0">{skill.name}</div>;
+        })
+    } else {
+        console.log('no skills')
+        skillList = <div>No skills</div>;
+    }
     if (this.state.projects && this.state.projects.length !== 0) {
       projectList = this.state.projects.map((project, index) => {
         return <ProjectCard project={project} key={index} />
@@ -108,7 +118,7 @@ class Profile extends React.Component {
                 </div>
 
                 <h2 className="pt4 f3">Skills</h2>
-                <p className="f5">{this.props.user.skills}</p>
+                <p className="f5">{skillList}</p>
 
                 <h2 className="pt4 f3">Biography</h2>
                 <p className="f5">{this.props.user.bio}</p>
