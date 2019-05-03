@@ -197,6 +197,11 @@ input.input {
 .dropdown-scroller {
     overflow-y: scroll;
     max-height: 150px;
+    z-index: 9997;
+}
+
+.flash-message {
+    z-index: 9998;
 }
 
 .std-button:hover, .std-button:active {
