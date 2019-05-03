@@ -196,7 +196,8 @@ class Dashboard extends React.Component {
         query: {
             with_statuses: statuses,
             with_user_id: this.props.user.id,
-            with_limit: 4
+            with_statuses: [0, 2, 3],
+            with_limit: 3
         }
     };
 
@@ -236,7 +237,7 @@ class Dashboard extends React.Component {
         return <ProjectCard project={project} key={index} />;
       });
     } else {
-      projectList = <div>No Results</div>;
+      projectList = <div>You do not have any projects.</div>;
     }
 
     let applicationList;
@@ -285,7 +286,7 @@ class Dashboard extends React.Component {
         );
       });
     } else {
-      applicationList = <div>No Results</div>;
+      applicationList = <div>You do not have any applications.</div>;
     }
     return (
         <div className="w-100 h-100 tc bg-white">

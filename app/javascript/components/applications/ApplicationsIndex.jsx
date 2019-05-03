@@ -17,7 +17,7 @@ class ApplicationsIndex extends React.Component {
             id: 0,
             uid: 'pending',
             title: 'Pending',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
@@ -31,7 +31,7 @@ class ApplicationsIndex extends React.Component {
             id: 2,
             uid: 'interviewing',
             title: 'Interviewing',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
@@ -181,7 +181,7 @@ class ApplicationsIndex extends React.Component {
         );
       });
     } else {
-      applicationList = <div>No Results</div>;
+      applicationList = <div>You do not have any applications.</div>;
     }
 
     return (
@@ -208,7 +208,7 @@ class ApplicationsIndex extends React.Component {
                     </div>
                 </div>
                 <div className="cf"></div>
-                <div className="w-100 h1 mb3">
+                <div className="w-100 h1 mb3 mt3">
                     <div className="dib fl">
                         <h3>Applications</h3>
                     </div>

@@ -163,7 +163,7 @@ class ProjectsIndex extends React.Component {
         return <ProjectCard project={project} key={index} />
       });
     } else {
-      projectList = <li>No Results</li>;
+      projectList = <li>You do not have any projects.</li>;
     }
 
     return (
