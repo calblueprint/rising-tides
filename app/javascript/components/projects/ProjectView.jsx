@@ -51,7 +51,7 @@ class ProjectView extends React.Component {
         organization,
         organization_signed_in,
         current_organization,
-        deliverables
+        milestones
     } = this.props;
 
     var org_img = <span></span>;
@@ -151,7 +151,7 @@ class ProjectView extends React.Component {
             </div>
         )
 
-    let deliverablesList = deliverables.map((deliverable, index) => {
+    let milestonesList = milestones.map((deliverable, index) => {
         return (
             <div className="ml4 mb4 relative">
                 <div style={{left: '-38px', height: '11px', width: '11px'}} className="w1 h1 br-pill bw3 absolute bg-black"></div>
@@ -178,7 +178,7 @@ class ProjectView extends React.Component {
                     <div className="w-75">
                         <h3 className="mt3 mb3">Project Plan</h3>
                         <div className="ml4 bl">
-                            {deliverablesList}
+                            {milestonesList}
                         </div>
                     </div>
                     <div className="w-25 bg-light-gray pa3 h-auto">

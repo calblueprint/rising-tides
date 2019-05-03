@@ -110,13 +110,13 @@ class Api::ProjectsController < ApplicationController
 
     if saved
       begin
-          for deliverable in params[:deliverables]
-            project.deliverables.create(
+          for deliverable in params[:milestones]
+            project.milestones.create(
                 deliverable.permit(:description, :title)
             )
           end
       rescue StandardError => e
-        project.deliverables.delete_all
+        project.milestones.delete_all
         project.delete
         return render json: {
             project: project,
@@ -143,9 +143,9 @@ class Api::ProjectsController < ApplicationController
     end
     if a
       new_project = Project.find(params[:id])
-      new_project.deliverables.delete_all
-      for deliverable in params[:deliverables]
-        new_project.deliverables.create(
+      new_project.milestones.delete_all
+      for deliverable in params[:milestones]
+        new_project.milestones.create(
             deliverable.permit(:description, :title)
         )
       end

@@ -6,7 +6,7 @@ class Project < ApplicationRecord
   has_many :applications
   has_many :users, through: :applications
   has_many :photos
-  has_many :deliverables
+  has_many :milestones
   has_and_belongs_to_many :skills
 
   scope :with_skill_ids, -> (skill_ids) { distinct.

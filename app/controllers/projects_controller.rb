@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
         ).as_json(
           include: [:skills]
         ).first
-    @deliverables = Project.find(params[:id]).deliverables
+    @milestones = Project.find(params[:id]).milestones
   end
 
   def show
@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
       @project = Project.where(
         :id => params[:id]
       ).with_application_count.first
-      @deliverables = Project.find(params[:id]).deliverables
+      @milestones = Project.find(params[:id]).milestones
       @project_type = ProjectType.find(@project.project_type_id)
     end
 

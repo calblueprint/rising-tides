@@ -48,7 +48,7 @@ class NewProjectForm extends React.Component {
         user_limit: 1,
         organization_id: props.organization.id
       },
-      deliverables: [{
+      milestones: [{
         id: 0,
         title: "",
         description: ""
@@ -68,8 +68,8 @@ class NewProjectForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleSelected = this.toggleSelected.bind(this);
     this.toggleSelectedSingle = this.toggleSelectedSingle.bind(this);
-    this.addDeliverable = this.addDeliverable.bind(this);
-    this.removeDeliverable = this.removeDeliverable.bind(this);
+    this.addMilestone = this.addMilestone.bind(this);
+    this.removeMilestone = this.removeMilestone.bind(this);
     this.handlers = [];
   }
 
@@ -98,23 +98,23 @@ class NewProjectForm extends React.Component {
     });
   }
 
-  addDeliverable() {
-    var { deliverables } = this.state;
-    deliverables.push({
-        id: this.state.deliverables.length,
+  addMilestone() {
+    var { milestones } = this.state;
+    milestones.push({
+        id: this.state.milestones.length,
         title: "",
         description: ""
     });
     this.setState({
-        deliverables
+        milestones
     });
   }
 
-  removeDeliverable() {
-    var { deliverables } = this.state;
-    deliverables.splice(-1, 1);
+  removeMilestone() {
+    var { milestones } = this.state;
+    milestones.splice(-1, 1);
     this.setState({
-        deliverables
+        milestones
     });
   }
 
@@ -129,12 +129,12 @@ class NewProjectForm extends React.Component {
     return this.handlers[name];
   };
 
-  handleDeliverableChange = (id, name) => {
+  handleMilestoneChange = (id, name) => {
     if (!this.handlers[id + ":" + name]) {
       this.handlers[id + ":" + name] = event => {
-        const { deliverables } = this.state;
-        deliverables[id][name] = event.target.value;
-        this.setState({ deliverables });
+        const { milestones } = this.state;
+        milestones[id][name] = event.target.value;
+        this.setState({ milestones });
       };
     }
     return this.handlers[id + ":" + name];
@@ -164,7 +164,7 @@ class NewProjectForm extends React.Component {
             deliverable_type_id = this.state.deliverable_types[i].uid;
     }
 
-    let { project, deliverables } = this.state;
+    let { project, milestones } = this.state;
     project.skill_ids = skill_ids;
     project.project_type_id = project_type_id;
     project.deliverable_type_id = deliverable_type_id;
@@ -173,7 +173,7 @@ class NewProjectForm extends React.Component {
 
     const payload = {
         project: project,
-        deliverables: deliverables
+        milestones: milestones
     };
 
     axios
@@ -188,7 +188,7 @@ class NewProjectForm extends React.Component {
         window.location.href = `/projects/${project.id}`;
       }).catch(res => {
         this.flash_message.flashError(
-            res.response.data.message
+            res.response.data.error
         );
     });
 
@@ -197,22 +197,22 @@ class NewProjectForm extends React.Component {
 
   render() {
     const { project } = this.state;
-    let deliverables = this.state.deliverables.map((deliverable, index) => {
+    let milestones = this.state.milestones.map((deliverable, index) => {
         return (
             <div key={index}>
                 <input
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
-                    onChange={this.handleDeliverableChange(index, "title")}
-                    value={this.state.deliverables[index].title}
+                    onChange={this.handleMilestoneChange(index, "title")}
+                    value={this.state.milestones[index].title}
                     placeholder="Enter title..."
                 />
                 <textarea
                     rows="3"
                     className="essay-box bg-light-gray mt1 w-100 pa3"
-                    onChange={this.handleDeliverableChange(index, "description")}
-                    placeholder="Enter deliverable..."
-                    value={this.state.deliverables[index].description}></textarea>
+                    onChange={this.handleMilestoneChange(index, "description")}
+                    placeholder="Enter milestone..."
+                    value={this.state.milestones[index].description}></textarea>
             </div>);
     });
     return (
@@ -326,15 +326,15 @@ class NewProjectForm extends React.Component {
                     value={this.state.project.user_limit}
                 />
                 <h3 className="mt5">Project Plan</h3>
-                {deliverables}
+                {milestones}
                 <div className="flex mt3 w-100">
                     <div className="w-100">
-                        <a className="dib std-button-white ph3 pv1 fw4 f5" onClick={this.addDeliverable}>
-                            Add Deliverable
+                        <a className="dib std-button-white ph3 pv1 fw4 f5" onClick={this.addMilestone}>
+                            Add Milestone
                         </a>
                     </div>
                     <div className="tr w-100">
-                        <a className="dib std-button-black ph3 pv1 fw4 f5" onClick={this.removeDeliverable}>
+                        <a className="dib std-button-black ph3 pv1 fw4 f5" onClick={this.removeMilestone}>
                             Remove
                         </a>
                     </div>
