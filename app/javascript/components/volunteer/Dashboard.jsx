@@ -237,7 +237,7 @@ class Dashboard extends React.Component {
         return <ProjectCard project={project} key={index} />
       });
     } else {
-      projectList = <div>No Results</div>;
+      projectList = <div>You do not have any projects.</div>;
     }
 
     let applicationList;
@@ -286,7 +286,7 @@ class Dashboard extends React.Component {
         );
       });
     } else {
-      applicationList = <div>No Results</div>;
+      applicationList = <div>You do not have any applications.</div>;
     }
     return (
         <div className="w-100 h-100 tc bg-white">
