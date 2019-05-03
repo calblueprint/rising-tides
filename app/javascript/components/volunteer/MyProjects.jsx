@@ -2,6 +2,7 @@ import React from "react"
 import axios from 'axios';
 import Logout from "./Logout"
 import NavBar from "../utils/NavBar"
+import Loader from "../utils/Loader"
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
 import FlashMessage from '../utils/FlashMessage'
@@ -19,7 +20,8 @@ class MyProjects extends React.Component {
             uid: skill['id'],
             title: skill['name'],
             selected: false,
-            key: 'skills'
+            key: 'skills',
+            loading: true
         });
     }
 
@@ -56,6 +58,8 @@ class MyProjects extends React.Component {
       project_types: project_types_a,
       deliverable_types: deliverable_types_a,
       show_filtering: false,
+      currentLoading: true,
+      pastLoading: true,
       keyword: ""
     };
 
@@ -143,7 +147,8 @@ class MyProjects extends React.Component {
         );
       }
       this.setState({
-        currentProjects: projects
+        currentProjects: projects,
+        currentLoading:false
       });
     }).catch(res => {
         this.flash_message.flashError(
@@ -173,7 +178,8 @@ class MyProjects extends React.Component {
         );
       }
       this.setState({
-        pastProjects: projects
+        pastProjects: projects,
+        pastLoading: false
       });
     }).catch(res => {
         this.flash_message.flashError(
@@ -189,8 +195,6 @@ class MyProjects extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
-    console.log(this.state);
     this.updateSearch();
   }
 
@@ -205,7 +209,9 @@ class MyProjects extends React.Component {
         return <ProjectCard project={project} key={index} />
       });
     } else {
-      currentProjectList = <div>No Results</div>;
+        if (this.state.currentLoading == false) {
+            currentProjectList = <div className="f4 tc pa3">There are no projects. </div>;
+        }
     }
 
     let pastProjectList;
@@ -215,7 +221,9 @@ class MyProjects extends React.Component {
         return <ProjectCard project={project} key={index} />
       });
     } else {
-      pastProjectList = <div>No Results</div>;
+        if (this.state.pastLoading == false) {
+            pastProjectList = <div className="f4 tc pa3">There are no projects. </div>;
+        }
     }
 
     return (
@@ -288,6 +296,7 @@ class MyProjects extends React.Component {
                         onClick={() => this.updateSearch()}>
                         Update Search</a>
                 </div>}
+                <Loader loading={this.state.currentLoading} />
                 {currentProjectList}
                 <div className="cf"></div>
                 <div className="w-100 h1 mt5">
@@ -296,6 +305,7 @@ class MyProjects extends React.Component {
                     </div>
                 </div>
                 <div className="mb2 mt3 bt b--black-10" />
+                <Loader loading={this.state.pastLoading} />
                 {pastProjectList}
             </div>
         </div>

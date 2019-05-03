@@ -2,6 +2,7 @@ import React from "react";
 import axios from 'axios';
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
+import Loader from '../utils/Loader';
 import FlashMessage from '../utils/FlashMessage'
 
 class ProjectsIndex extends React.Component {
@@ -52,7 +53,8 @@ class ProjectsIndex extends React.Component {
       project_types: project_types_a,
       deliverable_types: deliverable_types_a,
       show_filtering: false,
-      keyword: ""
+      keyword: "",
+      loading: true
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -135,8 +137,10 @@ class ProjectsIndex extends React.Component {
           message
         );
       }
-      this.setState({ projects });
-      console.log("UPDATED PROJECTS LENGTH: " + projects.length);
+      this.setState({ 
+        projects: projects,
+        loading: false
+    });
     }).catch(res => {
         this.flash_message.flashError(
             res.response.data.message
@@ -163,7 +167,9 @@ class ProjectsIndex extends React.Component {
         return <ProjectCard project={project} key={index} />
       });
     } else {
-      projectList = <li>You do not have any projects.</li>;
+        if (this.state.loading == false) {
+            ProjectList = <div className="f4 tc pa3"> There are no projects. </div>;
+        }
     }
 
     return (
@@ -233,6 +239,7 @@ class ProjectsIndex extends React.Component {
                         onClick={() => this.updateSearch()}>
                         Update Search</a>
                 </div>}
+                <Loader loading={this.state.loading} />
                 {projectList}
             </div>
       </div>
