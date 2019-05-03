@@ -148,7 +148,10 @@ class ApplicationView extends React.Component {
       return(
         <div className="w-100 h-100 tc">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
-            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
+            <div
+                className="h5 absolute w-100 bg-black bg-image"
+                style={{zIndex: -1}} />
+            <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
                 <div><h1 className="ma0 f1 mb4 truncate"> Application - {this.props.project.title} </h1></div>
                 {this.displayStatus()}
                 <div className="mb3">
