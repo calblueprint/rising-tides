@@ -24,6 +24,7 @@ class ProjectsController < ApplicationController
         ).as_json(
           include: [:skills]
         ).first
+    @deliverables = Project.find(params[:id]).deliverables
   end
 
   def show
@@ -41,7 +42,10 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.where(:id => params[:id]).with_application_count.first
+      @project = Project.where(
+        :id => params[:id]
+      ).with_application_count.first
+      @deliverables = Project.find(params[:id]).deliverables
       @project_type = ProjectType.find(@project.project_type_id)
     end
 

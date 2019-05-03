@@ -50,7 +50,8 @@ class ProjectView extends React.Component {
         project,
         organization,
         organization_signed_in,
-        current_organization
+        current_organization,
+        deliverables
     } = this.props;
 
     var org_img = <span></span>;
@@ -150,6 +151,16 @@ class ProjectView extends React.Component {
             </div>
         )
 
+    let deliverablesList = deliverables.map((deliverable, index) => {
+        return (
+            <div className="ml4 mb4 relative">
+                <div style={{left: '-38px', height: '11px', width: '11px'}} className="w1 h1 br-pill bw3 absolute bg-black"></div>
+                <div className="f5">{deliverable.deadline}</div>
+                <div className="mt3">{deliverable.description}</div>
+            </div>
+        );
+    });
+
     return (
         <div className="w-100 h-100 tc bg-white">
             <div
@@ -165,20 +176,10 @@ class ProjectView extends React.Component {
                 <p>{project.overview}</p>
                 <div className="mt3 flex items-start">
                     <div className="w-75">
-                        <h3 className="mt3">Description</h3>
-                        <p>{project.overview}</p>
-                        <h3 className="mt3">Deliverable</h3>
-                        <p>{project.deliverable}</p>
-                        <h3 className="mt3">Volunteer Requirements</h3>
-                        <p>{project.volunteer_requirements}</p>
-                        <h3 className="mt3">Other Details</h3>
-                        <p>{project.other_details}</p>
-                        <h3 className="mt3">Our Community Needs This If</h3>
-                        <p>{project.question1}</p>
-                        <h3 className="mt3">The Right Volunteer for this Project Is</h3>
-                        <p>{project.question2}</p>
-                        <h3 className="mt3">What You Give, What You Get</h3>
-                        <p>{project.question3}</p>
+                        <h3 className="mt3 mb3">Project Plan</h3>
+                        <div className="ml4 bl">
+                            {deliverablesList}
+                        </div>
                     </div>
                     <div className="w-25 bg-light-gray pa3 h-auto">
                         <div className="flex items-center">
@@ -197,6 +198,20 @@ class ProjectView extends React.Component {
                         {apply_button}
                     </div>
                 </div>
+                <h3 className="mt4">Project Description</h3>
+                <p>{project.description}</p>
+                <h3 className="mt3">Deliverable</h3>
+                <p>{project.deliverable}</p>
+                <h3 className="mt3">Volunteer Requirements</h3>
+                <p>{project.volunteer_requirements}</p>
+                <h3 className="mt3">Other Details</h3>
+                <p>{project.other_details}</p>
+                <h3 className="mt3">Our Community Needs This If</h3>
+                <p>{project.question1}</p>
+                <h3 className="mt3">The Right Volunteer for this Project Is</h3>
+                <p>{project.question2}</p>
+                <h3 className="mt3">What You Give, What You Get</h3>
+                <p>{project.question3}</p>
                 {applications}
             </div>
         </div>

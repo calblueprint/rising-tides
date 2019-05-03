@@ -54,6 +54,7 @@ class EditProjectForm extends React.Component {
     }
     this.state = {
       project: props.project,
+      deliverables: props.deliverables,
       message: "",
       error: "",
       skills: skills_a,
@@ -69,6 +70,8 @@ class EditProjectForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleSelected = this.toggleSelected.bind(this);
     this.toggleSelectedSingle = this.toggleSelectedSingle.bind(this);
+    this.addDeliverable = this.addDeliverable.bind(this);
+    this.removeDeliverable = this.removeDeliverable.bind(this);
     this.handlers = [];
   }
 
@@ -108,6 +111,37 @@ class EditProjectForm extends React.Component {
     return this.handlers[name];
   };
 
+  handleDeliverableChange = (id, name) => {
+    if (!this.handlers[id + ":" + name]) {
+      this.handlers[id + ":" + name] = event => {
+        const { deliverables } = this.state;
+        deliverables[id][name] = event.target.value;
+        this.setState({ deliverables });
+      };
+    }
+    return this.handlers[id + ":" + name];
+  };
+
+  addDeliverable() {
+    var { deliverables } = this.state;
+    deliverables.push({
+        id: this.state.deliverables.length,
+        deadline: "",
+        description: ""
+    });
+    this.setState({
+        deliverables
+    });
+  }
+
+  removeDeliverable() {
+    var { deliverables } = this.state;
+    deliverables.splice(-1, 1);
+    this.setState({
+        deliverables
+    });
+  }
+
   goBack = e => {
     e.preventDefault();
     window.location.href = "/projects/" + this.props.project.id;
@@ -132,7 +166,7 @@ class EditProjectForm extends React.Component {
             deliverable_type_id = this.state.deliverable_types[i].uid;
     }
 
-    let { project } = this.state;
+    let { project, deliverables } = this.state;
     project.skill_ids = skill_ids;
     project.project_type_id = project_type_id;
     project.deliverable_type_id = deliverable_type_id;
@@ -140,7 +174,8 @@ class EditProjectForm extends React.Component {
     project.user_limit = parseInt(project.user_limit);
 
     const payload = {
-        project: project
+        project: project,
+        deliverables: deliverables
     };
 
     axios
@@ -164,6 +199,23 @@ class EditProjectForm extends React.Component {
 
   render() {
     const { project } = this.state;
+    let deliverables = this.state.deliverables.map((deliverable, index) => {
+        return (
+            <div key={index}>
+                <input
+                    className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
+                    type="date"
+                    onChange={this.handleDeliverableChange(index, "deadline")}
+                    value={this.state.deliverables[index].deadline}
+                />
+                <textarea
+                    rows="4"
+                    className="essay-box bg-light-gray mt1 w-100 pa3"
+                    onChange={this.handleDeliverableChange(index, "description")}
+                    placeholder="Enter deliverable..."
+                    value={this.state.deliverables[index].description}></textarea>
+            </div>);
+    });
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -274,6 +326,20 @@ class EditProjectForm extends React.Component {
                     onChange={this.handleChange("user_limit")}
                     value={this.state.project.user_limit}
                 />
+                <h3 className="mt5">Project Plan</h3>
+                {deliverables}
+                <div className="flex mt3 w-100">
+                    <div className="w-100">
+                        <a className="dib std-button-white ph3 pv1 fw4 f5" onClick={this.addDeliverable}>
+                            Add Deliverable
+                        </a>
+                    </div>
+                    <div className="tr w-100">
+                        <a className="dib std-button-black ph3 pv1 fw4 f5" onClick={this.removeDeliverable}>
+                            Remove
+                        </a>
+                    </div>
+                </div>
                 <div className="mt5">
                     <a className="fl std-button-black ph3 pv1 fw4 f5" onClick={this.goBack}>
                         Cancel

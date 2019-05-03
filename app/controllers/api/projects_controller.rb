@@ -109,6 +109,12 @@ class Api::ProjectsController < ApplicationController
     end
 
     if saved
+      for deliverable in params[:deliverables]
+        project.deliverables.create(
+            deliverable.permit(:description, :deadline)
+        )
+      end
+
       return render json: {
         project: project,
         message: 'Project successfully created!'
@@ -127,6 +133,12 @@ class Api::ProjectsController < ApplicationController
     end
     if a
       new_project = Project.find(params[:id])
+      new_project.deliverables.delete_all
+      for deliverable in params[:deliverables]
+        new_project.deliverables.create(
+            deliverable.permit(:description, :deadline)
+        )
+      end
       return render json: {message: 'Project successfully updated!',
                            project: new_project}
     else
