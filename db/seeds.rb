@@ -37,7 +37,7 @@ def create_volunteers
     user.save
     puts "Created Volunteer ##{i} (#{user.id})"
   end
-  User.create!(email: "peterkangveerman@gmail.com",
+  user = User.create!(email: "peterkangveerman@gmail.com",
                         password: 'password',
                         password_confirmation: 'password',
                         first_name: "Peter",
@@ -47,6 +47,8 @@ def create_volunteers
                         bio: Faker::TvShows::RickAndMorty.quote,
                         phone_number: Faker::PhoneNumber.phone_number
   )
+  user.skip_confirmation!
+  user.save
   puts "Created #{NUM_USERS} volunteers! #{User.count} volunteers in db."
 end
 
@@ -66,7 +68,9 @@ end
 
 def create_projects
   1.upto(NUM_PROJECTS) do |i|
-    org_id = Faker::Number.between(ORGANIZATION_START_ID, ORGANIZATION_END_ID)
+    skill_ids = Skill.all.sample(3).pluck(:id)
+    deliverable_id = DeliverableType.all.sample(1).first[:id]
+    org_id = Organization.all.sample(1).first[:id]
     proj = Project.create!(title: Faker::IndustrySegments.industry,
                            description: Faker::TvShows::BojackHorseman.quote,
                            deliverable: Faker::Commerce.product_name,
@@ -76,8 +80,8 @@ def create_projects
                            question3: Faker::Company.catch_phrase,
                            project_type_id: i % 2 + 1,
                            organization_id: org_id,
-                           deliverable_type_id: i % 3 + 1,
-                           skill_ids: [Faker::Number.between(1, 24), Faker::Number.between(1, 24), Faker::Number.between(1, 24)]
+                           deliverable_type_id: deliverable_id,
+                           skill_ids: skill_ids
     )
     proj.save
     puts "Created Project ##{i}. Owned by organization(id:#{org_id})"
@@ -142,7 +146,18 @@ def create_skills
 end
 
 def create_deliverable_types
-    deliverable_list = ['del type 1', 'del type 2', 'del type 3']
+    deliverable_list = [
+      'Legal, Standards, & Policy Assistance',
+      'Finances, Fundraising, & Budget',
+      'Community Baseline Assessment of Risks, Hazards, & Impacts',
+      'Planning & Management',
+      'Community Outreach & Public Relations',
+      'Tangible Cultural Heritage Resources Preservation',
+      'Natural Heritage Resources Preservation',
+      'Intangible Heritage Preservation & Documentation',
+      'Disaster & Emergency Response',
+      'Science-based Decision Making'
+    ]
     deliverable_list.each do |deliverable|
       DeliverableType.create( name: deliverable )
     end
