@@ -291,6 +291,7 @@ class Dashboard extends React.Component {
                         </h3>
                     </div>
                 </div>
+                <div className="mb2 bt b--black-10" />
                 {this.state.show_application_filtering &&
                 <div className="w-100 flex items-center">
                     <Dropdown

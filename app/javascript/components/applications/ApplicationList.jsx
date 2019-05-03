@@ -85,7 +85,7 @@ class ApplicationList extends React.Component {
       });
     } else {
       if (this.props.loading == false) {
-            projectList = <div className="f4 tc pa3">There are no applications. </div>;
+            applicationList = <div className="f4 tc pa3">There are no applications. </div>;
         }
     }
 
@@ -93,7 +93,7 @@ class ApplicationList extends React.Component {
     if (is_org_view) {
         header_row = (
             <div className="flex items-center pv3">
-                <div className="w-25 ma0">User Name</div>
+                <div className="w-25 ma0">Name</div>
                 <div className="w-25">
                     Application Status
                 </div>
@@ -109,12 +109,13 @@ class ApplicationList extends React.Component {
                 <div className="w-25">
                     Application Status
                 </div>
-                <div className="w-25 ma0">User Name</div>
+                <div className="w-25 ma0">Name</div>
                 <div className="w-25">Submission Time</div>
                 <div className="w-25 tr"></div>
             </div>
         );
     }
+    header_row = (!this.props.loading && applications.length !== 0) ? header_row : null
     return (
       <div>
         <div className="cf" />

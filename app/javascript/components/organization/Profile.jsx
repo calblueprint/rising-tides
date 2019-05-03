@@ -2,12 +2,9 @@ import React from "react";
 import axios from "axios";
 import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
-<<<<<<< HEAD
 import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 
-=======
->>>>>>> proj cards and fonts
 
 class Profile extends React.Component {
   constructor(props) {

@@ -35,7 +35,7 @@ class Dropdown extends React.Component {
       return {headerTitle: `${count} ${nextProps.titleHelper}`}
     }
     else if (count > 1) {
-      return {headerTitle: `${count} ${nextProps.titleHelper}s`}
+      return {headerTitle: `${count} ${nextProps.titleHelper}es`}
     }
   }
 
