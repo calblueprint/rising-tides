@@ -1,11 +1,9 @@
 import React from "react"
 import axios from 'axios';
-import Logout from "./Logout"
-import NavBar from "../utils/NavBar"
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
-import FlashMessage from '../utils/FlashMessage'
-
+import FlashMessage from '../utils/FlashMessage';
+import ApplicationList from '../applications/ApplicationList';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -240,54 +238,6 @@ class Dashboard extends React.Component {
       projectList = <div>You do not have any projects.</div>;
     }
 
-    let applicationList;
-
-    if (this.state.applications) {
-      applicationList = this.state.applications.map((application, index) => {
-        var project_status = (
-            <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                Pending
-            </div>
-        );
-        if (application.status == "interviewing") {
-            project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interviewing
-                </div>
-            );
-        } else if (application.status == "accepted") {
-            project_status = (
-                <div className="dib accepted ph3 pv2 fw4">
-                    Accepted
-                </div>
-            );
-        } else if (application.status == "denied") {
-            project_status = (
-                <div className="dib ph3 pv2 fw4">
-                    No longer in consideration
-                </div>
-            );
-        }
-        return (
-            <div className="">
-                <div className="bt b--black-10" />
-                <div className="flex items-center pv3" key={index}>
-                    <h4 className="w-25 ma0">{application.project.title}</h4>
-                    <div className="w-25">
-                        {project_status}
-                    </div>
-                    <div className="w-25">{application.project.organization.name}</div>
-                    <a
-                        className="w-25 tr"
-                        href={"/applications/" + application.id}
-                        >View Application <span className="ml3 f5 fa fa-angle-right"></span></a>
-                </div>
-            </div>
-        );
-      });
-    } else {
-      applicationList = <div>You do not have any applications.</div>;
-    }
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -338,16 +288,9 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateApplicationSearch()}>
                         Update Search</a>
                 </div>}
-                <div className="cf"></div>
-                {applicationList}
-                <div>
-                    <div className="bt b--black-10" />
-                    <div className="pv3 tc">
-                        <a
-                            href={"/applications"}
-                            >View More Applications</a>
-                    </div>
-                </div>
+                <ApplicationList
+                    is_org_view={false}
+                    applications={this.state.applications} />
 
                 <div className="cf"></div>
                 <div className="w-100 mt5 mb1 flex items-center">
