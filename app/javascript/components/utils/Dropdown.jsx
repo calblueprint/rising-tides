@@ -56,7 +56,6 @@ class Dropdown extends React.Component {
             </div>
 
             <div className="relative">
-                
                     {listOpen && <div className="dropdown-scroller absolute top-0 bg-white w-100 ba b--black-10">
                         <ul className="list pl0 ma0">
                         {list.map((item) => (

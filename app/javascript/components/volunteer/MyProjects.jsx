@@ -247,7 +247,7 @@ class MyProjects extends React.Component {
                     Create Project
                 </a>}
                 <div className="cf"></div>
-                <div className="w-100 h1 mt5">
+                <div className="w-100 h1 mt3">
                     <div className="dib fl">
                         <h3>Current Projects</h3>
                     </div>
