@@ -117,7 +117,8 @@ class ApplicationList extends React.Component {
     }
     return (
       <div>
-        <Loader loading={this.props.loading} />
+        <div className="cf" />
+         <Loader loading={this.props.loading} />
         {header_row}
         {applicationList}
       </div>
