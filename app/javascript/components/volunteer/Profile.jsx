@@ -51,23 +51,8 @@ class Profile extends React.Component {
   };
  
   render() {
-<<<<<<< HEAD
     const { user } = this.state;
-<<<<<<< HEAD
     let projectList;  
-=======
-<<<<<<< HEAD
->>>>>>> default profile pic
-    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
-    let profileImage = <img className="h-100 w4"  src={profileUrl} />;
-=======
-    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
-    let profileImage = <img className="h-100 ba w4"  src={profile_pic} />;
->>>>>>> default profile pic
-    let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
-    let resume = <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                    <i className="fas fa-file-alt f2"></i>                            
-                </a>
     if (this.state.projects && this.state.projects.length !== 0) {
       projectList = this.state.projects.map((project, index) => {
         return <ProjectCard project={project} key={index} />
@@ -77,18 +62,6 @@ class Profile extends React.Component {
             projectList = <div className="f4 tc pa3">There are no projects. </div>;
         }
     }
-    let resume = <a className="dib ba bg-accent f5 w-auto pv1 mb4 ml3 lh-m" src={resumeUrl}>Resume</a>;
-=======
-    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : "https://media.licdn.com/dms/image/C4E03AQFbjc-XoDAJtA/profile-displayphoto-shrink_200_200/0?e=1559779200&v=beta&t=zCNkokfNKlZr1fjfa-ztpX7dMsji-hUfPYu21S7Qhzg";
-    let profileImage = <img className="h-100 ba w4"  src={profile_pic} />;
-    let projectList;
-    if (this.state.projects && this.state.projects.length !== 0) {
-        projectList = this.state.projects.map((project, index) => {
-          return <ProjectCard project={project} key={index} />
-        });
-    } else {
-    projectList = <div>No Results</div>;
-    }
 
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
     if (profileUrl === "/profile_images/original/missing.png") {
@@ -96,10 +69,7 @@ class Profile extends React.Component {
     }
     let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
     let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
-    let resume = <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                    <i className="fas fa-file-alt f2"></i>                            
-                </a>
->>>>>>> proj cards and fonts
+
     return (
         <div className="w-100 h-100 tc">
             <div
@@ -114,14 +84,11 @@ class Profile extends React.Component {
                             <h1 className="ma0 truncate f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
-                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.link}`}>
-                            <i className="fab fa-linkedin f2"></i>
-                            </a>
-                            <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                            <i className="fas fa-file-alt f2"></i>                            
+                            <a className="pa0 ph1 ml3 mb4" target="_blank" href={`http://${this.props.user.link}`}>
+                                <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
                             </a>
                         </div>
-                        <div className="flex lato b f5">
+                        <div className="flex f5">
                             <div className="mt1-ns">
                                 {this.props.user.email}
                             </div>
@@ -143,12 +110,8 @@ class Profile extends React.Component {
                 <h2 className="pt4 f3">Biography</h2>
                 <p className="f5">{this.props.user.bio}</p>
 
-<<<<<<< HEAD
                 <h3 className="pt5">Projects</h3>
                 <Loader loading={this.state.loading} />
-=======
-                <h2 className="pt4 pb3 f3">Projects</h2>
->>>>>>> proj cards and fonts
                 {projectList}
             </div>
             
