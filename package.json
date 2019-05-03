@@ -8,6 +8,7 @@
     "axios": "^0.18.0",
     "core-js": "2",
     "delete-react-zombies": "0.0.3",
+    "emotion": "^10.0.9",
     "jquery": "^3.3.1",
     "prop-types": "^15.7.2",
     "rails-ujs": "^5.2.1",
