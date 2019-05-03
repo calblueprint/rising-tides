@@ -162,8 +162,8 @@ class NewProjectForm extends React.Component {
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
             <div
-                className="h5 absolute w-100 bg-moon-gray"
-                style={{zIndex: -1}}></div>
+                className="h5 absolute w-100 bg-black bg-image"
+                style={{zIndex: -1}} />
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
                 <h1 className="f1 ma0">New Project</h1>
                 <h3 className="mt5">Title</h3>
