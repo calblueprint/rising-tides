@@ -93,12 +93,12 @@ class EditProfileForm extends React.Component {
   };
 
 
-  // handleChange = name => event => {
-  //   const { value } = event.target;
-  //   this.setState({ [name]: value }, () => {
-  //     this.validateField(name, value);
-  //   });
-  // };
+  handleChange = name => event => {
+    const { value } = event.target;
+    this.setState({ [name]: value }, () => {
+      this.validateField(name, value);
+    });
+  };
 
   handleChange = name => (e) => {
     const {name, value} = e.target;
@@ -141,7 +141,7 @@ class EditProfileForm extends React.Component {
     axios
       .patch("/organizations/", formData)
       .then(function(response) {
-        window.location.href = "/organizations";
+        window.location.href = "/organizations/" + this.state.organization.id;
       })
       .catch(function(error) {
         console.log(error);
