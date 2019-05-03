@@ -201,17 +201,17 @@ class NewProjectForm extends React.Component {
         return (
             <div key={index}>
                 <input
-                    className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
+                    className="dib essay-box bg-light-gray mt1 w-100 pl3 pr3 pt1 pb1  input"
                     type="text"
                     onChange={this.handleMilestoneChange(index, "title")}
                     value={this.state.milestones[index].title}
-                    placeholder="Enter title..."
+                    placeholder="Enter milestone title..."
                 />
                 <textarea
                     rows="3"
                     className="essay-box bg-light-gray mt1 w-100 pa3"
                     onChange={this.handleMilestoneChange(index, "description")}
-                    placeholder="Enter milestone..."
+                    placeholder="Enter milestone description..."
                     value={this.state.milestones[index].description}></textarea>
             </div>);
     });
