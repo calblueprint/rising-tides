@@ -1,12 +1,12 @@
-import React from "react"
+import React from "react";
 import axios from 'axios';
-import Logout from "./Logout"
+import Logout from "./Logout";
 import NavBar from "../utils/NavBar"
 import Loader from "../utils/Loader"
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
-import FlashMessage from '../utils/FlashMessage'
-
+import FlashMessage from '../utils/FlashMessage';
+import ApplicationList from '../applications/ApplicationList';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -250,58 +250,6 @@ class Dashboard extends React.Component {
             projectList = <div className="f4 tc pa3">There are no projects. </div>;
         }
     }
-
-    let applicationList;
-
-    if (this.state.applications) {
-      applicationList = this.state.applications.map((application, index) => {
-        var project_status = (
-            <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                Pending
-            </div>
-        );
-        if (application.status == "interviewing") {
-            project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interviewing
-                </div>
-            );
-        } else if (application.status == "accepted") {
-            project_status = (
-                <div className="dib accepted ph3 pv2 fw4">
-                    Accepted
-                </div>
-            );
-        } else if (application.status == "denied") {
-            project_status = (
-                <div className="dib ph3 pv2 fw4">
-                    No longer in consideration
-                </div>
-            );
-        }
-        return (
-            <div className="">
-                <div className="bt b--black-10" />
-                <div className="flex items-center pv3" key={index}>
-                    <h4 className="w-25 ma0">{application.project.title}</h4>
-                    <div className="w-25">
-                        {project_status}
-                    </div>
-                    <div className="w-25">{application.user.first_name} {application.user.last_name}</div>
-                    <a
-                        className="w-25 tr"
-                        href={"/applications/" + application.id}
-                        >View Application <span className="ml3 f5 fa fa-angle-right"></span></a>
-                </div>
-            </div>
-        );
-      });
-    } else {
-        if (this.state.applicationsLoading == false) {
-            applicationList = <div className="f4 tc pa3">There are no applications. </div>;
-        }
-    }
-
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -343,6 +291,7 @@ class Dashboard extends React.Component {
                         </h3>
                     </div>
                 </div>
+                <div className="mb2 bt b--black-10" />
                 {this.state.show_application_filtering &&
                 <div className="w-100 flex items-center">
                     <Dropdown
@@ -357,19 +306,16 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateApplicationSearch()}>
                         Update Search</a>
                 </div>}
+                <ApplicationList
+                    is_org_view={true}
+                    applications={this.state.applications}
+                    loading={this.state.applicationsLoading} />
                 <div className="cf"></div>
-                <Loader loading={this.state.applicationsLoading} />
-                {applicationList}
-                <div>
-                    <div className="bt b--black-10" />
-                    <div className="pv3 tc">
-                        <a
-                            href={"/applications"}
-                            >View More Applications</a>
-                    </div>
+                <div className="pv3 tc">
+                    <a
+                        href={"/applications"}
+                        >View More Applications</a>
                 </div>
-
-                <div className="cf"></div>
                 <div className="w-100 mt5 mb1 flex items-center">
                     <div className="dib w-100">
                         <a className="f4 pa0" href="/my-projects">Current Projects</a>

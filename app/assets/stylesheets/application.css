@@ -422,17 +422,8 @@ input.input {
     color:black;
 }
 
-.icon-link {
-    color:black;
-}
-
 .icon-link:hover {
-    color:grey;
-}
-
-.white-on-grey:hover {
-    color: white;
-    background-color: grey;
+    color: grey;
 }
 
 .pic-height {

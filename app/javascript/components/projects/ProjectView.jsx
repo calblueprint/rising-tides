@@ -4,6 +4,7 @@
 
 import React from "react";
 import axios from "axios";
+import ApplicationList from '../applications/ApplicationList';
 
 class ProjectView extends React.Component {
   constructor(props) {
@@ -87,55 +88,6 @@ class ProjectView extends React.Component {
         edit_button = <span></span>;
     }
 
-    let applicationList;
-
-    if (this.props.applications) {
-      applicationList = this.props.applications.map((application, index) => {
-        var project_status = (
-            <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                In Review
-            </div>
-        );
-        if (application.status == "interviewing") {
-            project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interview
-                </div>
-            );
-        } else if (application.status == "accepted") {
-            project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interview
-                </div>
-            );
-        } else if (application.status == "denied") {
-            project_status = (
-                <div className="dib ph3 pv2 fw4">
-                    No longer in consideration
-                </div>
-            );
-        }
-        return (
-            <div className="">
-                <div className="bt b--black-10" />
-                <div className="flex items-center pv3" key={index}>
-                    <h4 className="w-25 ma0">{application.project.title}</h4>
-                    <div className="w-25">
-                        {project_status}
-                    </div>
-                    <div className="w-25">{application.user.first_name} {application.user.last_name}</div>
-                    <a
-                        className="w-25 tr"
-                        href={"/applications/" + application.id}
-                        >View job description <span className="ml3 f5 fa fa-angle-right"></span></a>
-                </div>
-            </div>
-        );
-      });
-    } else {
-      applicationList = <div>No Results</div>;
-    }
-
     let applications;
 
     applications = (!organization_signed_in || organization.id != current_organization.id) ? <span></span> : ( 
@@ -146,7 +98,9 @@ class ProjectView extends React.Component {
                     </div>
                     
             </div>
-            {applicationList}
+            <ApplicationList
+                    is_org_view={true}
+                    applications={this.props.applications} />
             </div>
         )
 

@@ -35,9 +35,15 @@ class Dropdown extends React.Component {
       return {headerTitle: `${count} ${nextProps.titleHelper}`}
     }
     else if (count > 1) {
-      return {headerTitle: `${count} ${nextProps.titleHelper}s`}
+        if (nextProps.titleHelper == "Application Status") {
+            
+             return {headerTitle: `${count} ${nextProps.titleHelper}es`}
+        }
+        else {
+             return {headerTitle: `${count} ${nextProps.titleHelper}s`}
+        }
     }
-  }
+    }
 
   render() {
     const {list, toggleItem} = this.props;
