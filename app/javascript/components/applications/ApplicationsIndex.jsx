@@ -146,7 +146,7 @@ class ApplicationsIndex extends React.Component {
                                 <input
                                     onKeyPress={this.handleKeyPress}
                                     onChange={this.handleChange("keyword")}
-                                    className="bn bg-transparent"
+                                    className="bn bg-transparent w5"
                                     type="text"
                                     placeholder="Find Projects..." />
                             </div>

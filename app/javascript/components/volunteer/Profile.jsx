@@ -4,7 +4,7 @@ import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
 import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
-
+import ProjectList from '../projects/ProjectList';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -51,8 +51,8 @@ class Profile extends React.Component {
   };
  
   render() {
-    let projectList;  
     let skillList;
+    const { projects, loading } = this.state;
 
      if (this.props.user.skills) {
         console.log(this.props.user.skills)
@@ -62,15 +62,6 @@ class Profile extends React.Component {
     } else {
         console.log('no skills')
         skillList = <div>No skills</div>;
-    }
-    if (this.state.projects && this.state.projects.length !== 0) {
-      projectList = this.state.projects.map((project, index) => {
-        return <ProjectCard project={project} key={index} />
-      });
-    } else {
-      if (this.state.loading == false) {
-            projectList = <div className="f4 tc pa3">There are no projects. </div>;
-        }
     }
 
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
@@ -124,8 +115,7 @@ class Profile extends React.Component {
                 <p className="f5">{this.props.user.bio}</p>
 
                 <h2 className="pt4 f3">Projects</h2>
-                <Loader loading={this.state.loading} />
-                {projectList}
+                <ProjectList projects={projects} loading={loading} />
             </div>
             
         </div>
