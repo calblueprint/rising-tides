@@ -2,10 +2,15 @@ import React from "react";
 import axios from 'axios';
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
+<<<<<<< HEAD
 import Loader from "../utils/Loader";
 import FlashMessage from '../utils/FlashMessage';
 import ApplicationList from '../applications/ApplicationList';
 import ProjectList from '../projects/ProjectList';
+=======
+import FlashMessage from '../utils/FlashMessage';
+import ApplicationList from '../applications/ApplicationList';
+>>>>>>> Application List Styling (#115)
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -239,6 +244,19 @@ class Dashboard extends React.Component {
     const { user } = this.props;
     const { projects, projectsLoading, applicationsLoading } = this.state;
 
+<<<<<<< HEAD
+=======
+    let projectList;
+
+    if (this.state.projects) {
+      projectList = this.state.projects.map((project, index) => {
+        return <ProjectCard project={project} key={index} />;
+      });
+    } else {
+      projectList = <div>You do not have any projects.</div>;
+    }
+
+>>>>>>> Application List Styling (#115)
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -290,6 +308,7 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateApplicationSearch()}>
                         Update Search</a>
                 </div>}
+<<<<<<< HEAD
                 <Loader loading={this.state.applicationsLoading} />
                 <ApplicationList
                     is_org_view={false}
@@ -302,6 +321,13 @@ class Dashboard extends React.Component {
                         href={"/applications"}
                         >View More Applications</a>
                 </div>
+=======
+                <ApplicationList
+                    is_org_view={false}
+                    applications={this.state.applications} />
+
+                <div className="cf"></div>
+>>>>>>> Application List Styling (#115)
                 <div className="w-100 mt5 mb1 flex items-center">
                     <div className="dib w-100">
                         <a className="f4 pa0" href="/my-projects">Current Projects</a>
