@@ -184,7 +184,7 @@ class ApplicationsIndex extends React.Component {
       });
     } else {
         if (this.state.loading == false) {
-            applicationList = <div className="f4 tc pa3"> There are no applications. </div>;
+            applicationList = <div className="f4 tc pa3">There are no applications. </div>;
         }
     }
 

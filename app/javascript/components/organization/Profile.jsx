@@ -59,7 +59,7 @@ class Profile extends React.Component {
       });
     } else {
       if (this.state.loading == false) {
-            projectList = <div className="f4 tc pa3"> There are no projects. </div>;
+            projectList = <div className="f4 tc pa3">There are no projects. </div>;
         }
     }
 

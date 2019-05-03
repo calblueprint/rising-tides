@@ -210,7 +210,7 @@ class MyProjects extends React.Component {
       });
     } else {
         if (this.state.currentLoading == false) {
-            currentProjectList = <div className="f4 tc pa3"> There are no projects. </div>;
+            currentProjectList = <div className="f4 tc pa3">There are no projects. </div>;
         }
     }
 
@@ -222,7 +222,7 @@ class MyProjects extends React.Component {
       });
     } else {
         if (this.state.pastLoading == false) {
-            pastProjectList = <div className="f4 tc pa3"> There are no projects. </div>;
+            pastProjectList = <div className="f4 tc pa3">There are no projects. </div>;
         }
     }
 

@@ -247,7 +247,7 @@ class Dashboard extends React.Component {
       });
     } else {
         if (this.state.projectsLoading == false) {
-            projectList = <div className="f4 tc pa3"> There are no projects. </div>;
+            projectList = <div className="f4 tc pa3">There are no projects. </div>;
         }
     }
 
@@ -298,7 +298,7 @@ class Dashboard extends React.Component {
       });
     } else {
         if (this.state.applicationsLoading == false) {
-            applicationList = <div className="f4 tc pa3"> There are no applications. </div>;
+            applicationList = <div className="f4 tc pa3">There are no applications. </div>;
         }
     }
 
