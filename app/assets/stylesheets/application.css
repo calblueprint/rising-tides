@@ -34,10 +34,11 @@ a {
     padding-left: 20px;
     position: relative;
     text-decoration: none;
+    color: black
 }
 
 h2 {
-    font-family: Impact;
+    font-family: Impact;;
     font-size: 38px;
     line-height: normal;
     color: #000000;
@@ -63,7 +64,6 @@ a:hover {
     cursor: pointer;
     background-color: auto;
     color: auto;
-    color: black;
 }
 
 button, .button {
@@ -517,7 +517,34 @@ fieldset {
     border: 0;
 }
 
+.skill-pill {
+    font-family: Lato;
+    border-style:solid;
+    border-width:1px;
+    margin:8px;
+    border-radius:9999px;
+    padding-left:16px;
+    padding-right:16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 16px;
+    display:inline-block;
+}
 
-
+.deliverable-pill {
+    font-family: Lato;
+    border-style:solid;
+    border-width:1px;
+    margin:8px;
+    border-radius:9999px;
+    padding-left:16px;
+    padding-right:16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 16px;
+    display:inline-block;
+    color: white;
+    background-color:black;
+}
 
 
