@@ -36,6 +36,8 @@ class ProjectsController < ApplicationController
     if @project.organization.profile_image
         @org_image_url = @project.organization.profile_image.url
     end
+
+    @reached_application_limit = @project.reached_application_limit?
   end
 
 
