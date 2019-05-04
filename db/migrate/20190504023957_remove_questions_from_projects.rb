@@ -1,4 +1,4 @@
-class RemoveQuestion1FromProjects < ActiveRecord::Migration[5.2]
+class RemoveQuestionsFromProjects < ActiveRecord::Migration[5.2]
   def change
     remove_column :projects, :question1
     remove_column :projects, :question2
