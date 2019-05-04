@@ -141,14 +141,30 @@ class ProjectView extends React.Component {
             </div>
         );
     });
+    
 
     let accepted_volunteers;
     accepted_volunteers = (!organization_signed_in || organization.id != current_organization.id) ? <span></span> : ( 
         skillList = this.props.applications.map((application, index) => {
+            let profileUrl = application.user.profile_image_file_name;
+            if (profileUrl === "/profile_images/original/missing.png" || !application.user.profile_image_file_name) {
+                profileUrl = profile_pic
+            }
             return (application.status === "accepted" ? 
-            <a className="ma0 pa0 icon-link" href ={"/users/" + application.user.id}>
-                <p className="f5">•     {application.user.first_name} {application.user.last_name}</p>
-            </a> : null);
+            <a href ={"/users/" + application.user.id}>
+            <div className="proj-card col-item dib ma2 shadow-1">
+                <img src={profileUrl} className="db pic-height w-100 br--top"/>
+                <div className="bt b--white pa3">
+                    <p className="f4 b lato compact mt3 ma2">
+                    {application.user.first_name} {application.user.last_name} 
+                    </p>
+                    <p className="f5 lato fl truncate mb0 ma2">
+                    {application.user.city}, {application.user.state} 
+                    </p>
+                </div>
+            </div>
+            </a>
+            : null);
         })
         )
 
@@ -223,8 +239,10 @@ class ProjectView extends React.Component {
                     <a className="mb2" href="/applications"><h2 className="f3">Applications</h2></a>
                     {applications}
                     <div>
-                        <h2 className="mt4 f3">Accepted Volunteers</h2>
+                        <h2 className="mt4 mb2 f3">Accepted Volunteers</h2>
+                        <div className="flex flex-wrap justify-around">
                         {accepted_volunteers}
+                        </div>
                     </div>
                     
             </div>

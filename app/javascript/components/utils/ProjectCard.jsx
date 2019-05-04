@@ -16,7 +16,7 @@ class ProjectCard extends React.Component {
   render() {
     return (
         <div className="proj-card col-item dib ma2 shadow-1" onClick={this.goToProject}>
-          <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br2 br--top" alt="Photo of a kitten looking menacing."/>
+          <img src="http://placekitten.com/g/600/300" className="db pic-height w-100 br--top" alt="Photo of a kitten looking menacing."/>
           <div className="bt b--white pa3">
             <p className="f4 b lato compact mt3 ma2">
               {this.props.project.title}

@@ -428,6 +428,7 @@ input.input {
 
 .pic-height {
     height:10rem;
+    object-fit: cover;
 }
 
 .ul {
