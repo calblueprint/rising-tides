@@ -60,7 +60,7 @@ class ProjectView extends React.Component {
     if (profileUrl === "/profile_images/original/missing.png") {
         profileUrl = profile_pic;
     }
-    let org_img = <img className="h-100 ba" style={{width: 48}}  src={profileUrl} />;
+    let org_img = <a href ={"/organizations/" + organization.id}><img className="h-100 ba" style={{width: 48}}  src={profileUrl} /></a>;
 
 
     var project_string_status = "Accepting Applications";
@@ -152,7 +152,7 @@ class ProjectView extends React.Component {
                   <div className="bg-light-gray ma2 pa4 h-auto">
                     <div className="flex items-center">
                         {org_img}
-                        <a className="ma0 f3 truncate dib">{organization.name}</a>
+                        <a href ={"/organizations/" + organization.id} className="ma0 f3 truncate dib">{organization.name}</a>
                     </div>
                     <div className="flex pt3">
                         <div className="pa2 w-33 truncate">

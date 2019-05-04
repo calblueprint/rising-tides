@@ -34,10 +34,11 @@ a {
     padding-left: 20px;
     position: relative;
     text-decoration: none;
+    color: black
 }
 
 h2 {
-    font-family: Impact;
+    font-family: Impact;;
     font-size: 38px;
     line-height: normal;
     color: #000000;
@@ -63,7 +64,7 @@ a:hover {
     cursor: pointer;
     background-color: auto;
     color: auto;
-    color: black;
+    color: grey;
 }
 
 button, .button {
