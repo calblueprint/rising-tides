@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_04_012613) do
+ActiveRecord::Schema.define(version: 2019_05_04_023957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,16 +107,12 @@ ActiveRecord::Schema.define(version: 2019_05_04_012613) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "limit"
-    t.text "overview"
     t.text "deliverable"
     t.text "volunteer_requirements"
-    t.text "other_details"
+    t.text "additional_details"
     t.integer "organization_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.text "question1"
-    t.text "question2"
-    t.text "question3"
     t.bigint "project_type_id"
     t.bigint "deliverable_type_id"
     t.integer "application_limit", default: 10

@@ -129,8 +129,8 @@ class ProjectView extends React.Component {
         return (
             <div className="ml4 mb4 relative">
                 <div style={{left: '-38px', height: '11px', width: '11px'}} className="w1 h1 br-pill bw3 absolute bg-black"></div>
-                <div className="f5">{deliverable.title}</div>
-                <div className="mt3">{deliverable.description}</div>
+                <div className="f3">{deliverable.title}</div>
+                <div className="mt3"><p>{deliverable.description}</p></div>
             </div>
         );
     });
@@ -166,33 +166,27 @@ class ProjectView extends React.Component {
                         </div>
                     </div>
                 </div>
-                {project.overview ? (
-                            <div className="pt3">
-                                <h2 className="mt3 f3">Project Overview</h2>
-                                <p className="f5">{project.overview}</p>
-                            </div>
-                        ) : (null)}
                 <div className="mt3 flex items-start">
                     <div className="w-75">
-                        <h3 className="mt3 mb3">Project Plan</h3>
-                        <div className="ml4 bl">
-                            {milestonesList}
-                        </div>
-                        {project.description ? (
-                            <div>
-                                <h2 className="mt4 f3">Description</h2>
-                                <p className="f5">{project.description}</p>
-                            </div>
-                        ) : (null)}
                         {project.deliverable ? (
                             <div>
                                 <h2 className="mt4 f3">Deliverable</h2>
                                 <p className="f5">{project.deliverable}</p>
                             </div>
                         ) : (null)}
+                        {project.description ? (
+                            <div>
+                                <h2 className="mt4 f3">Description</h2>
+                                <p className="f5">{project.description}</p>
+                            </div>
+                        ) : (null)}
+                        <h2 className="mt4 f3 mb3">Project Plan </h2>
+                        <div className="ml4 bl">
+                            {milestonesList}
+                        </div>
                         {this.props.skills ? (
                             <div>
-                                <h2 className="mt4 f3 pb3">Volunteer Skills</h2>
+                                <h2 className="mt4 f3 pb3">Required Skills</h2>
                                 {skillList}
                             </div>
                         ) : (null)}
@@ -202,33 +196,14 @@ class ProjectView extends React.Component {
                                 <p className="f5">{project.volunteer_requirements}</p>
                             </div>
                         ) : (null)}
-                        {project.other_details ? (
+                        {project.additional_details ? (
                             <div>
-                                <h2 className="mt4 f3">Other Details</h2>
-                                <p className="f5">{project.other_details}</p>
-                            </div>
-                        ) : (null)}
-                        {project.question1 ? (
-                            <div>
-                                <h2 className="mt4 f3">Our Community Needs This If</h2>
-                                <p className="f5"> {project.question1}</p>
-                            </div>
-                        ) : (null)}
-                        {project.question2 ? (
-                            <div>
-                                <h2 className="mt4 f3">The Right Volunteer for this Project Is</h2>
-                                <p className="f5">{project.question2}</p>
-                            </div>
-                        ) : (null)}
-                        {project.question3 ? (
-                            <div>
-                                <h2 className="mt4 f3">What You Give, What You Get</h2>
-                                <p className="f5">{project.question3}</p>
+                                <h2 className="mt4 f3">Additional Details</h2>
+                                <p className="f5">{project.additional_details}</p>
                             </div>
                         ) : (null)}
                     </div>
                 </div>
-                    <a className="mb2" href="/applications"><h2 className="f3">Applications</h2></a>
                 {applications}
             </div>
         </div>

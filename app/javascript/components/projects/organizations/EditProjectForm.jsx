@@ -203,7 +203,7 @@ class EditProjectForm extends React.Component {
         return (
             <div key={index}>
                 <input
-                    className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
+                    className="dib essay-box bg-light-gray mt1 w-100 pr3 pl3 pt1 pb1 input"
                     type="text"
                     onChange={this.handleMilestoneChange(index, "title")}
                     value={this.state.milestones[index].title}
@@ -252,19 +252,27 @@ class EditProjectForm extends React.Component {
                         />
                     </div>
                 </div>
-                <h3 className="mt3">Brief Description</h3>
+                <h3 className="mt3">Description</h3>
                 <textarea
                     rows="6"
                     className="essay-box bg-light-gray mt1 w-100 pa3"
                     onChange={this.handleChange("description")}
                     value={this.state.project.description}></textarea>
                 <h3 className="mt3">Project Plan</h3>
-                <textarea
-                    rows="6"
-                    className="essay-box bg-light-gray mt1 w-100 pa3"
-                    onChange={this.handleChange("overview")}
-                    value={this.state.project.overview}></textarea>
-                <div className="flex justify-between w-100">
+                {milestones}
+                <div className="flex mt1 w-100">
+                    <div className="w-100">
+                        <a className="dib std-button-white ph3 pv1 fw4 f5" onClick={this.addMilestone}>
+                            Add Milestone
+                        </a>
+                    </div>
+                    <div className="tr w-100">
+                        <a className="dib std-button-black ph3 pv1 fw4 f5" onClick={this.removeMilestone}>
+                            Remove
+                        </a>
+                    </div>
+                </div>
+                <div className="flex mt3 justify-between w-100">
                     <div className="dib w-30">
                         <h3 className="mt3">Professional Skills Needed</h3>
                         <Dropdown
@@ -295,52 +303,32 @@ class EditProjectForm extends React.Component {
                         />
                     </div>
                 </div>
-                <h3 className="mt3">Our Community Needs This If</h3>
+                <h3 className="mt3">Volunteer Requirements</h3>
                 <textarea
                     rows="6"
                     className="essay-box bg-light-gray mt1 w-100 pa3"
-                    onChange={this.handleChange("question1")}
-                    value={this.state.project.question1}></textarea>
-                <h3 className="mt3">The Right Volunteer for this Project Is</h3>
-                <textarea
-                    rows="6"
-                    className="essay-box bg-light-gray mt1 w-100 pa3"
-                    onChange={this.handleChange("question2")}
-                    value={this.state.project.question2}></textarea>
-                <h3 className="mt3">What You Give, What You Get</h3>
-                <textarea
-                    rows="6"
-                    className="essay-box bg-light-gray mt1 w-100 pa3"
-                    onChange={this.handleChange("question3")}
-                    value={this.state.project.question3}></textarea>
-                <h3 className="mt5">Application Limit</h3>
+                    onChange={this.handleChange("volunteer_requirements")}
+                    value={this.state.project.volunteer_requirements}></textarea>
+                <h3 className="mt3">Application Limit</h3>
                 <input
                     className="essay-box bg-light-gray mt1 w-100 pa3"
                     type="number"
                     onChange={this.handleChange("application_limit")}
                     value={this.state.project.application_limit}
                 />
-                <h3 className="mt5">Volunteer Limit</h3>
+                <h3 className="mt3">Volunteer Limit</h3>
                 <input
                     className="essay-box bg-light-gray mt1 w-100 pa3"
                     type="number"
                     onChange={this.handleChange("user_limit")}
                     value={this.state.project.user_limit}
                 />
-                <h3 className="mt5">Project Plan</h3>
-                {milestones}
-                <div className="flex mt3 w-100">
-                    <div className="w-100">
-                        <a className="dib std-button-white ph3 pv1 fw4 f5" onClick={this.addMilestone}>
-                            Add Milestone
-                        </a>
-                    </div>
-                    <div className="tr w-100">
-                        <a className="dib std-button-black ph3 pv1 fw4 f5" onClick={this.removeMilestone}>
-                            Remove
-                        </a>
-                    </div>
-                </div>
+                <h3 className="mt3">Additional Details</h3>
+                <textarea
+                    rows="6"
+                    className="essay-box bg-light-gray mt1 w-100 pa3"
+                    onChange={this.handleChange("additional_details")}
+                    value={this.state.project.additional_details}></textarea>
                 <div className="mt5">
                     <a className="fl std-button-black ph3 pv1 fw4 f5" onClick={this.goBack}>
                         Cancel
