@@ -10,19 +10,7 @@ class EditProfileForm extends React.Component {
       profileImage = <img src={this.props.profileImage_url} />;
     }
     this.state = {
-      name: props.organization.name,
-      website: props.organization.link,
-      email: props.organization.email,
-      city: props.organization.city,
-      state: props.organization.state,
-      password: props.organization.password,
-      password_confirmation: props.organization.password_confirmation,
-      profileImage: props.organization.profileImage_url,
-      mission: props.organization.description,
-      contact_first_name: props.organization.contact_first_name,
-      contact_last_name: props.organization.contact_last_name,
-      contact_phone_number: props.organization.phone_number,
-      contact_selected_file: props.organization.contact_selected_fil,
+      organization: this.props.organization
     };
 
   }
@@ -94,57 +82,55 @@ class EditProfileForm extends React.Component {
 
 
   handleChange = name => event => {
-    const { value } = event.target;
-    this.setState({ [name]: value }, () => {
-      this.validateField(name, value);
-    });
+    var user = this.state.user;
+    user[name] = event.target.value;
+    this.setState({ user: user });
   };
-
-  handleChange = name => (e) => {
-    const {name, value} = e.target;
-    this.setState({
-      [name]: event.value,
-  })};
 
   goBack = e => {
     e.preventDefault();
     window.location.href = "/";
   };
 
-  handleSubmit = e => {
+  handleSubmit() {
     const formData = new FormData();
-    formData.append("organization[email]", this.state.email);
-    formData.append("organization[password]", this.state.password);
+    let { selected_file, contact_selected_file } = this.state;
+    formData.append("organization[email]", this.state.organization.email);
+    formData.append("organization[password]", this.state.organization.password);
     formData.append(
       "organization[password_confirmation]",
-      this.state.password_confirmation
+      this.state.organization.password_confirmation
     );
     formData.append(
       "organization[contact_first_name]",
-      this.state.contact_first_name
+      this.state.organization.contact_first_name
     );
     formData.append(
       "organization[contact_last_name]",
-      this.state.contact_last_name
+      this.state.organization.contact_last_name
     );
-    formData.append("organization[city]", this.state.city);
-    formData.append("organization[state]", this.state.state);
-    formData.append("organization[link]", this.state.link);
-    formData.append("organization[description]", this.state.description);
-    formData.append("organization[name]", this.state.name);
+    formData.append("organization[city]", this.state.organization.city);
+    formData.append("organization[state]", this.state.organization.state);
+    formData.append("organization[link]", this.state.organization.link);
+    formData.append("organization[description]", this.state.organization.description);
+    formData.append("organization[name]", this.state.organization.name);
     formData.append(
       "organization[contact_phone_number]",
-      this.state.contact_phone_number
+      this.state.organization.contact_phone_number
     );
-    formData.append("organization[profile_image]", this.state.selected_file);
-    formData.append("organization[contact_image]", this.state.contact_selected_file);
+    formData.append("organization[profile_image]", selected_file);
+    formData.append("organization[contact_selected_file]", contact_selected_file);
+    let { organization } = this.props;
     axios
-      .patch("/organizations/", formData)
+      .patch(`/api/organizations/` + organization.id, formData)
       .then(function(response) {
-        window.location.href = "/organizations/" + this.state.organization.id;
+        console.log(response);
+        console.log(response.data.message);
+        window.location.href = "/organizations/" + organization.id;
       })
       .catch(function(error) {
         console.log(error);
+        console.log(error.response.data.message);
       });
   };
 
@@ -162,14 +148,14 @@ class EditProfileForm extends React.Component {
                 className="essay-box bg-light-gray mt1 w-100 pa3"
                 type="text"
                 onChange={this.handleChange("name")}
-                defaultValue={this.state.name}
+                defaultValue={this.state.organization.name}
             />
             <h3 className="mt3">Website</h3>
             <input
                 className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                 type="email"
                 onChange={this.handleChange("website")}
-                defaultValue={this.state.website}
+                defaultValue={this.state.organization.website}
             />
             <div className="flex justify-between w-100">
               <div className="dib w-100 mr3">
@@ -178,7 +164,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("city")}
-                    defaultValue={this.state.city}
+                    defaultValue={this.state.organization.city}
                 />
               </div>
               <div className="dib w-100 ml3">
@@ -187,7 +173,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("state")}
-                    defaultValue={this.state.state}
+                    defaultValue={this.state.organization.state}
                 />
               </div>
             </div>
@@ -216,13 +202,13 @@ class EditProfileForm extends React.Component {
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               type="file"
               onChange={this.handleFileChange}
-              defaultValue={this.state.selected_file}
+              defaultValue={this.state.organization.selected_file}
             />
             <h3 className="mt3">Tell us about the organization's mission.</h3>
             <textarea
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               placeholder="Tell us about your organization!"
-              defaultValue={this.state.description}
+              defaultValue={this.state.organization.description}
               rows="6"
               cols="50"
               onChange={this.handleChange("description")}
@@ -236,7 +222,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("contact_first_name")}
-                    defaultValue={this.state.contact_first_name}
+                    defaultValue={this.state.organization.contact_first_name}
                 />
               </div>
               <div className="dib w-100 ml3">
@@ -245,7 +231,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("contact_last_name")}
-                    defaultValue={this.state.contact_last_name}
+                    defaultValue={this.state.organization.contact_last_name}
                 />
               </div>
             </div>
@@ -254,14 +240,14 @@ class EditProfileForm extends React.Component {
                 className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                 type="tel"
                 onChange={this.handleChange("contact_phone_number")}
-                defaultValue={this.state.contact_phone_number}
+                defaultValue={this.state.organization.contact_phone_number}
             />
             <h3 className="mt3">Add a Photo</h3>
             <input
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               type="file"
               onChange={this.handleFileChange}
-              defaultValue={this.state.contact_selected_file}
+              defaultValue={this.state.organization.contact_selected_file}
             />
             <div className="mt5">
                 <a className="fl std-button-black ph3 pv1 fw4 f5" onClick={this.goBack}>

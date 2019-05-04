@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Dropdown from '../utils/Dropdown';
+// import { Field, ErrorMessage } from "formik";
 
 class EditProfileForm extends React.Component {
   constructor(props) {
@@ -97,19 +98,6 @@ class EditProfileForm extends React.Component {
     this.setState({ user: user });
   };
 
-
-  // handleChange = name => event => {
-  //   var user = this.state.user;
-  //   user[name] = event.target.value;
-  //   this.setState({ user: user });
-  // };
-
-  // handleChange = name => event => {
-  //   const { value } = event.target;
-  //   this.setState({ [name]: value }, () => {
-  //     this.validateField(name, value);
-  //   });
-  // };
 
   goBack = e => {
     e.preventDefault();
