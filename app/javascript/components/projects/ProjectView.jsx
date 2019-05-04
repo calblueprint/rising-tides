@@ -64,9 +64,9 @@ class ProjectView extends React.Component {
 
 
     var project_string_status = "Accepting Applications";
-    if (project.status == "in_progress" || project.application_limit - project.application_count < 1) {
+    if (project.status === "in_progress" || project.application_limit - project.application_count < 1) {
         project_string_status = "Applications Closed";
-    } else if (project.status == "completed") {
+    } else if (project.status === "completed") {
         project_string_status = "Project Completed";
     }
 
