@@ -424,6 +424,7 @@ input.input {
 
 .icon-link:hover {
     color: grey;
+    cursor: pointer;
 }
 
 .pic-height {
@@ -545,6 +546,12 @@ fieldset {
     display:inline-block;
     color: white;
     background-color:black;
+}
+
+.white-on-grey {
+    background-color: grey;
+    color: white;
+    cursor: pointer;
 }
 
 

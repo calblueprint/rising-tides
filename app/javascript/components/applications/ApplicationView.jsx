@@ -162,7 +162,7 @@ class ApplicationView extends React.Component {
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
                         <div className="flex items-end">
-                            <h1 className="ma0 f1 mb3">
+                            <h1 className="ma0 f1 icon-link mb3" onClick={this.handleVolunteerClick}>
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
                             <br/>
