@@ -4,7 +4,7 @@ import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
 import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
-
+import ProjectList from '../projects/ProjectList';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -51,18 +51,7 @@ class Profile extends React.Component {
   };
 
   render() {
-    const { organization } = this.state;
-    let projectList;
-
-    if (this.state.projects && this.state.projects.length !== 0) {
-      projectList = this.state.projects.map((project, index) => {
-        return <ProjectCard project={project} key={index} />
-      });
-    } else {
-      if (this.state.loading == false) {
-            projectList = <div className="f4 tc pa3">There are no projects. </div>;
-        }
-    }
+    const { organization, projects, loading } = this.state;
 
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
     if (profileUrl === "/profile_images/original/missing.png") {
@@ -108,8 +97,7 @@ class Profile extends React.Component {
                 <p className="f5">{this.props.organization.description}</p>
 
                 <h2 className="pt4 f3 pb3">Projects</h2>
-                <Loader loading={this.state.loading} />
-                {projectList}
+                <ProjectList projects={projects} loading={loading} />
             </div>
         </div>
     );
