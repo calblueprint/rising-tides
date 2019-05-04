@@ -42,6 +42,19 @@ class Project < ApplicationRecord
                         .group('projects.id')
                         .select('projects.*, COUNT(applications.id) AS application_count') }
   scope :with_project_statuses, -> (statuses) { where status: statuses }
+  scope :with_free_slots, -> (is_free) {
+    if is_free
+        as_array = find_by_sql("SELECT projects.*, COUNT(applications.id) as application_count FROM projects LEFT OUTER JOIN applications ON applications.project_id = projects.id AND (applications.status = 0 OR applications.status = 2) GROUP BY projects.id HAVING COUNT(applications.id) < projects.application_limit")
+        where(id: as_array.map(&:id))
+    else
+        as_array = find_by_sql("SELECT projects.*, COUNT(applications.id) as application_count FROM projects LEFT OUTER JOIN applications ON applications.project_id = projects.id AND (applications.status = 0 OR applications.status = 2) GROUP BY projects.id HAVING COUNT(applications.id) >= projects.application_limit")
+        where(id: as_array.map(&:id))
+    end
+  }
+  scope :with_user_skills, -> (user_id) {
+    skill_ids = User.find(user_id).skills.pluck(:id)
+    with_skill_ids(skill_ids)
+  }
   scope :include_organization, -> () {
     includes(:organization).as_json(
         include: [

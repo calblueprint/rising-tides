@@ -55,7 +55,8 @@ class ProjectsIndex extends React.Component {
       deliverable_types: deliverable_types_a,
       show_filtering: false,
       keyword: "",
-      loading: true
+      loading: true,
+      filter_by_user_skills: false
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -66,6 +67,7 @@ class ProjectsIndex extends React.Component {
     this.toggleSelected = this.toggleSelected.bind(this);
     this.toggleSelectedSingle = this.toggleSelectedSingle.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleSkillCheck = this.handleSkillCheck.bind(this);
   }
 
   componentDidMount() {
@@ -128,8 +130,13 @@ class ProjectsIndex extends React.Component {
             with_skill_ids: skill_ids,
             with_project_type_ids: project_type_ids,
             with_deliverable_type_ids: deliverable_type_ids,
-            with_keyword: this.state.keyword
+            with_keyword: this.state.keyword,
+            with_free_slots: true
         }
+    }
+    if (this.state.filter_by_user_skills) {
+        payload.query.with_user_skills = this.props.user.id;
+        console.log("Filtering by user skills");
     }
     axios.post("/api/projects/filter", payload).then(ret => {
       const { projects, message } = ret.data;
@@ -155,13 +162,31 @@ class ProjectsIndex extends React.Component {
     }
   }
 
+  handleSkillCheck() {
+    console.log("setting filter_by_user_skills:" + this.state.filter_by_user_skills);
+    this.setState({
+        filter_by_user_skills: !this.state.filter_by_user_skills
+    });
+  }
+
   goBack = e => {
     e.preventDefault();
     window.location.href = "/";
   };
 
   render() {
-    let { loading, projects } = this.state;
+    let { loading, projects, filter_by_user_skills } = this.state;
+
+    var skill_filter_checkbox;
+    if (this.props.user) {
+        skill_filter_checkbox = (
+            <div className="dib fr mr2 bg-white disable-selection pt1">
+                Filter by My Skills: <input
+                    type="checkbox"
+                    onChange={this.handleSkillCheck} 
+                    checked={filter_by_user_skills} />
+            </div>);
+    }
 
     return (
       <div className="w-100 h-100 tc">
@@ -187,8 +212,13 @@ class ProjectsIndex extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <a
+                        className="dib std-button pa2 fr"
+                        href="/projects/new">
+                        Create Project
+                    </a>
                     <div className="cf"></div>
-                    <div className="w-100 h1">
+                    <div className="w-100 h1 mt3">
                         <div className="dib fl">
                             <h3>Current Projects</h3>
                         </div>
@@ -199,6 +229,7 @@ class ProjectsIndex extends React.Component {
                                 Filter <span className="f6 fa fa-filter"></span>
                             </h3>
                         </div>
+                        {skill_filter_checkbox}
                     </div>
                 </div>
                 <div className="mb2 mt3 bt b--black-10" />
