@@ -68,8 +68,19 @@ class Profile extends React.Component {
     if (profileUrl === "/profile_images/original/missing.png") {
         profileUrl = profile_pic;
     }
+    console.log(this.props.resume_url)
     let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
-    let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
+    let linkedin = this.props.user.link ? (<a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.link}`}>
+                                            <i className="fab fa-linkedin f2 icon-link"></i>
+                                            </a>) : null;
+    
+    let resume;
+    if (this.props.resume_url || this.props.resume_url ==="/profile_images/original/missing.png") {
+        resume = null;
+    } else {
+        resume = (<a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={this.props.resume_url}>
+                    <i className="fas fa-file-alt f2 icon-link"></i>                            
+                    </a>)}
 
     return (
         <div className="w-100 h-100 tc">
@@ -85,12 +96,8 @@ class Profile extends React.Component {
                             <h1 className="ma0 truncate f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
-                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.link}`}>
-                            <i className="fab fa-linkedin f2 icon-link"></i>
-                            </a>
-                            <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                            <i className="fas fa-file-alt f2 icon-link"></i>                            
-                            </a>
+                            {linkedin}
+                            {resume}
                         </div>
                         <div className="flex f5">
                             <div className="mt1-ns">
