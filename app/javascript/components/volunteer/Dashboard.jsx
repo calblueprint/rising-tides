@@ -290,6 +290,7 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateApplicationSearch()}>
                         Update Search</a>
                 </div>}
+                <Loader loading={this.state.applicationsLoading} />
                 <ApplicationList
                     is_org_view={false}
                     applications={this.state.applications} 
