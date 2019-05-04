@@ -140,11 +140,6 @@ class ProjectsIndex extends React.Component {
     }
     axios.post("/api/projects/filter", payload).then(ret => {
       const { projects, message } = ret.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
       this.setState({ 
         projects: projects,
         loading: false

@@ -30,11 +30,6 @@ class Profile extends React.Component {
     }
     axios.post("/api/projects/filter", payload).then(res => {
       const { projects, message } = res.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
       this.setState({ 
         projects: projects,
         loading: false });

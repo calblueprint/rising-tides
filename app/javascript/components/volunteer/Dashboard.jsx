@@ -172,11 +172,6 @@ class Dashboard extends React.Component {
     }
     axios.post("/api/projects/filter", payload).then(ret => {
       const { projects, message } = ret.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
       this.setState({ 
         projects: projects,
         projectsLoading: false
@@ -208,11 +203,6 @@ class Dashboard extends React.Component {
 
     axios.post("/api/applications/filter", payload).then(ret => {
       const { applications, message } = ret.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
       this.setState({ 
         applications: applications,
         applicationsLoading: false
