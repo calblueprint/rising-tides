@@ -10,8 +10,24 @@ class EditProfileForm extends React.Component {
       profileImage = <img src={this.props.profileImage_url} />;
     }
     this.state = {
-      organization: this.props.organization
+      organization: this.props.organization,
+      formErrors: { first_name: "", last_name: "", email: "" },
+      first_nameValid: false,
+      last_nameValid: false,
+      emailValid: false,
+      passwordValid: false,
+      passwordMatch: false,
+      formValid: false
     };
+    axios.defaults.headers.common = {
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-TOKEN": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
+    };
+    this.handlers = [];
+    // this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
@@ -82,9 +98,9 @@ class EditProfileForm extends React.Component {
 
 
   handleChange = name => event => {
-    var user = this.state.user;
-    user[name] = event.target.value;
-    this.setState({ user: user });
+    var organization = this.state.organization;
+    organization[name] = event.target.value;
+    this.setState({ organization: organization });
   };
 
   goBack = e => {
@@ -122,7 +138,7 @@ class EditProfileForm extends React.Component {
     formData.append("organization[contact_selected_file]", contact_selected_file);
     let { organization } = this.props;
     axios
-      .patch(`/api/organizations/` + organization.id, formData)
+      .patch("/api/organizations/" + organization.id, formData)
       .then(function(response) {
         console.log(response);
         console.log(response.data.message);
@@ -135,7 +151,7 @@ class EditProfileForm extends React.Component {
   };
 
   render() {
-    const { organization} = this.state;
+    const { organization } = this.state;
     return (
       <div className="w-100 h-100 bg-white">
         <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
@@ -202,7 +218,7 @@ class EditProfileForm extends React.Component {
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               type="file"
               onChange={this.handleFileChange}
-              defaultValue={this.state.organization.selected_file}
+              defaultValue={this.state.organization.profile_image}
             />
             <h3 className="mt3">Tell us about the organization's mission.</h3>
             <textarea

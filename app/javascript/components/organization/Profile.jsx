@@ -35,7 +35,7 @@ class Profile extends React.Component {
           message
         );
       }
-      this.setState({ 
+      this.setState({
         projects: projects,
         loading: false });
     }).catch(res => {
@@ -60,7 +60,7 @@ class Profile extends React.Component {
       return (
         <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
           <img src="/images/edit_pen.png"
-              style={{ width: '21px', height: '21px'}}
+              style={{ width: '21px', height: '21px' }}
               className="grayscale"/>
         </a>
       )}
@@ -68,9 +68,9 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { organization, projects, loading } = this.state;
+    const { projects, loading } = this.state;
 
-    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
+    let profileUrl = this.props.organization.profile_image_url ? this.props.organization.profile_image_url : profile_pic;
     if (profileUrl === "/profile_images/original/missing.png") {
         profileUrl = profile_pic;
     }
@@ -82,8 +82,8 @@ class Profile extends React.Component {
                 className="h5 absolute w-100 bg-black bg-image"
                 style={{zIndex: -1}} />
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
-            {this.checkIfOrg()}
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
+                {this.checkIfOrg()}
                 <div className="h4 flex items-end">
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">

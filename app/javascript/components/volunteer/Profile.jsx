@@ -56,23 +56,6 @@ class Profile extends React.Component {
   };
 
 
-  getInitialState = () => {
-    return {
-        hover: false
-    };
-  };
-
-  hoverOn = () =>{
-    console.log("on");
-    this.setState({ hover: true });
-  };
-
-  hoverOff = () =>{
-    console.log("off");
-    this.setState({ hover: false });
-  };
-
-
   checkIfUser = () => {
     if (this.props.user != null && this.props.curr_user != null){
       if (this.props.user.name == this.props.curr_user.name && this.props.user.email == this.props.curr_user.email){
@@ -101,7 +84,6 @@ class Profile extends React.Component {
     }
 
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
-<<<<<<< HEAD
     if (profileUrl === "/profile_images/original/missing.png") {
         profileUrl = profile_pic;
     }
@@ -118,14 +100,6 @@ class Profile extends React.Component {
         resume = (<a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={this.props.resume_url}>
                     <i className="fas fa-file-alt f2 icon-link"></i>
                     </a>)}
-
-=======
-    let profileImage = <img className="h-100 w4"  src={profileUrl} />;
-    let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
-    let resume = <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                    <i className="fas fa-file-alt f2"></i>
-                </a>
->>>>>>> update
     return (
         <div className="w-100 h-100 tc">
             <div

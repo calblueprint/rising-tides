@@ -177,7 +177,7 @@ class Dashboard extends React.Component {
           message
         );
       }
-      this.setState({ 
+      this.setState({
         projects: projects,
         projectsLoading: false
     });
@@ -213,7 +213,7 @@ class Dashboard extends React.Component {
           message
         );
       }
-      this.setState({ 
+      this.setState({
         applications: applications,
         applicationsLoading: false
       });
@@ -290,9 +290,13 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateApplicationSearch()}>
                         Update Search</a>
                 </div>}
+<<<<<<< HEAD
+=======
+                <Loader loading={this.state.applicationsLoading} />
+>>>>>>> fixed bugs after rebase
                 <ApplicationList
                     is_org_view={false}
-                    applications={this.state.applications} 
+                    applications={this.state.applications}
                     loading={this.state.applicationsLoading}
                     />
                 <div className="cf"></div>
