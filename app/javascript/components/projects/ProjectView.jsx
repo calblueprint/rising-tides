@@ -186,10 +186,7 @@ class ProjectView extends React.Component {
                 </div>
                 <div className="mt3 flex items-start">
                     <div className="w-75">
-                        <h2 className="mt3 f3">Project Plan</h2>
-                        <div className="ml4 bl">
-                            {milestonesList}
-                        </div>
+                        
                         {project.description ? (
                             <div>
                                 <h2 className="mt4 f3">Description</h2>
@@ -200,12 +197,6 @@ class ProjectView extends React.Component {
                             <div>
                                 <h2 className="mt4 f3">Deliverable</h2>
                                 <p className="f5">{project.deliverable}</p>
-                            </div>
-                        ) : (null)}
-                        {project.description ? (
-                            <div>
-                                <h2 className="mt4 f3">Description</h2>
-                                <p className="f5">{project.description}</p>
                             </div>
                         ) : (null)}
                         <h2 className="mt4 f3 mb3">Project Plan </h2>
