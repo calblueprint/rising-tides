@@ -60,11 +60,15 @@ class Project < ApplicationRecord
   enum status: { recruiting: 0, in_progress: 1, completed: 2 }
 
   def reached_application_limit?
-    return self.applications.length >= self.application_limit
+    return self.applications.where(status: [0, 2]).length >= self.application_limit
   end
 
   def reached_user_limit?
-    return self.users.length >= self.application_limit
+    return self.applications
+               .where(status: 3)
+               .joins(:user)
+               .group(:id)
+               .length >= self.application_limit
   end
 
 

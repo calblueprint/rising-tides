@@ -9,7 +9,6 @@ import ApplicationList from '../applications/ApplicationList';
 class ProjectView extends React.Component {
   constructor(props) {
     super(props);
-    this.spotsLeft = this.props.project.application_limit - this.props.project.application_count;
     this.state = {
       organization: null
     };
@@ -52,7 +51,8 @@ class ProjectView extends React.Component {
         organization,
         organization_signed_in,
         current_organization,
-        milestones
+        milestones,
+        reached_application_limit
     } = this.props;
 
     var org_img = <span></span>;
@@ -74,7 +74,7 @@ class ProjectView extends React.Component {
             Apply
         </a>
     );
-    if (organization_signed_in || this.spotsLeft <= 0) {
+    if (organization_signed_in || reached_application_limit) {
         apply_button = <span></span>;
     }
 

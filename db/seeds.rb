@@ -23,6 +23,7 @@ end
 
 def create_volunteers
   1.upto(NUM_USERS) do |i|
+    skill_ids = Skill.all.sample(3).pluck(:id)
     user = User.create!(email: "user#{i}@gmail.com",
                         password: 'password',
                         password_confirmation: 'password',
@@ -31,7 +32,8 @@ def create_volunteers
                         city: Faker::Address.city,
                         state: Faker::Address.state_abbr,
                         bio: Faker::TvShows::RickAndMorty.quote,
-                        phone_number: Faker::PhoneNumber.phone_number
+                        phone_number: Faker::PhoneNumber.phone_number,
+                        skill_ids: skill_ids
     )
     user.skip_confirmation!
     user.save

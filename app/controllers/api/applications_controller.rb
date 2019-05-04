@@ -88,7 +88,7 @@ class Api::ApplicationsController < ApplicationController
 
     begin
       application = Application.find(params[:id])
-      raise Error::MaxProjUserError unless Application.statuses['accepted'] != Application.statuses[decision] or not application.project.reached_user_limit?
+      raise Error::MaxProjUserError unless 'accepted' != decision or not application.project.reached_user_limit?
       a = application.update_attribute(:status, decision)
     end
     if a
