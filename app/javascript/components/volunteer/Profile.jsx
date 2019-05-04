@@ -101,6 +101,7 @@ class Profile extends React.Component {
     }
 
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
+<<<<<<< HEAD
     if (profileUrl === "/profile_images/original/missing.png") {
         profileUrl = profile_pic;
     }
@@ -118,6 +119,13 @@ class Profile extends React.Component {
                     <i className="fas fa-file-alt f2 icon-link"></i>
                     </a>)}
 
+=======
+    let profileImage = <img className="h-100 w4"  src={profileUrl} />;
+    let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
+    let resume = <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
+                    <i className="fas fa-file-alt f2"></i>
+                </a>
+>>>>>>> update
     return (
         <div className="w-100 h-100 tc">
             <div

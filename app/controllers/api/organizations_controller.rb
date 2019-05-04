@@ -31,9 +31,9 @@ class Api::OrganizationsController < ApplicationController
       a = organization.update(organization_params)
     end
     if a
-      new_organization = Project.find(params[:id])
+      new_organization = Organization.find(params[:id])
       return render json: {message: 'Organization successfully updated!',
-                           project: new_organization}
+                           organization: new_organization}
     else
       raise StandardError, application.errors.full_messages
     end

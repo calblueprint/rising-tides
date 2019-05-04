@@ -18,21 +18,6 @@ class EditProfileForm extends React.Component {
 
     this.state = {
       user: this.props.user,
-<<<<<<< HEAD
-=======
-      // first_name: props.first_name,
-      // last_name: props.last_name,
-      // email: props.email,
-      // password: "*****",
-      // phone_number: props.phone_number,
-      // city: props.city,
-      // state: props.state,
-      // skills: skills,
-      // profileImage: props.selected_file,
-      // resume: props.selected_resume_file,
-      // linkedIn: props.link,
-      // bio: props.bio,
->>>>>>> edit changes still in progress
       formErrors: { first_name: "", last_name: "", email: "" },
       first_nameValid: false,
       last_nameValid: false,
@@ -112,15 +97,19 @@ class EditProfileForm extends React.Component {
     this.setState({ user: user });
   };
 
-<<<<<<< HEAD
-=======
+
+  // handleChange = name => event => {
+  //   var user = this.state.user;
+  //   user[name] = event.target.value;
+  //   this.setState({ user: user });
+  // };
+
   // handleChange = name => event => {
   //   const { value } = event.target;
   //   this.setState({ [name]: value }, () => {
   //     this.validateField(name, value);
   //   });
   // };
->>>>>>> edit changes still in progress
 
   goBack = e => {
     e.preventDefault();
@@ -129,10 +118,7 @@ class EditProfileForm extends React.Component {
 
   handleSubmit() {
     const formData = new FormData();
-<<<<<<< HEAD
     let { selected_file, selected_resume_file } = this.state;
-=======
->>>>>>> edit changes still in progress
     formData.append("user[email]", this.state.user.email);
     formData.append("user[password]", this.state.user.password);
     formData.append(
@@ -150,32 +136,20 @@ class EditProfileForm extends React.Component {
     formData.append("user[city]", this.state.user.city);
     formData.append("user[state]", this.state.user.state);
     formData.append("user[link]", this.state.user.linkedIn);
-<<<<<<< HEAD
     formData.append("user[bio]", this.state.user.bio);
-=======
-    formData.append("user[description]", this.state.user.bio);
->>>>>>> edit changes still in progress
     formData.append(
       "user[phone_number]",
       this.state.user.phone_number
     );
-<<<<<<< HEAD
     formData.append("user[profile_image]", selected_file);
     formData.append("user[resume]", selected_resume_file);
     let { user } = this.props;
-=======
-    formData.append("user[profile_image]", this.state.user.selected_file);
->>>>>>> edit changes still in progress
     axios
       .patch(`/api/users/` + user.id, formData)
       .then(function(response) {
-<<<<<<< HEAD
         console.log(response);
         console.log(response.data.message);
         window.location.href = "/users/" + user.id;
-=======
-        window.location.href = "/users/" + this.state.user.id;
->>>>>>> edit changes still in progress
       })
       .catch(function(error) {
         console.log(error);
