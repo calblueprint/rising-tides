@@ -548,7 +548,7 @@ fieldset {
     background-color:black;
 }
 
-.white-on-grey {
+.white-on-grey:hover{
     background-color: grey;
     color: white;
     cursor: pointer;
