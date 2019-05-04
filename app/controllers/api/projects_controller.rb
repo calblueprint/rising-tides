@@ -46,11 +46,6 @@ class Api::ProjectsController < ApplicationController
         message: "Missing description."
       }, status: :unprocessable_entity
     end
-    if not project_params[:overview]
-      return render json: {
-        message: "Missing overview."
-      }, status: :unprocessable_entity
-    end
     if not project_params[:start_time]
       return render json: {
         message: "Missing start time."
@@ -74,21 +69,6 @@ class Api::ProjectsController < ApplicationController
     if not project_params[:project_type_id]
       return render json: {
         message: "Missing project type."
-      }, status: :unprocessable_entity
-    end
-    if not project_params[:question1]
-      return render json: {
-        message: "Missing an answer to \"Our Community Needs This If\"."
-      }, status: :unprocessable_entity
-    end
-    if not project_params[:question2]
-      return render json: {
-        message: "Missing an answer to \"The Right Volunteer for this Project Is\"."
-      }, status: :unprocessable_entity
-    end
-    if not project_params[:question3]
-      return render json: {
-        message: "Missing an answer to \"What You Give, What You Get\"."
       }, status: :unprocessable_entity
     end
     if not project_params[:application_limit]
@@ -167,18 +147,15 @@ class Api::ProjectsController < ApplicationController
       params.require(:project).permit(
         :title,
         :description,
-        :overview,
         :volunteer_requirements,
         :deliverable,
-        :question1,
-        :question2,
-        :question3,
         :organization_id,
         :project_type_id,
         :deliverable_type_id,
         :start_time,
         :end_time,
         :application_limit,
+        :additional_details,
         :user_limit,
         skill_ids: []
       )
