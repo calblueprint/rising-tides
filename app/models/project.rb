@@ -68,7 +68,7 @@ class Project < ApplicationRecord
                .where(status: 3)
                .joins(:user)
                .group(:id)
-               .length >= self.application_limit
+               .length >= self.user_limit
   end
 
 
