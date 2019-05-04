@@ -192,6 +192,8 @@ class Api::ProjectsController < ApplicationController
             :with_organization_id,
             :with_limit,
             :with_accepted_user_id,
+            :with_free_slots,
+            :with_user_skills,
             with_project_statuses: [],
             with_skill_ids: [],
             with_project_type_ids: [],
