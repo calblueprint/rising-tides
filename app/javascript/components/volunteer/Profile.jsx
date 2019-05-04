@@ -75,7 +75,7 @@ class Profile extends React.Component {
                                             </a>) : null;
     
     let resume;
-    if (this.props.resume_url || this.props.resume_url ==="/profile_images/original/missing.png") {
+    if (!this.props.resume_url || this.props.resume_url ==="/profile_images/original/missing.png") {
         resume = null;
     } else {
         resume = (<a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={this.props.resume_url}>
