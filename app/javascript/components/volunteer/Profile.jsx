@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
+import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 
 
@@ -9,7 +10,8 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.user
+      user: props.user,
+      loading: true
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -33,7 +35,9 @@ class Profile extends React.Component {
           message
         );
       }
-      this.setState({ projects });
+      this.setState({ 
+        projects: projects,
+        loading: false  });
     }).catch(res => {
       this.flash_message.flashError(
         res.response.data.message
@@ -45,15 +49,37 @@ class Profile extends React.Component {
     e.preventDefault();
     window.location.href = "/";
   };
-
+ 
   render() {
-    const { user } = this.state;
+    let projectList;  
+    let skillList;
+
+     if (this.props.user.skills) {
+        console.log(this.props.user.skills)
+        skillList = this.props.user.skills.map((skill, index) => {
+            return <div className="f5 dim br-pill ba ph3 pv2 mb2 dib lato black">{skill.name}</div>;
+        })
+    } else {
+        console.log('no skills')
+        skillList = <div>No skills</div>;
+    }
+    if (this.state.projects && this.state.projects.length !== 0) {
+      projectList = this.state.projects.map((project, index) => {
+        return <ProjectCard project={project} key={index} />
+      });
+    } else {
+      if (this.state.loading == false) {
+            projectList = <div className="f4 tc pa3">There are no projects. </div>;
+        }
+    }
+
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
-    let profileImage = <img className="h-100 w4"  src={profileUrl} />;
+    if (profileUrl === "/profile_images/original/missing.png") {
+        profileUrl = profile_pic;
+    }
+    let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
     let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
-    let resume = <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                    <i className="fas fa-file-alt f2"></i>                            
-                </a>
+
     return (
         <div className="w-100 h-100 tc">
             <div
@@ -65,15 +91,15 @@ class Profile extends React.Component {
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
                         <div className="flex items-end">
-                            <h1 className="ma0 f1 mb3">
+                            <h1 className="ma0 truncate f1 mb3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
-                            <a className="pa0 ph1 ml3 mb1" target="_blank" href={`http://${this.props.user.link}`}>
-                                <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.link}`}>
+                            <i className="fab fa-linkedin f2 icon-link"></i>
                             </a>
-                            <div className="pb2 ml3">
-                                {resume}
-                            </div>
+                            <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
+                            <i className="fas fa-file-alt f2 icon-link"></i>                            
+                            </a>
                         </div>
                         <div className="flex f5">
                             <div className="mt1-ns">
@@ -91,13 +117,15 @@ class Profile extends React.Component {
                     </div>
                 </div>
 
-                <h3 className="pt5">Skills</h3>
-                {this.props.user.skills}
+                <h2 className="pt4 f3">Skills</h2>
+                <p className="f5">{skillList}</p>
 
-                <h3 className="pt5">Biography</h3>
-                {this.props.user.bio}
+                <h2 className="pt4 f3">Biography</h2>
+                <p className="f5">{this.props.user.bio}</p>
 
-                <h3 className="pt5">Projects</h3>
+                <h2 className="pt4 f3">Projects</h2>
+                <Loader loading={this.state.loading} />
+                {projectList}
             </div>
             
         </div>

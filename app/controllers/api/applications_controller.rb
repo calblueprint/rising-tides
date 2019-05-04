@@ -118,6 +118,7 @@ class Api::ApplicationsController < ApplicationController
             :with_keyword,
             :with_user_id,
             :with_organization_id,
+            :with_limit,
             with_statuses: []
         )
     end

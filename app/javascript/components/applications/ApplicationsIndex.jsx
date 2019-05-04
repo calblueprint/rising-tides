@@ -1,13 +1,12 @@
 import React from "react";
 import axios from "axios";
-import ApplicationRow from "./ApplicationRow";
 import Dropdown from '../utils/Dropdown';
 import FlashMessage from '../utils/FlashMessage'
+import ApplicationList from './ApplicationList';
 
 class ApplicationsIndex extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       applications: props.applications,
       show_filtering: false,
@@ -41,7 +40,8 @@ class ApplicationsIndex extends React.Component {
             selected: false,
             key: 'application_statuses'
         }
-      ]
+      ],
+      loading: true
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -92,7 +92,6 @@ class ApplicationsIndex extends React.Component {
         payload.query.with_organization_id = this.props.organization.id;
     }
 
-    console.log(payload);
     axios.post("/api/applications/filter", payload).then(ret => {
       const { applications, message } = ret.data;
       if (message) {
@@ -100,8 +99,10 @@ class ApplicationsIndex extends React.Component {
           message
         );
       }
-      this.setState({ applications });
-      console.log("UPDATED APPLICATIONS LENGTH: " + applications.length);
+      this.setState({
+        applications: applications,
+        loading: false
+      });
     }).catch(res => {
         this.flash_message.flashError(
             res.response.data.message
@@ -129,61 +130,6 @@ class ApplicationsIndex extends React.Component {
   };
 
   render() {
-    let applicationList;
-
-    if (this.state.applications.length !== 0) {
-      applicationList = this.state.applications.map((application, index) => {
-        var project_status = (
-            <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                In Review
-            </div>
-        );
-        if (application.status == "interviewing") {
-            project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interview
-                </div>
-            );
-        } else if (application.status == "accepted") {
-            project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interview
-                </div>
-            );
-        } else if (application.status == "denied") {
-            project_status = (
-                <div className="dib ph3 pv2 fw4">
-                    No longer in consideration
-                </div>
-            );
-        }
-        var app_name;
-        if (this.props.organization) {
-            app_name = <span>{application.user.first_name} {application.user.last_name}</span>;
-        } else {
-            app_name = <span>{application.project.organization.name}</span>;
-        }
-        return (
-            <div className="">
-                <div className="bt b--black-10" />
-                <div className="flex items-center pv3" key={index}>
-                    <h4 className="w-25 ma0">{application.project.title}</h4>
-                    <div className="w-25">
-                        {project_status}
-                    </div>
-                    <div className="w-25">{app_name}</div>
-                    <a
-                        className="w-25 tr"
-                        href={"/applications/" + application.id}
-                        >View job description <span className="ml3 f5 fa fa-angle-right"></span></a>
-                </div>
-            </div>
-        );
-      });
-    } else {
-      applicationList = <div>No Results</div>;
-    }
-
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -208,7 +154,7 @@ class ApplicationsIndex extends React.Component {
                     </div>
                 </div>
                 <div className="cf"></div>
-                <div className="w-100 h1 mb3">
+                <div className="w-100 h1 mb3 mt3">
                     <div className="dib fl">
                         <h3>Applications</h3>
                     </div>
@@ -234,7 +180,10 @@ class ApplicationsIndex extends React.Component {
                         onClick={() => this.updateSearch()}>
                         Update Search</a>
                 </div>}
-                {applicationList}
+                <ApplicationList
+                    is_org_view={this.props.organization}
+                    applications={this.state.applications} 
+                    loading={this.state.loading}/>
             </div>
         </div>
     );

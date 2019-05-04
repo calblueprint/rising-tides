@@ -30,6 +30,10 @@ class Project < ApplicationRecord
       left_joins(:applications).
       where('applications.user_id' => user_id).
       group(:id) }
+  scope :with_accepted_user_id, -> (user_id) { distinct.
+      left_joins(:applications).
+      where('applications.status = 3 AND applications.user_id = ?', user_id).
+      group(:id) }
   scope :with_organization_id, -> (organization_id) { where organization_id: organization_id }
   scope :with_limit, -> (_limit) { limit(_limit)}
   scope :with_application_count, -> () {

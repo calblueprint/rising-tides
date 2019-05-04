@@ -1,11 +1,10 @@
 import React from "react"
 import axios from 'axios';
-import Logout from "./Logout"
-import NavBar from "../utils/NavBar"
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
-import FlashMessage from '../utils/FlashMessage'
-
+import Loader from "../utils/Loader"
+import FlashMessage from '../utils/FlashMessage';
+import ApplicationList from '../applications/ApplicationList';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -58,6 +57,8 @@ class Dashboard extends React.Component {
       show_project_filtering: false,
       show_application_filtering: false,
       keyword: "",
+      applicationsLoading: true,
+      projectsLoading: true,
       application_statuses: [
         {
             id: 0,
@@ -164,7 +165,7 @@ class Dashboard extends React.Component {
             with_project_type_ids: project_type_ids,
             with_deliverable_type_ids: deliverable_type_ids,
             with_keyword: this.state.keyword,
-            with_user_id: this.props.user.id,
+            with_accepted_user_id: this.props.user.id,
             with_limit: 3
         }
     }
@@ -175,7 +176,10 @@ class Dashboard extends React.Component {
           message
         );
       }
-      this.setState({ projects });
+      this.setState({ 
+        projects: projects,
+        projectsLoading: false
+    });
       console.log("UPDATED PROJECTS LENGTH: " + projects.length);
     }).catch(res => {
         this.flash_message.flashError(
@@ -208,7 +212,10 @@ class Dashboard extends React.Component {
           message
         );
       }
-      this.setState({ applications });
+      this.setState({ 
+        applications: applications,
+        applicationsLoading: false
+      });
     }).catch(res => {
         this.flash_message.flashError(
             res.response.data.message
@@ -232,62 +239,16 @@ class Dashboard extends React.Component {
 
     let projectList;
 
-    if (this.state.projects) {
+    if (this.state.projects.length) {
       projectList = this.state.projects.map((project, index) => {
-        return <ProjectCard project={project} key={index} />
+        return <ProjectCard project={project} key={index} />;
       });
     } else {
-      projectList = <div>No Results</div>;
-    }
-
-    let applicationList;
-
-    if (this.state.applications) {
-      applicationList = this.state.applications.map((application, index) => {
-        var project_status = (
-            <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                Pending
-            </div>
-        );
-        if (application.status == "interviewing") {
-            project_status = (
-                <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interviewing
-                </div>
-            );
-        } else if (application.status == "accepted") {
-            project_status = (
-                <div className="dib accepted ph3 pv2 fw4">
-                    Accepted
-                </div>
-            );
-        } else if (application.status == "denied") {
-            project_status = (
-                <div className="dib ph3 pv2 fw4">
-                    No longer in consideration
-                </div>
-            );
+      if (this.state.projectsLoading == false) {
+            projectList = <div className="f4 tc pa3">There are no projects. </div>;
         }
-        return (
-            <div className="">
-                <div className="bt b--black-10" />
-                <div className="flex items-center pv3" key={index}>
-                    <h4 className="w-25 ma0">{application.project.title}</h4>
-                    <div className="w-25">
-                        {project_status}
-                    </div>
-                    <div className="w-25">{application.project.organization.name}</div>
-                    <a
-                        className="w-25 tr"
-                        href={"/applications/" + application.id}
-                        >View Application <span className="ml3 f5 fa fa-angle-right"></span></a>
-                </div>
-            </div>
-        );
-      });
-    } else {
-      applicationList = <div>No Results</div>;
     }
+
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -312,11 +273,11 @@ class Dashboard extends React.Component {
                     </div>
                 </div>
                 <div className="cf"></div>
-                <div className="w-100 h1 mb3">
-                    <div className="dib fl">
-                        <a href="/applications"><h3>Applications</h3></a>
+                <div className="w-100 mb1 flex items-center">
+                    <div className="dib w-100">
+                        <a className="f4 pa0" href="/applications">Applications</a>
                     </div>
-                    <div className="dib fr">
+                    <div className="dib w-100 tr">
                         <h3
                             className="pointer disable-selection dim"
                             onClick={() => this.toggleApplicationFiltering()}>
@@ -324,6 +285,7 @@ class Dashboard extends React.Component {
                         </h3>
                     </div>
                 </div>
+                <div className="mb2 bt b--black-10" />
                 {this.state.show_application_filtering &&
                 <div className="w-100 flex items-center">
                     <Dropdown
@@ -338,14 +300,23 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateApplicationSearch()}>
                         Update Search</a>
                 </div>}
-                {applicationList}
-
+                <Loader loading={this.state.applicationsLoading} />
+                <ApplicationList
+                    is_org_view={false}
+                    applications={this.state.applications} 
+                    loading={this.state.applicationsLoading}
+                    />
                 <div className="cf"></div>
-                <div className="w-100 h1 mt5">
-                    <div className="dib fl">
-                        <a href="/my-projects"><h3>Current Projects</h3></a>
+                <div className="pv3 tc">
+                    <a
+                        href={"/applications"}
+                        >View More Applications</a>
+                </div>
+                <div className="w-100 mt5 mb1 flex items-center">
+                    <div className="dib w-100">
+                        <a className="f4 pa0" href="/my-projects">Current Projects</a>
                     </div>
-                    <div className="dib fr">
+                    <div className="dib w-100 tr">
                         <h3
                             className="pointer disable-selection dim"
                             onClick={() => this.toggleProjectFiltering()}>
@@ -353,7 +324,7 @@ class Dashboard extends React.Component {
                         </h3>
                     </div>
                 </div>
-                <div className="mb2 mt3 bt b--black-10" />
+                <div className="mb2 bt b--black-10" />
                 {this.state.show_project_filtering &&
                 <div className="w-100 flex items-center">
                     <Dropdown
@@ -382,9 +353,16 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateProjectSearch()}>
                         Update Search</a>
                 </div>}
+                <div className="cf"></div>
+                <Loader loading={this.state.projectsLoading} />
                 {projectList}
+                <div className="cf"></div>
+                <div className="pv3 tc">
+                    <a
+                        href={"/my-projects"}
+                        >View More Projects</a>
+                </div>
             </div>
-            <Logout />
         </div>
     );
   }

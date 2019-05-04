@@ -91,15 +91,15 @@ class ApplicationView extends React.Component {
             if (this.props.application.status === null || this.props.application.status === "pending") {
                 buttons = (
                     <div className="mv4">
-                    <button className="accept-button f5 pa2 fr b" onClick={this.handleInterview}>Interview</button>
-                    <button className="f5 w-auto tc pa2 white bg-black lato ba fr b mr3" onClick={this.handleDeny}>Reject</button>
+                    <button className="white-on-grey accept-button f5 pa2 fr b" onClick={this.handleInterview}>Interview</button>
+                    <button className="white-on-grey f5 w-auto tc pa2 white bg-black lato ba fr b mr3" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             } else if (this.props.application.status == "interviewing") {
                 buttons = (
                     <div className="mv4">
-                    <button className="accept-button f5 pa2 fr b" onClick={this.handleAccept}>Accept</button>
-                    <button className="f5 w-auto tc pa2 white bg-black lato ba b fr mr3" onClick={this.handleDeny}>Reject</button>
+                    <button className="white-on-grey accept-button f5 pa2 fr b" onClick={this.handleAccept}>Accept</button>
+                    <button className="white-on-grey f5 w-auto tc pa2 white bg-black lato ba b fr mr3" onClick={this.handleDeny}>Reject</button>
                     </div>
                 );
             }
@@ -110,7 +110,7 @@ class ApplicationView extends React.Component {
     displayWithdraw() {
         let withdraw = null;
         if (!this.props.organization && this.props.application.user_id == this.props.user.id && this.props.application.status != "denied") {
-            withdraw = (<button className="f5 w-auto tc pa2 white bg-black lato ba mr3" onClick={this.handleDeny}>
+            withdraw = (<button className="white-on-grey f5 w-auto tc pa2 white bg-black lato ba mr3" onClick={this.handleDeny}>
                             Withdraw Application
                         </button>)
         }
@@ -148,7 +148,10 @@ class ApplicationView extends React.Component {
       return(
         <div className="w-100 h-100 tc">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
-            <div className="tl fl w-100 pl6 pr6 pt5 pb5">
+            <div
+                className="h5 absolute w-100 bg-black bg-image"
+                style={{zIndex: -1}} />
+            <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
                 <div><h1 className="ma0 f1 mb4 truncate"> Application - {this.props.project.title} </h1></div>
                 {this.displayStatus()}
                 <div className="mb3">
@@ -164,10 +167,10 @@ class ApplicationView extends React.Component {
                             </h1>
                             <br/>
                             <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.linkedin_url}`}>
-                            <i className="fab fa-linkedin f2"></i>
+                            <i className="fab fa-linkedin f2 icon-link"></i>
                             </a>
                             <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                            <i class="fas fa-file-alt f2"></i>                            
+                            <i class="fas fa-file-alt f2 icon-link"></i>                            
                             </a>
                         </div>
                         <div className="flex f5 b lato">
@@ -198,7 +201,7 @@ class ApplicationView extends React.Component {
                 <p className="lato f5">{this.props.application.question2} {this.props.application.question3}</p>
                 {this.displayButtons()}
                 <br/>
-                <button className="f5 w-auto ba tc bg-white black pa2 lato" onClick={this.goBack}>
+                <button className="white-on-grey f5 w-auto ba tc bg-white black pa2 lato " onClick={this.goBack}>
                     Back
                 </button>
            </div>
