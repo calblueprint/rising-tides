@@ -290,7 +290,6 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateApplicationSearch()}>
                         Update Search</a>
                 </div>}
-                <Loader loading={this.state.applicationsLoading} />
                 <ApplicationList
                     is_org_view={false}
                     applications={this.state.applications} 
@@ -302,9 +301,6 @@ class Dashboard extends React.Component {
                         href={"/applications"}
                         >View More Applications</a>
                 </div>
-                <ApplicationList
-                    is_org_view={false}
-                    applications={this.state.applications} />
 
                 <div className="cf"></div>
                 <div className="w-100 mt5 mb1 flex items-center">

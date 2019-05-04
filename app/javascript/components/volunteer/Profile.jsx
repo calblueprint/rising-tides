@@ -50,9 +50,10 @@ class Profile extends React.Component {
     const { projects, loading } = this.state;
 
      if (this.props.user.skills) {
+        console.log('has skills')
         console.log(this.props.user.skills)
         skillList = this.props.user.skills.map((skill, index) => {
-            return <div className="skill-pill">{skill.name}</div>;
+            return <div className="skill-pill" key={index}>{skill.name}</div>;
         })
     } else {
         console.log('no skills')
