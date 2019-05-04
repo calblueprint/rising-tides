@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import ProjectCard from '../utils/ProjectCard';
 import FlashMessage from '../utils/FlashMessage'
-import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 import ProjectList from '../projects/ProjectList';
 
@@ -11,7 +10,7 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       user: props.user,
-      loading: true
+      hover: false
     };
     axios.defaults.headers.common = {
       "X-Requested-With": "XMLHttpRequest",
@@ -35,9 +34,7 @@ class Profile extends React.Component {
           message
         );
       }
-      this.setState({ 
-        projects: projects,
-        loading: false  });
+      this.setState({ projects });
     }).catch(res => {
       this.flash_message.flashError(
         res.response.data.message
@@ -49,28 +46,33 @@ class Profile extends React.Component {
     e.preventDefault();
     window.location.href = "/";
   };
- 
+
+  goEdit = () => {
+    window.location.href = "/users/edit";
+  };
+
+
+  checkIfUser = () => {
+    if (this.props.user != null && this.props.curr_user != null){
+      if (this.props.user.name == this.props.curr_user.name && this.props.user.email == this.props.curr_user.email){
+      return (
+        <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
+        <img src="/images/edit_pen.png"
+            style={{ width: '21px', height: '21px'}}
+            className="grayscale"/>
+        </a>
+      )}
+    }
+  }
+
   render() {
-    let skillList;
-    const { projects, loading } = this.state;
-
-     if (this.props.user.skills) {
-        console.log(this.props.user.skills)
-        skillList = this.props.user.skills.map((skill, index) => {
-            return <div className="f5 dim br-pill ba ph3 pv2 mb2 dib lato black">{skill.name}</div>;
-        })
-    } else {
-        console.log('no skills')
-        skillList = <div>No skills</div>;
-    }
-
+    const { user } = this.state;
     let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
-    if (profileUrl === "/profile_images/original/missing.png") {
-        profileUrl = profile_pic;
-    }
-    let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
+    let profileImage = <img className="h-100 w4"  src={profileUrl} />;
     let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
-
+    let resume = <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
+                    <i className="fas fa-file-alt f2"></i>
+                </a>
     return (
         <div className="w-100 h-100 tc">
             <div
@@ -78,19 +80,24 @@ class Profile extends React.Component {
                 style={{zIndex: -1}} />
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
+            {this.checkIfUser()}
                 <div className="h4 flex items-end">
                     {profileImage}
+
                     <div className="w-100 m3 ph4 pt4">
+
                         <div className="flex items-end">
-                            <h1 className="ma0 truncate f1 mb3">
-                                {this.props.user.first_name} {this.props.user.last_name}
-                            </h1>
-                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.link}`}>
-                            <i className="fab fa-linkedin f2 icon-link"></i>
-                            </a>
-                            <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                            <i className="fas fa-file-alt f2 icon-link"></i>                            
-                            </a>
+                        <h1 className=" fl ma0 f1 mb3">
+                            {this.props.user.first_name} {this.props.user.last_name}
+                        </h1>
+                        <div className="fr">
+                          <a className="pa0 ph1 ml3 mb1" target="_blank" href={`http://${this.props.user.link}`}>
+                              <img src="/images/linkedin-icon.png" style={{ width: '21px', height: '21px' }} />
+                          </a>
+                          <div className="pb2 ml3">
+                              {resume}
+                          </div>
+                        </div>
                         </div>
                         <div className="flex f5">
                             <div className="mt1-ns">
@@ -108,16 +115,20 @@ class Profile extends React.Component {
                     </div>
                 </div>
 
-                <h2 className="pt4 f3">Skills</h2>
-                <p className="f5">{skillList}</p>
+                <h3 className="pt5">Skills</h3>
+                {this.props.user.skills}
 
-                <h2 className="pt4 f3">Biography</h2>
-                <p className="f5">{this.props.user.bio}</p>
+                <h3 className="pt5">Biography</h3>
+                {this.props.user.bio}
 
+<<<<<<< HEAD
                 <h2 className="pt4 f3">Projects</h2>
                 <ProjectList projects={projects} loading={loading} />
+=======
+                <h3 className="pt5">Projects</h3>
+>>>>>>> profiles
             </div>
-            
+
         </div>
     );
   }

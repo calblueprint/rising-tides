@@ -35,7 +35,7 @@ class Profile extends React.Component {
           message
         );
       }
-      this.setState({ 
+      this.setState({
         projects: projects,
         loading: false });
     }).catch(res => {
@@ -45,10 +45,27 @@ class Profile extends React.Component {
     });
   }
 
+  goEdit = () => {
+    window.location.href = "/users/edit";
+  };
+
   goBack = e => {
     e.preventDefault();
     window.location.href = "/";
   };
+
+  checkIfUser = () => {
+    if (this.props.organization != null && this.props.curr_organization != null){
+      if (this.props.organization.name == this.props.curr_organization.name && this.props.organization.email == this.props.curr_organization.email){
+      return (
+        <a className="fr pa0 ph1 ml3 mb1 " target="_blank" onClick={this.goEdit}>
+        <img src="/images/edit_pen.png"
+            style={{ width: '21px', height: '21px'}}
+            className="grayscale"/>
+        </a>
+      )}
+    }
+  }
 
   render() {
     const { organization, projects, loading } = this.state;
@@ -58,13 +75,14 @@ class Profile extends React.Component {
         profileUrl = profile_pic;
     }
     let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
-    
+
     return (
         <div className="w-100 h-100 tc">
            <div
                 className="h5 absolute w-100 bg-black bg-image"
                 style={{zIndex: -1}} />
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
+            {this.checkIfUser()}
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
                 <div className="h4 flex items-end">
                     {profileImage}
