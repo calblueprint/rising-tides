@@ -1,12 +1,13 @@
 import React from "react";
 import axios from 'axios';
 import Logout from "./Logout";
-import NavBar from "../utils/NavBar"
-import Loader from "../utils/Loader"
+import NavBar from "../utils/NavBar";
+import Loader from "../utils/Loader";
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
 import FlashMessage from '../utils/FlashMessage';
 import ApplicationList from '../applications/ApplicationList';
+import ProjectList from '../projects/ProjectList';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -238,18 +239,8 @@ class Dashboard extends React.Component {
 
   render() {
     const { organization } = this.props;
+    const { projects, projectsLoading } = this.state;
 
-    let projectList;
-
-    if (this.state.projects.length) {
-      projectList = this.state.projects.map((project, index) => {
-        return <ProjectCard project={project} key={index} />;
-      });
-    } else {
-        if (this.state.projectsLoading == false) {
-            projectList = <div className="f4 tc pa3">There are no projects.</div>;
-        }
-    }
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -267,7 +258,7 @@ class Dashboard extends React.Component {
                                 <input
                                     onKeyPress={this.handleKeyPress}
                                     onChange={this.handleChange("keyword")}
-                                    className="bn bg-transparent"
+                                    className="bn bg-transparent w5"
                                     type="text"
                                     placeholder="Find Projects..." />
                             </div>
@@ -358,8 +349,7 @@ class Dashboard extends React.Component {
                         Update Search</a>
                 </div>}
                 <div className="cf"></div>
-                <Loader loading={this.state.projectsLoading} />
-                {projectList}
+                <ProjectList projects={projects} loading={projectsLoading} />
                 <div className="cf"></div>
                 <div className="pv3 tc">
                     <a

@@ -4,6 +4,7 @@ import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
 import Loader from '../utils/Loader';
 import FlashMessage from '../utils/FlashMessage'
+import ProjectList from '../projects/ProjectList'
 
 class ProjectsIndex extends React.Component {
   constructor(props) {
@@ -160,17 +161,7 @@ class ProjectsIndex extends React.Component {
   };
 
   render() {
-    let projectList;
-
-    if (this.state.projects.length !== 0) {
-      projectList = this.state.projects.map((project, index) => {
-        return <ProjectCard project={project} key={index} />
-      });
-    } else {
-        if (this.state.loading == false) {
-            projectList = <div className="f4 tc pa3">There are no projects.</div>;
-        }
-    }
+    let { loading, projects } = this.state;
 
     return (
       <div className="w-100 h-100 tc">
@@ -189,7 +180,7 @@ class ProjectsIndex extends React.Component {
                                     <input
                                         onKeyPress={this.handleKeyPress}
                                         onChange={this.handleChange("keyword")}
-                                        className="bn bg-transparent"
+                                        className="bn bg-transparent w5"
                                         type="text"
                                         placeholder="Find Projects..." />
                                 </div>
@@ -239,8 +230,7 @@ class ProjectsIndex extends React.Component {
                         onClick={() => this.updateSearch()}>
                         Update Search</a>
                 </div>}
-                <Loader loading={this.state.loading} />
-                {projectList}
+                <ProjectList projects={projects} loading={loading} />
             </div>
       </div>
     );

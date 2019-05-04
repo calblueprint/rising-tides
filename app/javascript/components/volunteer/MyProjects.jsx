@@ -5,8 +5,8 @@ import NavBar from "../utils/NavBar"
 import Loader from "../utils/Loader"
 import ProjectCard from '../utils/ProjectCard';
 import Dropdown from '../utils/Dropdown';
-import FlashMessage from '../utils/FlashMessage'
-
+import FlashMessage from '../utils/FlashMessage';
+import ProjectList from '../projects/ProjectList';
 
 class MyProjects extends React.Component {
   constructor(props) {
@@ -201,6 +201,9 @@ class MyProjects extends React.Component {
   render() {
     console.log(this.props);
     const { user } = this.props;
+    const { 
+        currentProjects, pastProjects,
+        currentLoading, pastLoading } = this.state;
 
     let currentProjectList;
 
@@ -242,7 +245,7 @@ class MyProjects extends React.Component {
                                 <input
                                     onKeyPress={this.handleKeyPress}
                                     onChange={this.handleChange("keyword")}
-                                    className="bn bg-transparent"
+                                    className="bn bg-transparent w5"
                                     type="text"
                                     placeholder="Find Projects..." />
                             </div>
@@ -296,8 +299,7 @@ class MyProjects extends React.Component {
                         onClick={() => this.updateSearch()}>
                         Update Search</a>
                 </div>}
-                <Loader loading={this.state.currentLoading} />
-                {currentProjectList}
+                <ProjectList projects={currentProjects} loading={currentLoading} />
                 <div className="cf"></div>
                 <div className="w-100 h1 mt5">
                     <div className="dib fl">
@@ -305,8 +307,7 @@ class MyProjects extends React.Component {
                     </div>
                 </div>
                 <div className="mb2 mt3 bt b--black-10" />
-                <Loader loading={this.state.pastLoading} />
-                {pastProjectList}
+                <ProjectList projects={pastProjects} loading={pastLoading} />
             </div>
         </div>
     );
