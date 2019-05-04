@@ -4,15 +4,6 @@ class ApplicationsController < ApplicationController
   # GET /applications
   # GET /applications.json
   def index
-    if user_signed_in?
-        @applications = current_user
-            .applications
-            .with_project_organization_json
-    else
-        @applications = Application.with_organization_id(
-            current_organization.id
-        ).with_project_organization_json
-    end
   end
 
   # GET /applications/1

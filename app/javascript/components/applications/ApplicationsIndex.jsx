@@ -8,7 +8,7 @@ class ApplicationsIndex extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      applications: props.applications,
+      applications: [],
       show_filtering: false,
       keyword: "",
       application_statuses: [

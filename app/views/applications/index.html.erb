@@ -1,4 +1,4 @@
 <% if user_signed_in? || organization_signed_in?  %>
-    <%= react_component('applications/ApplicationsIndex', { applications: @applications, user: current_user, organization: current_organization }) %>
+    <%= react_component('applications/ApplicationsIndex', { user: current_user, organization: current_organization }) %>
 <% end %>
 
