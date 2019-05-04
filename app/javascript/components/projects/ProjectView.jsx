@@ -153,17 +153,12 @@ class ProjectView extends React.Component {
             }
             return (application.status === "accepted" ? 
             <a href ={"/users/" + application.user.id}>
-            <div className="proj-card col-item dib ma2 shadow-1">
-                <img src={profileUrl} className="db pic-height w-100 br--top"/>
-                <div className="bt b--white pa3">
-                    <p className="f4 b lato compact mt3 ma2">
+            <div className="col-item">
+                <img src={profileUrl} className="db shadow-1 user-card"/>
+                    <p className="f4 b lato compact mt2 icon-link black">
                     {application.user.first_name} {application.user.last_name} 
                     </p>
-                    <p className="f5 lato fl truncate mb0 ma2">
-                    {application.user.city}, {application.user.state} 
-                    </p>
                 </div>
-            </div>
             </a>
             : null);
         })
