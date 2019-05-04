@@ -76,8 +76,8 @@ class NewApplicationForm extends React.Component {
                 style={{zIndex: -1}}></div>
             <div className="tl fl w-75 ml6 mr6 mt6 mb5 bg-white pa5">
                 <h1 className="f1 ma0">Application - {project.title}</h1>
-                <h3 className="mt3">What we are looking for</h3>
-                <p>{project.description}</p>
+                <h3 className="mt3">Volunteer Requirements</h3>
+                <p>{project.volunteer_requirements}</p>
                 <h3 className="mt5">Why are you interested?</h3>
                 <textarea
                     rows="6"
