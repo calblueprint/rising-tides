@@ -42,7 +42,6 @@ class ApplicationList extends React.Component {
             );
         }
         var app_columns;
-<<<<<<< HEAD
         var date_parts = application.created_at.split('T')[0].split('-');
         var time_parts = application.created_at.split('T')[1].split('.')[0].split(':');
         var hour = parseInt(time_parts[0]);
@@ -51,11 +50,6 @@ class ApplicationList extends React.Component {
         hour = hour == 0 ? 12 : hour;
         hour = hour < 10 ? "0" + hour : hour;
         var creation_time = hour + ':' + time_parts[1] + ' ' + am_pm + ' ' + date_parts[1] + '/' + date_parts[2] + '/' + date_parts[0];
-=======
-        var date_string = application.created_at.split('T')[0];
-        var time_string = application.created_at.split('T')[1].split('.')[0];
-        var creation_time = date_string + ' ' + time_string;
->>>>>>> Application List Styling (#115)
         if (is_org_view) {
             app_columns = (
                 <div className="flex items-center pv3">
@@ -64,11 +58,7 @@ class ApplicationList extends React.Component {
                         {project_status}
                     </div>
                     <div className="w-25"><a className="pa0" href={"/projects/" + application.project.id}>{application.project.title}</a></div>
-<<<<<<< HEAD
                     <div className="w-25 fw6">{creation_time}</div>
-=======
-                    <div className="w-25">{creation_time}</div>
->>>>>>> Application List Styling (#115)
                     <a
                         className="w-25 tr pa0"
                         href={"/applications/" + application.id}
@@ -83,11 +73,7 @@ class ApplicationList extends React.Component {
                         {project_status}
                     </div>
                     <h4 className="w-25 ma0"><a className="pa0" href={"/organizations/" + application.project.organization.id}>{application.project.organization.name}</a></h4>
-<<<<<<< HEAD
                     <div className="w-25 fw6">{creation_time}</div>
-=======
-                    <div className="w-25">{creation_time}</div>
->>>>>>> Application List Styling (#115)
                     <a
                         className="w-25 tr pa0"
                         href={"/applications/" + application.id}
@@ -104,11 +90,7 @@ class ApplicationList extends React.Component {
       });
     } else {
       if (this.props.loading == false) {
-<<<<<<< HEAD
             applicationList = <div className="f4 tc pa3">There are no applications.</div>;
-=======
-            projectList = <div className="f4 tc pa3">There are no applications. </div>;
->>>>>>> Application List Styling (#115)
         }
     }
 
@@ -116,11 +98,7 @@ class ApplicationList extends React.Component {
     if (is_org_view) {
         header_row = (
             <div className="flex items-center pv3">
-<<<<<<< HEAD
                 <div className="w-25 ma0">Name</div>
-=======
-                <div className="w-25 ma0">User Name</div>
->>>>>>> Application List Styling (#115)
                 <div className="w-25">
                     Application Status
                 </div>
@@ -136,20 +114,13 @@ class ApplicationList extends React.Component {
                 <div className="w-25">
                     Application Status
                 </div>
-<<<<<<< HEAD
                 <div className="w-25 ma0">Name</div>
-=======
-                <div className="w-25 ma0">User Name</div>
->>>>>>> Application List Styling (#115)
                 <div className="w-25">Submission Time</div>
                 <div className="w-25 tr"></div>
             </div>
         );
     }
-<<<<<<< HEAD
     header_row = (!this.props.loading && applications.length !== 0) ? header_row : null
-=======
->>>>>>> Application List Styling (#115)
     return (
       <div>
         <div className="cf" />

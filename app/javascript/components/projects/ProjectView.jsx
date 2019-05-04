@@ -152,7 +152,7 @@ class ProjectView extends React.Component {
                   <div className="bg-light-gray pa4 h-auto">
                     <div className="flex items-center">
                         {org_img}
-                        <a href ={"/organizations/" + organization.id} className="ma0 pa0 f2 lato">{organization.name}</a>
+                        <a href ={"/organizations/" + organization.id} className="ma0 pa0 f2 icon-link lato">{organization.name}</a>
                     </div>
                     <div className="flex pt3">
                         <div className="pa2 w-33 truncate">
@@ -226,26 +226,6 @@ class ProjectView extends React.Component {
                                 <p className="f5">{project.question3}</p>
                             </div>
                         ) : (null)}
-                    </div>
-                    <div className="w-third bg-light-gray pa4 h-auto">
-                        <div className="flex items-center">
-                            {org_img}
-                            <a className="ma0 f3 truncate dib">{organization.name}</a>
-                        </div>
-                        <div className="mt4 truncate">
-                            <i className="fas fa-map-pin f4"></i><span className="ml2 f5 truncate">{organization.city}, {organization.state}</span>
-                        </div>
-                        <div className="mt4 truncate">
-                            <i className="fas fa-calendar f4"></i><span className="ml2 f5 truncate">{project.start_time} - {project.end_time}</span>
-                        </div>
-                        <div className="mt4 truncate">
-                            <i className="fas fa-phone f4"></i><span className="ml2 f5 truncate">{organization.contact_phone_number}</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-100 h1 mt2">
-                    <div className="dib fl">
-                        <a className="mb2" href="/applications"><h2 className="f3">Applications</h2></a>
                     </div>
                 </div>
                     <a className="mb2" href="/applications"><h2 className="f3">Applications</h2></a>
