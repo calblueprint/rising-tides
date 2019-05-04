@@ -6,6 +6,7 @@ import React from "react";
 import axios from "axios";
 import profile_pic from "images/profile_pic.png";
 import ApplicationList from '../applications/ApplicationList';
+import UserCard from "../utils/UserCard";
 
 class ProjectView extends React.Component {
   constructor(props) {
@@ -147,19 +148,8 @@ class ProjectView extends React.Component {
     let accepted_volunteers;
     accepted_volunteers = (!organization_signed_in || organization.id != current_organization.id) ? <span></span> : ( 
         skillList = this.props.applications.map((application, index) => {
-            let profileUrl = application.user.profile_image_file_name;
-            if (profileUrl === "/profile_images/original/missing.png" || !application.user.profile_image_file_name) {
-                profileUrl = profile_pic
-            }
             return (application.status === "accepted" ? 
-            <a href ={"/users/" + application.user.id}>
-            <div className="col-item">
-                <img src={profileUrl} className="db shadow-1 user-card"/>
-                    <p className="f4 b lato compact mt2 icon-link black">
-                    {application.user.first_name} {application.user.last_name} 
-                    </p>
-                </div>
-            </a>
+            <UserCard user={application.user} key={index}/>
             : null);
         })
         )
