@@ -95,7 +95,7 @@ class ProjectView extends React.Component {
     
     if (this.props.skills) {
         skillList = this.props.skills.map((skill, index) => {
-            return <div className="f5 ma1 dim br-pill ba ph3 pv2 dib lato black">{skill.name}</div>;
+            return <div className="skill-pill">{skill.name}</div>;
         })
     } else {
         skillList = <div>No skills.</div>;
@@ -162,7 +162,7 @@ class ProjectView extends React.Component {
                             <i className="fas fa-calendar f4"></i><span className="ml2 f5 truncate">{start_date} to {end_date}</span>
                         </div>
                         <div className="pa2 w-33 truncate">
-                            <i className="fas fa-phone f4"></i><span style={{marginLeft: 5}} className="f5 truncate">E{organization.contact_phone_number}</span>
+                            <i className="fas fa-phone f4"></i><span style={{marginLeft: 5}} className="f5 truncate">{organization.contact_phone_number}</span>
                         </div>
                     </div>
                 </div>

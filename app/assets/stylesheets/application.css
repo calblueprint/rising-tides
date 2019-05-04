@@ -518,5 +518,34 @@ fieldset {
     border: 0;
 }
 
+.skill-pill {
+    font-family: Lato;
+    border-style:solid;
+    border-width:1px;
+    margin:8px;
+    border-radius:9999px;
+    padding-left:16px;
+    padding-right:16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 16px;
+    display:inline-block;
+}
+
+.deliverable-pill {
+    font-family: Lato;
+    border-style:solid;
+    border-width:1px;
+    margin:8px;
+    border-radius:9999px;
+    padding-left:16px;
+    padding-right:16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 16px;
+    display:inline-block;
+    color: white;
+    background-color:black;
+}
 
 
