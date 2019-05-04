@@ -239,8 +239,7 @@ class ProjectsIndex extends React.Component {
                         titleHelper="Deliverable Type"
                         title="Deliverable Types"
                         list={this.state.deliverable_types}
-                        toggleItem={this.toggleSelectedSingle}
-                        singleItem={true}
+                        toggleItem={this.toggleSelected}
                     />
                     <Dropdown
                         titleHelper="Project Type"
