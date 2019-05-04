@@ -186,7 +186,7 @@ class Dashboard extends React.Component {
 
     }).catch(res => {
         this.flash_message.flashError(
-            res.response.data.message
+            res.response.data.error
         );
     });
   }
@@ -221,7 +221,7 @@ class Dashboard extends React.Component {
         });
     }).catch(res => {
         this.flash_message.flashError(
-            res.response.data.message
+            res.response.data.error
         );
     });
   }

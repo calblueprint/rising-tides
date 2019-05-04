@@ -20,11 +20,19 @@ class Api::ApplicationsController < ApplicationController
   end
 
   def filter
+    if (filter_params[:with_user_id] and
+        current_user.id != filter_params[:with_user_id]) or
+        (filter_params[:with_organization_id] and
+        current_organization.id != filter_params[:with_organization_id])
+          return render json: {
+            error: "Not authorized to view these applications."
+          }, status: :forbidden
+    end
     @applications = Application.filter(filter_params)
         .with_project_organization_json
     render json: {
         applications: @applications,
-        message: "Applications loaded..."
+        error: "Applications loaded..."
     }
   end
 
@@ -100,6 +108,14 @@ class Api::ApplicationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_application
       @application = Application.find(params[:id])
+      if (current_user and
+        current_user.id != @application.user.id) or
+        (current_organization and
+        current_organization.id != @application.project.organization.id)
+        return render json: {
+            message: "Not authorized to view these applications."
+        }, status: :forbidden
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

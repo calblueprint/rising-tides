@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_234312) do
+ActiveRecord::Schema.define(version: 2019_05_04_012613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,8 +119,8 @@ ActiveRecord::Schema.define(version: 2019_05_03_234312) do
     t.text "question3"
     t.bigint "project_type_id"
     t.bigint "deliverable_type_id"
-    t.integer "application_limit", default: 2
-    t.integer "user_limit", default: 1
+    t.integer "application_limit", default: 10
+    t.integer "user_limit", default: 3
     t.integer "status", default: 0
   end
 

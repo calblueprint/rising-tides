@@ -44,8 +44,8 @@ class NewProjectForm extends React.Component {
     }
     this.state = {
       project: {
-        application_limit: 2,
-        user_limit: 1,
+        application_limit: 10,
+        user_limit: 3,
         organization_id: props.organization.id
       },
       milestones: [{
