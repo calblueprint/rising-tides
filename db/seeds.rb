@@ -147,16 +147,37 @@ end
 
 def create_deliverable_types
     deliverable_list = [
-      'Legal, Standards, & Policy Assistance',
-      'Finances, Fundraising, & Budget',
-      'Community Baseline Assessment of Risks, Hazards, & Impacts',
-      'Planning & Management',
-      'Community Outreach & Public Relations',
-      'Tangible Cultural Heritage Resources Preservation',
-      'Natural Heritage Resources Preservation',
-      'Intangible Heritage Preservation & Documentation',
-      'Disaster & Emergency Response',
-      'Science-based Decision Making'
+      'Environmental Planning & Historic Preservation in FEMA Compliance',
+      'Policies & Standards',
+      'Grant Template or Cover Letter',
+      'Cost-Benefit Analysis of Adaptation Approaches',
+      'Adaptation/Preservation Project Budget',
+      'Inventory Creation of Historic Resources Vulnerable to Climate Change',
+      'Baseline Documentation',
+      'Risk Assessment & Hazard Mapping',
+      'Monitoring Plan',
+      'Facilitated Strategy Session on Climate Change Decision frameworks',
+      'Cultural Resource Climate Change Management Plan',
+      'Scenario Planning',
+      'Adaptation Option Assessment',
+      'Public Relations/Marketing/Education Climate Change & Historic Preservation',
+      'Climate Heritage Tourism Program',
+      'Cultural Resources Climate Change Literacy',
+      'Facilitated Listening and Partnering',
+      'Buildings & Structures Climate Change Adaptation',
+      'Systems & Districts Climate Change Adaptation',
+      'Museum Collection Climate Impact Adaptation',
+      'Archeological Site Climate Change Adaptation',
+      'Cultural Landscape Climate Change Adaptation',
+      'Ethnographic Resource Climate Change Adaptation',
+      'Food Sovereignty/Heritage',
+      'Oral History Resource Assistance',
+      'Community Disaster Risk Reduction & Response',
+      'Connecting with disaster planning and response',
+      'Local Climate Science & Impact Assessment',
+      'Science Tools Training',
+      'Preservation Science Training',
+      'Integrate Cultural Resources Databases-geographic Information Systems'
     ]
     deliverable_list.each do |deliverable|
       DeliverableType.create( name: deliverable )
