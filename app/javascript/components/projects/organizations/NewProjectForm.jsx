@@ -48,6 +48,11 @@ class NewProjectForm extends React.Component {
         user_limit: 1,
         organization_id: props.organization.id
       },
+      milestones: [{
+        id: 0,
+        title: "",
+        description: ""
+      }],
       message: "",
       error: "",
       skills: skills_a,
@@ -63,6 +68,8 @@ class NewProjectForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleSelected = this.toggleSelected.bind(this);
     this.toggleSelectedSingle = this.toggleSelectedSingle.bind(this);
+    this.addMilestone = this.addMilestone.bind(this);
+    this.removeMilestone = this.removeMilestone.bind(this);
     this.handlers = [];
   }
 
@@ -91,6 +98,26 @@ class NewProjectForm extends React.Component {
     });
   }
 
+  addMilestone() {
+    var { milestones } = this.state;
+    milestones.push({
+        id: this.state.milestones.length,
+        title: "",
+        description: ""
+    });
+    this.setState({
+        milestones
+    });
+  }
+
+  removeMilestone() {
+    var { milestones } = this.state;
+    milestones.splice(-1, 1);
+    this.setState({
+        milestones
+    });
+  }
+
   handleChange = name => {
     if (!this.handlers[name]) {
       this.handlers[name] = event => {
@@ -100,6 +127,17 @@ class NewProjectForm extends React.Component {
       };
     }
     return this.handlers[name];
+  };
+
+  handleMilestoneChange = (id, name) => {
+    if (!this.handlers[id + ":" + name]) {
+      this.handlers[id + ":" + name] = event => {
+        const { milestones } = this.state;
+        milestones[id][name] = event.target.value;
+        this.setState({ milestones });
+      };
+    }
+    return this.handlers[id + ":" + name];
   };
 
   goBack = e => {
@@ -126,7 +164,7 @@ class NewProjectForm extends React.Component {
             deliverable_type_id = this.state.deliverable_types[i].uid;
     }
 
-    let { project } = this.state;
+    let { project, milestones } = this.state;
     project.skill_ids = skill_ids;
     project.project_type_id = project_type_id;
     project.deliverable_type_id = deliverable_type_id;
@@ -134,7 +172,8 @@ class NewProjectForm extends React.Component {
     project.user_limit = parseInt(project.user_limit);
 
     const payload = {
-        project: project
+        project: project,
+        milestones: milestones
     };
 
     axios
@@ -149,7 +188,7 @@ class NewProjectForm extends React.Component {
         window.location.href = `/projects/${project.id}`;
       }).catch(res => {
         this.flash_message.flashError(
-            res.response.data.message
+            res.response.data.error
         );
     });
 
@@ -158,6 +197,24 @@ class NewProjectForm extends React.Component {
 
   render() {
     const { project } = this.state;
+    let milestones = this.state.milestones.map((deliverable, index) => {
+        return (
+            <div key={index}>
+                <input
+                    className="dib essay-box bg-light-gray mt1 w-100 pl3 pr3 pt1 pb1  input"
+                    type="text"
+                    onChange={this.handleMilestoneChange(index, "title")}
+                    value={this.state.milestones[index].title}
+                    placeholder="Enter milestone title..."
+                />
+                <textarea
+                    rows="3"
+                    className="essay-box bg-light-gray mt1 w-100 pa3"
+                    onChange={this.handleMilestoneChange(index, "description")}
+                    placeholder="Enter milestone description..."
+                    value={this.state.milestones[index].description}></textarea>
+            </div>);
+    });
     return (
         <div className="w-100 h-100 tc bg-white">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -268,6 +325,20 @@ class NewProjectForm extends React.Component {
                     onChange={this.handleChange("user_limit")}
                     value={this.state.project.user_limit}
                 />
+                <h3 className="mt5">Project Plan</h3>
+                {milestones}
+                <div className="flex mt3 w-100">
+                    <div className="w-100">
+                        <a className="dib std-button-white ph3 pv1 fw4 f5" onClick={this.addMilestone}>
+                            Add Milestone
+                        </a>
+                    </div>
+                    <div className="tr w-100">
+                        <a className="dib std-button-black ph3 pv1 fw4 f5" onClick={this.removeMilestone}>
+                            Remove
+                        </a>
+                    </div>
+                </div>
                 <div className="mt5">
                     <a className="fl std-button-black ph3 pv1 fw4 f5" onClick={this.goBack}>
                         Cancel
