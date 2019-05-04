@@ -180,7 +180,7 @@ class ProjectsIndex extends React.Component {
     var skill_filter_checkbox;
     if (this.props.user) {
         skill_filter_checkbox = (
-            <div className="dib fr mr2 bg-white disable-selection pt1">
+            <div className="dib fr f5 mr4 bg-white disable-selection pt1">
                 Filter by My Skills: <input
                     type="checkbox"
                     onChange={this.handleSkillCheck} 
