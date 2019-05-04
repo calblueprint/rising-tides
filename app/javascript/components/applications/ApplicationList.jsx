@@ -31,7 +31,7 @@ class ApplicationList extends React.Component {
         } else if (application.status == "accepted") {
             project_status = (
                 <div className="dib rt-yellow-bg ph3 pv2 fw4">
-                    Interview
+                    Accepted
                 </div>
             );
         } else if (application.status == "denied") {

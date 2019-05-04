@@ -130,7 +130,7 @@ class ApplicationView extends React.Component {
                                 Interviewing
                           </div>)
       } else if (this.props.application.status === "accepted") {
-        rendered_status = (<div className="f5 fr pa2 w4 tc accepted">
+        rendered_status = (<div className="f5 fr pa2 w4 tc white b accepted">
                                 Accepted
                           </div>)
       } else if (this.props.application.status === "denied") {
