@@ -281,7 +281,7 @@ class Dashboard extends React.Component {
                     <Dropdown
                         titleHelper="Application Status"
                         title="Select Status..."
-                        list={applicationsLoading}
+                        list={this.state.application_statuses}
                         toggleItem={this.toggleSelected}
                     />
                     <a

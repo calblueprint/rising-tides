@@ -170,7 +170,7 @@ class ApplicationView extends React.Component {
                             <i className="fab fa-linkedin f2 icon-link"></i>
                             </a>
                             <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                            <i class="fas fa-file-alt f2 icon-link"></i>                            
+                            <i className="fas fa-file-alt f2 icon-link"></i>
                             </a>
                         </div>
                         <div className="flex f5 b lato">

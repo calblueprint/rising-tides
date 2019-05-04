@@ -23,6 +23,7 @@ class Dropdown extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
+    console.log(nextProps);
     const selected = nextProps.list.filter(function(a) { return a.selected; });
     const count = selected.length;
     if (count === 0) {
