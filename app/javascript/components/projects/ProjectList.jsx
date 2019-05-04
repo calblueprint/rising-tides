@@ -16,7 +16,7 @@ class ProjectList extends React.Component {
     let { projects, loading } = this.props;
     let projectList;
 
-    if (projects.length) {
+    if (projects) {
       projectList = projects.map((project, index) => {
         return <ProjectCard project={project} key={index} />;
       });
