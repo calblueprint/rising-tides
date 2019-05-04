@@ -126,6 +126,7 @@ class ProjectView extends React.Component {
 
     applications = (!organization_signed_in || organization.id != current_organization.id) ? <span></span> : ( 
         <div>
+            <a className="mb2" href="/applications"><h2 className="f3">Applications</h2></a>
             <ApplicationList
                     is_org_view={true}
                     applications={this.props.applications} />
@@ -200,6 +201,16 @@ class ProjectView extends React.Component {
                 </div>
                 <div className="mt3 flex items-start">
                     <div className="w-75">
+                        <h2 className="mt3 f3">Project Plan</h2>
+                        <div className="ml4 bl">
+                            {milestonesList}
+                        </div>
+                        {project.description ? (
+                            <div>
+                                <h2 className="mt4 f3">Description</h2>
+                                <p className="f5">{project.description}</p>
+                            </div>
+                        ) : (null)}
                         {project.deliverable ? (
                             <div>
                                 <h2 className="mt4 f3">Deliverable</h2>
@@ -236,13 +247,15 @@ class ProjectView extends React.Component {
                         ) : (null)}
                     </div>
                 </div>
-                    <a className="mb2" href="/applications"><h2 className="f3">Applications</h2></a>
                     {applications}
                     <div>
-                        <h2 className="mt4 mb2 f3">Accepted Volunteers</h2>
-                        <div className="flex flex-wrap justify-around">
-                        {accepted_volunteers}
-                        </div>
+                        {(organization_signed_in && organization.id == current_organization.id) ?
+                        <div>
+                            <h2 className="mt4 mb2 f3">Accepted Volunteers</h2>
+                            <div className="flex flex-wrap justify-around">
+                                {accepted_volunteers}
+                            </div>
+                        </div> : null}
                     </div>
                     
             </div>
