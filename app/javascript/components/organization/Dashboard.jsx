@@ -255,7 +255,7 @@ class Dashboard extends React.Component {
                     </div>
                 </div>
                 <a
-                    className="dib std-button pa2 fr"
+                    className="dib std-button pa2 fl"
                     href="/projects/new">
                     Create Project</a> 
                 <div className="cf"></div>
