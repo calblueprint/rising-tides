@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
             id: 0,
             uid: 'pending',
             title: 'Pending',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
@@ -81,7 +81,7 @@ class Dashboard extends React.Component {
             id: 2,
             uid: 'interviewing',
             title: 'Interviewing',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
@@ -198,7 +198,6 @@ class Dashboard extends React.Component {
         query: {
             with_statuses: statuses,
             with_organization_id: this.props.organization.id,
-            with_statuses: [0, 2],
             with_limit: 3
         }
     };
