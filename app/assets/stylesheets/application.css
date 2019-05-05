@@ -422,13 +422,20 @@ input.input {
     color:black;
 }
 
+.user-card {
+    width: 12rem; 	
+    height:12rem;
+}
+
 .icon-link:hover {
     color: grey;
 }
 
 .pic-height {
     height:10rem;
+    object-fit: cover;
 }
+
 
 .ul {
     list-style-type: none;
