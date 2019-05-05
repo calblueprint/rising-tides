@@ -15,7 +15,6 @@ class RegisterForm extends React.Component {
       currentStep: 1,
       email: "",
       contactPhoneNumber: "",
-      state: {},
       selectedProfileFile: {},
       formErrors: {
         contactPhoneNumber: ""
@@ -174,7 +173,7 @@ class RegisterForm extends React.Component {
 
   handleRegistration = (values, actions) => {
     console.log("entered registration");
-    const { contactPhoneNumber, state, selectedProfileFile } = this.state;
+    const { contactPhoneNumber, selectedProfileFile } = this.state;
     const formData = new FormData();
     formData.append("organization[email]", values.email);
     formData.append("organization[password]", values.password);
@@ -188,7 +187,7 @@ class RegisterForm extends React.Component {
     );
     formData.append("organization[contact_last_name]", values.contactLastName);
     formData.append("organization[city]", values.city);
-    formData.append("organization[state]", state);
+    formData.append("organization[state]", values.state);
     formData.append("organization[link]", values.link);
     formData.append("organization[description]", values.description);
     formData.append("organization[name]", values.name);

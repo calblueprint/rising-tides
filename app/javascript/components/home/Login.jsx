@@ -71,7 +71,7 @@ class Login extends React.Component {
             htmlFor="login-volunteer-selection"
           >
             <input
-              className="mh1"
+              className="mh2"
               id="login-volunteer-selection"
               type="radio"
               value="volunteer"
@@ -86,7 +86,7 @@ class Login extends React.Component {
             htmlFor="login-organization-selection"
           >
             <input
-              className="mh1"
+              className="mh2"
               id="organization"
               type="radio"
               value="organization"

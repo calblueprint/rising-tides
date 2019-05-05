@@ -55,7 +55,7 @@ class Modal extends React.Component {
             Close
           </button> */}
           <div>
-            <h2 className="mt0 mb4">Sign up as...</h2>
+            <h2 className="reg_modal mt0 mb4">Sign up as...</h2>
             <div className="flex">
               <Button
                 className="mr3"

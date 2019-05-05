@@ -40,11 +40,14 @@ a {
 }
 
 h2 {
-  /* font-family: Impact;;
-    font-size: 38px;
-    line-height: normal;
-    color: #000000;
-    margin: 0; */
+  font-family: Impact;
+  font-size: 38px;
+  line-height: normal;
+  color: #000000;
+  margin: 0;
+}
+
+h2.reg_modal {
   font-family: "Lato", "Helvetica Neue", sans-serif;
   font-weight: lighter;
   font-size: 1.9rem;
