@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from "prop-types";
 import FlashMessage from '../utils/FlashMessage';
 import profile_pic from "images/profile_pic.png";
-
+import peter_pic from "images/peter.jpg";
 
 
 class ApplicationView extends React.Component {

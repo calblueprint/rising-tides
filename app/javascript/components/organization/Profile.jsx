@@ -5,6 +5,7 @@ import FlashMessage from '../utils/FlashMessage'
 import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 import ProjectList from '../projects/ProjectList';
+import bp_pic from "images/blueprint.png";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -53,6 +54,9 @@ class Profile extends React.Component {
         profileUrl = profile_pic;
     }
     let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
+    if (organization.name == "Blueprint") {
+        profileImage = <img className="h-100 ba w4"  src={bp_pic} />;
+    }
     
     return (
         <div className="w-100 h-100 tc">

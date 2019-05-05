@@ -4,6 +4,8 @@ import axios from "axios";
 import logo from "images/risingtides.svg";
 import profile_pic from "images/profile_pic.png";
 import onClickOutside from "react-onclickoutside";
+import peter_pic from "images/peter.jpg";
+import bp_pic from "images/blueprint.png";
 
 class NavBar extends React.Component {
 
@@ -144,6 +146,9 @@ class NavBar extends React.Component {
     let profile = null;
     if (this.isOrganization) {
       let profileUrl = this.props.organization.profile_image_url ? this.props.organization.profile_image_url : profile_pic;
+      if (this.props.organization.name == "Blueprint") {
+        profileUrl = bp_pic;
+      }
       let profileImage = <img className="h-auto w2 ba"  src={profileUrl} />;
       profile = <li className="fr f4 tl w-auto"> 
                   <a className="shadow-bold black" onClick={() => this.toggleList()}>
@@ -160,6 +165,9 @@ class NavBar extends React.Component {
                 </li>
     } else if (this.isVolunteer) {
       let profileUrl = this.props.user.profile_image_url ? this.props.user.profile_image_url : profile_pic;
+      if (this.props.user.first_name == "Peter") {
+        profileUrl = peter_pic;
+      }
       let profileImage = <img className="h-auto w2 ba"  src={profileUrl} />;
       profile = <li className="fr f4 tl w-auto"> 
                   <a className="shadow-bold black" onClick={() => this.toggleList()}>
