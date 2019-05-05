@@ -147,7 +147,7 @@ class ProjectView extends React.Component {
 
     let accepted_volunteers;
     accepted_volunteers = (!organization_signed_in || organization.id != current_organization.id) ? <span></span> : ( 
-        skillList = this.props.applications.map((application, index) => {
+        this.props.applications.map((application, index) => {
             return (application.status === "accepted" ? 
             <UserCard user={application.user} key={index}/>
             : null);
