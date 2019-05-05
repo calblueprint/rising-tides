@@ -9,16 +9,22 @@ import PhoneInput from "react-phone-number-input";
 class Step2 extends React.Component {
   static propTypes = {
     currentStep: PropTypes.number.isRequired,
-    contactPhoneNumberValue: PropTypes.string.isRequired,
-    handleChange: PropTypes.func.isRequired,
+    contactPhoneNumber: PropTypes.string.isRequired,
     handleBlur: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
     handleProfileFileChange: PropTypes.func.isRequired,
     selectedProfileFile: PropTypes.shape({
       name: PropTypes.string,
       path: PropTypes.string,
       preview: PropTypes.string
     }).isRequired,
-    deleteProfileFile: PropTypes.func.isRequired
+    deleteProfileFile: PropTypes.func.isRequired,
+    formErrors: PropTypes.shape({
+      contactPhoneNumber: PropTypes.string
+    }).isRequired,
+    touched: PropTypes.shape({
+      contactPhoneNumber: PropTypes.bool
+    }).isRequired
   };
 
   constructor(props) {
@@ -89,9 +95,11 @@ class Step2 extends React.Component {
   render() {
     const {
       currentStep,
-      contactPhoneNumberValue,
+      contactPhoneNumber,
+      handleBlur,
       handleChange,
-      handleBlur
+      formErrors,
+      touched
     } = this.props;
 
     if (currentStep !== 2) {
@@ -99,8 +107,8 @@ class Step2 extends React.Component {
     }
     return (
       <>
-        <h2 className="underline mb3">Lead Contact Information</h2>
-        <section className="flex mb4">
+        <h2 className="underline mt0 mb3">Lead Contact Information</h2>
+        <section className="flex">
           <label htmlFor="firstName" className="mr3 w-50">
             <h3>First Name</h3>
             <Field type="text" name="contactFirstName" className="w-100" />
@@ -120,34 +128,26 @@ class Step2 extends React.Component {
             />
           </label>
         </section>
-        <section className="flex flex-column mb4">
+        <section className="flex flex-column">
           <label htmlFor="contactPhoneNumber">
             <h3>Phone Number</h3>
             <PhoneInput
               name="contactPhoneNumber"
               country="US"
               showCountrySelect={false}
-              value={contactPhoneNumberValue}
-              onChange={handleChange}
+              value={contactPhoneNumber}
+              onChange={handleChange("contactPhoneNumber")}
+              onBlur={handleBlur("contactPhoneNumber")}
             />
-            {/* <Field
-              component={PhoneInput}
-              name="contactPhoneNumber"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              country="US"
-              showCountrySelect={false}
-            /> */}
-            {/* <ErrorMessage
-              name="contactPhoneNumber"
-              className="error"
-              component="div"
-            /> */}
+            {formErrors.contactPhoneNumber && touched.contactPhoneNumber && (
+              <div className="error">{formErrors.contactPhoneNumber}</div>
+            )}
           </label>
         </section>
-        <section className="mb4">
+        <section>
           <h3>Add a photo</h3>
           {this.profile()}
+          <ErrorMessage name="profileFile" className="error" component="div" />
         </section>
       </>
     );

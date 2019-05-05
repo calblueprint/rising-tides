@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 import axios from "axios";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import Confirmation from "../helpers/Confirmation";
 import Error from "../helpers/Error";
 import FormContainer from "./registration/FormContainer";
-// import { Formik, Form, Field, ErrorMessage } from "formik";
 
 class RegisterForm extends React.Component {
   constructor(props) {
@@ -13,26 +13,16 @@ class RegisterForm extends React.Component {
     this.state = {
       pbPercentage: (1 / 3) * 100,
       currentStep: 1,
-      name: "",
-      contactFirstName: "",
-      contactLastName: "",
       email: "",
-      password: "",
-      passwordConfirmation: "",
       contactPhoneNumber: "",
-      city: "",
-      state: "",
-      link: "",
-      description: "",
+      state: {},
       selectedProfileFile: {},
-      formErrors: { firstName: "", lastName: "", email: "" },
-      nameValid: false,
-      emailValid: false,
-      passwordValid: false,
-      passwordMatch: false,
-      contactFirstNameValid: false,
-      contactLastNameValid: false,
-      formValid: false
+      formErrors: {
+        contactPhoneNumber: ""
+      },
+      touched: {
+        contactPhoneNumber: false
+      }
     };
 
     axios.defaults.headers.common = {
@@ -43,82 +33,82 @@ class RegisterForm extends React.Component {
     };
   }
 
-  validateField = (fieldName, value) => {
-    const { formErrors, password } = this.state;
-    let {
-      nameValid,
-      emailValid,
-      passwordValid,
-      passwordMatch,
-      contactFirstNameValid,
-      contactLastNameValid
-    } = this.state;
-    switch (fieldName) {
-      case "name":
-        nameValid = value.length > 0;
-        formErrors.name = nameValid ? "" : " is not a valid organization name";
-        break;
-      case "email":
-        emailValid =
-          value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null;
-        formErrors.email = emailValid ? "" : " is an invalid email";
-        break;
-      case "password":
-        passwordValid = value.length >= 6;
-        formErrors.password = passwordValid ? "" : " is too short";
-        break;
-      case "passwordConfirmation":
-        passwordMatch = value.match(password) !== null;
-        formErrors.password = passwordMatch ? "" : " does not match";
-        break;
-      case "contactFirstName":
-        contactFirstNameValid = value.length > 0;
-        formErrors.firstName = contactFirstNameValid
-          ? ""
-          : " is not a valid first name";
-        break;
-      case "contactLastName":
-        contactLastNameValid = value.length > 0;
-        formErrors.lastName = contactLastNameValid
-          ? ""
-          : " is not a valid last name";
-        break;
-      default:
-        break;
-    }
-    this.setState(
-      {
-        formErrors,
-        nameValid,
-        emailValid,
-        passwordValid,
-        passwordMatch,
-        contactFirstNameValid,
-        contactLastNameValid
-      },
-      this.validateForm
-    );
-  };
+  // validateField = (fieldName, value) => {
+  //   const { formErrors, password } = this.state;
+  //   let {
+  //     nameValid,
+  //     emailValid,
+  //     passwordValid,
+  //     passwordMatch,
+  //     contactFirstNameValid,
+  //     contactLastNameValid
+  //   } = this.state;
+  //   switch (fieldName) {
+  //     case "name":
+  //       nameValid = value.length > 0;
+  //       formErrors.name = nameValid ? "" : " is not a valid organization name";
+  //       break;
+  //     case "email":
+  //       emailValid =
+  //         value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null;
+  //       formErrors.email = emailValid ? "" : " is an invalid email";
+  //       break;
+  //     case "password":
+  //       passwordValid = value.length >= 6;
+  //       formErrors.password = passwordValid ? "" : " is too short";
+  //       break;
+  //     case "passwordConfirmation":
+  //       passwordMatch = value.match(password) !== null;
+  //       formErrors.password = passwordMatch ? "" : " does not match";
+  //       break;
+  //     case "contactFirstName":
+  //       contactFirstNameValid = value.length > 0;
+  //       formErrors.firstName = contactFirstNameValid
+  //         ? ""
+  //         : " is not a valid first name";
+  //       break;
+  //     case "contactLastName":
+  //       contactLastNameValid = value.length > 0;
+  //       formErrors.lastName = contactLastNameValid
+  //         ? ""
+  //         : " is not a valid last name";
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   this.setState(
+  //     {
+  //       formErrors,
+  //       nameValid,
+  //       emailValid,
+  //       passwordValid,
+  //       passwordMatch,
+  //       contactFirstNameValid,
+  //       contactLastNameValid
+  //     },
+  //     this.validateForm
+  //   );
+  // };
 
-  validateForm = () => {
-    const {
-      nameValid,
-      emailValid,
-      passwordValid,
-      passwordMatch,
-      contactFirstNameValid,
-      contactLastNameValid
-    } = this.state;
-    this.setState({
-      formValid:
-        nameValid &&
-        emailValid &&
-        passwordValid &&
-        passwordMatch &&
-        contactFirstNameValid &&
-        contactLastNameValid
-    });
-  };
+  // validateForm = () => {
+  //   const {
+  //     nameValid,
+  //     emailValid,
+  //     passwordValid,
+  //     passwordMatch,
+  //     contactFirstNameValid,
+  //     contactLastNameValid
+  //   } = this.state;
+  //   this.setState({
+  //     formValid:
+  //       nameValid &&
+  //       emailValid &&
+  //       passwordValid &&
+  //       passwordMatch &&
+  //       contactFirstNameValid &&
+  //       contactLastNameValid
+  //   });
+  // };
 
   handleProfileFileChange = file => {
     console.log(`profile ${file[0]}`);
@@ -144,31 +134,47 @@ class RegisterForm extends React.Component {
     }
   };
 
-  handleUpload = () => {};
+  handleBlur = field => event => {
+    const { touched, formErrors } = this.state;
+    this.setState(
+      {
+        touched: { ...touched, [field]: true }
+      },
+      () => {
+        this.setState({
+          formErrors: {
+            ...formErrors,
+            [field]: this.validateField(field)
+          }
+        });
+      }
+    );
+  };
 
-  handleChange = name => event => {
-    const { value } = event.target;
-    this.setState({ [name]: value }, () => {
-      this.validateField(name, value);
-    });
+  handleChange = field => event => {
+    this.setState({ [field]: event === undefined ? "" : event });
+  };
+
+  validateField = field => {
+    switch (field) {
+      case "contactPhoneNumber": {
+        const { contactPhoneNumber } = this.state;
+        if (!contactPhoneNumber) {
+          return "Required";
+        }
+        if (!isValidPhoneNumber(contactPhoneNumber)) {
+          return "Invalid phone number";
+        }
+        return "";
+      }
+      default:
+        return false;
+    }
   };
 
   handleRegistration = (values, actions) => {
     console.log("entered registration");
-    const {
-      // name,
-      // email,
-      // password,
-      // passwordConfirmation,
-      // contactFirstName,
-      // contactLastName,
-      // contactPhoneNumber,
-      // city,
-      // state,
-      // link,
-      // description,
-      selectedProfileFile
-    } = this.state;
+    const { contactPhoneNumber, state, selectedProfileFile } = this.state;
     const formData = new FormData();
     formData.append("organization[email]", values.email);
     formData.append("organization[password]", values.password);
@@ -182,25 +188,24 @@ class RegisterForm extends React.Component {
     );
     formData.append("organization[contact_last_name]", values.contactLastName);
     formData.append("organization[city]", values.city);
-    formData.append("organization[state]", values.state);
+    formData.append("organization[state]", state);
     formData.append("organization[link]", values.link);
     formData.append("organization[description]", values.description);
     formData.append("organization[name]", values.name);
-    formData.append(
-      "organization[contact_phone_number]",
-      values.contactPhoneNumber
-    );
+    formData.append("organization[contact_phone_number]", contactPhoneNumber);
     formData.append("organization[profile_image]", selectedProfileFile);
     console.log("formData appended");
     axios
       .post("/organizations", formData)
       .then(response => {
         console.log("sent");
-        this.setState({ currentStep: 5 });
         URL.revokeObjectURL(selectedProfileFile.preview);
+        actions.setSubmitting(false);
+        this.setState({ currentStep: 5 });
       })
       .catch(error => {
         console.log(error);
+        actions.setSubmitting(false);
         this.setState({ currentStep: 6 });
       });
   };
@@ -209,20 +214,10 @@ class RegisterForm extends React.Component {
     const {
       pbPercentage,
       currentStep,
-      name,
-      email,
-      password,
-      passwordConfirmation,
-      contactFirstName,
-      contactLastName,
       contactPhoneNumber,
-      city,
-      state,
-      link,
-      description,
       selectedProfileFile,
-      formValid,
-      formErrors
+      formErrors,
+      touched
     } = this.state;
     if (currentStep > 3) {
       return null;
@@ -234,20 +229,11 @@ class RegisterForm extends React.Component {
         prev={this.prev}
         handleRegistration={this.handleRegistration}
         handleProfileFileChange={this.handleProfileFileChange}
-        // handleChange={this.handleChange}
+        handleBlur={this.handleBlur}
+        handleChange={this.handleChange}
         formErrors={formErrors}
-        formValid={formValid}
-        // name={name}
-        // email={email}
-        // password={password}
-        // passwordConfirmation={passwordConfirmation}
-        // contactFirstName={contactFirstName}
-        // contactLastName={contactLastName}
-        // contactPhoneNumber={contactPhoneNumber}
-        // city={city}
-        // state={state}
-        // link={link}
-        // description={description}
+        touched={touched}
+        contactPhoneNumber={contactPhoneNumber}
         selectedProfileFile={selectedProfileFile}
         deleteProfileFile={this.deleteProfileFile}
         pbPercentage={pbPercentage}

@@ -60,9 +60,11 @@ a:hover {
 }
 
 .error {
-  position: absolute;
   color: #db3236;
-  padding-top: 3.5rem;
+}
+
+section {
+  margin-bottom: 1.5rem;
 }
 
 label {
@@ -76,6 +78,7 @@ select {
   padding: 0.5rem 1rem;
   border-style: none;
   background-color: #f2f2f2;
+  width: 100%;
 }
 
 input:focus {
@@ -87,6 +90,18 @@ input.input {
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
   box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+.pt3-5 {
+  padding-top: 3.5rem;
+}
+
+.pt4-5 {
+  padding-top: 4.5rem;
+}
+
+.pt5-75 {
+  padding-top: 5.75rem;
 }
 
 .alert-show {
@@ -304,7 +319,7 @@ img.checkmark {
 }
 
 .form-h {
-  height: 25rem;
+  height: 26rem;
 }
 
 .progress-bar {

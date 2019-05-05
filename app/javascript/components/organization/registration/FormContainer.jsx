@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { isValidPhoneNumber } from "react-phone-number-input";
 import Button from "../../helpers/Button";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -17,30 +16,21 @@ class RegisterForm extends React.Component {
     handleRegistration: PropTypes.func.isRequired,
     handleProfileFileChange: PropTypes.func.isRequired,
     formErrors: PropTypes.shape({
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
-      email: PropTypes.string,
-      password: PropTypes.string
+      contactPhoneNumber: PropTypes.string
     }).isRequired,
-    formValid: PropTypes.bool.isRequired,
-    // name: PropTypes.string.isRequired,
-    // contactFirstName: PropTypes.string.isRequired,
-    // contactLastName: PropTypes.string.isRequired,
-    // email: PropTypes.string.isRequired,
-    // password: PropTypes.string.isRequired,
-    // passwordConfirmation: PropTypes.string.isRequired,
-    // contactPhoneNumber: PropTypes.string.isRequired,
-    // city: PropTypes.string.isRequired,
-    // state: PropTypes.string.isRequired,
+    touched: PropTypes.shape({
+      contactPhoneNumber: PropTypes.bool
+    }).isRequired,
+    contactPhoneNumber: PropTypes.string.isRequired,
     selectedProfileFile: PropTypes.shape({
       name: PropTypes.string,
       path: PropTypes.string,
       preview: PropTypes.string
     }).isRequired,
     deleteProfileFile: PropTypes.func.isRequired,
-    // description: PropTypes.string.isRequired,
-    // link: PropTypes.string.isRequired,
-    pbPercentage: PropTypes.number.isRequired
+    pbPercentage: PropTypes.number.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -73,13 +63,13 @@ class RegisterForm extends React.Component {
   };
 
   submitButton = () => {
-    const { currentStep, formValid } = this.props;
+    const { currentStep, formErrors } = this.props;
     if (currentStep === 3) {
       return (
         <Button
           type="button-primary-submit"
           value="Next Step"
-          disabled={!formValid}
+          disabled={false}
           className="self-end"
         >
           Sign up
@@ -125,23 +115,15 @@ class RegisterForm extends React.Component {
     const {
       pbPercentage,
       currentStep,
-      // name,
-      // email,
-      // password,
-      // passwordConfirmation,
-      // contactFirstName,
-      // contactLastName,
-      // contactPhoneNumber,
+      contactPhoneNumber,
       handleProfileFileChange,
       selectedProfileFile,
       deleteProfileFile,
-      // city,
-      // state,
-      // link,
-      // description,
       handleRegistration,
-      formValid,
-      formErrors
+      handleChange,
+      handleBlur,
+      formErrors,
+      touched
     } = this.props;
 
     const validationSchema = Yup.object().shape({
@@ -158,15 +140,8 @@ class RegisterForm extends React.Component {
       passwordConfirmation: Yup.string()
         .oneOf([Yup.ref("password"), null], "Passwords must match")
         .required("Required"),
-      firstName: Yup.string().required("Required"),
-      lastName: Yup.string().required("Required"),
-      contactPhoneNumber: Yup.string()
-        .test("phoneNumberTest", "Invalid phone number", isValidPhoneNumber)
-        // .matches(
-        //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-        //   "Invalid phone number"
-        // )
-        .required("Required"),
+      contactFirstName: Yup.string().required("Required"),
+      contactLastName: Yup.string().required("Required"),
       city: Yup.string().required("Required"),
       state: Yup.string().required("Required"),
       link: Yup.string().url("Invalid link"),
@@ -184,13 +159,12 @@ class RegisterForm extends React.Component {
           contactLastName: "",
           contactPhoneNumber: "",
           city: "",
-          state: "",
           link: "",
           description: ""
         }}
         onSubmit={handleRegistration}
         validationSchema={validationSchema}
-        render={({ values, handleSubmit, handleChange, handleBlur }) => (
+        render={({ handleSubmit }) => (
           <form
             onSubmit={handleSubmit}
             className="form-h w-90 w-60-m w-33-l flex flex-column justify-between"
@@ -199,12 +173,14 @@ class RegisterForm extends React.Component {
               <Step1 currentStep={currentStep} />
               <Step2
                 currentStep={currentStep}
-                contactPhoneNumberValue={values.contactPhoneNumber}
+                contactPhoneNumber={contactPhoneNumber}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
                 handleProfileFileChange={handleProfileFileChange}
                 selectedProfileFile={selectedProfileFile}
                 deleteProfileFile={deleteProfileFile}
+                formErrors={formErrors}
+                touched={touched}
               />
               <Step3 currentStep={currentStep} />
             </div>

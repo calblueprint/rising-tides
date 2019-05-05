@@ -22,7 +22,7 @@ class Step3 extends React.Component {
     }
     return (
       <>
-        <section className="flex mb4">
+        <section className="flex">
           <label htmlFor="city" className="mr3 w-80">
             <h3>City</h3>
             <Field type="text" name="city" />
@@ -92,16 +92,16 @@ class Step3 extends React.Component {
             <ErrorMessage name="state" className="error" component="div" />
           </label>
         </section>
-        <section className="mb4">
+        <section>
           <label htmlFor="link">
             <h3>
               Website <i className="f5">(optional)</i>
             </h3>
-            <Field type="text" name="link" />
+            <Field type="text" name="link" placeholder="https://google.com" />
             <ErrorMessage name="link" className="error" component="div" />
           </label>
         </section>
-        <section className="mb4">
+        <section>
           <label htmlFor="description">
             <h3>Tell us about the organization&apos;s mission</h3>
             <Field
