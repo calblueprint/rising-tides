@@ -1,15 +1,15 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/label-has-for */
 import React from "react";
 import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
+import { Field, ErrorMessage } from "formik";
 
 class Step4 extends React.Component {
   static propTypes = {
     currentStep: PropTypes.number.isRequired,
-    handleChange: PropTypes.func.isRequired,
     handleProfileFileChange: PropTypes.func.isRequired,
     handleResumeFileChange: PropTypes.func.isRequired,
-    link: PropTypes.string.isRequired,
-    formValid: PropTypes.bool.isRequired,
     selectedProfileFile: PropTypes.shape({
       name: PropTypes.string,
       path: PropTypes.string,
@@ -138,38 +138,37 @@ class Step4 extends React.Component {
   };
 
   render() {
-    const { currentStep, handleChange, link } = this.props;
+    const { currentStep } = this.props;
 
     if (currentStep !== 4) {
       return null;
     }
     return (
-      <div>
-        <section className="mb3">
+      <>
+        <section>
           <h3>Add a photo of yourself</h3>
           {this.profile()}
         </section>
-        <section className="mb3">
+        <section>
           <h3>
             Upload a resume <i className="f5">(optional)</i>
           </h3>
           {this.resume()}
         </section>
-        <section className="mb3">
+        <section>
           <label htmlFor="link">
             <h3>
               Link to Linkedin Profile <i className="f5">(optional)</i>
             </h3>
-            <input
+            <Field
               type="text"
-              placeholder="ie. linkedin.com/in/john-doe/"
-              value={link}
-              id="link"
-              onChange={handleChange("link")}
+              placeholder="https://linkedin.com/in/john-doe"
+              name="link"
             />
+            <ErrorMessage name="link" className="error" component="div" />
           </label>
         </section>
-      </div>
+      </>
     );
   }
 }

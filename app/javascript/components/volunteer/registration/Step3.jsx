@@ -1,11 +1,11 @@
+/* eslint-disable jsx-a11y/label-has-for */
 import React from "react";
 import PropTypes from "prop-types";
+import { Field, ErrorMessage } from "formik";
 
 class Step3 extends React.Component {
   static propTypes = {
-    currentStep: PropTypes.number.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    bio: PropTypes.string.isRequired
+    currentStep: PropTypes.number.isRequired
   };
 
   constructor(props) {
@@ -14,23 +14,30 @@ class Step3 extends React.Component {
   }
 
   render() {
-    const { currentStep, handleChange, bio } = this.props;
+    const { currentStep } = this.props;
 
     if (currentStep !== 3) {
       return null;
     }
     return (
       <div>
-        <section className="mb3">
+        <section>
           <label htmlFor="bio">
             <h3>Tell us a little bit about yourself</h3>
-            <textarea
+            <Field
+              name="bio"
+              component="textarea"
+              row="14"
+              style={{ resize: "none" }}
+            />
+            <ErrorMessage name="bio" className="error" component="div" />
+            {/* <textarea
               value={bio}
               rows={14}
               onChange={handleChange("bio")}
               id="bio"
               style={{ resize: "none" }}
-            />
+            /> */}
           </label>
         </section>
       </div>

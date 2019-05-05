@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import Confirmation from "../helpers/Confirmation";
 import Error from "../helpers/Error";
 import FormContainer from "./registration/FormContainer";
@@ -10,26 +11,16 @@ class RegisterForm extends React.Component {
     this.state = {
       pbPercentage: (1 / 4) * 100,
       currentStep: 1,
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      passwordConfirmation: "",
       phoneNumber: "",
-      city: "",
-      state: "",
-      link: "",
       skills: "",
-      bio: "",
       selectedProfileFile: {},
       selectedResumeFile: {},
-      formErrors: { firstName: "", lastName: "", email: "", password: "" },
-      firstNameValid: false,
-      lastNameValid: false,
-      emailValid: false,
-      passwordValid: false,
-      passwordMatch: false,
-      formValid: false
+      formErrors: {
+        phoneNumber: ""
+      },
+      touched: {
+        phoneNumber: false
+      }
     };
 
     axios.defaults.headers.common = {
@@ -40,72 +31,72 @@ class RegisterForm extends React.Component {
     };
   }
 
-  validateField = (fieldName, value) => {
-    const { formErrors, password } = this.state;
-    let {
-      firstNameValid,
-      lastNameValid,
-      emailValid,
-      passwordValid,
-      passwordMatch
-    } = this.state;
-    switch (fieldName) {
-      case "firstName":
-        firstNameValid = value.length > 0;
-        formErrors.firstName = firstNameValid
-          ? ""
-          : " is not a valid first name";
-        break;
-      case "lastName":
-        lastNameValid = value.length > 0;
-        formErrors.lastName = lastNameValid ? "" : " is not a valid last name";
-        break;
-      case "email":
-        emailValid =
-          value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null;
-        formErrors.email = emailValid ? "" : " is an invalid email";
-        break;
-      case "password":
-        passwordValid = value.length >= 6;
-        formErrors.password = passwordValid ? "" : " is too short";
-        break;
-      case "passwordConfirmation":
-        passwordMatch = value.match(password) !== null;
-        formErrors.password = passwordMatch ? "" : " does not match";
-        break;
-      default:
-        break;
-    }
-    this.setState(
-      {
-        formErrors,
-        firstNameValid,
-        lastNameValid,
-        emailValid,
-        passwordValid,
-        passwordMatch
-      },
-      this.validateForm
-    );
-  };
+  // validateField = (fieldName, value) => {
+  //   const { formErrors, password } = this.state;
+  //   let {
+  //     firstNameValid,
+  //     lastNameValid,
+  //     emailValid,
+  //     passwordValid,
+  //     passwordMatch
+  //   } = this.state;
+  //   switch (fieldName) {
+  //     case "firstName":
+  //       firstNameValid = value.length > 0;
+  //       formErrors.firstName = firstNameValid
+  //         ? ""
+  //         : " is not a valid first name";
+  //       break;
+  //     case "lastName":
+  //       lastNameValid = value.length > 0;
+  //       formErrors.lastName = lastNameValid ? "" : " is not a valid last name";
+  //       break;
+  //     case "email":
+  //       emailValid =
+  //         value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null;
+  //       formErrors.email = emailValid ? "" : " is an invalid email";
+  //       break;
+  //     case "password":
+  //       passwordValid = value.length >= 6;
+  //       formErrors.password = passwordValid ? "" : " is too short";
+  //       break;
+  //     case "passwordConfirmation":
+  //       passwordMatch = value.match(password) !== null;
+  //       formErrors.password = passwordMatch ? "" : " does not match";
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   this.setState(
+  //     {
+  //       formErrors,
+  //       firstNameValid,
+  //       lastNameValid,
+  //       emailValid,
+  //       passwordValid,
+  //       passwordMatch
+  //     },
+  //     this.validateForm
+  //   );
+  // };
 
-  validateForm = () => {
-    const {
-      firstNameValid,
-      lastNameValid,
-      emailValid,
-      passwordValid,
-      passwordMatch
-    } = this.state;
-    this.setState({
-      formValid:
-        firstNameValid &&
-        lastNameValid &&
-        emailValid &&
-        passwordValid &&
-        passwordMatch
-    });
-  };
+  // validateForm = () => {
+  //   const {
+  //     firstNameValid,
+  //     lastNameValid,
+  //     emailValid,
+  //     passwordValid,
+  //     passwordMatch
+  //   } = this.state;
+  //   this.setState({
+  //     formValid:
+  //       firstNameValid &&
+  //       lastNameValid &&
+  //       emailValid &&
+  //       passwordValid &&
+  //       passwordMatch
+  //   });
+  // };
 
   handleProfileFileChange = file => {
     console.log(`profile ${file[0]}`);
@@ -151,54 +142,78 @@ class RegisterForm extends React.Component {
 
   handleUpload = () => {};
 
-  handleChange = name => e => {
-    const { value } = e.target;
-    this.setState({ [name]: value }, () => {
-      this.validateField(name, value);
-    });
+  handleBlur = field => event => {
+    const { touched, formErrors } = this.state;
+    this.setState(
+      {
+        touched: { ...touched, [field]: true }
+      },
+      () => {
+        this.setState({
+          formErrors: {
+            ...formErrors,
+            [field]: this.validateField(field)
+          }
+        });
+      }
+    );
   };
 
-  handleRegistration = e => {
+  handleChange = field => event => {
+    this.setState({ [field]: event === undefined ? "" : event });
+  };
+
+  validateField = field => {
+    switch (field) {
+      case "phoneNumber": {
+        const { phoneNumber } = this.state;
+        if (!phoneNumber) {
+          return "Required";
+        }
+        if (!isValidPhoneNumber(phoneNumber)) {
+          return "Invalid phone number";
+        }
+        return "";
+      }
+      default:
+        return false;
+    }
+  };
+
+  handleRegistration = (values, actions) => {
     console.log("entered registration");
     const {
-      firstName,
-      lastName,
-      email,
-      password,
-      passwordConfirmation,
       phoneNumber,
-      city,
-      state,
-      link,
       skills,
-      bio,
       selectedProfileFile,
       selectedResumeFile
     } = this.state;
     const formData = new FormData();
-    formData.append("user[email]", email);
-    formData.append("user[password]", password);
-    formData.append("user[password_confirmation]", passwordConfirmation);
-    formData.append("user[first_name]", firstName);
-    formData.append("user[last_name]", lastName);
-    formData.append("user[city]", city);
-    formData.append("user[state]", state);
-    formData.append("user[link]", link);
-    formData.append("user[bio]", bio);
+    formData.append("user[email]", values.email);
+    formData.append("user[password]", values.password);
+    formData.append("user[password_confirmation]", values.passwordConfirmation);
+    formData.append("user[first_name]", values.firstName);
+    formData.append("user[last_name]", values.lastName);
+    formData.append("user[city]", values.city);
+    formData.append("user[state]", values.state);
+    formData.append("user[link]", values.link);
+    formData.append("user[bio]", values.bio);
     formData.append("user[skills]", skills);
     formData.append("user[phone_number]", phoneNumber);
-    formData.append("user[profile_image]", selectedProfileFile[0]);
-    formData.append("user[resume]", selectedResumeFile[0]);
+    formData.append("user[profile_image]", selectedProfileFile);
+    formData.append("user[resume]", selectedResumeFile);
     console.log("formData appended");
     axios
       .post("/users", formData)
       .then(response => {
         console.log("sent");
-        this.setState({ currentStep: 5 });
         URL.revokeObjectURL(selectedProfileFile.preview);
+        actions.setSubmitting(false);
+        this.setState({ currentStep: 5 });
       })
       .catch(error => {
         console.log(error);
+        actions.setSubmitting(false);
         this.setState({ currentStep: 6 });
       });
   };
@@ -208,20 +223,11 @@ class RegisterForm extends React.Component {
       pbPercentage,
       currentStep,
       formErrors,
-      firstName,
-      lastName,
-      email,
-      password,
-      passwordConfirmation,
+      touched,
       phoneNumber,
-      city,
-      state,
-      link,
       skills,
       selectedProfileFile,
-      selectedResumeFile,
-      bio,
-      formValid
+      selectedResumeFile
     } = this.state;
     if (currentStep > 4) {
       return null;
@@ -231,28 +237,20 @@ class RegisterForm extends React.Component {
         currentStep={currentStep}
         next={this.next}
         prev={this.prev}
+        handleChange={this.handleChange}
+        handleBlur={this.handleBlur}
         handleRegistration={this.handleRegistration}
         handleProfileFileChange={this.handleProfileFileChange}
         handleResumeFileChange={this.handleResumeFileChange}
-        handleChange={this.handleChange}
-        formErrors={formErrors}
-        formValid={formValid}
-        firstName={firstName}
-        lastName={lastName}
-        email={email}
-        password={password}
-        passwordConfirmation={passwordConfirmation}
         phoneNumber={phoneNumber}
-        city={city}
-        state={state}
         skills={skills}
         selectedProfileFile={selectedProfileFile}
         selectedResumeFile={selectedResumeFile}
         deleteProfileFile={this.deleteProfileFile}
         deleteResumeFile={this.deleteResumeFile}
-        bio={bio}
-        link={link}
         pbPercentage={pbPercentage}
+        formErrors={formErrors}
+        touched={touched}
       />
     );
   };
