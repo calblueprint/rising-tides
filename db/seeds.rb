@@ -65,6 +65,17 @@ def create_organizations
     )
     puts "Created Organization ##{i} (#{org.id})"
   end
+  org = Organization.create!(email: "admin@calblueprint.org",
+                             password: 'password',
+                             name: "Blueprint",
+                             city: "Berkeley",
+                             state: "CA",
+                             link: "https://calblueprint.org",
+                             description: "Blueprint strives to make technology accessible and useful for those who create communities and promote public welfare.",
+                             contact_first_name: "Steve",
+                             contact_last_name: "Shi",
+                             contact_phone_number: "6264103037"
+    )
   puts "Created #{NUM_ORGANIZATIONS} organizations! #{Organization.count} organizations in db."
 end
 
