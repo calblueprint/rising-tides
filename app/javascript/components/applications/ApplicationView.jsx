@@ -150,13 +150,23 @@ class ApplicationView extends React.Component {
                                             </a>) : null;
     
     let resume;
-    console.log(this.props.resume_url)
     if (!this.props.resume_url || this.props.resume_url ==="/profile_images/original/missing.png") {
         resume = null;
     } else {
         resume = (<a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={this.props.resume_url}>
                     <i className="fas fa-file-alt f2 icon-link"></i>                            
                     </a>)}
+
+    let skillList;
+
+    if (this.props.user.skills) {
+        skillList = this.props.user.skills.map((skill, index) => {
+            return <div className="skill-pill">{skill.name}</div>;
+        })
+    } else {
+        skillList = <div>No skills</div>;
+    }
+
       return(
         <div className="w-100 h-100 tc">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -196,7 +206,7 @@ class ApplicationView extends React.Component {
                 </div>
 
                 <h2 className="pt4 f3">Skills</h2>
-                <p className="lato f5">{this.props.user.skills}</p>
+                {skillList}
 
                 <h2 className="pt4 f3">Biography</h2>
                 <p className="lato f5">{this.props.user.bio}</p>
