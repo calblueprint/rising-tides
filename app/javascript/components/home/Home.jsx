@@ -1,5 +1,7 @@
 import React from "react";
-import Registration from "./Registration";
+import logo from "images/rising-tides-logo.svg";
+import logoImg from "images/rising-tides-logo-img.png";
+import SVG from "react-inlinesvg";
 import Login from "./Login";
 
 class Home extends React.Component {
@@ -10,10 +12,14 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1> Welcome to Rising Tides </h1>
+      <div className="vh-100 flex flex-column justify-center items-center">
+        <SVG src={logo} className="w-30r">
+          <img src={logoImg} alt="logo" />
+        </SVG>  
+        <div className="w-30r relative">
+          <div className="bg-primary h2 w-30r absolute top--1-15" />
+        </div>
         <Login />
-        <Registration />
       </div>
     );
   }
