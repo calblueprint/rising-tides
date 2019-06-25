@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
-import FlashMessage from '../utils/FlashMessage'
+import FlashMessage from "../utils/FlashMessage";
+import Button from "../helpers/Button";
+import Modal from "./RegistrationOption";
 
 class Login extends React.Component {
   constructor(props) {
@@ -13,97 +15,129 @@ class Login extends React.Component {
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content")
     };
-    this.handleSignup = this.handleSignup.bind(this);
   }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
-  handleSignup() {
+  handleSignin = event => {
+    event.preventDefault();
+
+    const { email, password, selectedType } = this.state;
     const data = {
-      email: this.state.email,
-      password: this.state.password
+      email,
+      password
     };
 
-    if (this.state.selectedType === "volunteer") {
+    if (selectedType === "volunteer") {
       axios
         .post("/users/sign_in", {
           user: data
-        }).then(function(response) {
+        })
+        .then(function(response) {
           window.location.href = "/";
-        }).catch(res => {
-          this.flash_message.flashError(
-            res.response.data
-          );
+        })
+        .catch(res => {
+          this.flash_message.flashError(res.response.data);
         });
-    } else if (this.state.selectedType === "organization") {
+    } else if (selectedType === "organization") {
       axios
         .post("/organizations/sign_in", {
           organization: data
-        }).then(function(response) {
+        })
+        .then(function(response) {
           window.location.href = "/";
-        }).catch(res => {
-          this.flash_message.flashError(
-            res.response.data
-          );
+        })
+        .catch(res => {
+          this.flash_message.flashError(res.response.data);
         });
     } else {
-        this.flash_message.flashMessage(
-            "You must select either \"Volunteer\" or \"Organization\""
-        );
+      this.flash_message.flashMessage(
+        'You must select either "Volunteer" or "Organization"'
+      );
     }
   };
 
   render() {
-    return (
-      <div>
-        <FlashMessage onRef={ref => (this.flash_message = ref)} />
-        <h2>Login</h2>
-          <div>
-            <label>
-              <input
-                type="radio"
-                value="volunteer"
-                onChange={this.handleChange("selectedType")}
-                checked={this.state.selectedType === "volunteer"}
-              />
-              Volunteer
-            </label>
+    const { selectedType } = this.state;
 
-            <label>
-              <input
-                type="radio"
-                value="organization"
-                onChange={this.handleChange("selectedType")}
-                checked={this.state.selectedType === "organization"}
-              />
-              Organization
-            </label>
-          </div>
-          <br />
-          <div>
+    return (
+      <form className="mt4">
+        <FlashMessage onRef={ref => (this.flash_message = ref)} />
+        <div className="flex flex-row justify-center mb3">
+          <label
+            className="flex flex-row justify-center mh2"
+            htmlFor="login-volunteer-selection"
+          >
+            <input
+              className="mh2"
+              id="login-volunteer-selection"
+              type="radio"
+              value="volunteer"
+              onChange={this.handleChange("selectedType")}
+              checked={selectedType === "volunteer"}
+            />
+            Volunteer
+          </label>
+
+          <label
+            className="flex flex-row justify-center mh2"
+            htmlFor="login-organization-selection"
+          >
+            <input
+              className="mh2"
+              id="organization"
+              type="radio"
+              value="organization"
+              onChange={this.handleChange("selectedType")}
+              checked={selectedType === "organization"}
+            />
+            Organization
+          </label>
+        </div>
+        <div className="flex flex-column mb3">
+          <label htmlFor="login-email">
+            Email
             <input
               className="input-box"
               type="text"
-              id="email"
-              placeholder="email"
+              id="login-email"
               onChange={this.handleChange("email")}
             />
-            <br />
+          </label>
+        </div>
+        <div className="flex flex-column mb4">
+          <label htmlFor="login-password">
+            Password
             <input
               className="input-box"
               type="password"
-              id="password"
-              placeholder="password"
+              id="login-password"
               onChange={this.handleChange("password")}
             />
+          </label>
+          <a href="/" className="f6 no-underline">
+            Forgot your password?
+          </a>
+        </div>
+        <div className="flex login-buttons">
+          <Modal
+            className="mr3"
+            title="Sign up"
+            buttonType="button-secondary"
+          />
+          <div>
+            <Button
+              type="button-primary"
+              onClick={this.handleSignin}
+              className="ml3"
+            >
+              Sign In
+            </Button>
           </div>
-          <br />
-          <div className="input-contianer">
-            <button onClick={() => this.handleSignup()}>Login</button>
-          </div>
-      </div>
+        </div>
+      </form>
     );
   }
 }
