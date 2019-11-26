@@ -20,7 +20,7 @@
 body {
   background-color: #ffffff;
   font-family: "Lato", "Helvetica Neue", sans-serif;
-  color: rgba(0, 0, 0);
+  color: rgb(0, 0, 0);
   font-size: 1rem;
 }
 
@@ -63,7 +63,7 @@ h3 {
 p {
   font-family: "Lato", "Helvetica Neue", sans-serif;
   font-size: 1rem;
-  color: rgba(0, 0, 0);
+  color: rgb(0, 0, 0);
 }
 
 a {
