@@ -6,6 +6,7 @@ import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 import ProjectList from '../projects/ProjectList';
 import peter_pic from "images/peter.jpg";
+import Button from "../helpers/Button";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -78,9 +79,15 @@ class Profile extends React.Component {
     if (!this.props.resume_url || this.props.resume_url ==="/profile_images/original/missing.png") {
         resume = null;
     } else {
-        resume = (<a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={this.props.resume_url}>
-                    <i className="fas fa-file-alt f2 icon-link"></i>                            
-                    </a>)}
+        resume = (
+            <Button
+                type="button-tertiary"
+                onClick={() => window.open(this.props.resume_url, '_blank')}
+            >
+                <p>Resume</p>
+            </Button>
+        );
+    }
 
     return (
         <div className="w-100 h-100 tc">
@@ -93,7 +100,7 @@ class Profile extends React.Component {
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
                         <div className="flex items-end">
-                            <h1 className="ma0 truncate f1 mb3">
+                            <h1 className="ma0 f1 mb3 mr3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
                             {linkedin}
