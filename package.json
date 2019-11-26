@@ -46,6 +46,9 @@
     "prettier": "^1.16.4",
     "webpack-dev-server": "^3.3.1"
   },
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "lint": "yarn run eslint -- --ext .js --ext .jsx app/javascript"
   }
