@@ -9,7 +9,7 @@ module Error
     end
 
     def fetch_json
-      Helpers::Render.json(error, message, status)
+      Error::Helpers::Render.json(error, message, status)
     end
   end
 end
