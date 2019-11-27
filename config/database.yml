@@ -72,7 +72,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: rising-tides_production
-  username: rising-tides
-  password: <%= ENV['RISING-TIDES_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
