@@ -5,7 +5,8 @@ Rising Tides will be the first interactive online skills-based volunteering plat
 ## 🤖 Technologies:
 * Ruby 2.5.1
 * Rails 5.2.1
-* Postgresql
+* Node 10.x
+* PostgreSQL 10.x
 
 ## 📦 Installation
 
@@ -24,9 +25,6 @@ gem install mailcatcher
 🗂Open a seperate terminal tab and execute the following command
 - `mailcatcher`
 - Go to http://localhost:1080/ to view the SMTP server web interface
-
-### 🗄 Generate database.yml
-- Generate a `database.yml` file using postgresql and place it in the `config/` directory
 
 ### 🔮Set up the database
 ```
