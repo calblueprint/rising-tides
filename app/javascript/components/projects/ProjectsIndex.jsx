@@ -140,7 +140,7 @@ class ProjectsIndex extends React.Component {
     }
     axios.post("/api/projects/filter", payload).then(ret => {
       const { projects, message } = ret.data;
-      this.setState({ 
+      this.setState({
         projects: projects,
         loading: false
     });
@@ -170,6 +170,7 @@ class ProjectsIndex extends React.Component {
   };
 
   render() {
+    let { user_type} = this.props
     let { loading, projects, filter_by_user_skills } = this.state;
 
     var skill_filter_checkbox;
@@ -178,7 +179,7 @@ class ProjectsIndex extends React.Component {
             <div className="dib fr f5 mr4 bg-white disable-selection pt1">
                 Filter by My Skills: <input
                     type="checkbox"
-                    onChange={this.handleSkillCheck} 
+                    onChange={this.handleSkillCheck}
                     checked={filter_by_user_skills} />
             </div>);
     }
@@ -207,11 +208,14 @@ class ProjectsIndex extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <a
+                    {
+                      user_type === 'User' ? '' :
+                        <a
                         className="dib std-button pa2 fr"
                         href="/projects/new">
                         Create Project
-                    </a>
+                        </a>
+                    }
                     <div className="cf"></div>
                     <div className="w-100 h1 mt3">
                         <div className="dib fl">
