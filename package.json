@@ -4,7 +4,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-react": "^7.0.0",
-    "@rails/webpacker": "^4.0.2",
+    "@rails/webpacker": "^4.2.0",
     "axios": "^0.18.0",
     "core-js": "2",
     "delete-react-zombies": "0.0.3",
@@ -19,13 +19,14 @@
     "react-inlinesvg": "^0.8.4",
     "react-modal": "^3.8.1",
     "react-onclickoutside": "^6.8.0",
-    "react-spinners": "^0.5.4",
     "react-phone-number-input": "^2.3.11",
     "react-select": "^2.4.2",
+    "react-spinners": "^0.5.4",
     "react_ujs": "^2.4.4",
     "turbolinks": "^5.2.0",
     "validate.js": "^0.12.0",
     "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.10",
     "yup": "^0.27.0"
   },
   "devDependencies": {
