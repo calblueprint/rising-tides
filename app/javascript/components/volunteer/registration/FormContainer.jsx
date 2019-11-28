@@ -9,7 +9,7 @@ import Step3 from "./Step3";
 import Step4 from "./Step4";
 import ProgressBar from "../../helpers/ProgressBar";
 
-class RegisterForm extends React.Component {
+class FormContainer extends React.Component {
   static propTypes = {
     currentStep: PropTypes.number.isRequired,
     next: PropTypes.func.isRequired,
@@ -31,12 +31,12 @@ class RegisterForm extends React.Component {
       name: PropTypes.string,
       path: PropTypes.string,
       preview: PropTypes.string
-    }).isRequired,
+    }),
     selectedResumeFile: PropTypes.shape({
       name: PropTypes.string,
       path: PropTypes.string,
       preview: PropTypes.string
-    }).isRequired,
+    }),
     deleteProfileFile: PropTypes.func.isRequired,
     deleteResumeFile: PropTypes.func.isRequired,
     pbPercentage: PropTypes.number.isRequired
@@ -186,4 +186,4 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default RegisterForm;
+export default FormContainer;
