@@ -19,6 +19,8 @@ module Error
         end
         rescue_from StandardError do |e|
           respond(:standard_error, 500, e.to_s)
+          # We raise the error again for useful Sentry/logging output
+          raise e
         end
         rescue_from AppLimitError do |e|
           respond(e.error, e.status, e.message)
