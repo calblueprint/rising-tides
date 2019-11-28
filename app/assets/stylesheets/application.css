@@ -490,7 +490,7 @@ img.checkmark {
   height: 18rem;
   cursor: pointer;
   color: white;
-  background-color: black;
+  background-color: white;
 }
 
 .proj-card:hover {
