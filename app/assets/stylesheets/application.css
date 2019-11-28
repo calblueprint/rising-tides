@@ -99,7 +99,7 @@ select {
 }
 
 input:focus {
-  outline: none;
+  outline: 3px solid  #000;
 }
 
 input.input {
@@ -221,6 +221,10 @@ input.input {
   outline: none;
   resize: none;
   overflow: auto;
+}
+
+.essay-box:focus {
+  outline: 3px solid  #000;
 }
 
 .rt-yellow-bg {
