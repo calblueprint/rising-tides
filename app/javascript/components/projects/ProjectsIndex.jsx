@@ -209,12 +209,13 @@ class ProjectsIndex extends React.Component {
                         </div>
                     </div>
                     {
-                      user_type === 'User' ? '' :
+                      user_type === 'Organization' ?
                         <a
                         className="dib std-button pa2 fr"
                         href="/projects/new">
                         Create Project
                         </a>
+                        : ''
                     }
                     <div className="cf"></div>
                     <div className="w-100 h1 mt3">

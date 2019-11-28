@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :update, :destroy]
 
   def index
+    @user_type = current_user ? current_user.class.to_s : current_organization.class.to_s
     @skills = Skill.all
     @project_types = ProjectType.all
     @deliverable_types = DeliverableType.all
