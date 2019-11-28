@@ -51,19 +51,13 @@ GEM
     arel (9.0.0)
     ast (2.4.0)
     aws-eventstream (1.0.3)
-    aws-partitions (1.246.0)
-    aws-sdk-core (3.82.0)
-      aws-eventstream (~> 1.0, >= 1.0.2)
-      aws-partitions (~> 1, >= 1.239.0)
-      aws-sigv4 (~> 1.1)
+    aws-sdk (2.11.406)
+      aws-sdk-resources (= 2.11.406)
+    aws-sdk-core (2.11.406)
+      aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.26.0)
-      aws-sdk-core (~> 3, >= 3.71.0)
-      aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.57.0)
-      aws-sdk-core (~> 3, >= 3.77.0)
-      aws-sdk-kms (~> 1)
-      aws-sigv4 (~> 1.1)
+    aws-sdk-resources (2.11.406)
+      aws-sdk-core (= 2.11.406)
     aws-sigv4 (1.1.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
     babel-source (5.8.35)
@@ -397,7 +391,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionview-encoded_mail_to
-  aws-sdk-s3
+  aws-sdk (~> 2.3)
   bootsnap (>= 1.1.0)
   byebug
   cancancan (~> 2.0)

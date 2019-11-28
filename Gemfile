@@ -90,4 +90,4 @@ gem 'webpacker'
 
 gem "sentry-raven"
 
-gem "aws-sdk-s3", require: false
+gem "aws-sdk", '~> 2.3'

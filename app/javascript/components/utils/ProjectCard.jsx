@@ -2,11 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class ProjectCard extends React.Component {
-
   constructor(props) {
     super(props);
     this.goToProject = this.goToProject.bind(this);
-    console.log(props);
   }
 
   goToProject = () => {
