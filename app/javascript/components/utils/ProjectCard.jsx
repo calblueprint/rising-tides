@@ -20,7 +20,7 @@ class ProjectCard extends React.Component {
             <i className="fas fa-image gray f1"/>
           </div>
           <div className="bt b--white pa3">
-            <p className="f4 b lato compact mt3 ma2">
+            <p className="f4 b lato ellipsis mt3 ma2">
               {this.props.project.title}
             </p>
             <p className="f5 lato fl truncate mb0 ma2">
