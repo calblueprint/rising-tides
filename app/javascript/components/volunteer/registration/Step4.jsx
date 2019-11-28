@@ -14,12 +14,12 @@ class Step4 extends React.Component {
       name: PropTypes.string,
       path: PropTypes.string,
       preview: PropTypes.string
-    }).isRequired,
+    }),
     selectedResumeFile: PropTypes.shape({
       name: PropTypes.string,
       path: PropTypes.string,
       preview: PropTypes.string
-    }).isRequired,
+    }),
     deleteProfileFile: PropTypes.func.isRequired,
     deleteResumeFile: PropTypes.func.isRequired
   };
@@ -35,10 +35,7 @@ class Step4 extends React.Component {
       handleProfileFileChange,
       deleteProfileFile
     } = this.props;
-    if (
-      Object.keys(selectedProfileFile).length === 0 &&
-      selectedProfileFile.constructor === Object
-    ) {
+    if (!selectedProfileFile) {
       return (
         <Dropzone
           onDrop={handleProfileFileChange}
@@ -78,10 +75,7 @@ class Step4 extends React.Component {
 
   file = () => {
     const { selectedProfileFile } = this.props;
-    if (
-      Object.keys(selectedProfileFile).length === 0 &&
-      selectedProfileFile.constructor === Object
-    ) {
+    if (!selectedProfileFile) {
       return null;
     }
     return (
@@ -95,10 +89,7 @@ class Step4 extends React.Component {
       handleResumeFileChange,
       deleteResumeFile
     } = this.props;
-    if (
-      Object.keys(selectedResumeFile).length === 0 &&
-      selectedResumeFile.constructor === Object
-    ) {
+    if (!selectedResumeFile) {
       return (
         <Dropzone
           onDrop={handleResumeFileChange}
