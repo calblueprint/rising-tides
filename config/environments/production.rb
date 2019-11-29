@@ -41,6 +41,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
+  # Paperclip is being used instead
   config.active_storage.service = :local
 
   # Mount Action Cable outside main process or domain
@@ -104,4 +105,17 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.paperclip_defaults = {
+    storage: :s3,
+    preserve_files: true,
+    bucket: ENV.fetch('AWS_BUCKET'),
+    path: ':class/:attachment/:id_partition/:style/:filename',
+    url: ':s3_domain_url',
+    s3_credentials: {
+      access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
+      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
+      s3_region: ENV.fetch('AWS_BUCKET_REGION'),
+    }
+  }
 end

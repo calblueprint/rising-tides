@@ -28,7 +28,9 @@ h1 {
   font-family: "Impact", sans-serif;
   font-weight: lighter;
   font-size: 2.25rem;
+  line-height: normal;
 }
+
 a {
   line-height: 20px;
   margin-top: 8px;
@@ -72,8 +74,6 @@ a {
 
 a:hover {
   cursor: pointer;
-  background-color: transparent;
-  color: #eee037;
 }
 
 .error {
@@ -490,7 +490,7 @@ img.checkmark {
   height: 18rem;
   cursor: pointer;
   color: white;
-  background-color: black;
+  background-color: white;
 }
 
 .proj-card:hover {
@@ -536,6 +536,13 @@ img.checkmark {
 
 .compact {
   line-height: 50%;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: normal;
 }
 
 .navbar {

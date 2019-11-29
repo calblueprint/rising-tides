@@ -89,3 +89,5 @@ gem 'cancancan', '~> 2.0'
 gem 'webpacker'
 
 gem "sentry-raven"
+
+gem "aws-sdk", '~> 2.3'
