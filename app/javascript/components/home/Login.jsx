@@ -65,10 +65,13 @@ class Login extends React.Component {
     return (
       <form className="mt4">
         <FlashMessage onRef={ref => (this.flash_message = ref)} />
-        <div className="flex flex-row justify-between mv3" style={{height: 'auto'}}>
+        <div
+          className="flex flex-row justify-between mv3"
+          style={{ height: "auto" }}
+        >
           <label
             htmlFor="login-volunteer-selection"
-            style={{flex: 1}}
+            style={{ flex: 1 }}
             className="mh3 flex flex-row justify-center"
           >
             <input
@@ -82,11 +85,11 @@ class Login extends React.Component {
           </label>
           <label
             htmlFor="login-organization-selection"
-            style={{flex: 1}}
+            style={{ flex: 1 }}
             className="mh3 flex flex-row justify-center"
           >
             <input
-              id="organization"
+              id="login-organization-selection"
               type="radio"
               value="organization"
               onChange={this.handleChange("selectedType")}
