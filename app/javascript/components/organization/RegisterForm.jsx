@@ -15,7 +15,7 @@ class RegisterForm extends React.Component {
       currentStep: 1,
       email: "",
       contactPhoneNumber: "",
-      selectedProfileFile: {},
+      selectedProfileFile: null,
       formErrors: {
         contactPhoneNumber: ""
       },
@@ -32,85 +32,7 @@ class RegisterForm extends React.Component {
     };
   }
 
-  // validateField = (fieldName, value) => {
-  //   const { formErrors, password } = this.state;
-  //   let {
-  //     nameValid,
-  //     emailValid,
-  //     passwordValid,
-  //     passwordMatch,
-  //     contactFirstNameValid,
-  //     contactLastNameValid
-  //   } = this.state;
-  //   switch (fieldName) {
-  //     case "name":
-  //       nameValid = value.length > 0;
-  //       formErrors.name = nameValid ? "" : " is not a valid organization name";
-  //       break;
-  //     case "email":
-  //       emailValid =
-  //         value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) !== null;
-  //       formErrors.email = emailValid ? "" : " is an invalid email";
-  //       break;
-  //     case "password":
-  //       passwordValid = value.length >= 6;
-  //       formErrors.password = passwordValid ? "" : " is too short";
-  //       break;
-  //     case "passwordConfirmation":
-  //       passwordMatch = value.match(password) !== null;
-  //       formErrors.password = passwordMatch ? "" : " does not match";
-  //       break;
-  //     case "contactFirstName":
-  //       contactFirstNameValid = value.length > 0;
-  //       formErrors.firstName = contactFirstNameValid
-  //         ? ""
-  //         : " is not a valid first name";
-  //       break;
-  //     case "contactLastName":
-  //       contactLastNameValid = value.length > 0;
-  //       formErrors.lastName = contactLastNameValid
-  //         ? ""
-  //         : " is not a valid last name";
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   this.setState(
-  //     {
-  //       formErrors,
-  //       nameValid,
-  //       emailValid,
-  //       passwordValid,
-  //       passwordMatch,
-  //       contactFirstNameValid,
-  //       contactLastNameValid
-  //     },
-  //     this.validateForm
-  //   );
-  // };
-
-  // validateForm = () => {
-  //   const {
-  //     nameValid,
-  //     emailValid,
-  //     passwordValid,
-  //     passwordMatch,
-  //     contactFirstNameValid,
-  //     contactLastNameValid
-  //   } = this.state;
-  //   this.setState({
-  //     formValid:
-  //       nameValid &&
-  //       emailValid &&
-  //       passwordValid &&
-  //       passwordMatch &&
-  //       contactFirstNameValid &&
-  //       contactLastNameValid
-  //   });
-  // };
-
   handleProfileFileChange = file => {
-    console.log(`profile ${file[0]}`);
     if (file[0] !== undefined) {
       this.setState({
         selectedProfileFile: Object.assign(file[0], {
@@ -122,13 +44,12 @@ class RegisterForm extends React.Component {
     }
   };
 
-  deleteProfileFile = click => e => {
+  deleteProfileFile = () => {
     const { selectedProfileFile } = this.state;
-    const { key } = e;
-    if (click || key === "Enter") {
+    if (selectedProfileFile) {
       URL.revokeObjectURL(selectedProfileFile.preview);
       this.setState({
-        selectedProfileFile: {}
+        selectedProfileFile: null
       });
     }
   };
@@ -192,13 +113,15 @@ class RegisterForm extends React.Component {
     formData.append("organization[description]", values.description);
     formData.append("organization[name]", values.name);
     formData.append("organization[contact_phone_number]", contactPhoneNumber);
-    formData.append("organization[profile_image]", selectedProfileFile);
-    console.log("formData appended");
+    if (selectedProfileFile) {
+      formData.append("organization[profile_image]", selectedProfileFile);
+    }
     axios
       .post("/organizations", formData)
       .then(response => {
-        console.log("sent");
-        URL.revokeObjectURL(selectedProfileFile.preview);
+        if (selectedProfileFile) {
+          URL.revokeObjectURL(selectedProfileFile.preview);
+        }
         actions.setSubmitting(false);
         this.setState({ currentStep: 5 });
       })

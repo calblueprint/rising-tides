@@ -17,7 +17,7 @@ class Step2 extends React.Component {
       name: PropTypes.string,
       path: PropTypes.string,
       preview: PropTypes.string
-    }).isRequired,
+    }),
     deleteProfileFile: PropTypes.func.isRequired,
     formErrors: PropTypes.shape({
       contactPhoneNumber: PropTypes.string
@@ -38,10 +38,7 @@ class Step2 extends React.Component {
       handleProfileFileChange,
       deleteProfileFile
     } = this.props;
-    if (
-      Object.keys(selectedProfileFile).length === 0 &&
-      selectedProfileFile.constructor === Object
-    ) {
+    if (!selectedProfileFile) {
       return (
         <Dropzone
           onDrop={handleProfileFileChange}
@@ -70,8 +67,8 @@ class Step2 extends React.Component {
         <h4 className="ma0 ml3 mr2">{selectedProfileFile.name}</h4>
         <i
           className="fas fa-trash pointer"
-          onClick={deleteProfileFile(true)}
-          onKeyPress={deleteProfileFile(false)}
+          onClick={deleteProfileFile}
+          onKeyPress={({ key }) => key === " " && deleteProfileFile()}
           role="button"
           tabIndex={0}
         />
