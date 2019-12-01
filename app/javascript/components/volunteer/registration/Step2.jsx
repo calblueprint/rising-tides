@@ -7,16 +7,7 @@ import PhoneInput from "react-phone-number-input";
 
 class Step2 extends React.Component {
   static propTypes = {
-    currentStep: PropTypes.number.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    phoneNumber: PropTypes.string.isRequired,
-    formErrors: PropTypes.shape({
-      phoneNumber: PropTypes.string
-    }).isRequired,
-    touched: PropTypes.shape({
-      phoneNumber: PropTypes.bool
-    }).isRequired
+    currentStep: PropTypes.number.isRequired
   };
 
   constructor(props) {
@@ -25,14 +16,7 @@ class Step2 extends React.Component {
   }
 
   render() {
-    const {
-      currentStep,
-      phoneNumber,
-      handleChange,
-      handleBlur,
-      formErrors,
-      touched
-    } = this.props;
+    const { currentStep } = this.props;
 
     if (currentStep !== 2) {
       return null;
@@ -42,17 +26,24 @@ class Step2 extends React.Component {
         <section>
           <label htmlFor="phoneNumber">
             <h3>Phone Number</h3>
-            <PhoneInput
-              name="phoneNumber"
-              country="US"
-              showCountrySelect={false}
-              value={phoneNumber}
-              onChange={handleChange("phoneNumber")}
-              onBlur={handleBlur("phoneNumber")}
-            />
-            {formErrors.phoneNumber && touched.phoneNumber && (
-              <div className="error">{formErrors.phoneNumber}</div>
-            )}
+            <Field name="phoneNumber">
+              {({ field: { name, value, onBlur, onChange } }) => (
+                <div>
+                  <PhoneInput
+                    country="US"
+                    showCountrySelect={false}
+                    value={value}
+                    onBlur={() => onBlur({ target: { name } })}
+                    onChange={value => onChange({ target: { value, name } })}
+                  />
+                  <ErrorMessage
+                    name="phoneNumber"
+                    className="error"
+                    component="div"
+                  />
+                </div>
+              )}
+            </Field>
           </label>
         </section>
         <section className="flex">
@@ -135,14 +126,6 @@ class Step2 extends React.Component {
               style={{ resize: "none" }}
             />
             <ErrorMessage name="skills" className="error" component="div" />
-            {/* <textarea
-              value={skills}
-              name="skills"
-              rows={6}
-              cols={50}
-              onChange={handleChange("skills")}
-              id="skills"
-            /> */}
           </label>
         </section>
       </>
