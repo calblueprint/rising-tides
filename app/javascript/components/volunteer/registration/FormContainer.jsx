@@ -95,6 +95,7 @@ class FormContainer extends React.Component {
       handleBlur,
       handleProfileFileChange,
       handleResumeFileChange,
+      toggleSelected,
       selectedProfileFile,
       selectedResumeFile,
       deleteProfileFile,
@@ -103,7 +104,8 @@ class FormContainer extends React.Component {
       phoneNumber,
       pbPercentage,
       formErrors,
-      touched
+      touched,
+      skills
     } = this.props;
 
     const validationSchema = Yup.object().shape({
@@ -120,7 +122,6 @@ class FormContainer extends React.Component {
         .required("Required"),
       city: Yup.string().required("Required"),
       state: Yup.string().required("Required"),
-      skills: Yup.string().required("Required"),
       bio: Yup.string().required("Required"),
       link: Yup.string().url("Invalid link")
     });
@@ -155,6 +156,8 @@ class FormContainer extends React.Component {
                 formErrors={formErrors}
                 touched={touched}
                 phoneNumber={phoneNumber}
+                skills={skills}
+                toggleSelected={toggleSelected}
               />
               <Step3 currentStep={currentStep} />
               <Step4

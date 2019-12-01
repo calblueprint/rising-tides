@@ -4,6 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Field, ErrorMessage } from "formik";
 import PhoneInput from "react-phone-number-input";
+import Dropdown from '../../utils/Dropdown';
 
 class Step2 extends React.Component {
   static propTypes = {
@@ -21,7 +22,6 @@ class Step2 extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   render() {
@@ -30,8 +30,10 @@ class Step2 extends React.Component {
       phoneNumber,
       handleChange,
       handleBlur,
+      toggleSelected,
       formErrors,
-      touched
+      touched,
+      skills
     } = this.props;
 
     if (currentStep !== 2) {
@@ -128,11 +130,11 @@ class Step2 extends React.Component {
         <section>
           <label htmlFor="skills">
             <h3>Skills</h3>
-            <Field
-              name="skills"
-              component="textarea"
-              row="6"
-              style={{ resize: "none" }}
+            <Dropdown
+                titleHelper="Skill"
+                title="Select Skills..."
+                list={skills}
+                toggleItem={toggleSelected}
             />
             <ErrorMessage name="skills" className="error" component="div" />
             {/* <textarea

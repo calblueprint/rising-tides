@@ -8,11 +8,23 @@ import FormContainer from "./registration/FormContainer";
 class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
+    var skills_a = [];
+    var i, skill;
+    for (i in props.skills) {
+        skill = props.skills[i];
+        skills_a.push({
+            id: i,
+            uid: skill['id'],
+            title: skill['name'],
+            selected: false,
+            key: 'skills'
+        });
+    }
     this.state = {
       pbPercentage: (1 / 4) * 100,
       currentStep: 1,
       phoneNumber: "",
-      skills: "",
+      skills: skills_a,
       selectedProfileFile: null,
       selectedResumeFile: null,
       formErrors: {
@@ -29,6 +41,15 @@ class RegisterForm extends React.Component {
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content")
     };
+    this.toggleSelected = this.toggleSelected.bind(this);
+  }
+
+  toggleSelected(id, key) {
+    let temp = this.state[key];
+    temp[id].selected = !temp[id].selected;
+    this.setState({
+      [key]: temp
+    });
   }
 
   handleProfileFileChange = file => {
@@ -121,6 +142,11 @@ class RegisterForm extends React.Component {
       selectedResumeFile
     } = this.state;
     const formData = new FormData();
+    var i;
+    for (i in this.state.skills) {
+        if (this.state.skills[i].selected)
+            formData.append("user[skill_ids][]", this.state.skills[i].uid);
+    }
     formData.append("user[email]", values.email);
     formData.append("user[password]", values.password);
     formData.append("user[password_confirmation]", values.passwordConfirmation);
@@ -130,7 +156,6 @@ class RegisterForm extends React.Component {
     formData.append("user[state]", values.state);
     formData.append("user[link]", values.link);
     formData.append("user[bio]", values.bio);
-    formData.append("user[skills]", skills);
     formData.append("user[phone_number]", phoneNumber);
     if (selectedProfileFile) {
       formData.append("user[profile_image]", selectedProfileFile);
@@ -179,6 +204,7 @@ class RegisterForm extends React.Component {
         handleRegistration={this.handleRegistration}
         handleProfileFileChange={this.handleProfileFileChange}
         handleResumeFileChange={this.handleResumeFileChange}
+        toggleSelected={this.toggleSelected}
         phoneNumber={phoneNumber}
         skills={skills}
         selectedProfileFile={selectedProfileFile}
