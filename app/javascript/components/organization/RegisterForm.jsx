@@ -15,7 +15,7 @@ class RegisterForm extends React.Component {
       currentStep: 1,
       email: "",
       contactPhoneNumber: "",
-      selectedProfileFile: {},
+      selectedProfileFile: null,
       formErrors: {
         contactPhoneNumber: ""
       },
@@ -110,7 +110,6 @@ class RegisterForm extends React.Component {
   // };
 
   handleProfileFileChange = file => {
-    console.log(`profile ${file[0]}`);
     if (file[0] !== undefined) {
       this.setState({
         selectedProfileFile: Object.assign(file[0], {
@@ -122,13 +121,12 @@ class RegisterForm extends React.Component {
     }
   };
 
-  deleteProfileFile = click => e => {
+  deleteProfileFile = () => {
     const { selectedProfileFile } = this.state;
-    const { key } = e;
-    if (click || key === "Enter") {
+    if (selectedProfileFile) {
       URL.revokeObjectURL(selectedProfileFile.preview);
       this.setState({
-        selectedProfileFile: {}
+        selectedProfileFile: null
       });
     }
   };
@@ -192,13 +190,15 @@ class RegisterForm extends React.Component {
     formData.append("organization[description]", values.description);
     formData.append("organization[name]", values.name);
     formData.append("organization[contact_phone_number]", contactPhoneNumber);
-    formData.append("organization[profile_image]", selectedProfileFile);
-    console.log("formData appended");
+    if (selectedProfileFile) {
+      formData.append("organization[profile_image]", selectedProfileFile);
+    }
     axios
       .post("/organizations", formData)
       .then(response => {
-        console.log("sent");
-        URL.revokeObjectURL(selectedProfileFile.preview);
+        if (selectedProfileFile) {
+          URL.revokeObjectURL(selectedProfileFile.preview);
+        }
         actions.setSubmitting(false);
         this.setState({ currentStep: 5 });
       })
