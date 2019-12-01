@@ -6,6 +6,7 @@ import React from "react";
 import axios from "axios";
 import profile_pic from "images/profile_pic.png";
 import ApplicationList from '../applications/ApplicationList';
+import UserCard from "../utils/UserCard";
 
 class ProjectView extends React.Component {
   constructor(props) {
@@ -64,11 +65,15 @@ class ProjectView extends React.Component {
 
 
     var project_string_status = "Accepting Applications";
-    if (project.status == "in_progress" || project.application_limit - project.application_count < 1) {
+    if (project.status === "in_progress" || project.application_limit - project.application_count < 1) {
         project_string_status = "Applications Closed";
-    } else if (project.status == "completed") {
+    } else if (project.status === "completed") {
         project_string_status = "Project Completed";
     }
+
+    let project_status = (<div className="dib ph3 ba pv2 mv3 f5 fw4">
+                            {project_string_status} 
+                        </div>);
     console.log("PROJECT STATUS: " + project.status);
 
     let apply_button = (
@@ -91,11 +96,20 @@ class ProjectView extends React.Component {
         edit_button = <span></span>;
     }
 
+    let app_count = (
+        <div className="dib ph3 ba pv2 mv3 f5 fr fw4">
+            {this.props.project.application_count} / {this.props.project.application_limit} Applications Received
+        </div>
+    );
+    if (!organization_signed_in || organization.id != current_organization.id) {
+        app_count = <span></span>;
+    }
+
     let skillList = null;
     
     if (this.props.skills) {
         skillList = this.props.skills.map((skill, index) => {
-            return <div className="skill-pill">{skill.name}</div>;
+            return <div className="skill-pill" key={index}>{skill.name}</div>;
         })
     } else {
         skillList = <div>No skills.</div>;
@@ -113,12 +127,7 @@ class ProjectView extends React.Component {
 
     applications = (!organization_signed_in || organization.id != current_organization.id) ? <span></span> : ( 
         <div>
-            <div className="w-100 h1 mb3">
-                    <div className="dib fl">
-                        <a href="/applications"><h3>Applications</h3></a>
-                    </div>
-                    
-            </div>
+            <a className="mb2" href="/applications"><h2 className="f3">Applications</h2></a>
             <ApplicationList
                     is_org_view={true}
                     applications={this.props.applications} />
@@ -134,6 +143,16 @@ class ProjectView extends React.Component {
             </div>
         );
     });
+    
+
+    let accepted_volunteers;
+    accepted_volunteers = (!organization_signed_in || organization.id != current_organization.id) ? <span></span> : ( 
+        this.props.applications.map((application, index) => {
+            return (application.status === "accepted" ? 
+            <UserCard user={application.user} key={index}/>
+            : null);
+        })
+        )
 
     return (
         <div className="w-100 h-100 tc bg-white">
@@ -144,15 +163,14 @@ class ProjectView extends React.Component {
                 <h1 className="f1 ma0">{project.title}</h1>
                 {edit_button}
                 <div>
-                    <div className="dib ph3 ba pv2 mv3 f5 fw4">
-                        {project_string_status} 
-                    </div>
+                    {project_status}
+                    {app_count}
                     {apply_button}
                 </div>
                   <div className="bg-light-gray pa4 h-auto">
                     <div className="flex items-center">
                         {org_img}
-                        <a href ={"/organizations/" + organization.id} className="ma0 pa0 f2 icon-link lato">{organization.name}</a>
+                        <a href ={"/organizations/" + organization.id} style={{fontSize: 30}} className="ma0 pa3 icon-link truncate lato">{organization.name}</a>
                     </div>
                     <div className="flex pt3">
                         <div className="pa2 w-33 truncate">
@@ -168,16 +186,17 @@ class ProjectView extends React.Component {
                 </div>
                 <div className="mt3 flex items-start">
                     <div className="w-75">
-                        {project.deliverable ? (
-                            <div>
-                                <h2 className="mt4 f3">Deliverable</h2>
-                                <p className="f5">{project.deliverable}</p>
-                            </div>
-                        ) : (null)}
+                        
                         {project.description ? (
                             <div>
                                 <h2 className="mt4 f3">Description</h2>
                                 <p className="f5">{project.description}</p>
+                            </div>
+                        ) : (null)}
+                        {project.deliverable ? (
+                            <div>
+                                <h2 className="mt4 f3">Deliverable</h2>
+                                <p className="f5">{project.deliverable}</p>
                             </div>
                         ) : (null)}
                         <h2 className="mt4 f3 mb3">Project Plan </h2>
@@ -204,7 +223,17 @@ class ProjectView extends React.Component {
                         ) : (null)}
                     </div>
                 </div>
-                {applications}
+                    {applications}
+                    <div>
+                        {(organization_signed_in && organization.id == current_organization.id) ?
+                        <div>
+                            <h2 className="mt4 mb2 f3">Accepted Volunteers</h2>
+                            <div className="flex flex-wrap justify-around">
+                                {accepted_volunteers}
+                            </div>
+                        </div> : null}
+                    </div>
+                    
             </div>
         </div>
     );

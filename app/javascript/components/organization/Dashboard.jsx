@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
             id: 0,
             uid: 'pending',
             title: 'Pending',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
@@ -81,7 +81,7 @@ class Dashboard extends React.Component {
             id: 2,
             uid: 'interviewing',
             title: 'Interviewing',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
@@ -174,11 +174,6 @@ class Dashboard extends React.Component {
     }
     axios.post("/api/projects/filter", payload).then(ret => {
       const { projects, message } = ret.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
         this.setState( {
             projects: projects,
             projectsLoading: false
@@ -203,18 +198,12 @@ class Dashboard extends React.Component {
         query: {
             with_statuses: statuses,
             with_organization_id: this.props.organization.id,
-            with_statuses: [0, 2],
             with_limit: 3
         }
     };
 
     axios.post("/api/applications/filter", payload).then(ret => {
       const { applications, message } = ret.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
       this.setState({
             applications: applications, 
             applicationsLoading: false
@@ -266,7 +255,7 @@ class Dashboard extends React.Component {
                     </div>
                 </div>
                 <a
-                    className="dib std-button pa2 fr"
+                    className="dib std-button pa2 fl"
                     href="/projects/new">
                     Create Project</a> 
                 <div className="cf"></div>

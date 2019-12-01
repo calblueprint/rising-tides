@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from "prop-types";
 import FlashMessage from '../utils/FlashMessage';
 import profile_pic from "images/profile_pic.png";
-
+import peter_pic from "images/peter.jpg";
 
 
 class ApplicationView extends React.Component {
@@ -130,7 +130,7 @@ class ApplicationView extends React.Component {
                                 Interviewing
                           </div>)
       } else if (this.props.application.status === "accepted") {
-        rendered_status = (<div className="f5 fr pa2 w4 tc accepted">
+        rendered_status = (<div className="f5 fr pa2 w4 tc white b accepted">
                                 Accepted
                           </div>)
       } else if (this.props.application.status === "denied") {
@@ -144,7 +144,29 @@ class ApplicationView extends React.Component {
     render() {
       let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
       let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
-      let resumeUrl = this.props.resume_url ? this.props.resume_url : "";
+
+      let linkedin = this.props.user.linkedin_url ? (<a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.linkedin_url}`}>
+                                            <i className="fab fa-linkedin f2 icon-link"></i>
+                                            </a>) : null;
+    
+    let resume;
+    if (!this.props.resume_url || this.props.resume_url ==="/profile_images/original/missing.png") {
+        resume = null;
+    } else {
+        resume = (<a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={this.props.resume_url}>
+                    <i className="fas fa-file-alt f2 icon-link"></i>                            
+                    </a>)}
+
+    let skillList;
+
+    if (this.props.user.skills) {
+        skillList = this.props.user.skills.map((skill, index) => {
+            return <div className="skill-pill">{skill.name}</div>;
+        })
+    } else {
+        skillList = <div>No skills</div>;
+    }
+
       return(
         <div className="w-100 h-100 tc">
             <FlashMessage onRef={ref => (this.flash_message = ref)} />
@@ -162,16 +184,10 @@ class ApplicationView extends React.Component {
                     {profileImage}
                     <div className="w-100 m3 ph4 pt4">
                         <div className="flex items-end">
-                            <h1 className="ma0 f1 mb3">
+                            <h1 className="ma0 f1 icon-link mb3" onClick={this.handleVolunteerClick}>
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
-                            <br/>
-                            <a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.linkedin_url}`}>
-                            <i className="fab fa-linkedin f2 icon-link"></i>
-                            </a>
-                            <a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={resumeUrl}>
-                            <i className="fas fa-file-alt f2 icon-link"></i>
-                            </a>
+                            {linkedin} {resume}
                         </div>
                         <div className="flex f5 b lato">
                             <div className="mt1-ns">
@@ -190,7 +206,7 @@ class ApplicationView extends React.Component {
                 </div>
 
                 <h2 className="pt4 f3">Skills</h2>
-                <p className="lato f5">{this.props.user.skills}</p>
+                {skillList}
 
                 <h2 className="pt4 f3">Biography</h2>
                 <p className="lato f5">{this.props.user.bio}</p>

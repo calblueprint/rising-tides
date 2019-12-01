@@ -26,7 +26,6 @@ class EditProfileForm extends React.Component {
         .getAttribute("content")
     };
     this.handlers = [];
-    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
@@ -110,38 +109,36 @@ class EditProfileForm extends React.Component {
 
   handleSubmit() {
     const formData = new FormData();
-    let { selected_file, contact_selected_file } = this.state;
-    formData.append("organization[email]", this.state.organization.email);
-    formData.append("organization[password]", this.state.organization.password);
+    const { selected_file, contact_selected_file, organization } = this.state;
+    formData.append("organization[email]", organization.email);
+    formData.append("organization[password]", organization.password);
     formData.append(
       "organization[password_confirmation]",
-      this.state.organization.password_confirmation
+      organization.password_confirmation
     );
     formData.append(
       "organization[contact_first_name]",
-      this.state.organization.contact_first_name
+      organization.contact_first_name
     );
     formData.append(
       "organization[contact_last_name]",
-      this.state.organization.contact_last_name
+      organization.contact_last_name
     );
-    formData.append("organization[city]", this.state.organization.city);
-    formData.append("organization[state]", this.state.organization.state);
-    formData.append("organization[link]", this.state.organization.link);
-    formData.append("organization[description]", this.state.organization.description);
-    formData.append("organization[name]", this.state.organization.name);
+    formData.append("organization[city]", organization.city);
+    formData.append("organization[state]", organization.state);
+    formData.append("organization[link]", organization.link);
+    formData.append("organization[description]", organization.description);
+    formData.append("organization[name]", organization.name);
     formData.append(
       "organization[contact_phone_number]",
-      this.state.organization.contact_phone_number
+      organization.contact_phone_number
     );
     formData.append("organization[profile_image]", selected_file);
     formData.append("organization[contact_selected_file]", contact_selected_file);
-    let { organization } = this.props;
+
     axios
       .patch("/api/organizations/" + organization.id, formData)
-      .then(function(response) {
-        console.log(response);
-        console.log(response.data.message);
+      .then(() => {
         window.location.href = "/organizations/" + organization.id;
       })
       .catch(function(error) {
@@ -164,14 +161,14 @@ class EditProfileForm extends React.Component {
                 className="essay-box bg-light-gray mt1 w-100 pa3"
                 type="text"
                 onChange={this.handleChange("name")}
-                defaultValue={this.state.organization.name}
+                defaultValue={organization.name}
             />
             <h3 className="mt3">Website</h3>
             <input
                 className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                 type="email"
                 onChange={this.handleChange("website")}
-                defaultValue={this.state.organization.website}
+                defaultValue={organization.website}
             />
             <div className="flex justify-between w-100">
               <div className="dib w-100 mr3">
@@ -180,7 +177,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("city")}
-                    defaultValue={this.state.organization.city}
+                    defaultValue={organization.city}
                 />
               </div>
               <div className="dib w-100 ml3">
@@ -189,7 +186,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("state")}
-                    defaultValue={this.state.organization.state}
+                    defaultValue={organization.state}
                 />
               </div>
             </div>
@@ -218,13 +215,13 @@ class EditProfileForm extends React.Component {
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               type="file"
               onChange={this.handleFileChange}
-              defaultValue={this.state.organization.profile_image}
+              defaultValue={organization.profile_image}
             />
             <h3 className="mt3">Tell us about the organization's mission.</h3>
             <textarea
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               placeholder="Tell us about your organization!"
-              defaultValue={this.state.organization.description}
+              defaultValue={organization.description}
               rows="6"
               cols="50"
               onChange={this.handleChange("description")}
@@ -238,7 +235,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("contact_first_name")}
-                    defaultValue={this.state.organization.contact_first_name}
+                    defaultValue={organization.contact_first_name}
                 />
               </div>
               <div className="dib w-100 ml3">
@@ -247,7 +244,7 @@ class EditProfileForm extends React.Component {
                     className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                     type="text"
                     onChange={this.handleChange("contact_last_name")}
-                    defaultValue={this.state.organization.contact_last_name}
+                    defaultValue={organization.contact_last_name}
                 />
               </div>
             </div>
@@ -256,14 +253,14 @@ class EditProfileForm extends React.Component {
                 className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
                 type="tel"
                 onChange={this.handleChange("contact_phone_number")}
-                defaultValue={this.state.organization.contact_phone_number}
+                defaultValue={organization.contact_phone_number}
             />
             <h3 className="mt3">Add a Photo</h3>
             <input
               className="dib essay-box bg-light-gray mt1 w-100 pa3 input"
               type="file"
               onChange={this.handleFileChange}
-              defaultValue={this.state.organization.contact_selected_file}
+              defaultValue={organization.contact_selected_file}
             />
             <div className="mt5">
                 <a className="fl std-button-black ph3 pv1 fw4 f5" onClick={this.goBack}>

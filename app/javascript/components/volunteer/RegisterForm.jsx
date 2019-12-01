@@ -1,31 +1,26 @@
 import React from "react";
-import $ from "jquery";
 import axios from "axios";
+import { isValidPhoneNumber } from "react-phone-number-input";
+import Confirmation from "../helpers/Confirmation";
+import Error from "../helpers/Error";
+import FormContainer from "./registration/FormContainer";
 
 class RegisterForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      first_name: "",
-      last_name: "",
-      email: "",
-      password: "",
-      password_confirmation: "",
-      phone_number: "",
-      city: "",
-      state: "",
-      link: "",
+      pbPercentage: (1 / 4) * 100,
+      currentStep: 1,
+      phoneNumber: "",
       skills: "",
-      bio: "",
-      selected_file: null,
-      selected_resume_file: null,
-      formErrors: { firstName: "", lastName: "", email: "" },
-      firstNameValid: false,
-      lastNameValid: false,
-      emailValid: false,
-      passwordValid: false,
-      passwordMatch: false,
-      formValid: false
+      selectedProfileFile: null,
+      selectedResumeFile: null,
+      formErrors: {
+        phoneNumber: ""
+      },
+      touched: {
+        phoneNumber: false
+      }
     };
 
     axios.defaults.headers.common = {
@@ -36,265 +31,217 @@ class RegisterForm extends React.Component {
     };
   }
 
-  validateField = (fieldName, value) => {
-    const { formErrors } = this.state;
-    let { firstNameValid } = this.state;
-    let { lastNameValid } = this.state;
-    let { emailValid } = this.state;
-    let { passwordValid } = this.state;
-    let { passwordMatch } = this.state;
-    switch (fieldName) {
-      case "first_name":
-        firstNameValid = value.length > 0;
-        formErrors.firstName = firstNameValid
-          ? ""
-          : " is not a valid first name";
-        break;
-      case "last_name":
-        lastNameValid = value.length > 0;
-        formErrors.lastName = lastNameValid ? "" : " is not a valid last name";
-        break;
-      case "email":
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        formErrors.email = emailValid ? "" : " is an invalid email";
-        break;
-      case "password":
-        passwordValid = value.length >= 6;
-        formErrors.password = passwordValid ? "" : " is too short";
-        break;
-      case "password_confirmation":
-        passwordMatch = value.match(this.state.password);
-        formErrors.password = passwordMatch ? "" : " does not match";
-        break;
-      default:
-        break;
+  handleProfileFileChange = file => {
+    console.log(`profile ${file[0]}`);
+    if (file[0] !== undefined) {
+      this.setState({
+        selectedProfileFile: Object.assign(file[0], {
+          preview: URL.createObjectURL(file[0])
+        })
+      });
+    } else {
+      alert("Please use only files with *.png or *.jpg");
     }
-    this.setState(
-      {
-        formErrors,
-        firstNameValid,
-        lastNameValid,
-        emailValid,
-        passwordValid,
-        passwordMatch
-      },
-      this.validateForm
-    );
   };
 
-  validateForm = () => {
-    this.setState({
-      formValid:
-        this.state.firstNameValid &&
-        this.state.lastNameValid &&
-        this.state.emailValid &&
-        this.state.passwordValid &&
-        this.state.passwordMatch
-    });
+  handleResumeFileChange = file => {
+    console.log(`resume ${file[0]}`);
+    if (file[0] !== undefined) {
+      this.setState({
+        selectedResumeFile: file[0]
+      });
+    }
   };
 
-  handleFileChange = e => {
-    this.setState({ selected_file: e.target.files[0] });
+  deleteProfileFile = click => e => {
+    const { selectedProfileFile } = this.state;
+    const { key } = e;
+    if (click || key === "Enter") {
+      URL.revokeObjectURL(selectedProfileFile.preview);
+      this.setState({
+        selectedProfileFile: null
+      });
+    }
   };
 
-  handleResumeFileChange = e => {
-    this.setState({ selected_resume_file: e.target.files[0] });
+  deleteResumeFile = click => e => {
+    const { key } = e;
+    if (click || key === "Enter") {
+      this.setState({
+        selectedResumeFile: null
+      });
+    }
   };
 
   handleUpload = () => {};
 
-  handleChange = name => event => {
-    const { value } = event.target;
-    this.setState({ [name]: value }, () => {
-      this.validateField(name, value);
-    });
+  handleBlur = field => event => {
+    const { touched, formErrors } = this.state;
+    this.setState(
+      {
+        touched: { ...touched, [field]: true }
+      },
+      () => {
+        this.setState({
+          formErrors: {
+            ...formErrors,
+            [field]: this.validateField(field)
+          }
+        });
+      }
+    );
   };
 
-  handleRegistration = e => {
+  handleChange = field => event => {
+    this.setState({ [field]: event === undefined ? "" : event });
+  };
+
+  validateField = field => {
+    switch (field) {
+      case "phoneNumber": {
+        const { phoneNumber } = this.state;
+        if (!phoneNumber) {
+          return "Required";
+        }
+        if (!isValidPhoneNumber(phoneNumber)) {
+          return "Invalid phone number";
+        }
+        return "";
+      }
+      default:
+        return false;
+    }
+  };
+
+  handleRegistration = (values, actions) => {
+    const {
+      phoneNumber,
+      skills,
+      selectedProfileFile,
+      selectedResumeFile
+    } = this.state;
     const formData = new FormData();
-    formData.append("user[email]", this.state.email);
-    formData.append("user[password]", this.state.password);
-    formData.append(
-      "user[password_confirmation]",
-      this.state.password_confirmation
-    );
-    formData.append("user[first_name]", this.state.first_name);
-    formData.append("user[last_name]", this.state.last_name);
-    formData.append("user[city]", this.state.city);
-    formData.append("user[state]", this.state.state);
-    formData.append("user[link]", this.state.link);
-    formData.append("user[bio]", this.state.bio);
-    formData.append("user[skills]", this.state.skills);
-    formData.append("user[phone_number]", this.state.phone_number);
-    formData.append("user[profile_image]", this.state.selected_file);
-    formData.append("user[resume]", this.state.selected_resume_file);
+    formData.append("user[email]", values.email);
+    formData.append("user[password]", values.password);
+    formData.append("user[password_confirmation]", values.passwordConfirmation);
+    formData.append("user[first_name]", values.firstName);
+    formData.append("user[last_name]", values.lastName);
+    formData.append("user[city]", values.city);
+    formData.append("user[state]", values.state);
+    formData.append("user[link]", values.link);
+    formData.append("user[bio]", values.bio);
+    formData.append("user[skills]", skills);
+    formData.append("user[phone_number]", phoneNumber);
+    if (selectedProfileFile) {
+      formData.append("user[profile_image]", selectedProfileFile);
+    }
+    if (selectedResumeFile) {
+      formData.append("user[resume]", selectedResumeFile);
+    }
+
     axios
       .post("/users", formData)
-      .then(function(response) {
-        window.location.href = "/";
+      .then(response => {
+        if (selectedProfileFile) {
+          URL.revokeObjectURL(selectedProfileFile.preview);
+        }
+        actions.setSubmitting(false);
+        this.setState({ currentStep: 5 });
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(error);
+        actions.setSubmitting(false);
+        this.setState({ currentStep: 6 });
       });
   };
 
-  goBack = e => {
+  form = () => {
+    const {
+      pbPercentage,
+      currentStep,
+      formErrors,
+      touched,
+      phoneNumber,
+      skills,
+      selectedProfileFile,
+      selectedResumeFile
+    } = this.state;
+    if (currentStep > 4) {
+      return null;
+    }
+    return (
+      <FormContainer
+        currentStep={currentStep}
+        next={this.next}
+        prev={this.prev}
+        handleChange={this.handleChange}
+        handleBlur={this.handleBlur}
+        handleRegistration={this.handleRegistration}
+        handleProfileFileChange={this.handleProfileFileChange}
+        handleResumeFileChange={this.handleResumeFileChange}
+        phoneNumber={phoneNumber}
+        skills={skills}
+        selectedProfileFile={selectedProfileFile}
+        selectedResumeFile={selectedResumeFile}
+        deleteProfileFile={this.deleteProfileFile}
+        deleteResumeFile={this.deleteResumeFile}
+        pbPercentage={pbPercentage}
+        formErrors={formErrors}
+        touched={touched}
+      />
+    );
+  };
+
+  confirmation = () => {
+    const { email, currentStep } = this.state;
+    if (currentStep === 5) {
+      return <Confirmation email={email} />;
+    }
+    return null;
+  };
+
+  registerError = () => {
+    const { currentStep } = this.state;
+    if (currentStep === 6) {
+      return <Error goBack={this.backToStart} />;
+    }
+    return null;
+  };
+
+  next = () => {
+    let { currentStep, pbPercentage } = this.state;
+    currentStep = currentStep >= 3 ? 4 : currentStep + 1;
+    pbPercentage = (currentStep / 4) * 100;
+    this.setState({
+      currentStep,
+      pbPercentage
+    });
+  };
+
+  prev = () => {
+    let { currentStep, pbPercentage } = this.state;
+    currentStep = currentStep <= 1 ? 1 : currentStep - 1;
+    pbPercentage = (currentStep / 4) * 100;
+    this.setState({
+      currentStep,
+      pbPercentage
+    });
+  };
+
+  backToStart = e => {
     e.preventDefault();
-    window.location.href = "/";
+    this.setState({ currentStep: 1, pbPercentage: (1 / 4) * 100 });
   };
 
   render() {
     return (
-      <div>
-        <a onClick={this.goBack}>Back</a>
-        <div>
-          <div>
-            {Object.keys(this.state.formErrors).map((fieldName, i) => {
-              if (this.state.formErrors[fieldName].length > 0) {
-                return (
-                  <p key={i}>
-                    {fieldName} {this.state.formErrors[fieldName]}
-                  </p>
-                );
-              }
-              return "";
-            })}
-          </div>
-        </div>
-        <form>
-          <fieldset>
-            <label htmlFor="first_name">First Name (required)</label>
-            <input
-              type="text"
-              placeholder="ie. John"
-              value={this.state.first_name}
-              id="first_name"
-              onChange={this.handleChange("first_name")}
-            />{" "}
-            <br />
-            <label htmlFor="last_name">Last Name (required)</label>
-            <input
-              type="text"
-              placeholder="ie. Doe"
-              value={this.state.last_name}
-              id="last_name"
-              onChange={this.handleChange("last_name")}
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="email">Email (required)</label>
-            <input
-              type="text"
-              placeholder="ie. johndoe@email.com"
-              value={this.state.email}
-              id="email"
-              onChange={this.handleChange("email")}
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="password">
-              Password (required, 6 characters minimum)
-            </label>
-            <input
-              type="password"
-              placeholder="ie. password123"
-              value={this.state.password}
-              id="password"
-              onChange={this.handleChange("password")}
-            />{" "}
-            <br />
-            <label htmlFor="password_confirmation">Confirm password</label>
-            <input
-              type="password"
-              placeholder="ie. password123"
-              value={this.state.password_confirmation}
-              id="password_confirmation"
-              onChange={this.handleChange("password_confirmation")}
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="phone_number">Phone number</label>
-            <input
-              type="text"
-              placeholder="ie. (123)456-7890"
-              value={this.state.phone_number}
-              id="phone_number"
-              onChange={this.handleChange("phone_number")}
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="city">City</label>
-            <input
-              type="text"
-              placeholder="ie. San Francisco"
-              value={this.state.city}
-              id="city"
-              onChange={this.handleChange("city")}
-            />{" "}
-            <br />
-            <label htmlFor="state">State (abbreviation)</label>
-            <input
-              type="text"
-              placeholder="ie. CA"
-              value={this.state.state}
-              id="state"
-              onChange={this.handleChange("state")}
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="link">Link</label>
-            <input
-              type="text"
-              placeholder="ie. linkedin.com/in/john-doe/"
-              value={this.state.link}
-              id="link"
-              onChange={this.handleChange("link")}
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="skills">Skills</label>
-            <textarea
-              placeholder="ie. Software Development"
-              value={this.state.skills}
-              name="skills"
-              rows="6"
-              cols="50"
-              onChange={this.handleChange("skills")}
-              id="skills"
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="bio">Bio</label>
-            <textarea
-              placeholder="Tell us about yourself!"
-              value={this.state.bio}
-              rows="6"
-              cols="50"
-              onChange={this.handleChange("bio")}
-              id="bio"
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="photo">Photo</label>
-            <input type="file" onChange={this.handleFileChange} />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="resume">Resume</label>
-            <input type="file" onChange={this.handleResumeFileChange} />
-          </fieldset>
-        </form>
-        <fieldset>
-          <button
-            type="submit"
-            value="Next Step"
-            disabled={!this.state.formValid}
-            onClick={this.handleRegistration}
-          >
-            Complete volunteer registration!
-          </button>
-        </fieldset>
+      <div className="vh-100 flex flex-column justify-center items-center">
+        {this.form()}
+        {this.confirmation()}
+        {this.registerError()}
       </div>
     );
   }
 }
+
 export default RegisterForm;

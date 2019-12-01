@@ -5,6 +5,8 @@ import FlashMessage from '../utils/FlashMessage'
 import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 import ProjectList from '../projects/ProjectList';
+import peter_pic from "images/peter.jpg";
+import Button from "../helpers/Button";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -30,11 +32,6 @@ class Profile extends React.Component {
     }
     axios.post("/api/projects/filter", payload).then(res => {
       const { projects, message } = res.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
       this.setState({
         projects: projects,
         loading: false  });
@@ -74,9 +71,10 @@ class Profile extends React.Component {
     const { projects, loading } = this.state;
 
      if (this.props.user.skills) {
+        console.log('has skills')
         console.log(this.props.user.skills)
         skillList = this.props.user.skills.map((skill, index) => {
-            return <div className="skill-pill">{skill.name}</div>;
+            return <div className="skill-pill" key={index}>{skill.name}</div>;
         })
     } else {
         console.log('no skills')
@@ -89,17 +87,27 @@ class Profile extends React.Component {
     }
     console.log(this.props.resume_url)
     let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
+    if (this.props.user.first_name == "Peter") {
+        profileImage = <img className="h-100 ba w4"  src={peter_pic} />;
+    }
     let linkedin = this.props.user.link ? (<a className="pa0 ph1 ml3" style={{marginBottom: 21}} target="_blank" href={`http://${this.props.user.link}`}>
                                             <i className="fab fa-linkedin f2 icon-link"></i>
                                             </a>) : null;
 
     let resume;
-    if (this.props.resume_url || this.props.resume_url ==="/profile_images/original/missing.png") {
+    if (!this.props.resume_url || this.props.resume_url ==="/profile_images/original/missing.png") {
         resume = null;
     } else {
-        resume = (<a className="pa0 ph1 ml3" style={{marginBottom: 23}} target="_blank" href={this.props.resume_url}>
-                    <i className="fas fa-file-alt f2 icon-link"></i>
-                    </a>)}
+        resume = (
+            <Button
+                type="button-tertiary"
+                onClick={() => window.open(this.props.resume_url, '_blank')}
+            >
+                <p>Resume</p>
+            </Button>
+        );
+    }
+
     return (
         <div className="w-100 h-100 tc">
             <div
@@ -114,7 +122,7 @@ class Profile extends React.Component {
                     <div className="w-100 m3 ph4 pt4">
 
                         <div className="flex items-end">
-                            <h1 className="ma0 truncate f1 mb3">
+                            <h1 className="ma0 f1 mb3 mr3">
                                 {this.props.user.first_name} {this.props.user.last_name}
                             </h1>
                             {linkedin}

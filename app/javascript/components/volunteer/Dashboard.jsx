@@ -65,7 +65,7 @@ class Dashboard extends React.Component {
             id: 0,
             uid: 'pending',
             title: 'Pending',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
@@ -79,14 +79,14 @@ class Dashboard extends React.Component {
             id: 2,
             uid: 'interviewing',
             title: 'Interviewing',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         },
         {
             id: 3,
             uid: 'accepted',
             title: 'Accepted',
-            selected: false,
+            selected: true,
             key: 'application_statuses'
         }
       ]
@@ -172,11 +172,6 @@ class Dashboard extends React.Component {
     }
     axios.post("/api/projects/filter", payload).then(ret => {
       const { projects, message } = ret.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
       this.setState({
         projects: projects,
         projectsLoading: false
@@ -201,18 +196,12 @@ class Dashboard extends React.Component {
         query: {
             with_statuses: statuses,
             with_user_id: this.props.user.id,
-            with_statuses: [0, 2, 3],
             with_limit: 3
         }
     };
 
     axios.post("/api/applications/filter", payload).then(ret => {
       const { applications, message } = ret.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
       this.setState({
         applications: applications,
         applicationsLoading: false
@@ -238,6 +227,16 @@ class Dashboard extends React.Component {
   render() {
     const { user } = this.props;
     const { projects, projectsLoading, applicationsLoading } = this.state;
+
+    let projectList;
+
+    if (this.state.projects) {
+      projectList = this.state.projects.map((project, index) => {
+        return <ProjectCard project={project} key={index} />;
+      });
+    } else {
+      projectList = <div>You do not have any projects.</div>;
+    }
 
     return (
         <div className="w-100 h-100 tc bg-white">
@@ -290,10 +289,6 @@ class Dashboard extends React.Component {
                         onClick={() => this.updateApplicationSearch()}>
                         Update Search</a>
                 </div>}
-<<<<<<< HEAD
-=======
-                <Loader loading={this.state.applicationsLoading} />
->>>>>>> fixed bugs after rebase
                 <ApplicationList
                     is_org_view={false}
                     applications={this.state.applications}
@@ -305,6 +300,8 @@ class Dashboard extends React.Component {
                         href={"/applications"}
                         >View More Applications</a>
                 </div>
+
+                <div className="cf"></div>
                 <div className="w-100 mt5 mb1 flex items-center">
                     <div className="dib w-100">
                         <a className="f4 pa0" href="/my-projects">Current Projects</a>
@@ -343,7 +340,7 @@ class Dashboard extends React.Component {
                     <a
                         className="w-100 std-button pv2"
                         href="#"
-                        onClick={() => this.updateProjectSearch()}>
+                        onClick={() => this.updteProjectSearch()}>
                         Update Search</a>
                 </div>}
                 <div className="cf"></div>

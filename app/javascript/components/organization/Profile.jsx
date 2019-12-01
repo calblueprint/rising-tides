@@ -5,6 +5,7 @@ import FlashMessage from '../utils/FlashMessage'
 import Loader from '../utils/Loader'
 import profile_pic from "images/profile_pic.png";
 import ProjectList from '../projects/ProjectList';
+import bp_pic from "images/blueprint.png";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -30,11 +31,6 @@ class Profile extends React.Component {
     }
     axios.post("/api/projects/filter", payload).then(res => {
       const { projects, message } = res.data;
-      if (message) {
-        this.flash_message.flashMessage(
-          message
-        );
-      }
       this.setState({
         projects: projects,
         loading: false });
@@ -68,13 +64,16 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { projects, loading } = this.state;
+    const { organization, projects, loading } = this.state;
 
-    let profileUrl = this.props.organization.profile_image_url ? this.props.organization.profile_image_url : profile_pic;
+    let profileUrl = this.props.profile_image_url ? this.props.profile_image_url : profile_pic;
     if (profileUrl === "/profile_images/original/missing.png") {
         profileUrl = profile_pic;
     }
     let profileImage = <img className="h-100 ba w4"  src={profileUrl} />;
+    if (organization.name == "Blueprint") {
+        profileImage = <img className="h-100 ba w4"  src={bp_pic} />;
+    }
 
     return (
         <div className="w-100 h-100 tc">
