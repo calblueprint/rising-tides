@@ -5,9 +5,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    @skills = Skill.all
+    super
+  end
 
   # POST /resource
   # def create
@@ -53,7 +54,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
             :profile_image,
             :resume,
             :phone_number,
-            skill_ids: []])
+            :skill_ids => []])
   end
 
   # protected
