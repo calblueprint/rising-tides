@@ -172,7 +172,7 @@ class Dashboard extends React.Component {
     }
     axios.post("/api/projects/filter", payload).then(ret => {
       const { projects, message } = ret.data;
-      this.setState({ 
+      this.setState({
         projects: projects,
         projectsLoading: false
     });
@@ -202,7 +202,7 @@ class Dashboard extends React.Component {
 
     axios.post("/api/applications/filter", payload).then(ret => {
       const { applications, message } = ret.data;
-      this.setState({ 
+      this.setState({
         applications: applications,
         applicationsLoading: false
       });
@@ -291,7 +291,7 @@ class Dashboard extends React.Component {
                 </div>}
                 <ApplicationList
                     is_org_view={false}
-                    applications={this.state.applications} 
+                    applications={this.state.applications}
                     loading={this.state.applicationsLoading}
                     />
                 <div className="cf"></div>
@@ -340,7 +340,7 @@ class Dashboard extends React.Component {
                     <a
                         className="w-100 std-button pv2"
                         href="#"
-                        onClick={() => this.updateProjectSearch()}>
+                        onClick={() => this.updteProjectSearch()}>
                         Update Search</a>
                 </div>}
                 <div className="cf"></div>
