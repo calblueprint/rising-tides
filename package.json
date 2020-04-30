@@ -10,7 +10,7 @@
     "delete-react-zombies": "0.0.3",
     "emotion": "^10.0.9",
     "formik": "^1.5.2",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "prop-types": "^15.7.2",
     "rails-ujs": "^5.2.1",
     "react": "^16.8.3",
